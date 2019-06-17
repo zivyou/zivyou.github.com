@@ -1,0 +1,60 @@
+layout: false
+---
+
+<canvas id="c" width="500" height="500">
+</canvas>
+
+<script>
+var c = document.getElementById('c');
+var	ctx = c.getContext('2d');
+var t = 0;
+
+var x = 250;
+var y = 250;
+
+
+
+function draw(){
+    try {
+        var preX = x;
+        var preY = y;
+        for (var i=0; i<=t; i++){
+            var xx = 250+200*Math.sin(1/18*i);
+            var yy = 250+200*Math.sin(1/13*i);
+            ctx.beginPath();
+            ctx.moveTo(preX, preY);
+            ctx.lineTo(xx, yy);
+            ctx.stroke();
+
+            preX = xx;
+            preY = yy;
+        }
+    } 
+    catch (e) {
+    };
+}
+
+function clear(){
+    ctx.fillStyle = '#d0e7f9';
+	ctx.clearRect(0, 0, c.width, c.height);
+	ctx.beginPath();
+	ctx.rect(0, 0, c.width, c.height);
+	ctx.closePath();
+	ctx.fill();
+}
+
+var loop = function(){
+    clear();
+    t+=Math.PI/4.0;
+    if (t > 4000){
+        t = 0;
+        clear();
+    }
+
+
+    draw();
+    setTimeout(loop, 1000/10);
+}
+
+loop();
+</script>
