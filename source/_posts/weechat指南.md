@@ -12,11 +12,12 @@ tags: tech
 5. /join #channel: 进入名为channel的channel
 6. /close: close a server
 7. /nick username: 使用昵称username
-8. /msg NickServ identify ****: 输入当前用户的密码(相当于登录)
+8. /msg NickServ identify ****: 输入用户名、密码，以空格相隔(相当于登录)
 9. Ctrl+n: switch between buffer
 10. Ctrl+x: switch between topic
+11. /part "a message" : leave a channel
 
 
 ## 设定
 1. /set irc.server_default.nicks "nick1, nick2" :设定默认的登录昵称
-2. 
+2. /set
