@@ -79,13 +79,17 @@ pagination_dir: page
 theme: polarbear 
 
 
-# math:
-#   engine: 'mathjax'
-#   mathjax:
-#     src: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js?config=TeX-AMS-MML_HTMLorMML"
-#     config:
+math:
+  engine: 'mathjax' # or 'katex'
+  mathjax:
+    src: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"
+    config:
       # MathJax config
-
+  katex:
+    css: "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css"
+    js: "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js" # not used
+    config:
+      # KaTeX config
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
