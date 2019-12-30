@@ -9,27 +9,33 @@ tags: tech
 关于LSP: Language Server Protocol.
 
 ## 需要的插件
-    - Vundle.vim : 插件管理
-    - nerdtree
-    - roxma/vim-hug-neovim-rpc: 为vim8补全一些特性，像neoVim看齐。
-    - roxma/nvim-yarp: 同上
-    - autozimu/LanguageClient-neovim: neoVim的language client插件。vim8下需要上面两个插件支持
-    - Shougo/deoplete.nvim: neoVim的代码补全插件
-    - Shougo/neosnippet.vim: code snippet插件
-    - Shougo/neosnippet-snippets: 同上
-    - 
+> Vundle.vim : 插件管理
+> nerdtree
+> roxma/vim-hug-neovim-rpc: 为vim8补全一些特性，像neoVim看齐。
+> roxma/nvim-yarp: 同上
+> autozimu/LanguageClient-neovim: neoVim的language client插件。vim8下需要上面两个插件支持
+> Shougo/deoplete.nvim: neoVim的代码补全插件
+> Shougo/neosnippet.vim: code snippet插件
+> Shougo/neosnippet-snippets: 同上
+> 
 
 ## language server
-    - C/C++:  [ccls](https://github.com/MaskRay/ccls)
-        - install on macOS: brew install ccls
-    - js/ts: [javascript-typescript-langserer](https://github.com/sourcegraph/javascript-typescript-langserver)
-        - install on macOS: npm install -g javascript-typescript-langserver
+> C/C++:  [ccls](https://github.com/MaskRay/ccls)
+  - install on macOS: brew install ccls
+  - js/ts: [javascript-typescript-langserer](https://github.com/sourcegraph/javascript-typescript-langserver)
+    - install on macOS: npm install -g javascript-typescript-langserver
 
+## 步骤
 
-## 配置
+#### 1. 安装Vundle: git repo: https://github.com/VundleVim/Vundle.
+```
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
+    
+编辑.vimrc如下
 
-### .vimrc
-    - 里面加了一些私货，请酌情参考
+#### 2. .vimrc
+里面加了一些私货，请酌情参考
 ```
 syntax on
 map <C-n> :NERDTreeToggle <CR>
@@ -152,10 +158,10 @@ nmap ;r :call LanguageClient#textDocument_references({'includeDeclaration': v:fa
 nmap ;h :call LanguageClient#textDocument_hover()<cr>
 ```
 
-### 装插件
+#### 3. 装插件
     - :PluginInstall
 
-### 使用
+#### 4. 使用
     - ccls
     ccls在做代码索引的时候，需要针对不同的项目做不同的预处理。主要是生成JSON Compliation Database.
     ```
