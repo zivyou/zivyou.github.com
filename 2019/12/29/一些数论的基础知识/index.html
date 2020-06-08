@@ -12,10 +12,12 @@
 
 
 
-  <meta name="description" content="gdbNotes">
+  <meta name="description" content="一些数论的基础知识">
 
 
 
+
+  <meta name="keywords" content="math,">
 
 
 
@@ -30,20 +32,21 @@
 
 
 
-<link rel="canonical" href="http://zivyou.github.io/2018/11/01/gdbNotes/">
+<link rel="canonical" href="http://zivyou.github.io/2019/12/29/一些数论的基础知识/">
 
 
-<meta name="description" content="start: https://stackoverflow.com/questions/11408041/how-to-debug-the-linux-kernel-with-gdb-and-qemu  qemu-system-i386  -s -monitor stdio -fda floppy.img -boot a  -s for a gdbserver  ensure that lo et">
+<meta name="description" content="欧拉公式if gcd(a, n) == 1, then a^\phi(n) % n == 1  欧拉降幂法则if gcd(a, n) == 1, then a^b % n = a^(b % \phi(n)) % n  RSA加密  取大素数p, q 取数字e、d, 使得： ed % \phi(pq) == 1. 由欧拉公式得，只要满足gcd(ed, pq)即可 制成公钥：(pq, e), 私钥(">
+<meta name="keywords" content="math">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gdbNotes">
-<meta property="og:url" content="http://zivyou.github.io/2018/11/01/gdbNotes/index.html">
+<meta property="og:title" content="一些数论的基础知识">
+<meta property="og:url" content="http://zivyou.github.io/2019/12/29/一些数论的基础知识/index.html">
 <meta property="og:site_name" content="zivyou">
-<meta property="og:description" content="start: https://stackoverflow.com/questions/11408041/how-to-debug-the-linux-kernel-with-gdb-and-qemu  qemu-system-i386  -s -monitor stdio -fda floppy.img -boot a  -s for a gdbserver  ensure that lo et">
+<meta property="og:description" content="欧拉公式if gcd(a, n) == 1, then a^\phi(n) % n == 1  欧拉降幂法则if gcd(a, n) == 1, then a^b % n = a^(b % \phi(n)) % n  RSA加密  取大素数p, q 取数字e、d, 使得： ed % \phi(pq) == 1. 由欧拉公式得，只要满足gcd(ed, pq)即可 制成公钥：(pq, e), 私钥(">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-11-13T07:21:07.785Z">
+<meta property="og:updated_time" content="2020-05-20T09:24:38.588Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="gdbNotes">
-<meta name="twitter:description" content="start: https://stackoverflow.com/questions/11408041/how-to-debug-the-linux-kernel-with-gdb-and-qemu  qemu-system-i386  -s -monitor stdio -fda floppy.img -boot a  -s for a gdbserver  ensure that lo et">
+<meta name="twitter:title" content="一些数论的基础知识">
+<meta name="twitter:description" content="欧拉公式if gcd(a, n) == 1, then a^\phi(n) % n == 1  欧拉降幂法则if gcd(a, n) == 1, then a^b % n = a^(b % \phi(n)) % n  RSA加密  取大素数p, q 取数字e、d, 使得： ed % \phi(pq) == 1. 由欧拉公式得，只要满足gcd(ed, pq)即可 制成公钥：(pq, e), 私钥(">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -68,7 +71,7 @@
 
 
 
-    <title> gdbNotes - zivyou </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <title> 一些数论的基础知识 - zivyou </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   </head>
 
   <body>
@@ -114,12 +117,12 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          gdbNotes
+          一些数论的基础知识
         
       </h1>
 
       <time class="post-time">
-          11月 01 2018
+          12月 29 2019
       </time>
     </header>
 
@@ -127,34 +130,21 @@
 
     
             <div class="post-content">
-            <ul>
-<li>start:</li>
-<li><p><a href="https://stackoverflow.com/questions/11408041/how-to-debug-the-linux-kernel-with-gdb-and-qemu" target="_blank" rel="noopener">https://stackoverflow.com/questions/11408041/how-to-debug-the-linux-kernel-with-gdb-and-qemu</a><br>  qemu-system-i386  -s -monitor stdio -fda floppy.img -boot a<br>  -s for a gdbserver</p>
+            <ol>
+<li><p>欧拉公式<br>if gcd(a, n) == 1, then a^\phi(n) % n == 1</p>
 </li>
-<li><p>ensure that lo eth are up</p>
+<li><p>欧拉降幂法则<br>if gcd(a, n) == 1, then a^b % n = a^(b % \phi(n)) % n</p>
 </li>
-<li>gdb toyos_kernel<ul>
-<li>input “target remote localhost:1234” in gdb command line</li>
-<li>port 1234 is the default debug port for qemu</li>
-<li>monitor exit: to exit a connection</li>
+<li><p>RSA加密</p>
+<ul>
+<li>取大素数p, q</li>
+<li>取数字e、d, 使得： e<em>d % \phi(p</em>q) == 1. 由欧拉公式得，只要满足gcd(e<em>d, p</em>q)即可</li>
+<li>制成公钥：(p<em>q, e), 私钥(p</em>q, d)。</li>
+<li>明文M,用公钥加密成密文S, 过程为： S=M^e % (p*q)</li>
+<li>解密过程：M=S^d % (p<em>q). 因为gcd(M, (p</em>q)) == 1, 所以S=M^e % (p<em>q) = M^(e</em>d) % (p<em>q)<br>  由欧拉定理: M^(\phi(p</em>q)) % (p<em>q) == 1, 而e</em>d % \phi(p<em>q) == 1, 有： M^(e</em>d-1) % (p<em>q) == 1;<br>  从而M^(e</em>d) % (p*q) = M;                                    </li>
 </ul>
 </li>
-<li>check register in gdb:<ul>
-<li>info all-register: list all registers </li>
-<li>x/4ubh $eax<ul>
-<li>x for examine, 4ub for 4 unsigned bytes, h for hexadecimal. $eax is the register</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>check stack in gdb:<ul>
-<li>x/10x $sp<ul>
-<li>print front 10*4 bytes of the stack</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+</ol>
 
             </div>
           
@@ -162,20 +152,26 @@
     
       <footer class="post-footer">
 		
+		<div class="post-tags">
+		  
+			<a href="/tags/math/">math</a>
+		  
+		</div>
+		
 
         
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2018/11/15/n-queens-problem/">
+      <a class="prev" href="/2020/05/20/Questions/">
         <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">n-queens-problem</span>
+        <span class="prev-text nav-default">Questions</span>
         <span class="prev-text nav-mobile">上一篇</span>
       </a>
     
     
-      <a class="next" href="/2018/10/24/DrunkardProblem/">
-        <span class="next-text nav-default">DrunkardProblem</span>
+      <a class="next" href="/2019/12/05/SOSP2019-CrashTuner/">
+        <span class="next-text nav-default">SOSP2019-CrashTuner</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
