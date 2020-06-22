@@ -40,7 +40,7 @@
 <meta property="og:site_name" content="zivyou">
 <meta property="og:description" content="「完全的范式化和反范式化schema都是实验室里才有的东西」 范式化的优点:  范式化的更新操作通常比反范式化要快 当数据较好地范式化时，就只有很少或者没有常负数据，所以值需要修改更少的数据 范式化的表通常更小，可以更好地放在内存里，所以执行更快 很少有多余的数据意味着检索列表数据时更少需要DISTINCT或者GROUP语句  范式化的缺点   通常范式化需要大量的表关联，稍微复杂一些的查询语句在">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2020-06-04T16:16:00.245Z">
+<meta property="og:updated_time" content="2020-06-22T12:05:58.693Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HighPerformanceMysql notes">
 <meta name="twitter:description" content="「完全的范式化和反范式化schema都是实验室里才有的东西」 范式化的优点:  范式化的更新操作通常比反范式化要快 当数据较好地范式化时，就只有很少或者没有常负数据，所以值需要修改更少的数据 范式化的表通常更小，可以更好地放在内存里，所以执行更快 很少有多余的数据意味着检索列表数据时更少需要DISTINCT或者GROUP语句  范式化的缺点   通常范式化需要大量的表关联，稍微复杂一些的查询语句在">
@@ -313,6 +313,18 @@
 <li>自定义变量在整个查询连接过程中都存在</li>
 <li>使用了自定义变量的查询，无法使用查询缓存</li>
 </ul>
+<blockquote>
+<p>优化select for update<br>表格式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create table unsent_emails (id int not null primary key auto_increament, status enum(&apos;unsent&apos;, &apos;claimed&apos;, &apos;sent&apos;)</span><br><span class="line">                  owner int unsigned not null default 0, ts timestamp, key (owner, status, ts)</span><br><span class="line">                )</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>常规的用法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">begin;</span><br><span class="line">select id from unsent_emails</span><br><span class="line">  where owner=0 and status=&apos;unsent&apos;</span><br><span class="line">  limit 10 for update;</span><br><span class="line">-- result: 123, 456, 789</span><br><span class="line">update unsent_emails</span><br><span class="line">  set status=&apos;claimed&apos;, owner=connection_id(),</span><br><span class="line">  where id in(123, 456, 789)</span><br></pre></td></tr></table></figure></p>
+<p>改进的用法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">set autocommit=1;</span><br><span class="line">commit;</span><br><span class="line">update unsent_emails</span><br><span class="line">  set status=&apos;claimed&apos;, owner=connection_id()</span><br><span class="line">  where owner=0 and status=&apos;unsent&apos;</span><br><span class="line">  limit 10;</span><br><span class="line">set autocommit=0;</span><br><span class="line">select id from unsent_emails</span><br><span class="line">  where owner=connection_id() and status=&apos;claimed&apos;;</span><br><span class="line">-- result 123,456,789</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h1><p>翻页问题:  mysql可以使用limit m,n的方式支持翻页。但是在实现上，mysql查找第m条记录需要将前m条记录都扫一遍。因此当m比较大的时候，效率低。<br>解决方法:</p>
+<ol>
+<li>借助自增ID，定位m的值，较少扫描的行数。例如，limit m,n 的时候，我们可以改成 where id&gt;m order by id ASC limit n; 效果提升明显</li>
+<li>借助索引。具体想法是先找出limit m,n的id(id自带索引)，然后inner join整条记录:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from TableA inner join (select id from TableA limit m,n) as TableB using(id);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
             </div>
           
