@@ -1,6 +1,3 @@
-[submodule "hexo-theme-polarbear"]
-	path = hexo-theme-polarbear
-	url = https://github.com/zivyou/hexo-theme-polarbear.git
 [submodule "themes/polarbear"]
 	path = themes/polarbear
 	url = https://github.com/zivyou/hexo-theme-polarbear.git
