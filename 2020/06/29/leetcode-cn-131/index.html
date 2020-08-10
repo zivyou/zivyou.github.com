@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="leetcode-cn-131">
+
+
+
+
+  <meta name="keywords" content="leetcode,">
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zivyou">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://zivyou.github.io/2020/06/29/leetcode-cn-131/">
+
+
+<meta name="description" content="字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：12345678910111213141516171819i从[a, s.size())：- 假如s.substr(a, i-a+1)不是回文串，i++继续寻找下一个；- 假如s.substr(a, i-a+1)是回文串，可以将s.substr(a, i-a+1)推入我们的临时搜索结果集中，">
+<meta name="keywords" content="leetcode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode-cn-131">
+<meta property="og:url" content="http://zivyou.github.io/2020/06/29/leetcode-cn-131/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：12345678910111213141516171819i从[a, s.size())：- 假如s.substr(a, i-a+1)不是回文串，i++继续寻找下一个；- 假如s.substr(a, i-a+1)是回文串，可以将s.substr(a, i-a+1)推入我们的临时搜索结果集中，">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2020-08-10T12:14:15.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="leetcode-cn-131">
+<meta name="twitter:description" content="字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：12345678910111213141516171819i从[a, s.size())：- 假如s.substr(a, i-a+1)不是回文串，i++继续寻找下一个；- 假如s.substr(a, i-a+1)是回文串，可以将s.substr(a, i-a+1)推入我们的临时搜索结果集中，">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> leetcode-cn-131 - zivyou </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">zivyou</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about/me.html">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          leetcode-cn-131
+        
+      </h1>
+
+      <time class="post-time">
+          6月 29 2020
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <ul>
+<li>字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">i从[a, s.size())：</span><br><span class="line">- 假如s.substr(a, i-a+1)不是回文串，i++继续寻找下一个；</span><br><span class="line">- 假如s.substr(a, i-a+1)是回文串，可以将s.substr(a, i-a+1)推入我们的临时搜索结果集中，然后递归搜索剩下的；但是有个问题，i的后面就没有其他的字串s.substr(a, k-a+1)是回文串了吗?</span><br><span class="line">  所以，在将s.substr(a, i-a+1)推入搜索结果集中，并调用递归进行剩下的搜索之后，还需要把s.substr(a, i-a+1)从临时结果集中弹出，让i++继续，寻找当前临时结果集下其他的可能回文串。</span><br><span class="line">  故：</span><br><span class="line">  </span><br><span class="line">  void search(vector&lt;vector&lt;string&gt;&gt; &amp;re, vector&lt;string&gt; tmpRe, string &amp;s, int a, int b)&#123;</span><br><span class="line">      if (a &gt;= b)&#123;</span><br><span class="line">          re.push_back(tmpRe);</span><br><span class="line">          return;</span><br><span class="line">      &#125;</span><br><span class="line">      for (int i=a; i&lt;=b; i++)&#123;</span><br><span class="line">          if (isPalindrome(s.substr(a, i-a+1)))&#123;</span><br><span class="line">              tmpRe.push_back(s.substr(a, i-a+1));</span><br><span class="line">              search(re, tmpRe, s, i+1, b);</span><br><span class="line">              tmpRe.pop_back();   // 这一步就是所谓的回溯</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/leetcode/">leetcode</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2020/06/29/leetcode-cn-39/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">leetcode-cn-39</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/06/29/leetcode-cn-172/">
+        <span class="next-text nav-default">leetcode-cn-172</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2020
+    <span class="footer-author">zivyou.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

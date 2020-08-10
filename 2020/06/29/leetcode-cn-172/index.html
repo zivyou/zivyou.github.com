@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="leetcode-cn-172">
+
+
+
+
+  <meta name="keywords" content="leetcode,">
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zivyou">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://zivyou.github.io/2020/06/29/leetcode-cn-172/">
+
+
+<meta name="description" content="寻找一个数的阶乘中，末尾位数中连续的0的个数 目前的思路：将任意一个合数进行质因数分解，分解集中的5的个数，就是此数能够贡献的0的数量；  而对于一个质数，可以直接略过，因为它不可能贡献出0（当然除了5本身）； 1C=2^&amp;#123;k_1&amp;#125;*3^&amp;#123;k_2&amp;#125;*5^&amp;#123;k_3&amp;#125;*7^&amp;#123;k_4&amp;#125;...  对于阶乘， 1n! = 1*">
+<meta name="keywords" content="leetcode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode-cn-172">
+<meta property="og:url" content="http://zivyou.github.io/2020/06/29/leetcode-cn-172/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="寻找一个数的阶乘中，末尾位数中连续的0的个数 目前的思路：将任意一个合数进行质因数分解，分解集中的5的个数，就是此数能够贡献的0的数量；  而对于一个质数，可以直接略过，因为它不可能贡献出0（当然除了5本身）； 1C=2^&amp;#123;k_1&amp;#125;*3^&amp;#123;k_2&amp;#125;*5^&amp;#123;k_3&amp;#125;*7^&amp;#123;k_4&amp;#125;...  对于阶乘， 1n! = 1*">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2020-08-10T12:14:15.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="leetcode-cn-172">
+<meta name="twitter:description" content="寻找一个数的阶乘中，末尾位数中连续的0的个数 目前的思路：将任意一个合数进行质因数分解，分解集中的5的个数，就是此数能够贡献的0的数量；  而对于一个质数，可以直接略过，因为它不可能贡献出0（当然除了5本身）； 1C=2^&amp;#123;k_1&amp;#125;*3^&amp;#123;k_2&amp;#125;*5^&amp;#123;k_3&amp;#125;*7^&amp;#123;k_4&amp;#125;...  对于阶乘， 1n! = 1*">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> leetcode-cn-172 - zivyou </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">zivyou</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about/me.html">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          leetcode-cn-172
+        
+      </h1>
+
+      <time class="post-time">
+          6月 29 2020
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <ul>
+<li>寻找一个数的阶乘中，末尾位数中连续的0的个数</li>
+<li><p>目前的思路：将任意一个合数进行质因数分解，分解集中的5的个数，就是此数能够贡献的0的数量；<br>  而对于一个质数，可以直接略过，因为它不可能贡献出0（当然除了5本身）；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C=2^&#123;k_1&#125;*3^&#123;k_2&#125;*5^&#123;k_3&#125;*7^&#123;k_4&#125;...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对于阶乘，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n! = 1*2*3*4*5*...*n</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>每一个乘数都需要做质因数分解并计算分解集中5出现的次数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int rawTrailingZeroes(int a, int b)&#123;</span><br><span class="line">        if (b - a &lt; 5)&#123;</span><br><span class="line">            int count = 0;</span><br><span class="line">            for (int i=a; i&lt;=b; i++)&#123;</span><br><span class="line">                int j = i;</span><br><span class="line">                while (!(j%5))&#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    j = j/5;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return count;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return rawTrailingZeroes(a, (a+b)/2)+rawTrailingZeroes((a+b)/2+1, b);</span><br><span class="line">    &#125;</span><br><span class="line">    int trailingZeroes(int n) &#123;</span><br><span class="line">        return rawTrailingZeroes(1, n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>提交，发现运行超时</li>
+</ul>
+<hr>
+<ul>
+<li><p>设<script type="math/tex">f(n)</script>为n的阶乘中末尾0的数量，则有：</p>
+<script type="math/tex; mode=display">f(n) = n/5 + f(n/5)</script></li>
+<li><p>数学归纳法证明：</p>
+<ol>
+<li>对于<script type="math/tex">n<5</script>, 显然有<script type="math/tex">f(n) = n/5 + f(n/5) = 0</script>成立；</li>
+<li>假设对于<script type="math/tex">n>5</script>，有<script type="math/tex">f(n) = n/5 + f(n/5)</script>成立，则对于另一个数<script type="math/tex">m</script>,有：<ul>
+<li>若<script type="math/tex">m(m\in[n+1, n*5-1])</script>，根据质因数分解公式，<script type="math/tex">n \to m</script>中的任意数，都不会有新的质因数5出现。</li>
+<li>若<script type="math/tex">m=n*5</script>,根据质因数分解公式，相对于<script type="math/tex">n</script>,<script type="math/tex">m</script>出现了新的质因数5，因此有<script type="math/tex">f(m) = 1+f(n) = m/5+f(m/5)</script>。</li>
+</ul>
+</li>
+<li>综上，<script type="math/tex">f(n) = n/5 + f(n/5)</script> 成立。</li>
+</ol>
+</li>
+</ul>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/leetcode/">leetcode</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2020/06/29/leetcode-cn-131/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">leetcode-cn-131</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/06/28/leetcode-cn-376/">
+        <span class="next-text nav-default">leetcode-cn-376</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2020
+    <span class="footer-author">zivyou.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>
