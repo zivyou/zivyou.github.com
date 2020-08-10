@@ -84,7 +84,7 @@ math:
   mathjax:
     src: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"
     config:
-      # MathJax config
+      MathJax config
   katex:
     css: "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css"
     js: "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js" # not used
