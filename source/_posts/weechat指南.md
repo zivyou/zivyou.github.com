@@ -16,8 +16,12 @@ tags: tech
 9. Ctrl+n: switch between buffer
 10. Ctrl+x: switch between topic
 11. /part "a message" : leave a channel
+12. /Option+l: 纯显示聊天内容
+13. Ctrl+r: 历史命令搜索
+14. /window scroll 10/-10: buffer上下翻页
 
 
 ## 设定
 1. /set irc.server_default.nicks "nick1, nick2" :设定默认的登录昵称
 2. /set
+3. 利用Alt+k来设定快捷键: /key bind (press Alt+k to get keys) (press your keys composite) /window scroll 1
