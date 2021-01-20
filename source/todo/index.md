@@ -11,3 +11,7 @@ leetcode天梯
 排课问题研究
 
 TCP/IP research
+
+GNU工具集研究: ld, ranlib, ar
+
+面向AI平台的高性能技术 research
