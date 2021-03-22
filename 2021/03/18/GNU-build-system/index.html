@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="TCP-receive-queue">
+  <meta name="description" content="GNU build system">
 
 
 
@@ -32,21 +32,21 @@
 
 
 
-<link rel="canonical" href="http://zivyou.github.io/2021/01/20/TCP-receive-queue/">
+<link rel="canonical" href="http://zivyou.github.io/2021/03/18/GNU-build-system/">
 
 
-<meta name="description" content="连接过程:  sync队列 已连接队列  数据接收过程:  receive  out-of-order  backlog  prequeue   1中描述的队列是socket队列，用来存储处于不同状态的socket实体。SYN状态是TCP三次握手的第一此握手完成之后所处的状态，内核会将处于该状态的socket存储于这个队列。在连接建立完成之后，socket会被放置在’已连接队列上’。 2中描述的队">
+<meta name="description" content="GNU M4一个「Unix宏处理器」。Autoconfig 中用它来生成configure文件。大概的几条语法规则:  注释（从注释符（默认#）到换行）保持不动输出。 名字（由若干字母、数字和下划线组成，不以数字开始），当碰到名字是宏名字（多参数宏还要求马上紧接开括号），就触发宏展开，否则保持不动输出。 引用字符串（默认由配对的|和’包围，但这可以动态设置），会被剥去一层包装后输出。 其它字符，保">
 <meta name="keywords" content="Tech">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP-receive-queue">
-<meta property="og:url" content="http://zivyou.github.io/2021/01/20/TCP-receive-queue/index.html">
+<meta property="og:title" content="GNU build system">
+<meta property="og:url" content="http://zivyou.github.io/2021/03/18/GNU-build-system/index.html">
 <meta property="og:site_name" content="zivyou">
-<meta property="og:description" content="连接过程:  sync队列 已连接队列  数据接收过程:  receive  out-of-order  backlog  prequeue   1中描述的队列是socket队列，用来存储处于不同状态的socket实体。SYN状态是TCP三次握手的第一此握手完成之后所处的状态，内核会将处于该状态的socket存储于这个队列。在连接建立完成之后，socket会被放置在’已连接队列上’。 2中描述的队">
+<meta property="og:description" content="GNU M4一个「Unix宏处理器」。Autoconfig 中用它来生成configure文件。大概的几条语法规则:  注释（从注释符（默认#）到换行）保持不动输出。 名字（由若干字母、数字和下划线组成，不以数字开始），当碰到名字是宏名字（多参数宏还要求马上紧接开括号），就触发宏展开，否则保持不动输出。 引用字符串（默认由配对的|和’包围，但这可以动态设置），会被剥去一层包装后输出。 其它字符，保">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2021-01-20T14:40:52.555Z">
+<meta property="og:updated_time" content="2021-03-19T14:30:13.588Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TCP-receive-queue">
-<meta name="twitter:description" content="连接过程:  sync队列 已连接队列  数据接收过程:  receive  out-of-order  backlog  prequeue   1中描述的队列是socket队列，用来存储处于不同状态的socket实体。SYN状态是TCP三次握手的第一此握手完成之后所处的状态，内核会将处于该状态的socket存储于这个队列。在连接建立完成之后，socket会被放置在’已连接队列上’。 2中描述的队">
+<meta name="twitter:title" content="GNU build system">
+<meta name="twitter:description" content="GNU M4一个「Unix宏处理器」。Autoconfig 中用它来生成configure文件。大概的几条语法规则:  注释（从注释符（默认#）到换行）保持不动输出。 名字（由若干字母、数字和下划线组成，不以数字开始），当碰到名字是宏名字（多参数宏还要求马上紧接开括号），就触发宏展开，否则保持不动输出。 引用字符串（默认由配对的|和’包围，但这可以动态设置），会被剥去一层包装后输出。 其它字符，保">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -73,7 +73,7 @@
 
 
 
-    <title> TCP-receive-queue - zivyou </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <title> GNU build system - zivyou </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   </head>
 
   <body>
@@ -137,12 +137,12 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          TCP-receive-queue
+          GNU build system
         
       </h1>
 
       <time class="post-time">
-          1月 20 2021
+          3月 18 2021
       </time>
     </header>
 
@@ -150,34 +150,13 @@
 
     
             <div class="post-content">
-            <p>连接过程:</p>
-<ol>
-<li>sync队列</li>
-<li>已连接队列</li>
-</ol>
-<p>数据接收过程:</p>
+            <h1 id="GNU-M4"><a href="#GNU-M4" class="headerlink" title="GNU M4"></a>GNU M4</h1><p>一个「Unix宏处理器」。<br>Autoconfig 中用它来生成configure文件。<br>大概的几条语法规则:</p>
 <ul>
-<li><p>receive</p>
-</li>
-<li><p>out-of-order</p>
-</li>
-<li><p>backlog</p>
-</li>
-<li><p>prequeue</p>
-</li>
+<li>注释（从注释符（默认#）到换行）保持不动输出。</li>
+<li>名字（由若干字母、数字和下划线组成，不以数字开始），当碰到名字是宏名字（多参数宏还要求马上紧接开括号），就触发宏展开，否则保持不动输出。</li>
+<li>引用字符串（默认由配对的|和’包围，但这可以动态设置），会被剥去一层包装后输出。</li>
+<li>其它字符，保持不动输出。</li>
 </ul>
-<p>1中描述的队列是socket队列，用来存储处于不同状态的socket实体。SYN状态是TCP三次握手的第一此握手完成之后所处的状态，内核会将处于该状态的socket存储于这个队列。在连接建立完成之后，socket会被放置在’已连接队列上’。</p>
-<p>2中描述的队列是skb队列，用来存储通信过程中不同情景下传输的skb。详细的说明如下:</p>
-<ol>
-<li><p>假如用户态进程还没有调用recv函数，内核已经接收到数据，会将数据按顺序放置在receive队列</p>
-</li>
-<li><p>假如用户态进程还没有调用recv函数，内核已经接收到数据，但数据是乱序的，内核会先将乱序的skb暂时存放在out-of-order队列</p>
-</li>
-<li><p>假如用户态进程调用recv函数，进入了数据接收的上下文中，而此时网卡又接到了数据，网卡驱动会先将数据暂时放在backlog队列</p>
-</li>
-<li><p>假如用户态进程调用recv函数，但是因为没有数据所有阻塞了，进程被挂起了，而这个时候网卡收到了数据，网卡驱动会先将数据放在prequeue队列</p>
-</li>
-</ol>
 
             </div>
           
@@ -196,15 +175,9 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2021/03/18/GNU-build-system/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">GNU build system</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
     
-    
-      <a class="next" href="/2021/01/09/CPP-can-not-set-reference-as-key-in-STL/">
-        <span class="next-text nav-default">C++ can not set reference as key in STL</span>
+      <a class="next" href="/2021/01/20/TCP-receive-queue/">
+        <span class="next-text nav-default">TCP-receive-queue</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
@@ -258,9 +231,9 @@
 
 <script type="text/javascript">
   var disqus_shortname = 'zivyou';
-  var disqus_identifier = '2021/01/20/TCP-receive-queue/';
+  var disqus_identifier = '2021/03/18/GNU-build-system/';
 
-  var disqus_title = "TCP-receive-queue";
+  var disqus_title = "GNU build system";
 
 
   var disqus = {
