@@ -35,18 +35,18 @@
 <link rel="canonical" href="http://zivyou.github.io/2020/06/24/TLS-Handshake/">
 
 
-<meta name="description" content="1234sequenceDiagram  客户端 -&amp;gt;&amp;gt;  服务端 : 客户端生成一个随机数(r1)，加上自己支持的加密方式，将这二者发给服务端  服务端 -&amp;gt;&amp;gt; 客户端: 服务端收到客户端的随机数(r1)后，自己生成一个随机数(r2)，然后将r2和服务端证书发给客户端  客户端 -&amp;gt;&amp;gt; 服务端: 客户端新生成一个随机数(r3，又被称为预主密钥),将r3用步骤二">
+<meta name="description" content="sequenceDiagram   客户端 -&amp;gt;&amp;gt;  服务端 : 客户端生成一个随机数(r1)，加上自己支持的加密方式，将这二者发给服务端   服务端 -&amp;gt;&amp;gt; 客户端: 服务端收到客户端的随机数(r1)后，自己生成一个随机数(r2)，然后将r2和服务端证书发给客户端   客户端 -&amp;gt;&amp;gt; 服务端: 客户端新生成一个随机数(r3，又被称为预主密钥),将r3用步骤二中从证书里获取到的公钥加密，发给服务端">
 <meta name="keywords" content="Tech">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TLS-Handshake">
 <meta property="og:url" content="http://zivyou.github.io/2020/06/24/TLS-Handshake/index.html">
 <meta property="og:site_name" content="zivyou">
-<meta property="og:description" content="1234sequenceDiagram  客户端 -&amp;gt;&amp;gt;  服务端 : 客户端生成一个随机数(r1)，加上自己支持的加密方式，将这二者发给服务端  服务端 -&amp;gt;&amp;gt; 客户端: 服务端收到客户端的随机数(r1)后，自己生成一个随机数(r2)，然后将r2和服务端证书发给客户端  客户端 -&amp;gt;&amp;gt; 服务端: 客户端新生成一个随机数(r3，又被称为预主密钥),将r3用步骤二">
+<meta property="og:description" content="sequenceDiagram   客户端 -&amp;gt;&amp;gt;  服务端 : 客户端生成一个随机数(r1)，加上自己支持的加密方式，将这二者发给服务端   服务端 -&amp;gt;&amp;gt; 客户端: 服务端收到客户端的随机数(r1)后，自己生成一个随机数(r2)，然后将r2和服务端证书发给客户端   客户端 -&amp;gt;&amp;gt; 服务端: 客户端新生成一个随机数(r3，又被称为预主密钥),将r3用步骤二中从证书里获取到的公钥加密，发给服务端">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:updated_time" content="2020-06-24T06:47:52.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TLS-Handshake">
-<meta name="twitter:description" content="1234sequenceDiagram  客户端 -&amp;gt;&amp;gt;  服务端 : 客户端生成一个随机数(r1)，加上自己支持的加密方式，将这二者发给服务端  服务端 -&amp;gt;&amp;gt; 客户端: 服务端收到客户端的随机数(r1)后，自己生成一个随机数(r2)，然后将r2和服务端证书发给客户端  客户端 -&amp;gt;&amp;gt; 服务端: 客户端新生成一个随机数(r3，又被称为预主密钥),将r3用步骤二">
+<meta name="twitter:description" content="sequenceDiagram   客户端 -&amp;gt;&amp;gt;  服务端 : 客户端生成一个随机数(r1)，加上自己支持的加密方式，将这二者发给服务端   服务端 -&amp;gt;&amp;gt; 客户端: 服务端收到客户端的随机数(r1)后，自己生成一个随机数(r2)，然后将r2和服务端证书发给客户端   客户端 -&amp;gt;&amp;gt; 服务端: 客户端新生成一个随机数(r3，又被称为预主密钥),将r3用步骤二中从证书里获取到的公钥加密，发给服务端">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -150,8 +150,10 @@
 
     
             <div class="post-content">
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">  客户端 -&gt;&gt;  服务端 : 客户端生成一个随机数(r1)，加上自己支持的加密方式，将这二者发给服务端</span><br><span class="line">  服务端 -&gt;&gt; 客户端: 服务端收到客户端的随机数(r1)后，自己生成一个随机数(r2)，然后将r2和服务端证书发给客户端</span><br><span class="line">  客户端 -&gt;&gt; 服务端: 客户端新生成一个随机数(r3，又被称为预主密钥),将r3用步骤二中从证书里获取到的公钥加密，发给服务端</span><br></pre></td></tr></table></figure>
-<p>之后，服务端就可以用私钥解出r3。服务端和客户端都可以用商量好的加密方式，通过加密(r1, r2, r3)得到会话密钥。</p>
+            <p><pre class="mermaid">sequenceDiagram
+  客户端 ->>  服务端 : 客户端生成一个随机数(r1)，加上自己支持的加密方式，将这二者发给服务端
+  服务端 ->> 客户端: 服务端收到客户端的随机数(r1)后，自己生成一个随机数(r2)，然后将r2和服务端证书发给客户端
+  客户端 ->> 服务端: 客户端新生成一个随机数(r3，又被称为预主密钥),将r3用步骤二中从证书里获取到的公钥加密，发给服务端</pre><br>之后，服务端就可以用私钥解出r3。服务端和客户端都可以用商量好的加密方式，通过加密(r1, r2, r3)得到会话密钥。</p>
 
             </div>
           
@@ -214,6 +216,14 @@
         &copy;
     
         2018 -
+    
+    
+      <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+      <script>
+        if (window.mermaid) {
+          mermaid.initialize("");
+        }
+      </script>
     
     2021
     <span class="footer-author">zivyou.</span>
