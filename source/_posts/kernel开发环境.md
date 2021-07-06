@@ -5,7 +5,7 @@ tags:
 ---
 
 1. 编译
-就是常规的make menuconfig/ make 套路，最终生成一个bzImage镜像文件
+就是常规的make menuconfig/ make / make bzImage套路，最终生成一个bzImage镜像文件
 
 2. 制作根文件系统
 略有一些复杂： 
