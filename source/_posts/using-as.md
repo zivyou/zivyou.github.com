@@ -346,3 +346,46 @@ ASSEMBLER-INTERNAL-LOGIC-ERROR!   ：  这代表一个一直的汇编器内部�
  - expr sectoin： 汇编器会将一些复杂的表达式以一组符合的组合存储在这里。当某个符号确实需要对应一个表达式的时候，它会被放在这个section中。
 
 ## sub-sections
+汇编后生成的文件中的内容一般会以字节为单位，大部分的内容在.text和.data section。你可能会有这样的需求：将一组单独的section在obj文件末尾一个接一个排开，并且它们在汇编源码文件中可能不是连这些的。as汇编器提供了subsection来满足这个需求。在每个section内，可以使用0-8192来标识subsection。同一个subsection内的内容会被汇编到同一个obj文件中。举个例子，编译器可能会将常量放入text section，但是可能会不希望它们和被汇编的程序分散开。在这种情况下，编译器会声明一个‘.text 0’来标识每个源码中的代码程序，然后用‘.text 1’来标识每个源码中的常量部分。
+
+subsection是一个可选的功能。如果你不使用subsection，那默认所有的东西都是放在subsection 0中。
+
+subsection按数字从小到大顺序出现在你的obj文件中。obj文件中不包含subsection的任何表征信息，ld以及其他任何操作obj文件的程序也看不到subsection的痕迹。它们只将你所有的text subsection当作一个text section，将你所有的data subsection当作一个data section。
+
+为了区分你接下来的语句要被汇编到哪个subsection，你可以使用一个数字参数来显式地声明，语法是‘.text expression’或者'.data expression'（expression是subsection的编号，或者一个常量表达式）。在生成COFF或者ELF文件的时候，你也可以用语法‘.section name, expression’来声明一个带名字的subsection。如果你只写一个‘.text’，那么和'.text 0'是一个意思。同样的道理，‘.data’和‘.data 0’是一个意思。汇编后的程序都是以.text 0开始。举个例子：
+
+.text 0 # The default subsection is text 0 anyway.
+.ascii "This lives in the first text subsection. *"
+.text 1
+.ascii "But this lives in the second text subsection."
+.data 0
+.ascii "This lives in the data section,"
+.ascii "in the first data subsection."
+.text 0
+.ascii "This lives in the first text section,"
+.ascii "immediately following the asterisk (*)."
+
+每个section都有一个位置计数器(location counter)，它会以字节为单位一个个往上累加，这个section汇编进取的内容每多一个就加一。由于subsection的概念几乎是as汇编器使用范围内的优化，因此并没有一个‘subsectin位置计数器’的概念。也就是说没有方法直接去操作一个位置计数器。但是呢，有一个汇编命令.align可以做这个事情，并且汇编语言中的任何一个自定义的标签都可以捕获它当前的位置计数器。这种正在被汇编的section的位置计数器被称作active位置计数器。
+
+## bss section
+bss section用来作本地变量的存储。你可以在bss section中分配地址空间，但是你一般不能在程序跑起来之前往这个section中塞入数据。当你的程序跑起来之后，bss section的内容会被用0字节填充。
+
+.lcomm汇编命令可以在bss section定义符合。（后面会讲）
+
+.comm汇编命令可以用来定义另一种形式的为初始化符号。（后面会讲）
+
+在汇编像ELF和COFF这样的支持多个section的目标文件时，你也可以正常的切换到bss section去定义符号。但是一般你只能在这个section中填充0字节值。典型的使用方法是这个section中只包含符号定义或者使用.skip汇编命令。
+
+
+# 符号（Symbols）
+符号是是一个非常核心的概念：程序员会使用符号来给东西命名，链接器使用符号来链接，调试器使用符号来调试。
+
+注意！！： as汇编器并不一定会按照符号定义的顺序将这些符号放入到obj文件中。因为这样做可能会使一些调试器没法正常工作。
+
+## 标号（labels）
+标号的写法是在一个符号后面直接加一个冒号（：）。这种符号就可以表示active位置计数器的当前值（比如说一个对应的指令操作符）。如果你在两个不同的地方使用了同一个标号，汇编器会告警：第一个定义的标号被后面的其他定义给覆盖了。
+
+## 给符号赋其他值
+一个符号可以通过在后面添加一个等号来赋任意值。这个和使用.set汇编命令是等价的。
+
+## 符号名
