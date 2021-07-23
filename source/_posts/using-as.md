@@ -3,7 +3,10 @@ title: using as
 date: 2021-06-29 00:05:24
 tags:
 ---
-[TOC]
+> Translated by zivyou. All rights reserved.
+> 由zivyou翻译，保留所有权利。
+
+
 - [Using as(The GNU Assembly)](#using-asthe-gnu-assembly)
 - [概要](#概要)
   - [obj文件格式](#obj文件格式)
@@ -76,6 +79,74 @@ tags:
   - [.hword expressions](#hword-expressions)
   - [.ident](#ident)
   - [.if absolute expression](#if-absolute-expression)
+  - [.incbin "file"[, skip[, count]]](#incbin-file-skip-count)
+  - [.include "file"](#include-file)
+  - [.int expression](#int-expression)
+  - [.internal names](#internal-names)
+  - [.irp symbolX, values...](#irp-symbolx-values)
+  - [.irpc symbolX, values...](#irpc-symbolx-values)
+  - [.lcomm symbolX, length](#lcomm-symbolx-length)
+  - [.lflags](#lflags)
+  - [.line line-number](#line-line-number)
+  - [.linkonce [type]](#linkonce-type)
+  - [.ln line-number](#ln-line-number)
+  - [.mri val](#mri-val)
+  - [.list](#list)
+  - [.long expression.](#long-expression)
+  - [.macro](#macro)
+  - [.nolist](#nolist)
+  - [.octa bignums](#octa-bignums)
+  - [.org new-lc, fill](#org-new-lc-fill)
+  - [.p2align[wl] abs-expr, abs-expr, abs-expr](#p2alignwl-abs-expr-abs-expr-abs-expr)
+  - [.previous](#previous)
+  - [.popsection](#popsection)
+  - [.print string](#print-string)
+  - [.protected names](#protected-names)
+  - [.psize lines, columns](#psize-lines-columns)
+  - [.purgem name](#purgem-name)
+  - [.pushsection name, subsection](#pushsection-name-subsection)
+  - [.quad bignums](#quad-bignums)
+  - [.rept count](#rept-count)
+  - [.sbttl "subheading"](#sbttl-subheading)
+  - [.scl class](#scl-class)
+  - [.section name](#section-name)
+  - [.set symbol, expression](#set-symbol-expression)
+  - [.short expressions](#short-expressions)
+  - [.single flonums](#single-flonums)
+  - [.size](#size)
+  - [.sleb128 expressions](#sleb128-expressions)
+  - [.skip size, fill](#skip-size-fill)
+  - [.space size, fill](#space-size-fill)
+  - [.stabd, .stabn, stabs](#stabd-stabn-stabs)
+  - [.string "str"](#string-str)
+  - [.struct expression](#struct-expression)
+  - [.subsection name](#subsection-name)
+  - [.symver](#symver)
+  - [.tag structname](#tag-structname)
+  - [.text subsection](#text-subsection)
+  - [.title "heading"](#title-heading)
+  - [.type](#type)
+  - [.uleb128 expressions](#uleb128-expressions)
+  - [.val addr](#val-addr)
+  - [.version "string"](#version-string)
+  - [.vtable_entry table, offset](#vtable_entry-table-offset)
+  - [.vtable_inherit child, parent](#vtable_inherit-child-parent)
+  - [.weak names](#weak-names)
+  - [.word expressions](#word-expressions)
+- [80386架构相关的特性](#80386架构相关的特性)
+  - [命令行选项](#命令行选项)
+  - [AT&T汇编语法 vs Intel汇编语法](#att汇编语法-vs-intel汇编语法)
+  - [指令命名](#指令命名)
+  - [寄存器命名](#寄存器命名)
+  - [指令前缀](#指令前缀)
+  - [内存寻址](#内存寻址)
+  - [跳转类指令的处理](#跳转类指令的处理)
+  - [浮点数](#浮点数)
+  - [Intel的MMX指令集，以及AMD的 3DNow! SIMD操作](#intel的mmx指令集以及amd的-3dnow-simd操作)
+  - [用as写16位的汇编代码](#用as写16位的汇编代码)
+  - [AT&T的语法bug](#att的语法bug)
+  - [声明CPU架构](#声明cpu架构)
+  - [备注](#备注)
 # Using as(The GNU Assembly)
 
 By Dean Elsner, Jay Fenlason & friends- [Using as(The GNU Assembly)](#using-asthe-gnu-assembly)
@@ -755,4 +826,582 @@ size参数和value参数都是可选的。默认情况下，size的值是1，val
 这个命令会被一些汇编器用来给obj文件中放置tag。as汇编器仅仅是为了和其他汇编器保持兼容，实际上as并不会作任何事情。
 
 ## .if absolute expression
-.if
+.if命令以一个开关的形式确定某个section中的一段代码是否最终会汇编到目标程序中，.if命令标识了这段代码的开始，而且只有.if命令的参数（必须是一个常量表达式）的值是非0值的时候，才会将这段代码汇编到目标程序中。这段代码的结束必须通过命令.endif来标识。另外作为可选项，你可以使用.else命令来标识出另外一个选项。如果你有多个条件要检查，你可以使用.elseif命令来避免.if/.else的嵌套。
+
+下面几种.if命令的衍生命令也是支持的：
+
+.ifdef symbolX
+  如果给定的参数symbolX被定义过了，那么就汇编这个命令敲定的代码片段。注意，如果一个符号没有被显式地定义过而你直接拿去用了，那这个符号还是会被看作未定义的。
+
+.ifc string1, string2
+  如果给定的两个参数，即string1和string2相同，那么就汇编选定的代码片段。两个字符串需要用单引号引起来，如果没有用引号引起来的话，那么逗号前的一个串会被认为是第一个字符串，逗号后的串一直到行的末尾会被认为是第二个字符串。包含空白字符的字符串必须要引起来。字符串的比较是区分大小写的。
+
+.ifeq absolute expression
+  如果给定的常量表达式的值是0的话，就汇编选定的代码片段。
+
+.ifeqs string1, string2
+  .ifc命令的另一种形式，两个字符串必须通过双引号引起来
+
+.ifge absolute expression
+  如果给定的常量表达式的值大于等于0，就汇编选定的代码片段。
+
+.ifgt absolute expression
+  如果给定的常量表达式的值大于0，就汇编选定的代码片段。
+
+.ifle absolute expression
+  如果给定的常量表达式的值小于等于0，就汇编选定的代码片段。
+
+.iflt absolute expression
+  如果给定的常量表达式的值小于0，就汇编选定的代码片段。
+
+.ifnc string1, string2
+  和.ifc差不多，不过语义上是反过来的：即如果给定的两个字符串不相同，就汇编选定的代码片段。
+
+.ifndef symbolX
+.ifnotdef symbolX
+  如果给定的符号没有定义的话，就汇编选定的代码片段。这个命令的两种拼写形式都支持。注意，如果一个符号没有被显式地定义过而你直接拿去用了，那这个符号还是会被看作未定义的。
+
+.ifne abosolute expression
+  如果给定的常量表达式的值不等于0，就汇编选定的代码片段（换句话说，这个命令和.if命令是一个意思）。
+
+.ifnes string1, string2
+  和.ifeqs差不多，但是语义上反过来了： 即如果给定的两个字符串不同，就汇编选定的代码片段。
+
+## .incbin "file"[, skip[, count]]
+  .incbin命令会将指定的文件一字不拉的引入到当前位置来。你可以在as命令的-I参数中指定文件的搜索目录。file参数旁边的双引号是必须的。
+
+  skip参数可以指明在include的时候省略file文件开始的多少字节。count参数指明了最大可以读入多少字节。需要注意的是，读入的数据不会以任何方式对齐，因此使用该命令的人需要自己考虑在include之前和之后的空间对齐问题。
+  
+## .include "file"
+这个命令提供了一种在你的源代码中指定的地方引入一个文件的方式。参数file文件中的代码会当作.include这个点新插入的代码一样被汇编； 当include的文件到达末尾的时候，汇编程序会在调用.include命令的地方继续它的汇编过程。你可以通过as命令的-I选项来控制引入的文件的搜索路径。参数file附近的双引号是必须的。
+
+## .int expression
+.int命令可以在任何section中带0个或者多个表达式作为参数，参数以逗号作为分隔。每个表达式的值在运行时都得是一个数字。这个数字的字节序以及大小依赖于汇编的是哪种目标程序。
+
+## .internal names
+.internal是一个用来定义ELF文件中变量可见性的命令。其他两个定义可见性的命令是.hidden和.protected命令
+
+这个命令会覆盖掉变量默认的可见性设置（默认的可见性设置是这个变量是local，global还是weak来确定的。这个命令会强制将变量设置位internal这种可见性，即这个变量会被视为hidden状态（不能被其他组件看到），这个符号的相关的一些外部的、处理器相关的处理过程也会一并被执行。
+
+## .irp symbolX, values...
+产生一个语句序列，用来给symbolX赋不同的值。这个语句序列以.irp命令开始，以.endr命令结束。对于每个参数中给定的值，symbolX会被赋予这个值，产生的语句序列是可以被汇编的。如果参数中没有声明values，那么这个语句序列只会被汇编一次，并且symbolX会被赋值位空字符串。如果想要在产生的语句序列中引用symbolX，可以使用符号‘\symbolX’。
+
+举个例子，如果我们使用语句：
+.irp param, 1,2,3
+move d\param,sp@-
+那么上面的语句在汇编的时候等价于：
+move d1,sp@-
+move d2,sp@-
+move d3,sp@-
+
+## .irpc symbolX, values...
+产生一个语句序列，用来给symbolX赋不同的值。这个语句序列以.irpc命令开始，以.endr命令结束。对于每个参数中给定的字符，symbolX会被赋值为这个字符，产生的语句序列是可以被汇编的。如果参数中没有声明values，那么这个语句序列只会被汇编一次，并且symbolX会被赋值位空字符串。如果想要在产生的语句序列中引用symbolX，可以使用符号‘\symbolX’。
+
+举个例子，如果我们使用语句：
+.irp param, 123
+move d\param,sp@-
+那么上面的语句在汇编的时候等价于：
+move d1,sp@-
+move d2,sp@-
+move d3,sp@-
+
+
+## .lcomm symbolX, length
+给symbolX指定的一个本地变量预留length个字节。符号symbolX的section和值与这个预留的变量相同。变量的地址是分配在bss section中，因此在运行时的时候，这个预留的字节内容全是0.symbolX不是全局定义的，因此通常ld链接器并不能看到这个符号。
+
+一些计算机平台的.lcomm命令允许有第三个参数，这个参数声明了符号symbolX在bss section中对齐方式。
+
+## .lflags
+as汇编器会识别这个命令，但仅仅是为了和其他汇编器兼容，as会直接无视这个命令。
+
+## .line line-number
+这个命令可以改变逻辑的行号。参数line-number必须是一个常量表达式。这个命令的下一行会使用这个逻辑的行号。因此，任何其他在当前行的语句在逻辑上的行号是line-number - 1。as会在将来废除这个命令： 因为这个命令仅仅是为了和其他的汇编器兼容。
+
+尽管这个命令的功能与obj文件是a.out格式还是b.out格式相关，as汇编器仍然会在汇编COFF文件的时候接受这个命令。在汇编COFF文件的时候，.line命令和COFF文件中的.ln命令类似。
+
+当在.def/.endif命令之间使用.line命令时，这个命令会被编译器用来生成辅助性的符号调试信息。
+
+## .linkonce [type]
+将当前section标记一下，让链接器命令这个sectin只能被链接一次。这个命令在将同一个section的内容include到多个不同的obj文件中的时候特别有用。.linkonce这个命令必须在这个section的每个实例中被调用。判断section重复的方法时看多个section的名字是不是相同的，因此使用.linkonce的时候需要确保section的名字不和其他section相同。
+
+这个命令只支持在一小部分的obj文件格式中使用。到这个手册撰写的时间为止，目前只有Windows NT系统的PE格式支持这个命令。
+
+type参数时可选的。如果声明了type参数的下，这个参数的值必须是以下几种字符串：
+discard: 丢弃重复的section，并且不发出告警。这个时默认的选项。
+one_only: 在有重复的sectoin的时候，只保留一份，同时抛出告警
+same_size: 如果重复的section的大小不一样的时候，发出告警。
+same_contents: 如果重复的section的内容不是严格一致的话，发出告警。
+
+## .ln line-number
+.ln命令和.line命令相同。
+
+## .mri val
+如果参数val是一个非0值，这个命令的含义时告诉as汇编器进入MRI模式。如果val的值是0，这个命令的含义时告诉as退出MRI模式。这种操作会影响后续代码的汇编形式，这种影响一直持续到下一个.mri命令或者文件末尾。
+
+## .list
+（和.nolist命令一起使用）用来控制汇编的时候是不是要在控制台列出当前的汇编内容。这两个命令会维护一个内部的计数器，计数器的初始值时0..list命令会对计数器++，.nolist命令会对计数器--。汇编器会在这个计数器大于0的时候向控制台列出当前在汇编的内容。
+
+默认情况下，列出功能时关闭的。当你使用as命令的-a选项启用这个功能的时候，这个计数器的值会被设置成1.
+
+## .long expression.
+和.int命令相同。
+
+## .macro
+.macro命令和.endm命令允许你自定义个一个汇编宏。举个例子，下面的代码定义了一个sum宏，它能将一个数字序列写入到内存中：
+```
+.macro sum from=0, to=5
+.long \from
+.if \to-\from
+sum "(\from+1)",\to
+.endif
+.endm
+```
+在上面的宏定义中，“SUM 0,5”这句话等价于：
+.long 0
+.long 1
+.long 2
+.long 3
+.long 4
+.long 5
+
+.macro macname
+.macro macname macargs ...
+  这两句话是用来定义一个名位macname的宏。如果你定义的宏接受参数，你可以在macname后面接着声明参数名，参数名之间通过逗号或者空格分隔。你可以用"=deflt"来为每个参数定义一个默认值。举例来说，下面的宏定义都是合法的：
+  - .macro comm: 定义一个名为comm的宏，不带参数；
+  - .macro plus1 p, p1
+  - .macro plus1 p p1: 这两个语句都是定义了一个名为plus1的宏，这个宏带两个参数，在宏的定义范围内，可以使用“\p”和“\p1”来代表这两个参数
+  - .macro reserve_str p1=0 p2: 定义一个名为reserve_str的宏，这个宏带两个参数。第一个参数有默认值，第二个没有。宏定义完成之后，你可以“reserve_str a,b”这样的方式定用宏，也可以“reserve_str ,b”这样的方式调用宏。
+  
+  在调用宏的时候，你既可以通过参数位置来声明一个参数的值，也可以通过给定参数名来声明参数的值。比如，"sum 9,17"等价于"sum to=17,from=9"
+
+.endm 标识一个宏定义的结束。
+.exitm 提前从当前的宏定义中退出
+\@  as汇编器维护了一个计数器来记录当前运行了多少个宏了，\@就是这个计数器变量。你可以使用“\@”将这个计数器的值拷贝到你的输出中，但是这个符号只能在宏定义的上下文中使用。
+
+## .nolist
+见.list
+
+## .octa bignums
+这个命令可以接0个或者多个大整数，各个数以逗号隔开。这些大整数最多是16个字节的整数。
+
+为啥这里使用.octa这个单词呢？ 因为在计算机中，通常定义一个word是两个字节，那么octa个word就是16个字节了。
+
+## .org new-lc, fill
+将当前section的位置计数器（location counter）推进到new-lc参数指定的位置。new-lc可以是一个常量表达式，或者相同section内的当前subsection的表达式。也就是说，你不能用.org命令来跨section。如果new-lc指定到了一个非法的secton，.org命令会被汇编器给忽略掉。为了和以前的编译器兼容，如果new-lc指定的sectoin是absolute，as汇编器会抛一个告警，然后并提示说new-lc指示的section和当前的subsection相同。
+
+.org一般只能向前增加位置计数器，或者不做改动。你不能时候.org命令来将位置计数器向后移。
+
+由于as汇编器会尽力只执行一遍就完成汇编，new-lc参数不能是undefined。
+
+注意，移动的起点是section的起始点，而不是subsection的起始点。这个是为了和其他的汇编器保持兼容。
+
+当当前subsection的位置计数器开始向前移动时，越过的字节空间会被填充位参数fill提供的字节内容。所以fill参数必须是一个常量表达式。如果逗号和fill参数省略的话，默认使用0进行填充。
+
+## .p2align[wl] abs-expr, abs-expr, abs-expr
+将一个位置计数器（在当前subsection的位置计数器）限制在一个特殊的存储范围内。第一个参数必须是一个常量表达式，它声明了在对齐后位置计数器的低多少位必须是0.举个例子： '.p2align 3'说明位置计数器需要需要向前移动，直到位置计数器的值是8的倍数。如果位置计数器已经是8的倍数，那不需要做什么变化。
+
+第二个参数也是一个常量表达式，它声明了在对齐的时候，使用什么字节来填充。第二个参数可以被省略，如果省略的话，默认会使用0来填充。不过呢，在一些系统中，如果这个section中含有代码，并且省略了使用什么值来填充，那么会使用no-op指令来填充。
+
+第三个参数也是一个常量表达式，并且也是可选的。如果使用了这个参数，那么它声明了在对齐命令执行的时候，允许跨过的最大字节数。如果跨过的字节数大于这个参数的给定值，那么这次对齐不会执行。你可以使用两个逗号（‘,,’）来省略第二个参数同时使用第三个参数。这种写法在你想使用no-op命令来填充的时候很有用。
+
+.p2alignw和.p2alignl命令是.p2align命令的衍生。.p2alignw命令按照2个字节的模式来填充。.p2alignl命令按照4字节的模式来填充。举个例子，‘.p2alignw 2,0x368d’会按照4的倍数进行字节对齐，如果对齐过程中跨过的了2个字节，那么跨过的这两个字节会使用‘0x368d’这个值来填充。如果跨过的字节数是1或者3，那么使用什么值来填充是不确定的。
+
+## .previous
+这个是ELF文件的section栈操作命令。其他的栈操作命令包括.section, .subsectioin, .pushsection 和 .popsection。
+
+这个命令会交换当前的section和上一个访问的section。同一行中的多个.previous命令会翻转两个section。
+
+从section stack的角度来看，这个命令会交换当前section和section stack的栈顶sectoin。
+
+## .popsection
+这是一个ELF文件的secton stack操作命令。
+
+这个命令会将当前section替换成section stack的栈顶section。
+
+## .print string
+as汇编器会在汇编的时候将string的内容输出到标准输出。string必须使用双引号引起来。
+
+## .protected names
+这个是一个ELF的可见性命令。其他的两个可见性控制命令是.hidden和.internal。
+
+这个命令会覆盖有名符号的默认可见性（由它们的绑定关系确定：local, global或者weak）。这个命令会将可见性设置成protected，这意味着在当前模块中任何对于个这符号的引用都被限制在定义这个符号的模块中，即便在另外一个模块中再定义一下这个符号也不行。
+
+## .psize lines, columns
+可以使用这个命令来定义每页可以有多少行，多少列（多少列是一个可选项）。
+
+如果你不使用.psize命令，那在汇编过程展示的时候默认使用60行每页。你可以省略columns这个参数，省略的话默认值是200.
+
+as汇编器会在超出这个限定的行数之后自动添加换行符。如果你想自己搞一个换行符，你可以使用.eject命令。
+
+如果你声明的Lines参数是0，那就意味着as汇编器不会自己加换行符了。
+
+## .purgem name
+undefine一个宏名，这样的话后面就不能使用这个宏了。
+
+## .pushsection name, subsection
+这是一个ELF文件的secton stack操作命令。
+
+这个命令和.section命令是一个语义。它会将当前section push到section栈的栈顶，然后将当前栈的名字和subsection替换成‘name’参数的值和subsection参数的值。
+
+## .quad bignums
+.quad接受0个或者多个bignum参数，参数间通过逗号隔开。每个bignum都占用8个字节，如果这个bignum超过了8个字节，那会抛出一个告警，然后截断低位的8个字节。
+
+单词‘quad’是从'word'这个词演化过来的，'word'是占2个字节，所以'quad-word'是占8个字节。（quad在英文中有4倍的意思）
+
+## .rept count
+将指令.rept和指令.endr之前的行数按顺序重复‘count’次。
+
+举个例子，汇编代码：
+.rept 3
+.long 0
+.endr
+
+等价于：
+.long 0
+.long 0
+.long 0
+
+## .sbttl "subheading"
+在生成listing的时候将参数“subheading”设置位标题。
+
+这个命令会影响后面的页数，如果当前行在一页的开它，那也会影响当前页。
+
+## .scl class
+为一个符号设置存储类型（storage-class）。这个命令只能在.def/.endef命令对中间使用。存储类型指的是将一个符号标记成是静态的或者外部的，或者记录一些将来调试用的符号信息。
+
+.scl命令最开始是COFF输出文件专用的。如果在生成b.out文件的时候设置这个，as汇编器会忽略。
+
+## .section name
+使用.section命令来指示汇编器将下面的代码汇编到‘name’参数指定的section中。
+
+这个命令只能在那些支持自定义section名称的目标文件格式中使用。比如在a.out格式中，这个命令就不支持，即使你声明的是一个标准a.out支持的section名也不行。
+
+COFF格式版本
+对于COFF目标格式，.section命令有下面几种使用方式：
+.section name[, "flags]
+.section name[, subsegment]
+如果可选的参数是通过双引号引起来的，那么参数会被认为是描述这个section的一些flag标记。每个标记都是一个字符。总共支持的字符包括：
+b: 代表bss section
+n: 说明section没有被加载
+w: 可写section
+d: 代表是一个data section
+r: 代表是一个只读section
+x: 代表是一个可执行section
+s: 代表是一个共享section（对于PE格式的输出比较重要）
+a: 无意义，仅仅是为了兼容ELF格式
+
+如果没有声明任何flag，那么默认的flag值由section名字决定。如果声明的参数‘name’不是一个标准的section，as汇编器不认识，那么默认的flag会将section设置成可加载、可写。注意，'n'和'w' flag的原理是从指定的section中移除一些属性，而不是往这个section中添加一些属性，因此如果你仅仅使用这两个flag，相当于你没有对这个section的声明任何flag。
+
+如果提供的参数没有加引号，那这个参数会被当作一个subsegment的编号。
+
+ELF格式版本
+这个命令是一个ELF section栈操作命令。其他的几个section栈操作命令包括：  .subsection, .pushsection, .previous等等。
+
+对于ELF格式，.section命令的用法是：
+.section name [, "flags" [, @type[, @entsize]]]
+可选的参数flags需要用引号引起来，它一般是下面几个字符组成的字符串：
+a: section可以被分配空间
+w: section是可写的
+x： section可执行
+M：section可以被合并
+S：section包含以0结尾的字符串
+可选参数‘type’可以使用下面几种可选值：
+@progbits: 说明section包含数据
+@nobits：说明section不包含数据（也就是说，这个section仅仅是用来占空间的）
+注意，如果在一些‘@’字符代表注释的体系架构下（比如ARM架构），那么就得用其他符号来代替’@‘字符了。比如ARM架构就是使用’%‘来代替’@‘的。
+
+如果‘flags’参数中包含‘M’，那么‘type’参数必须带上‘entsize’参数。带有'M'标记但是不带‘S’标记的section必须包含固定大小的常量，每个常量必须是‘entsize’这么大。既带有‘M’标记又带有‘S’标记的section必须包含以0结尾的字符串，并且字符串中的每个字符都必须是‘entsize’这么大。链接器可能会去除一些相同名字、并且相同flags、并且相同entsize的section。
+
+如果没有声明flags，那默认的flags取决于声明的是什么section名字。如果声明的不是一个汇编器认识的名字，那么默认的flags就代表这个section不包含上面介绍的任何一个flag： 也就是说，这个section不能在内存中分配空间，并且不可写，并且不可执行，可以包含数据。
+
+对于ELF格式来说，汇编器支持另外一种形式的.section命令： .section "name"[, flags...]，这个是为了和Solaris汇编器兼容而设计的。
+
+这个命令会将替换当前section和当前subsection的值。被替换的section和subsection会被push到section栈中。可以在gas汇编器源码的测试用例目录gas/testsuite/gas/elf中找到一些section栈操作命令使用的例子。
+
+## .set symbol, expression
+将符号‘symbol’的值设置成表达式‘expression’代表的值。这个命令会改变符号'symbol'的值和类型。如果符号'symbol'的flag是external，那么这个符号的flag还是会保留。
+
+你可以使用.set命令重复设置一个符号多次。
+
+如果你使用.set命令设置一个全局符号，那么最终存入到obj文件中的符号的值将会是最后一次设置的值。
+
+## .short expressions
+.short命令和.word命令差不多。不过在有一些系统的配置中，.short命令和.word命令生成的长度是不一样的。
+
+## .single flonums
+这个命令会编排0个或者多个浮点数，每个浮点数通过逗号隔开。这个命令的效果和.float命令的效果一样。具体这个浮点数是如何标识的依赖于as汇编器的配置。
+
+## .size
+这个命令用来设置一个符号的大小
+
+COFF格式
+对于COFF格式的目标文件来说，这个.size命令只能在.def/.endef命令对中使用，使用的方法是： .size expression。.size命令只有在生成COFF格式的输出文件时有意义，如果as汇编器输出的b.out格式的文件，那么这个命令会被忽略。
+
+ELF格式
+对于ELF格式的目标文件来说，这个.size命令的用法是： .szie name, expression 。这个命令设置了一个名为'name'的符号的大小。符号大小由expression表达式的值给出。这个命令多用来定函数符号的大小。
+
+## .sleb128 expressions
+sleb128代表‘single little endian base 128’
+
+## .skip size, fill
+这个命令会向前预留'size'个字节，每个字节使用‘fill’值填充。size参数和fill参数都是常量表达式。如果逗号和fill参数省略了的话，fill参数的值默认会是0。这个命令和.space命令是一样的。
+
+## .space size, fill
+这个命令会向前预留'size'个字节，每个字节使用‘fill’值填充。size参数和fill参数都是常量表达式。如果逗号和fill参数省略了的话，fill参数的值默认会是0。这个命令和.skip命令是一样的。
+
+## .stabd, .stabn, stabs
+这三个命令都以.stab打头。这些个命令都会声明一些供符号调试器使用的符号。这些符号都不会进入到as汇编器的hash表中： 因此它们不能在源代码的任何地方被引用。这些符号有5个字段：
+
+string： 这个是声明这个符号的名字。可以包含任何字符除了字符‘\000’，也就是说这里的符号名可以比普通的符号名包含更多类型的字符。一些调试器往往会在这个字段设置一些更加复杂的符号名。
+
+type: 一个常量表达式。符号的类型会被设置成这个表达式的低8位。任意位的组合都是可以的，但是ld链接器和调试器会被一些奇奇怪怪的位组合给卡住。
+
+desc： 一个常量表达式。符号的descriptor会被设置成这个表达式的低16位。
+
+value: 一个常量表达式，符号的值会被设置成这个表达式的值。
+
+如果在读取一个.stabd, .stabn 或者 .stabs语句的时候产生了告警，那这个符号大概率已经被生成了；不过你会在你的obj文件中得到一个不完整的符号。这种行为也是为了和以前的汇编器保持兼容。
+
+.stabd type, other, desc: 参数‘name‘代表生成的符号名，基本上不可能是一个空字符串。为了保持兼容性，在是一个空字符串的时候，它会是一个空指针。一些老的汇编器会使用空指针来代表空字符串，这样不会浪费空间。定义的符号的值会设置在当前位置计数器的地方。当你的程序被链接时，这个符号的地址会被链接成当前位置计数器的地址。
+
+.stabn type, other, desc, value: 符号的名字会被设置成空字符串。
+
+.stabs string, type, other, desc, value： 5个字段都声明了。
+
+## .string "str"
+将当前字符串“str”拷贝到目标文件中。你可以同时声明多个字符串，每个字符串都以逗号隔开。正常情况下，汇编器会将每个字符串的结尾添加一个0字节。
+
+## .struct expression
+切换到absolute section，并且将section的偏移设置成参数'expression'的值，这个参数必须时一个常量表达式。你可以这样使用：
+.struct 0
+field1:
+.struct field1+4
+field2:
+.struct field2+4
+field3:
+这种写法会将符号field1的值设置成0，符号field2的值设置成4，符号field3的值设置成8.这个汇编过程会被限制在absolute section内，在进一步汇编之前，你需要使用.section命令来切换到其他的section内。
+
+## .subsection name
+这个是EFL section栈操作命令之一，其他的几个栈操作命令包括.section， .pushsection, .popsection, 和 .previous。
+
+这个命令会将当前的subsection替换成参数'name'声明的section。当前的sectioni不会发生改变。被替换的subsection会被push到section栈的顶部。
+
+## .symver
+你可以使用.symver命令在一个源代码文件中将一个符号绑定到一个指定的版本。这个命令只支持在ELF格式文件中使用，而且在将文件汇编和简介到一个共享库中时十分有用。下面有一些例子展示了如何在共享库中使用.symver命令来将符号限定在某些版本中可用。
+
+对于ELF文件来说，.symver可以这样用：
+.symver name, name2@nodename
+如果在汇编源代码文件中定义一个符号名‘name’,.symver命令会同时为符号‘name’创建一个别名‘name2@nodename’, 事实上我们不直接创建一个别名符号的原因是'@'符号是不能在符号名中使用的。‘name2’这一部分是这个符号的实际名字，可以被外部引用。参数‘name’仅仅是为了说明这个符号有可能在多个版本中有定义，这样编译器可以明确的知道具体指的是那个符号。'nodename'这一部分是一个在version script(提供给链接器使用)中声明的节点的名字。如果你想在共享库中覆盖一个带版本的符号，那么‘nodename’参数就需要对应上你想覆盖的符号对应的nodename。
+
+当参数‘name’对应的符号没有在汇编的时候定义的时候，所有引用符号‘name’的地方都会被汇编成‘name2@nodename’。如果符号‘name’没有被引用过，那么符号'name2@nodename'会从符号表中被移除。
+
+另一个使用.symver命令的方法： .symver name, name2@@nodename。在这种用法中，符号‘name’必须存在并且在当前被汇编的文件中存在。第二个参数和'name2@nodename'有点像，但是‘name2@@nodename’也会被链接器当作是‘name2’的引用。
+
+第三种使用.symver命令的方法是： .symver name, name2@@@nodename。在汇编的过程中如果发现‘name’没有被定义，那么这个符号会被当作‘name2@nodename’。当符号‘name’定义了的时候，符号’name‘会转成'name2@@nodename'.
+
+## .tag structname
+这个命令是由编译器自动生成的，用来在符号表中生成一些辅助的调试信息。这个命令只能在.def/.endef命令对中出现。Tags可以用来连接符号表中这些structure的定义以及这些structure的实例。
+
+‘.tag’只能在生成COFF文件的时候使用。当生成b.out文件的时候，as汇编器会直接忽略这个命令。
+
+## .text subsection
+告诉as汇编器将下面的语句汇编到.text的第'subsection'个subsection的末尾，参数‘subsection’必须是一个常量表达式。如果省略了‘subsection’参数，那么默认是0.
+
+## .title "heading"
+在生成Listing的时候将title设置成“heading”。
+
+这个命令会影响后续list时候的页数，如果在当前页的前10行出现的时候，也会影响当前页的页数。
+
+## .type
+这个命令用来设置一个符号的类型。
+
+COFF版本：
+对于COFF格式的文件，这个命令必须出现在.def/.endef命令对的中间。用起来时候像这样： .type int。类型的属性会以一个整数的形式存放在符号表中。
+.type命令只对COFF文件格式有效，当生成b.out格式的时候，这个命令会直接被忽略。
+
+ELF版本：
+对于ELF格式的文件，这个命令是这样使用的： .type name, type description。这个用法会将符号‘name’的类型设置成一个函数符号或者一个对象符号。参数”type description“有5种不同类型的语法(为了和其他的汇编器兼容):
+.type <name>, #function
+.type <name>, #object
+.type <name>,@function
+.type <name>,@object
+.type <name>,%function
+.type <name>,%object
+.type <name>,"function"
+.type <name>,"object"
+.type <name>,STT_FUNCTION
+.type <name>,STT_OBJECT
+
+## .uleb128 expressions
+uleb128的意思是： ‘unsigned little endian base 128’。
+
+## .val addr
+这个命令只能出现在.def/.endef命令对之间，参数‘addr’记录了符号表中符号的value属性所存放的地址。
+
+.val命令只能在COFF文件格式中使用 ，当as汇编器输出b.out格式文件的时候，这个命令会被忽略。
+
+## .version "string"
+这个命令会创建一个.note section，并且会将一个ELF格式的note放入这个section。这个note的类型是NT_VERSION，名字为参数"string"。
+
+## .vtable_entry table, offset
+这个命令会查找或者创建一个名为“table”的符号，并且为它创建一个VTABLE_ENTRY重定位。
+
+## .vtable_inherit child, parent
+这个命令会查找一个名为'child'的符号，然后查找或创建一个名为‘parent’的符号，然后为符号parent做一次VTABLE_INHERIT重定位，重定位的偏移值是符号child的值。一种特殊的情况是，parent的名字是0，那么parent会被当作ABS section。
+
+## .weak names
+这个命令会为参数'names'声明的符号序列（符号序列以逗号相互隔开）设置一个weak属性。如果给定的符号已经不存在，那么会创建新的同名的符号。
+
+## .word expressions
+这个命令接受0个或者多个表达式作为参数，每个参数以逗号隔开。
+
+给定的参数中的数字大小范围，以及字节序，取决于汇编器运行的计算机架构。
+
+注意： 为了支持编译器做的一些特殊处理：
+32位地址空间但是寻址不足32位的机器，这个命令会做以下特殊处理：如果这个机器使用了32位寻址，你可以忽略这个问题。为了汇编一些编译器生成的中间代码，as汇编器有些时候会在.word命令中做一些奇怪的事情。比如命令格式‘.word sym1-sym2’会经常被编译器用来在表之间做跳转。因此，当as汇编器汇编一个格式为’.word sym1-sym2‘的命令，并且sym1和sym2之前的差异不是16位的时候，as汇编器会在下一个标号前立即创建一个secondary jump table。这个“secondary jump table”会做一个short-jump跳转到这个secondary table后面的第一个字节。这次跳转可以避免控制流意外的进入新的table中。
+
+
+# 80386架构相关的特性
+as汇编器的i386版既支持原有的Intel 386架构(包括16位和32位模式)，也支持AMD在Intel 64位架构下扩展的的x86-64架构。
+
+## 命令行选项
+as汇编器的i386版本有一些机器相关的命令行选项：
+--32 | --64
+设定字长为32位或者64位。选择32位的话意味着是Intel i386架构，选择64位的话意味着是AMD x86-64架构
+
+这个选项只能在生成ELF格式文件的时候有用，并且需要确保必要的BFD支持已经被包含了（在32位平台你需要加上-enable-64-bit-bfd来配置）。
+
+## AT&T汇编语法 vs Intel汇编语法
+as汇编器现在也支持使用Intel汇编器的语法，你可以使用.intel_syntax来选择Intel模式，使用.att_syntax来切回默认的AT&T模式。GCC默认是生成AT&T模式的汇编代码。上面这两个命令可以带可选的参数： prefix/noprefix声明寄存器符号是否需要一个"%"作为前缀。AT&T的汇编语法和Intel的语法有很大不同，我们这里特意说明下这些不同，因为几乎所有的80386文档都是使用的Intel语法。这两种语法建最大的两个区别是： 
+1. AT&T的立即数以‘$’打头；Intel的立即数没有什么特殊前缀（比如Intel语法的'push 4'在AT&T语法中为'pushl $4'）。AT&T的寄存器操作数以'%'打头，Intel语法中的寄存器操作数没有什么特殊前缀。AT&T中的常量跳转/调用操作（与之相反的是PC相关的跳转/调用操作）以'*'打头，在Intel语法中没有什么特殊前缀。
+2. AT&T和Intel的语法在源操作数和目的操作数的顺序上正好相反。Intel的语句“add eax, 4”在AT&T中为“addl $4, %eax”. “source, dest”这样的使用习惯是为了和以前的Unix汇编器保持兼容。需要注意的是，那些多于一个源操作数的指令（比如'enter'指令）没有采用和Intel相反的顺序。
+3. AT&T的语法中，内存操作数的大小由指令助记符的最后一个字符决定。这些助记符的后缀包括： 'b', w', 'l', 'q' 分别对应 byte(8位),word(16位), long(32位),和quadruple word(64位)内存寻址。在Intel的语法中，做到相同功能的写法是给内存操作数(不是指令助记符)加前缀，对应的，内存操作数的前缀包括'byte ptr', 'word ptr', 'dword ptr', 'qword ptr'。因此，Intel中的'mov al, byte ptr foo'对应与AT&T中的'movb foo, %al'。
+4. AT&T语法中的长跳转/长调用逻辑是：'lcall/ljump $sectoin, $offset'; 对应的Intel语法是： 'call/jmp far section:offset'。对应的，AT&T中的长返回指令为：'lret $stack-adjust'; Intel的长返回语法为：'ret far stack-adjust'.
+5. AT&T的汇编器不支持多section的程序，Unix风格的系统希望所有的程序都在一个section中。
+
+## 指令命名
+AT&T的指令助记符会以一个特殊字符结尾，这个字符标识了操作数的大小。'b','w','l','q'分别对应于byte, word, long, quadruple word。如果没有声明任何的后缀的话，as汇编器会尝试依据目标寄存器来自动补上这个后缀字符。因此，'mov %ax, %bx'等价于‘movw %ax, %bx’; 同样的，'mov $1, %bx'等价于‘movw $1, bx’。
+
+几乎所有的AT&T指令都会在Intel格式中有同名的指令。不过也有一些例外。符号扩展和0扩展指令在使用时需要两种大小的操作数。一种大小用来指示此次符号/0扩展的from的大小，另一种大小用来指示0扩展中的to的大小。这个需求在AT&T语法中是通过两个指令助记符后缀来完成的。AT&T语法中基础的符号扩展和0扩展为： 'movs ...'/'movz...'（对应Intel语法中的'movsx'和'movzx'）。指令助记符的后缀紧跟着指令的基础名字，from的后缀，然后是to的后缀。因此，AT&T中的语句‘movsbl %al, %eds’意思是：“符号扩展移动，从%al到%edx”。这里的后缀是'bl',意味这是“从byte到long”。其他的还有'bw', 从byte到word；'wl',从word到long；'wl',从word到long; 'bq',从byte 到quadruple word; 'wq', 从word到quadruple word; 'lq', 从long到quadruple word。
+
+在Intel语法中,下面这些指令：
+ - 'cbw': 符号扩展，将“%al”扩展为"%ax"
+ - 'cwde': 符号扩展，将一个"%ax"中的word扩展成一个存储在"%eax"中的long
+ - 'cwd': 符号扩展，将"%ax"中的word扩展成一个存储在"%dx:%ax"中的long
+ - 'cdq': 符号扩展，将“%eax”中的一个dword扩展成一个存储在“%edx:%eax”中的quad
+ - 'cdqe': 符号扩展，将“%eax”中的一个dword扩展成一个存储在“%rax”中的quad
+ - 'cdo': 符号扩展，将"%rax"中的一个quad扩展成一个存储在"%rdx:%rax"中的octuple
+在AT&T中对应的写作： "cbtw", 'cwtl', 'cwtd', 'cltd', 'cltq', 'cqto'。
+
+AT&T中的长调用/跳转指令为“lcall”/"ljmp"，Intel中对应的指令为“call far”/"jump far"。
+
+## 寄存器命名
+寄存器操作数通常会以"%"为前缀。80386寄存器包括：
+ - 8个32位的寄存器%eax(累加器)， %ebx, %ecx, %edx, %edi, %esi, %ebp(栈帧指针), %esp(栈顶指针)
+ - 8个16位寄存器： %ax, %bx, %cx, %dx, %di, %si, %bp, %sp
+ - 8个8位寄存器： %ah, %al, %bh, %bl, %ch, %cl, %dh, %dl
+ - 6个section寄存器： %cs (code section), %ds(data section), %ss(stack section), %es, %fs, %gs
+ - 3个处理器控制寄存器： %cr0, %cr2, %cr3
+ - 6个调试寄存器： %db0, %db1, %db2, %db3, %db6, %db7
+ - 2个调试寄存器： %tr6和%tr7
+ - 8个浮点栈寄存器： %st，准确的写法是： %st(0), %st(1), %st(2),%st(3),%st(4),%st(5),%st(6),%st(7)。这些寄存器也就是对应的8个MMX寄存器： %mm0, %mm1, %mm2, %mm3, %mm4, %mm5, %mm6, %mm7。
+ - 8个SSE寄存器： %xmm0,%xmm1,%xmm2,%xmm3,%xmm4,%xmm5,%xmm6,%xmm7。
+
+AMD的x86-64扩展的寄存器包括：
+ - 将8个32位寄存器扩展到64位： %rax, %rbx, %rcx, %rdx, %rdi, %rsi, %rbp, %rsp
+ - 8个扩展寄存器: %r8 - %r15
+ - 8个32位的小端扩展寄存器： %r8d - %r15d
+ - 8个16位的小端扩展寄存器： %r8w - %r15w
+ - 8个8位的小端扩展寄存器： %r8b - %r15b
+ - 4个8位的寄存器： %sil, %dil, %bpl, %spl
+ - 8个调试寄存器： %db8 - %db15
+ - 8个SSE寄存器： %xmm8 - %xmm15
+
+## 指令前缀
+指令前缀是用来修改接下来的指令的。它们的功能包括： 重复一些字符串指令，提供section覆盖，执行锁总线操作，改变操作数和地址大小。指令前缀最好和它们要修饰的指令写在同一行。举个例子，“scas”(scan string)指令可以这样被修饰： repne scans %es:(%edi), %al
+
+下面是一些常见的指令前缀：
+ - section覆盖类前缀： 'cs', 'ds', 'ss', 'es', 'fs', 'gs'。这些前缀会被汇编器自动添加到section:memory-operand内存寻址表达式上，形成一种类似于“section:memory-operand”形式的地址表达式。
+ - 操作符/地址大小前缀（比如data16/addr16）可以将一个32位的操作数/地址转成16位的操作数/地址；data32/addr32可以将16位的操作数/地址转成32位的操作数/地址。这些指令前缀必须和它们修饰的指令出现在同一行。举个例子，在一个16位的.code16 section内， 你可以这么写： addr32 jmpl *(%ebx)。
+ - 锁总线前缀可以让当前指令在执行的时候禁用中断。这种用法只对某一些指令有效，详情得参考80386的手册。
+ - 等待协处理器的指令前缀："wait"，它可以让当前指令在执行的时候等待协处理器操作完成。这个在80386/80387系列中用不上了。
+ - "rep", "repe", "repne"前缀，用于修饰字符串指令，这样可以让这些字符串指令重复“%ecx”次。
+ - x86-64指令集使用"rex"系列前缀来扩展i386指令集。"rex"前缀有4位，用来将一个操作数从32位扩展到64位，
+
+## 内存寻址
+在Intel汇编中，间接寻找的格式是： section: [base+index*scale+disp]， 对应AT&T格式为： section:disp(base, index, scale)。
+这里base和index是可选的32位基址和索引寄存器，disp是可选的偏移量，scale 可以取值1,2,4,8, 代表这个操作数的地址是多少倍的index。如果没有给出scale参数的话，scale默认是1。section参数声明了内存操作数的section寄存器，这个参数可能覆盖默认的section寄存器。不过要注意的是AT&T语法中，寄存器覆盖必须用符号“%”显式说明。如果你声明的section寄存器和默认的section寄存器一样的，as汇编器不会给当前指令加什么前缀修饰。因此，section这个参数一般用来强调声明下当前的内存寻址使用的是哪个section寄存器。
+
+下面是一些具体的例子来比较Intel和AT&T的内存寻址风格：
+ - AT&T： '-4(%ebp)', Intel: '[ebp -4]'。base参数位%ebp, disp参数为-4，section参数没有给出，默认为%ss，因为使用%ebp默认对应的就是%ss。index, scale参数都没有给出。
+ - AT&T: 'foo(,%eax, 4)', Intel: '[foo+eax*4]': index参数为%eax, scale参数为4，disp参数为'foo'。其他所有的参数都省略了。section寄存器默认使用的是%ds
+ - AT&T: 'foo(,1)', Intel: '[foo]': 这个指令是将foo的地址值地址当作了内存操作数。base和index参数省略了，其他的只有一个逗号，因此这个语句是有语法问题的。
+ - AT&T： '%gs:foo', Intel: 'gs:foo': 这个是选中了变量foo中存储的内容，section寄存器使用的是gs
+
+绝对调用和跳转指令必须使用'*'作为前缀。如果没有给一个'*'的话，as汇编器通常会选择一个PC计数器相对的地址进行跳转/调用。
+
+任何有内存操作数，但是没有寄存器操作数指令，都必须通过指令助记符的后缀声明数据操作的大小。
+
+x86-64架构添加了RIP(instruction pointer relative)地址。这种地址模式必须使用"rip"寄存器当作基址寄存器，并且只允许使用常量的offset。举个例子：
+- AT&T: '1234(%rip)', Intel: '[rip+1234]' 这个地址指令当前指令的向后1234字节处。
+- AT&T: 'symbol(%rip)', Intel: '[rip+symbol]'。这个地址以相对RIP指针的方式指向符号symbol。这种写法比使用默认的绝对寻址方式简短一些。
+
+其他32位的寻址模式在x86-64位架构下都保持不变，除了将32位寄存器换成对应的64位寄存器。
+
+## 跳转类指令的处理
+跳转类指令通常都会被优化下，这样可以保证跳转的时候只跳转一个最小的偏移量。如果跳转的目标地址足够近的话，跳转指令的偏移量参数只有8位。如果跳转的目标地址太远的话，会使用一个长一点的偏移量参数来做这个事情。在32位模式中，我们不支持16位的跳转偏移量参数。这个不是汇编器的锅，这个是因为80386CPU架构只会使用%eip寄存器的16位，而不是32位。
+
+需要注意的是，'jcxz', 'jecxz', 'loop', 'loopz', 'loope', 'loopnz' 和 'loopne'指令都只能使用8位的跳转偏移量，因此如果你要使用这些指令（反正GCC是不会用的）可能会报错。AT&T的80386汇编器为了应对这种问题，会尝试将'jcxz foo'命令解释成：
+```
+jcxz cx_zero
+jmp cx_nonzero
+
+cx_zero: jmp foo
+cx_nonzero:
+```
+
+## 浮点数
+80387的所有浮点类型（除了packed BCD）都支持。这些数据类型可以是16位、32位、64位的整数，以及32位的单精度浮点数和64位的双精度浮点数，还有80位的扩展京都浮点数。每种支持的类型都有一个指令助记符后缀以及一个与之相关的构造命令。指令助记符的后缀声明了这个操作数的数据类型。构造命令将这些数据类型存入到内存中。
+
+ - 浮点类型的构造方法包括： .float, .single, .double 和 .tfloat 对应与 32位， 32位，64位，和80位的格式。80387只能通过fldt和fstpt指令来支持这些格式。
+ - 整数构造命令包括： .word, .long, .int 和 .quad， 对应 16位， 32位， 64位 整数格式。对应的指令助记符后缀是's'(single), l(long), q(quad)。对于80位的实数格式，64位的'q'格式只会在 fildq和fistpq指令中出现。
+ - 寄存器到寄存器的操作不应该使用指令助记符后缀。'fstl %st, %st(1)'这样的代码会抛出一个警告，然后当作指令'fst %st, %st(1)'命令去汇编。这是因为所有的寄存器到寄存器操作都是使用80位的浮点操作。
+
+## Intel的MMX指令集，以及AMD的 3DNow! SIMD操作
+as汇编器支持Intel的MMX指令集（Intel的整数数据SIMD指令集合）。as汇编器也支持AMD的3DNow!指令集（一种32位的浮点数数据的SIMD指令集）。
+
+到目前位值，as汇编器还不支持Intel的浮点SIMD指令集：Katmai(KNI)。
+
+8个64位MMX操作，也在3DNow!指令集中，它们是：  %mm0, %mm1, ..., %mm7。它们包含8个8位的整数，4个16位的整数，2个32位的整数，1个64位的整数，或者2个32位的浮点值。MMX寄存器不能同时当作浮点栈使用。
+
+可以参考下Intel和AMD的文档，需要注意的是，AT&T语法和Intel语法中操作数的顺序是相反的。
+
+## 用as写16位的汇编代码
+除了使用默认的配置，用as来写纯32位的i386代码或者64位的x86-64位代码外，as汇编器也支持跑在实模式的代码和跑在保护模式的16位代码。如果想这么做的话，可以在要以16位模式运行的代码前面写上.code16或者.code16gcc命令。你可以通过.code32命令将as切会32位模式。
+
+.code16gcc提供了一些尚在实验阶段的特性，它们可以支持gcc来生成16位的代码。因此，这个命令修饰的代码和.code16命令修饰的代码有一些不一样，主要是.code16中， call, ret, enter, leave, push, pop, pusha, popa, pushf, popf这几个指令默认是32位大小的。这么做是为了让栈指针可以在函数调用的时候保持同样的操作行为，以此来确保32位模式下函数的参数顺序是没有问题的。.code16gcc命令也会gcc生成32位地址的时候自动添加地址的大小前缀。
+
+as汇编器生成的16位代码不一定必须要运行在16位的80386处理器上。如果你确实是需要跑在这样的处理器上，你必须自己保证绝不在代码中使用任何32位的指令。
+
+如果要写16位的代码指令，得显式地声明指令助记符的前缀和后缀。在32位的代码段中，下面的代码： pushw $4 会生成机器码'66 6a 04'，意思是将4push到栈上，然后将%esp减2.
+
+同样的代码在16位的代码段中会生成机器码'6a 04'（也就是说，忽略了操作符前缀）。这个也是可以正确执行的，因为默认的操作数大小是16位，因为这个代码是在一个16位的代码段中。
+
+## AT&T的语法bug
+类Unix汇编器，以及其他从ix86衍生出来的AT&T汇编器，都会在几种特定的情况下，通过预留源寄存器和预留目的寄存器的方式来生成浮点指令。不幸的是，gcc以及其他的程序可能会使用这些预留的寄存器，然后我们就会卡在这了。
+
+举个例子：  fsub %st, %st(3)
+
+这个代码会将 %st(3)中的内容更新成 %st - %st(3) 而不是期望的 %st(3) - %st。这个情况会出现在两个操作数中源操作数是在%st寄存器中，目的操作数在%st(i)寄存器中的这种不可交换的四则浮点运算代码中。
+
+## 声明CPU架构
+as汇编器和通过.arch cpu_type命令声明一个特定的CPU架构。声明之后，gas如果检测到一个不属于这个架构的指令之后，会抛出一个告警。cpu_type参数的可选项包括：'i8086', 'i186', 'i286', 'i386', 'i486', 'i586', 'i686', 'pentium', 'pentiumpro', 'pentium4', 'k6', 'athlon', 'sledgehammer'.
+
+除去可以产生告警之外，这个指令还会对as汇编器的行为产生下面两个影响： 1. 如果你声明了一种CPU架构（除了i486架构），那么左移一位的指令，像'sarl $1, %eax'会自动使用一个2字节的操作码序列（i486架构会产生3字节码序列,你可以通过代码'sar1 %eax'显式地请求）。2. 如果你声明了'i8086', 'i186'或者'i286'CPU架构，同时又使用了.code16/.code16gcc命令，那么在必要的时候，一个以字节位单位的条件跳转语句会被转成两条指令，一条指令是相反的条件的跳转指令，另一条是一个无条件跳转指令，这个无条件跳转指令会跳转到原始的指令想要跳转的地方。对于这种情况的CPU架构，你可以使用'jumps'或者'nojumps'指令来控制这种特殊情况的条件跳转指令的转化。默认会使用‘jumps’指令来进行跳转转化。所有的外部跳转都是使用long类型变量，而文件内部的跳转是必须进行跳转转化的。'nojumps'指令将外部跳转指令看作是基于字节偏移的跳转，并且会在as汇编器进行文件内部跳转的转化的时候告警。非条件跳转指令和jumps指令类似。
+
+举个例子，你可以写这样的代码：  .arch i8086, nojumps
+
+## 备注
+值的说明的是，mul和imul指令有一些trickery。16位，32位，64位，128位扩展的乘法（乘法基本的操作码是0xf6,扩展位4对应与mul指令，5对应于imul指令）只能以一种操作数格式输出。因此，imul %ebx, %eax 指令不会选择扩展的乘法。扩展乘法会搞乱%edx寄存器，这会对gcc的输出造成影响。可以使用imul %ebx来获取64位的输出值（这个值是存储在%edx:%eax中）。
+
+我们添加了imul指令的2操作数形式，第一个操作数是一个立即数表达式，第二个操作数是一个寄存器。这只是一种简写，因此，如果你需要将 %eax乘以69，可以这么写： imul $69, %eax。而不是这么写：  imul $69, %eax, %eax。
