@@ -4,6 +4,21 @@ date: 2021-07-25 15:53:10
 tags:
 ---
 
+- [简介](#简介)
+- [使用方法](#使用方法)
+  - [命令行选项](#命令行选项)
+  - [环境变量](#环境变量)
+- [链接器脚本](#链接器脚本)
+  - [链接器脚本的一些基本概念](#链接器脚本的一些基本概念)
+  - [链接器脚本格式](#链接器脚本格式)
+  - [简单的链接器脚本示例](#简单的链接器脚本示例)
+  - [简单的链接器脚本命令](#简单的链接器脚本命令)
+  - [设置程序入口](#设置程序入口)
+  - [文件处理相关命令](#文件处理相关命令)
+  - [obj文件格式处理命令](#obj文件格式处理命令)
+  - [设置内存区域的别名](#设置内存区域的别名)
+  - [其他的链接器脚本命令](#其他的链接器脚本命令)
+
 GNU链接器
 作者： Steve Chamberlain, Ian Lance Taylor.   @Red Hat Inc
 
@@ -51,3 +66,250 @@ ld的一些命令行参数可以在命令的任何位值声明。不过呢，用
 --format=input-format
     ld可以通过配置来支持多种obj文件。如果你的ld通过这个参数进行配置的话，那-b选项可以声明输入的二进制Obj文件的格式。即使在需要ld支持多种obj格式的情况，你一般也不需要手动通过这个-b参数来显式地声明这些输入Obj的格式，这是因为ld的默认配置会根据各个机器的不同自动识别这个机器上常见的Obj格式。input-format参数是一个string文本，代表一个BFD库支持的特定的格式。你可以通过命令objdump -i命令来获取当前机器支持的所有二进制格式。
 
+...
+(选项太多，候选再补充)
+
+## 环境变量
+你可以通过环境变量GNUTARGET, LDEMULATION和COLLECTION_NO_DEMANGLE来改变ld的行为。
+
+GNUTARGET可以决定输入文件的格式，前提是你没有通过-b或者--format选项来声明输入文件的格式。这个环境变量的值必须是BFD中input format的一种。如果没有设置GNUTARGET环境变量的话，ld会使用默认的目标文件格式。如果GNUTARGET的值为default，那么BFD库会尝试自己检查二进制输入文件的格式；这种自动检查一般来说都是可以成功的，但是有些时候还是会失败，因为用来标识文件格式的magic number并不是统一和确定的。不过呢，BFD库中内置了各个系统中常见的格式，所以这种歧义一般可以通过约定俗成的规定来避免。
+
+LDEMULATION环境变量决定了默认的仿真功能（如果你不使用-m选项的话）。仿真功能可以影响链接器各个方面的行为，特别是默认的链接器脚本。你可以通过--verbose和-V选项来列出可用的仿真功能。如果没有使用-m选项，同时又没有设置LDEMULATION环境变量的话，仿真功能默认是由链接器自身的配置决定。
+
+正常情况下，链接器由默认的识别符号的方式。然而，如果设置了COLLECT_NO_DEMANGLE环境变量，那链接器默认会不自己识别符号。这个环境变量的gcc链接器wrapper程序中被广泛的使用。这个环境变量的值可以被--demangle和--no-demangle选项覆盖。
+
+# 链接器脚本
+链接过程由链接器脚本控制。链接器脚本是用‘链接命令语言’(the linker command language)撰写的。
+
+链接器脚本的主要目的是描述输入文件中的各个section怎么映射到输出文件中，然后如何控制输出文件中的内存布局。大多数的链接器脚本就干这两件事情。不过呢，在必要的时候，链接器脚本也可以使用下面的命令来指导链接器做一些其他的操作。
+
+一般来说，链接器都会使用一个链接器脚本。如果你没有自定一个链接器脚本的话，它会使用一个默认的脚本，这个脚本已经编译在ld命令的二进制程序中。你可以通过--verbose选项来展示默认的链接器脚本。一些命令行选项，比如-r和-N，可以影响默认的链接器脚本。
+
+你可以使用命令行选项-T来声明自定义的链接器脚本。当你这样声明的时候，你提供的链接器脚本会覆盖默认的链接器脚本。
+
+你可以通过将链接器脚本当作要被链接的输入文件这样的方式来隐式使用。
+
+## 链接器脚本的一些基本概念
+为了描述链接器脚本语言，我们需要定义一些基本的概念和词汇。
+
+链接器会将输入文件组合到一个单独的输出文件中。输出文件和各个输入文件都是obj格式文件。输入输出文件都可以被称为Obj文件，输出文件往往被称为可执行文件，不过我们的文档中也会将输出文件称为obj文件。每个obj文件都包括了一系列sections和一些其他东西。输入文件中的section称为输入section，输出文件中的section称为输出section。
+
+obj文件中的每个section都包含一个名字和一个大小。大多数section还包含一个相关的数据块，一般称为sectoin内容。section可以标记位‘可加载的’，这个是指当输出文件运行的时候这部分内容可以加载至内存中。一个没有任何内容的section可以是‘可分配的’，这是指内存中的这块区域需要单独设置，但是没有特别说明需要设置什么内容（一些情况下需要设置成0）。一个既不是可加载的也不是可分配的section一般都是包含一些调试信息。
+
+每个可加载的或者可分配的输出section都有两个地址。第一个地址称为VMA，即virtual memory address（虚拟内存地址）。这个地址定义了输出文件在运行的时候，这个section应该在哪个内存地址处。第二个地址是LMA，也称为load memory address。这个地址描述了这个section会被加载到哪个地址那里。大多数情况下这两个地址是相同的。它们俩不同的一种情况是： 当一个程序启动的时候，它的data section加载到ROM，然后又被加载到RAM中，就会出现这种情况。这个技术常常被一些基于ROM的系统用来初始化全局变量。这个案例中，ROM的地址应该是LMA，RAM的地址应该是VMA。
+
+可以使用objdump命令的-h选项来查看obj文件的各个section。每个Obj文件都有一个符号列表，即符号表。符号可以是定义的也可以是未定义的。每个符号都有一个名字，每个定义的符号都有一个地址以及一些其他信息。如果你是将一个C或者C++程序编译成obj文件，每个定义的函数和全局的或者静态变量都对应一个定义的符号。输入文件中的每个未定义的函数或者未定义的全局变量都会对应一个未定义符号。
+
+你可以使用nm程序来查看一个obj文件中的符号，或者使用objdump的-t选项来查看。
+
+## 链接器脚本格式
+链接器脚本是一个文本文件。
+
+你可以像写一系列命令一样来写一个链接器脚本。每个命令同时也是一个关键字，可以带参数，或者定义一个符号。可以通过分号分隔命令，空白字符一般会被忽略。
+
+文件名和格式名可以当作字符串直接输入。如果一个文件名中包含像逗号这样会切分字符串的字符，你需要将这个特殊的文件名通过双引号引起来。文件名中不能包含双引号。
+
+和C语言一样，你可以在链接器脚本中使用"/*"和"*/"来声明一段注释，同样的，注释也是会当作空白字符一样处理。
+
+## 简单的链接器脚本示例
+一般链接器脚本都相当简单。
+
+最简单的链接器脚本是只有一个命令的脚本： 'sections'。你可以使用sections命令来描述输出文件的内存布局。
+
+sections命令是一个很强的命令。我们简单演示一下它的用法。假设你的程序只包含代码、初始化数据和未初始化数据，它们分别放在.text，.data，和.bss sections中。
+
+这个例子中，我们假设代码需要在地址0x100000处加载，数据需要从0x8000000处开始。那我们可以写个这样的链接器脚本：
+sections
+{
+    . = 0x100000;
+    .text : {.*(.text)}
+    . = 0x8000000;
+    .data : {*(.data)}
+    .bss : {*(.bss}
+}
+首先，我们使用了命令section，紧接着我们在一对大括号内写了一系列符号的定义以及输出文件的secton描述。
+
+第一行section命令内部的设定了特殊符号“.”的值，这个“.”也被称作位置计数器。如果你没有使用一些其他的方法来声明输出section的地址的话，那这个地址会被设置成当前位置计数器的值。然后位置计数器的值会往上增加这个输出section大小的数值。在命令sections使用的地方，位置计数器的值是0.
+
+第二行定了一个输出section: .text。冒号是必须的。大括号内，你定义了需要放置在输出section内的输入section。“*”一个通配符，代表可以匹配任何名字。表达式“*(.text)”代表任何输入文件中的".text"输入section。
+
+由于".text : {.*(.text)}"这句话这里的位置计数器的值是“0x10000”，链接器会设置输出.text section的地址为0x100000。
+
+剩下的代码定义了输出文件的.data和.bss section。链接器会将输出文件中的.data section放在地址0x8000000处。之后，位置计数器的值会自动变为0x8000000加上.data输出section的大小。这样，.bss输出sectoin会立马紧接着放在.data输出section的内存地址后面。
+
+链接器通过自动增加位置计数器的方式来保证每个输出section都按要求对齐。这个例子中，.text和.data section会按照声明的方式进行对齐，但是链接器可能必须要在.data和.bss section中间预留一段间隙。
+
+就是这样！这就是一个简单但是完整的链接器脚本。
+
+## 简单的链接器脚本命令
+下面我们简单介绍一下连接器脚本中的命令。
+
+## 设置程序入口
+程序中执行的第一个指令称为程序的入口点(entry point)。你可以使用ENTRY链接器脚本命令来设置入口点。这个命令的参数是一个符号名：
+ENTRY(symbol)
+有多种方式可以设置入口点。对于链接器来说，他会一个个按顺序的尝试下面的方法，直到有一个方法成功了：
+- 命令行选项: -e
+- 链接器脚本中的 ENTRY(symbol)命令
+- 符号start的值，如果没有设置那这个方法就不行
+- .text段的第一个字节的地址
+- 地址0
+
+## 文件处理相关命令
+下面几个命令是文件处理相关的：
+- INCLUDE filename: 在当前位置包含一个链接器脚本filename进来。文件的搜索路径为当前路径，以及通过命令行选项-L声明的文件路径。你可以嵌套执行INCLUDE命令，但是最多嵌套10层。
+你可以将INCLUDE命令放置在最外层： 在MEMORY或者SECTIONS命令中，或者在输出section的描述区域中。
+
+- INPUT(file, file, ...) / INPUT(file file ...): INPUT命令告诉链接器需要链接的文件列表。
+  举个例子，如果你想在链接的时候包含一个名为‘subr.o’的文件作为输入文件，但是呢，每次在命令行中写又太麻烦了，那么你就可以在链接器脚本中定义： INPUT(subr.o)
+  事实上，只要你愿意，你可以在链接器脚本中列出所有的输入文件，然后在命令行写命令的时候可以简单的使用-T选项就完事了。
+  在配置了sysroot prefix系统根目录前缀的情况下，如果你声明的文件名以'/'开头，并且当前链接器脚本又在根目录下，那列出的文件会被认为是在根目录下的。负责，链接器会尝试在当前目录下找文件。如果没有找到，链接器会尝试在默认的库搜索路径下搜索文件。可以参考下参数-L的行为。
+  如果你这样使用INPUT命令： INPUT(-lfile)，那ld链接器会将文件名翻译为libfile.a，这个是参数-l的行为
+  当你显式地在链接器脚本中使用INPUT命令时，当这些文件会在当前链接器脚本生效的时刻引入到链接过程。这个可能会对文件搜索又一点影响。
+
+- GROUP(file, file, ...) / GROUP(file file ...): GROUP命令鹤INPUT命令类似，就是参数中的文件必须是归档文件，并且这些文件会反复搜索直到没有新的未定义的符号引用被创建出来。
+
+- AS_NEEDED(file, file, ...) / AS_NEEDED(file file ...): 这个用法只能和其他文件名一起出现在INPUT或者GROUP命令中间。列出的文件会被当作INPUT和GROUP命令列出的文件一样被处理，除了EFL的共享链接库，共享链接库只会在它们被需要的时候才会加载。这个命令本质上是在命令行选项上启用了--as-needed选项，然后列出所有的文件名，之后启用--no-as-needed选项。
+
+- OUTPUT(filename): OUTPUT命令可以给输出文件命名。在链接器脚本中使用OUTPUT(filename)命令等价于在命令行中使用-o filename选项。如果两者都使用了的话，命令行选项的优先级更高。
+  你可以使用OUTPUT命令来设置一个默认的输出文件名，如果常见的a.out默认输出文件名就是这么设定的。
+
+- SEARCH_DIR(path): SEARCH_DIR命令会将参数path添加到链接器搜索归档库的路径中。SEARCH_DIR(path)的原理和命令行选项-L path的原理是一样的。如果两者都使用了的话，命令行选项的优先级更高。
+
+- STARTUP(filename): STARTUP命令和INPUT命令类似，但是STARTUP命令声明的文件filename会是第一个被链接的输入文件，就好像它是命令行参数中第一个被声明的文件一样。这个在那些默认入口点是第一个被链接的文件的系统中是很有用的。
+
+## obj文件格式处理命令
+有一对链接器脚本命令可以用来处理obj文件格式。
+- OUTPUT_FORMAT(bfdname) / OUTPUT_FORMAT(default, big, little): OUTPUT_FORMAT这命令声明了输出文件使用的BFD格式。使用OUTPUT_FORMAT(bfdname)的效果和使用‘--oformat bfdname’命令行选项的效果是一样的。如果两者都使用了的话，命令行选项的定义优先级更高。
+你可以在命令OUTPUT_FORMAT命令后加3个参数来声明不同的输出格式，对应于命令选项中的-EB和-EL选项。这个用法让链接器可以根据系统不同的大小端情况来选择不同的输出格式。
+如果-EB和-EL选项都没有使用的话，那么输出文件的格式会是第一个参数default声明的格式。如果使用了-EB选项，那么输出格式会是第二个参数big声明的格式。如果使用了-EL选项，那么输出文件的格式会是第三个参数litte声明的格式。
+举个例子，MIPS架构下的ELF目标文件的格式在默认的链接器脚本中是这么定义的： OUTPUT_FORMAT(elf32-bigmips, elf32-bigmips, elf32-littlemips)
+这个定义时说，默认的输出文件格式是‘elf32-bigmips’，但是如果在链接的时候使用了-EL命令行选项，那么输出文件的格式将会是elf32-littlemips格式。
+
+- TARGET(bfdname): TARGET命令声明了解析输出文件时的BFD格式，这个设置同时也会影响到INPUT和GROUP命令。这个命令的效果和'-b bfdname'命令行选项的效果是一样的。如果使用了TARGET命令但是没有使用OUTPUT_FORMAT命令，那么最后一个TARGET设置的格式也会作为输出文件的格式。
+
+## 设置内存区域的别名
+通过创建命令动态创建出来的内存区域可以设置一个别名。每个别名最多可以对应一个内存区域。
+使用方法： REGION_ALIAS(alias, region)
+REGION_ALIAS函数为参数region指定的内存区域创建出一个名为alias的别名。这种用法可以灵活的为输出文件中的内存区域设置一个映射表。下面是一个具体的例子。
+假设我们有一个嵌入式系统的应用，它包含多个内存存储设备。和其他系统一样，随机访问存储器RAM允许代码的执行或者数据的存储。有一些系统可能会有一个只读的、非随机访问的存储器ROM，它允许代码指令和只读数据的访问。然后可能还会有一个只读的、非随机访问的的存储设备ROM，它只允许读取只读数据，并且不允许代码执行。这样我们就需要4个输出section:
+ - .text: 程序的代码
+ - .rodata: 只读数据
+ - .data: 已初始化的可读可写数据
+ - .bss: 用0初始化过的可读可写数据
+我们的目标是提供一个链接器命令文件，这个文件包含一个系统无关的部分，这个部分需要定义output section；还需要定义一个系统相关的部分，这个部分定义了输出section和系统可用内存区域的映射关系。我们的嵌入式系统有3中不同存储设置方案A, B 和 C，这3种方法分别如下：
+Section      Variant A      Variant B        Variant C                         
+.text          RAM             ROM             ROM                         
+.rodata        RAM             ROM             ROM2                         
+.data          RAM           RAM/ROM           RAM/RO                         
+.bss           RAM             RAM             RAM                          
+这里的RAM/ROM或者RAM/ROM2意思是这个section可以依次加载到ROM或者ROM2中。请注意，这3种方法中的.data section都是紧接着.rodata的末尾的。
+
+下面是生成输出section的一个链接器脚本的示例。这个脚本中包含一个linkcmds.memory文件，这个文件与系统相关，它描述了具体的内存布局。
+
+```
+INCLUDE linkcmds.memory
+
+SECTIONS
+{
+  .text: 
+  {
+    *(.text)
+  } > REGION_TEXT
+  .rodata:
+  {
+    *(.rodata)
+    rodata_end = .;
+  } > REGION_RODATA
+  .data : AT (rodata_end)
+  {
+    data_start = .;
+    *(.data)
+  } > REGION_DATA
+  data_size = SIZEOF(.data);
+  data_load_start = LOADADDR(.data);
+  .bss :
+  {
+    *(.bss)
+  } > REGION_BSS
+}
+```
+
+链接器脚本已经有了，现在我们需要提供3种不同的链接器命令文件linkcmds.memory来定义不同的内存布局和别名。A, B, C三种方法对应的文件分别如下：
+
+A方案：所有的内容都存储在RAM中。
+```
+MEMORY
+{
+  RAM : ORIGION = 0, LENGTH = 4M
+}
+
+REGION_ALIAS("REGION_TEXT", RAM);
+REGION_ALIAS("REGION_RODATA", RAM);
+REGION_ALIAS("REGION_DATA", RAM);
+REGION_ALIAS("REGION_BSS", RAM);
+```
+
+B方案：程序代码和只读数据存储在ROM中，可读写数据存储在RAM中。ROM中会存储一份用于初始化的数据，并且会在系统启动的时候拷贝到RAM中。
+```
+MEMORY
+{
+ROM : ORIGIN = 0, LENGTH = 3M
+RAM : ORIGIN = 0x10000000, LENGTH = 1M
+}
+REGION_ALIAS("REGION_TEXT", ROM);
+REGION_ALIAS("REGION_RODATA", ROM);
+REGION_ALIAS("REGION_DATA", RAM);
+REGION_ALIAS("REGION_BSS", RAM);
+```
+
+C方案：程序代码存储在ROM中，只读数据存储在ROM2中。可读写数据存储在RAM中。ROM2中存储有一份用于初始化的数据，并且会在系统启动的时候加载到RAM中。
+```
+MEMORY
+{
+ROM : ORIGIN = 0, LENGTH = 2M
+ROM2 : ORIGIN = 0x10000000, LENGTH = 1M
+RAM : ORIGIN = 0x20000000, LENGTH = 1M
+}
+REGION_ALIAS("REGION_TEXT", ROM);
+REGION_ALIAS("REGION_RODATA", ROM2);
+REGION_ALIAS("REGION_DATA", RAM);
+REGION_ALIAS("REGION_BSS", RAM);
+```
+
+如果有必要的话，我们可以写一段可以通用的处理程序，用来在系统初始化的时候将数据从ROM或者ROM2的.data section拷贝到RAM中。这段程序可以这么写：
+```
+#include <string.h>
+extern char data_start [];
+extern char data_size [];
+extern char data_load_start [];
+void copy_data(void)
+{
+  if (data_start != data_load_start)
+  {
+    memcpy(data_start, data_load_start, (size_t) data_size);
+  }
+}
+```
+
+## 其他的链接器脚本命令
+还有一些其他的链接器脚本命令。
+ASSERT(exp, message): 使用的时候必须保证exp的值不为0.如果是0的话，那链接器会将参数message的内容打印出来，并且抛出错误码，然后退出。
+
+EXTERN(symbol symbol ...): 强制将符号symbol作为一个undefined符号放入到输出文件中。有一些情况需要这样操作，比如想要触发链接器将一些标准库链接进来。你可以使用EXTERN来列出多个符号，也可以多次使用EXTERN命令。这个命令的效果和命令行参数-u是一样的。
+
+FORCE_COMMON_ALLOCATION: 这个命令和命令行选项-d的效果是一样的： 让ld链接器给通用符号预留空间，即使已已经通过-r选项声明了一个可重定位输出文件。
+
+INHIBIT_COMMON_ALLOCATION: 这个命令和命令行选项--no-define-common的效果是一样的： 让ld链接器忽略对通用符号的地址分配，即使声明了是一个不可重定位输出文件。
+
+INSERT [AFTER | BEFORE] output_section: 这个命令的典型使用场景是在一个-T声明的链接器脚本中，用来修饰SECTIONS命令的行为(比如overlays覆盖行为)。这个命令会将所有前面的链接器脚本语句插入到output_section参数声明的section之前（或者之后），同时会引起-T声明的链接器脚本不覆盖默认的链接器脚本。插入行为会发生在链接器将输入文件的section映射到输出文件的section完成之后。在插入之前，由于-T声明的链接器脚本会在默认的链接器脚本前面进行解析，因此-T声明的脚本中的语句会在默认的链接器脚本中的语句之前执行。特别的，-T声明的脚本中的输入section的分配会发生在默认链接器脚本的输入section分配之前。下面是一个例子，用来说明-T脚本是如何使用INSERT命令的。
+```
+SECTIONS
+{
+  OVERLAY :
+  {
+    .ov1 { ov1*(.text) }
+    .ov2 { ov2*(.text) }
+  }
+}
+INSERT AFTER .text;
+```
