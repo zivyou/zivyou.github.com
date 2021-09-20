@@ -93,6 +93,6 @@ mermaid: ## mermaid url https://github.com/knsv/mermaid
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/zivyou/zivyou.github.com.git
+  repo: git@github.com:zivyou/zivyou.github.com.git
   branch: master
   
