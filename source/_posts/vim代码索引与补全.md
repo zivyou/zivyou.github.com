@@ -44,33 +44,27 @@ filetype off " required
 set encoding=utf-8
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+set rtp+=~/.config/nvim/bundle/Vundle.vim
+call vundle#begin()            " required
+Plugin 'VundleVim/Vundle.vim'  " required
+Plugin 'git://github.com/scrooloose/nerdtree.git'
+Plugin 'https://github.com/Shougo/deoplete.nvim.git'
+Plugin 'https://github.com/autozimu/LanguageClient-neovim.git'
+Plugin 'git@github.com:vim-scripts/taglist.vim.git'
+Plugin 'scrooloose/syntastic'
+" ===================
+" my plugins here
+" ===================
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'nerdtree'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'roxma/vim-hug-neovim-rpc'
-Plugin 'roxma/nvim-yarp'
-Plugin 'autozimu/LanguageClient-neovim'
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'Shougo/neosnippet.vim'
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'altercation/vim-colors-solarized'
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
+" Plugin 'dracula/vim'
 
-" All of your Plugins must be added before the following line
-call vundle#end() " required
-filetype plugin indent on " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
+
+" ===================
+" end of plugins
+" ===================
+call vundle#end()               " required
+filetype plugin indent on       " required
+
 " Brief help
 " :PluginList - lists configured plugins
 " :PluginInstall - installs plugins; append `!` to update or just :PluginUpdate
@@ -86,20 +80,20 @@ let g:python2_host_prog = "/usr/local/bin/python2"
 
 " setup javascript/typescript language server
 let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_settingsPath = '/Users/xxx/.vim/.config.settings.json'
+let g:LanguageClient_settingsPath = '/Users/zivyou/.config/nvim/settings.json'
 let g:LanguageClient_autoStart = 1
+
+
+
 let g:LanguageClient_serverCommands = {
     \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'c': ['/usr/local/bin/ccls', '--log-file=/tmp/cc.log'],
-    \ 'cpp': ['/usr/local/bin/ccls', '--log-file=/tmp/cc.log'],
-    \ 'objc': ['/usr/local/bin/ccls', '--log-file=/tmp/cc.log'],
-    \ }
+   \ }
 
 if executable('javascript-typescript-stdio')
   let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
   " Use LanguageServer for omnifunc completion
   autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
-
+  
   "let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
   "autocmd FileType typescript setlocal omnifunc=LanguageClient#complete
 
@@ -109,15 +103,15 @@ else
 endif
 
 " Register ccls C++ lanuage server.
-if executable('ccls')
-   au User lsp_setup call lsp#register_server({
-      \ 'name': 'ccls',
-      \ 'cmd': {server_info->['ccls']},
-      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'initialization_options': {'cache': {'directory': '/tmp/ccls/cache' }},
-      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-      \ })
-endif
+""if executable('ccls')
+""   au User lsp_setup call lsp#register_server({
+""      \ 'name': 'ccls',
+""      \ 'cmd': {server_info->['ccls']},
+""      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+""      \ 'initialization_options': {'cache': {'directory': '/tmp/ccls/cache' }},
+""      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+""      \ })
+""endif
 
 
 call deoplete#custom#option('sources', {
@@ -125,37 +119,71 @@ call deoplete#custom#option('sources', {
             \ 'zsh': ['zsh']
             \})
 
-let g:deoplete#ignore_sources = {}
-let g:deoplete#ignore_sources._ = ['buffer', 'around']
-
 
 " setup deoplete
 let g:deoplete#enable_at_startup = 1
 
 
-"set background=dark
-"colorscheme solarized
-set ts=4
-set expandtab
-set hlsearch
-set backspace=indent,eol,start
-nmap <C-n> :NERDTreeToggle <CR>
-nmap <C-l> :tabn <CR>
-nmap <C-h> :tabp <CR>
+" setup eslint"
+let g:syntastic_javascript_checkers = ['eslint']
+
+
+nnoremap <C-n> :NERDTreeToggle <CR>
+nnoremap <C-l> :tabn <CR>
+nnoremap <C-h> :tabp <CR>
+nnoremap <F8> :TlistToggle <CR>
+nnoremap <C-f> :!find . -type f -name "*.h" -o -name "*.cpp" -o -name "*.c" -o -name "*.cc" -o -name "*.hpp" \| xargs grep -r <cword>
+
+" 生成cscope的索引
+nnoremap <C-c-t> :!find . -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.cc" -o -name "*.hpp" > FileList.txt; cat FileList.txt \| xargs ctags -a ; cscope -bkq -i FileList.txt;
+if has("cscope")
+  set csto=0
+  set nocsverb
+  if filereadable("cscope.out")
+    cscope add cscope.out
+  endif
+  set csverb
+endif
+
 " Settings for cscope:
-nmap ,c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap ,s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap ,g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap ,t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap ,t :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap ,f :cs find f <C-R>=expand("<cword>")<CR><CR>
-nmap ,i :cs find c <C-R>^=expand("<cword>")$<CR><CR>
-nmap ,d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nnoremap ,c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nnoremap ,s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nnoremap ,g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nnoremap ,t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nnoremap ,t :cs find e <C-R>=expand("<cword>")<CR><CR>
+nnoremap ,f :cs find f <C-R>=expand("<cword>")<CR><CR>
+nnoremap ,i :cs find c <C-R>^=expand("<cword>")$<CR><CR>
+nnoremap ,d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-r> :!
+nnoremap <C-c-s> :cs find 
 
 " LanguageClient-nvim key bindings
-nmap ;d :call LanguageClient#textDocument_definition()<cr>
-nmap ;r :call LanguageClient#textDocument_references({'includeDeclaration': v:false})<cr>
-nmap ;h :call LanguageClient#textDocument_hover()<cr>
+nnoremap ;d :call LanguageClient#textDocument_definition()<cr>
+nnoremap ;r :call LanguageClient#textDocument_references({'includeDeclaration': v:false})<cr>
+nnoremap ;h :call LanguageClient#textDocument_hover()<cr>
+" caller
+nnoremap ;c :call LanguageClient#findLocations({'method':'$ccls/call'})<cr>
+
+set showmatch
+color desert
+"set background=dark
+"colorscheme solarized
+set expandtab
+set ts=2
+set shiftwidth=2
+set hlsearch
+set backspace=indent,eol,start
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {}<ESC>i
+inoremap <C-b> <left>
+inoremap <C-n> <down>
+inoremap <C-p> <up>
+inoremap <C-f> <right>
+inoremap <C-e> <end>
+inoremap <C-a> <home>
 ```
 
 #### 3. 装插件
