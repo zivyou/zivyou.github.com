@@ -12,12 +12,12 @@
 
 
 
-  <meta name="description" content="数据库范式">
+  <meta name="description" content="leetcode-cn-131">
 
 
 
 
-  <meta name="keywords" content="Tech,">
+  <meta name="keywords" content="leetcode,">
 
 
 
@@ -32,21 +32,21 @@
 
 
 
-<link rel="canonical" href="http://zivyou.github.io/2020/06/29/数据库范式/">
+<link rel="canonical" href="http://zivyou.github.io/2020/06/29/回溯搜索回文串/">
 
 
-<meta name="description" content="1NF: 最基本的数据库形式，要求每一列都是不同的，不存在相同的列，数据项不可分割。现在的RDB已经不可能创建出不符合1NF的表了 2NF：每个表格的每一行需要有至少一个可以唯一标识这一行的字段，通常我们会把这个字段称为码。因此2NF要求表必须要有码，码确定的情况下其他字段都可以确定 3NF：每个表格的每一行中的所有字段，都只依赖于码，不依赖于其他任何字段。每个表格中的属性，既不部分依赖于码，也">
-<meta name="keywords" content="Tech">
+<meta name="description" content="leetcode 131  字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：12345678910111213141516171819i从[a, s.size())：- 假如s.substr(a, i-a+1)不是回文串，i++继续寻找下一个；- 假如s.substr(a, i-a+1)是回文串，可以将s.substr(a, i-a+1)推">
+<meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据库范式">
-<meta property="og:url" content="http://zivyou.github.io/2020/06/29/数据库范式/index.html">
+<meta property="og:title" content="leetcode-cn-131">
+<meta property="og:url" content="http://zivyou.github.io/2020/06/29/回溯搜索回文串/index.html">
 <meta property="og:site_name" content="zivyou">
-<meta property="og:description" content="1NF: 最基本的数据库形式，要求每一列都是不同的，不存在相同的列，数据项不可分割。现在的RDB已经不可能创建出不符合1NF的表了 2NF：每个表格的每一行需要有至少一个可以唯一标识这一行的字段，通常我们会把这个字段称为码。因此2NF要求表必须要有码，码确定的情况下其他字段都可以确定 3NF：每个表格的每一行中的所有字段，都只依赖于码，不依赖于其他任何字段。每个表格中的属性，既不部分依赖于码，也">
+<meta property="og:description" content="leetcode 131  字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：12345678910111213141516171819i从[a, s.size())：- 假如s.substr(a, i-a+1)不是回文串，i++继续寻找下一个；- 假如s.substr(a, i-a+1)是回文串，可以将s.substr(a, i-a+1)推">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2022-12-22T02:58:05.050Z">
+<meta property="og:updated_time" content="2023-04-28T11:54:08.640Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库范式">
-<meta name="twitter:description" content="1NF: 最基本的数据库形式，要求每一列都是不同的，不存在相同的列，数据项不可分割。现在的RDB已经不可能创建出不符合1NF的表了 2NF：每个表格的每一行需要有至少一个可以唯一标识这一行的字段，通常我们会把这个字段称为码。因此2NF要求表必须要有码，码确定的情况下其他字段都可以确定 3NF：每个表格的每一行中的所有字段，都只依赖于码，不依赖于其他任何字段。每个表格中的属性，既不部分依赖于码，也">
+<meta name="twitter:title" content="leetcode-cn-131">
+<meta name="twitter:description" content="leetcode 131  字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：12345678910111213141516171819i从[a, s.size())：- 假如s.substr(a, i-a+1)不是回文串，i++继续寻找下一个；- 假如s.substr(a, i-a+1)是回文串，可以将s.substr(a, i-a+1)推">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -73,7 +73,7 @@
 
 
 
-    <title> 数据库范式 - zivyou </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <title> leetcode-cn-131 - zivyou </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   </head>
 
   <body>
@@ -137,7 +137,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          数据库范式
+          leetcode-cn-131
         
       </h1>
 
@@ -155,12 +155,11 @@
 
     
             <div class="post-content">
-            <ol>
-<li>1NF: 最基本的数据库形式，要求每一列都是不同的，不存在相同的列，数据项不可分割。现在的RDB已经不可能创建出不符合1NF的表了</li>
-<li>2NF：每个表格的每一行需要有至少一个可以唯一标识这一行的字段，通常我们会把这个字段称为码。因此2NF要求表必须要有码，码确定的情况下其他字段都可以确定</li>
-<li>3NF：每个表格的每一行中的所有字段，都只依赖于码，不依赖于其他任何字段。每个表格中的属性，既不部分依赖于码，也不传递依赖于码</li>
-<li>BCNF：码与码之间不能有依赖关系</li>
-</ol>
+            <p>leetcode 131</p>
+<ul>
+<li>字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">i从[a, s.size())：</span><br><span class="line">- 假如s.substr(a, i-a+1)不是回文串，i++继续寻找下一个；</span><br><span class="line">- 假如s.substr(a, i-a+1)是回文串，可以将s.substr(a, i-a+1)推入我们的临时搜索结果集中，然后递归搜索剩下的；但是有个问题，i的后面就没有其他的字串s.substr(a, k-a+1)是回文串了吗?</span><br><span class="line">  所以，在将s.substr(a, i-a+1)推入搜索结果集中，并调用递归进行剩下的搜索之后，还需要把s.substr(a, i-a+1)从临时结果集中弹出，让i++继续，寻找当前临时结果集下其他的可能回文串。</span><br><span class="line">  故：</span><br><span class="line">  </span><br><span class="line">  void search(vector&lt;vector&lt;string&gt;&gt; &amp;re, vector&lt;string&gt; tmpRe, string &amp;s, int a, int b)&#123;</span><br><span class="line">      if (a &gt;= b)&#123;</span><br><span class="line">          re.push_back(tmpRe);</span><br><span class="line">          return;</span><br><span class="line">      &#125;</span><br><span class="line">      for (int i=a; i&lt;=b; i++)&#123;</span><br><span class="line">          if (isPalindrome(s.substr(a, i-a+1)))&#123;</span><br><span class="line">              tmpRe.push_back(s.substr(a, i-a+1));</span><br><span class="line">              search(re, tmpRe, s, i+1, b);</span><br><span class="line">              tmpRe.pop_back();   // 这一步就是所谓的回溯</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
             </div>
           
@@ -170,7 +169,7 @@
 		
 		<div class="post-tags">
 		  
-			<a href="/tags/Tech/">Tech</a>
+			<a href="/tags/leetcode/">leetcode</a>
 		  
 		</div>
 		
@@ -179,15 +178,15 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2020/07/02/leetcode-cn-377/">
+      <a class="prev" href="/2020/06/29/回溯搜索目标和数字组合/">
         <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">leetcode-cn-377</span>
+        <span class="prev-text nav-default">leetcode-cn-39</span>
         <span class="prev-text nav-mobile">上一篇</span>
       </a>
     
     
-      <a class="next" href="/2020/06/29/回溯搜索全排列/">
-        <span class="next-text nav-default">leetcode-cn-46</span>
+      <a class="next" href="/2020/06/29/阶乘中末尾连续0的个数/">
+        <span class="next-text nav-default">leetcode-cn-172</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
@@ -249,9 +248,9 @@
 
 <script type="text/javascript">
   var disqus_shortname = 'zivyou';
-  var disqus_identifier = '2020/06/29/数据库范式/';
+  var disqus_identifier = '2020/06/29/回溯搜索回文串/';
 
-  var disqus_title = "数据库范式";
+  var disqus_title = "leetcode-cn-131";
 
 
   var disqus = {
