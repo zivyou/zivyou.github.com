@@ -101,3 +101,51 @@ $$
 那么就称`$\boldsymbol{W}$`为`$\boldsymbol{V}$`的一个子空间。
 用人话说就是，子集`$\boldsymbol{W}$`对于加法和数乘自闭环。
 显然，子空间的维数小于等于原空间。
+
+
+### 子空间的张成
+1. 设`$\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_r}\}$`为`$\boldsymbol{V}$`中的一组向量，我们定义
+$$
+span\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_r}\} \triangleq  \{k_1*\boldsymbol{\alpha_1},...,k_n*\boldsymbol{\alpha_r} | \forall k_i \in F\}
+$$
+称`$span\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_r}\}$`为由`$\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_r}\}$`张成的子空间。
+
+理解起来比较简单直观，`$\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_n}\}$`中的任意向量在`$\boldsymbol{V}$`中对于加法和数乘操作都是封闭的。
+
+### 子空间基的扩充
+设`$\boldsymbol{W}$`为线性空间`$\boldsymbol{V^n}$`的子空间，`$\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_m}\}$`为`$\boldsymbol{W}$`的一组基，则可将它扩充`$\boldsymbol{V^n}$`的一组基`$\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_m},\boldsymbol{\alpha_{m+1}},..., \boldsymbol{\alpha_n}\}$`。
+这是在说子空间的基与空间的基之间的关系。
+
+### 子空间的交、和运算
+设`$\boldsymbol{W_1}$`与`$\boldsymbol{W_2}$`都是`$\boldsymbol{V}$`的子空间。
+1. 那么交运算的定义为:
+
+$$
+\boldsymbol{W_1} \cap \boldsymbol{W_2} \triangleq \{\alpha \in \boldsymbol{V} | \alpha \in \boldsymbol{W_1} 且 \alpha \in \boldsymbol{W_2}\}
+$$
+
+2. 和运算定义为:
+
+$$
+\boldsymbol{W_1} + \boldsymbol{W_2} \triangleq \{\alpha \in \boldsymbol{V} | \alpha=\alpha_1+\alpha_2, \alpha_1 \in \boldsymbol{W_1} 且 \alpha_2 \in \boldsymbol{W_2}\}
+$$
+
+显然，`$\boldsymbol{W}$`的两个子空间的交、和结果依然是`$\boldsymbol{W}$`的子空间。
+
+### 子空间的和与张成
+如果说:`$\boldsymbol{W_1}$`是由`$\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_r}\}$`张成的，而`$\boldsymbol{W}$`是由`$\{\boldsymbol{\beta_1},...,\boldsymbol{\beta_s}\}$`张成的，那么`$\boldsymbol{W}$`与`$\boldsymbol{W}$`的和是由`$\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_n}\}$`与`$\{\boldsymbol{\beta_1},...,\boldsymbol{\beta_s}\}$`一起张成的。
+$$
+\boldsymbol{W_1}= span\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_r}\},\boldsymbol{W_2} = span\{\boldsymbol{\beta_1},...,\boldsymbol{\beta_s}\}，则:
+\boldsymbol{W_1} + \boldsymbol{W_2} = span\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_r},\boldsymbol{\beta_1},...,\boldsymbol{\beta_s}\}
+$$
+
+### 维数公式
+设`$\boldsymbol{W_1}$`与`$\boldsymbol{W_2}$`都是`$\boldsymbol{V}$`的子空间，那么
+$$
+dim(\boldsymbol{W_1}+\boldsymbol{W_2}) + dim(\boldsymbol{W_1} \cap \boldsymbol{W_2}) = dim\boldsymbol{W_1} + dim\boldsymbol{W_2}
+$$
+这个形式与集合论中集合的势的规律是一样的，应该是这些数学家在特意的凑规律。
+证明的思路依靠下面三条:
+1. 维数的值等于基中的向量个数;
+2. 基是一个空间的极大线性无关组;
+3. 线性无关是说一组向量，他们的数乘之和为0，这些数乘操作所有取的数字都不是0;
