@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="zivyou">
 <meta property="og:description" content="线性空间 线性组合/线性表出 线性相关 唯一线性表出定理 基 坐标 维度 基与坐标变换 欧式空间 子空间    线性空间 假定有一个n阶方阵的集合\boldsymbol{R}^{n*n} = \{方阵A,方阵B...\}，然后针对这个集合定义加法和数乘运算法则，使得：   加法满足交换律、结合律，存在加法零元和负元；  数乘中的数来自数域\boldsymbol{F}，数乘运算满足结合律、分配律，">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2022-12-22T02:58:05.042Z">
+<meta property="og:updated_time" content="2023-05-01T08:12:32.658Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="旧书新读-《高等工程数学》">
 <meta name="twitter:description" content="线性空间 线性组合/线性表出 线性相关 唯一线性表出定理 基 坐标 维度 基与坐标变换 欧式空间 子空间    线性空间 假定有一个n阶方阵的集合\boldsymbol{R}^{n*n} = \{方阵A,方阵B...\}，然后针对这个集合定义加法和数乘运算法则，使得：   加法满足交换律、结合律，存在加法零元和负元；  数乘中的数来自数域\boldsymbol{F}，数乘运算满足结合律、分配律，">
@@ -239,6 +239,33 @@ p_{ni}
 \left[\boldsymbol{\beta_1}, \boldsymbol{\beta_2}, ..., \boldsymbol{\beta_n}\right] = \left[\boldsymbol{\alpha_1}, \boldsymbol{\alpha_2}, ..., \boldsymbol{\alpha_n}\right]\boldsymbol{P}</script><p>过渡矩阵必定是可逆矩阵。这是为什么呢？简单来想，基<script type="math/tex">\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_n}\}</script>可以通过过渡矩阵线性变换到<script type="math/tex">\{\boldsymbol{\beta_1},...,\boldsymbol{\beta_n}\}</script>；那么也一定是可以变回来的。加法运算与数乘运算都是有逆元的。</p>
 <h2 id="欧式空间"><a href="#欧式空间" class="headerlink" title="欧式空间"></a>欧式空间</h2><p>首先，欧式空间是一个线性空间。它在实数域内满足向量加法的交换律、结合律、有零元和逆元；数乘运算满足交换律、结合律、有单位元。除了加法运算和数乘运算，欧式空间还定义了内积运算，它支持交换律、分配律，还有一些特殊的数乘运算规则（就是中学学的那些数乘运算规则）。那么这个线性空间就升级成了一个欧式空间。<br>（猜测）欧式空间这种代数结构应该是用来总结早期的几何学内容的。</p>
 <h2 id="子空间"><a href="#子空间" class="headerlink" title="子空间"></a>子空间</h2><p>设<script type="math/tex">\boldsymbol{W}</script>是空间<script type="math/tex">\boldsymbol{V}</script>的一个子集，如果这个子集满足下面两个条件：<br>(1)对于<script type="math/tex">\boldsymbol{W}</script>中的任意两个向量<script type="math/tex">\boldsymbol{\alpha}, \boldsymbol{\beta}</script>，两者的和也在这个<script type="math/tex">\boldsymbol{W}</script>中；<br>(2)对于<script type="math/tex">\boldsymbol{W}</script>的任意一个向量<script type="math/tex">\boldsymbol{\alpha}</script>，如果定义<script type="math/tex">\boldsymbol{V}</script>时配套的数域<script type="math/tex">\boldsymbol{F}</script>上的任意一个数k,都可以使得<script type="math/tex">k\boldsymbol{\alpha}</script>还属于这个<script type="math/tex">\boldsymbol{W}</script>子集；<br>那么就称<script type="math/tex">\boldsymbol{W}</script>为<script type="math/tex">\boldsymbol{V}</script>的一个子空间。<br>用人话说就是，子集<script type="math/tex">\boldsymbol{W}</script>对于加法和数乘自闭环。<br>显然，子空间的维数小于等于原空间。</p>
+<h3 id="子空间的张成"><a href="#子空间的张成" class="headerlink" title="子空间的张成"></a>子空间的张成</h3><ol>
+<li>设<script type="math/tex">\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_r}\}</script>为<script type="math/tex">\boldsymbol{V}</script>中的一组向量，我们定义<script type="math/tex; mode=display">
+span\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_r}\} \triangleq  \{k_1*\boldsymbol{\alpha_1},...,k_n*\boldsymbol{\alpha_r} | \forall k_i \in F\}</script>称<script type="math/tex">span\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_r}\}</script>为由<script type="math/tex">\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_r}\}</script>张成的子空间。</li>
+</ol>
+<p>理解起来比较简单直观，<script type="math/tex">\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_n}\}</script>中的任意向量在<script type="math/tex">\boldsymbol{V}</script>中对于加法和数乘操作都是封闭的。</p>
+<h3 id="子空间基的扩充"><a href="#子空间基的扩充" class="headerlink" title="子空间基的扩充"></a>子空间基的扩充</h3><p>设<script type="math/tex">\boldsymbol{W}</script>为线性空间<script type="math/tex">\boldsymbol{V^n}</script>的子空间，<script type="math/tex">\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_m}\}</script>为<script type="math/tex">\boldsymbol{W}</script>的一组基，则可将它扩充<script type="math/tex">\boldsymbol{V^n}</script>的一组基<script type="math/tex">\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_m},\boldsymbol{\alpha_{m+1}},..., \boldsymbol{\alpha_n}\}</script>。<br>这是在说子空间的基与空间的基之间的关系。</p>
+<h3 id="子空间的交、和运算"><a href="#子空间的交、和运算" class="headerlink" title="子空间的交、和运算"></a>子空间的交、和运算</h3><p>设<script type="math/tex">\boldsymbol{W_1}</script>与<script type="math/tex">\boldsymbol{W_2}</script>都是<script type="math/tex">\boldsymbol{V}</script>的子空间。</p>
+<ol>
+<li>那么交运算的定义为:</li>
+</ol>
+<script type="math/tex; mode=display">
+\boldsymbol{W_1} \cap \boldsymbol{W_2} \triangleq \{\alpha \in \boldsymbol{V} | \alpha \in \boldsymbol{W_1} 且 \alpha \in \boldsymbol{W_2}\}</script><ol>
+<li>和运算定义为:</li>
+</ol>
+<script type="math/tex; mode=display">
+\boldsymbol{W_1} + \boldsymbol{W_2} \triangleq \{\alpha \in \boldsymbol{V} | \alpha=\alpha_1+\alpha_2, \alpha_1 \in \boldsymbol{W_1} 且 \alpha_2 \in \boldsymbol{W_2}\}</script><p>显然，<script type="math/tex">\boldsymbol{W}</script>的两个子空间的交、和结果依然是<script type="math/tex">\boldsymbol{W}</script>的子空间。</p>
+<h3 id="子空间的和与张成"><a href="#子空间的和与张成" class="headerlink" title="子空间的和与张成"></a>子空间的和与张成</h3><p>如果说:<script type="math/tex">\boldsymbol{W_1}</script>是由<script type="math/tex">\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_r}\}</script>张成的，而<script type="math/tex">\boldsymbol{W}</script>是由<script type="math/tex">\{\boldsymbol{\beta_1},...,\boldsymbol{\beta_s}\}</script>张成的，那么<script type="math/tex">\boldsymbol{W}</script>与<script type="math/tex">\boldsymbol{W}</script>的和是由<script type="math/tex">\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_n}\}</script>与<script type="math/tex">\{\boldsymbol{\beta_1},...,\boldsymbol{\beta_s}\}</script>一起张成的。</p>
+<script type="math/tex; mode=display">
+\boldsymbol{W_1}= span\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_r}\},\boldsymbol{W_2} = span\{\boldsymbol{\beta_1},...,\boldsymbol{\beta_s}\}，则:
+\boldsymbol{W_1} + \boldsymbol{W_2} = span\{\boldsymbol{\alpha_1},...,\boldsymbol{\alpha_r},\boldsymbol{\beta_1},...,\boldsymbol{\beta_s}\}</script><h3 id="维数公式"><a href="#维数公式" class="headerlink" title="维数公式"></a>维数公式</h3><p>设<script type="math/tex">\boldsymbol{W_1}</script>与<script type="math/tex">\boldsymbol{W_2}</script>都是<script type="math/tex">\boldsymbol{V}</script>的子空间，那么</p>
+<script type="math/tex; mode=display">
+dim(\boldsymbol{W_1}+\boldsymbol{W_2}) + dim(\boldsymbol{W_1} \cap \boldsymbol{W_2}) = dim\boldsymbol{W_1} + dim\boldsymbol{W_2}</script><p>这个形式与集合论中集合的势的规律是一样的，应该是这些数学家在特意的凑规律。<br>证明的思路依靠下面三条:</p>
+<ol>
+<li>维数的值等于基中的向量个数;</li>
+<li>基是一个空间的极大线性无关组;</li>
+<li>线性无关是说一组向量，他们的数乘之和为0，这些数乘操作所有取的数字都不是0;</li>
+</ol>
 
             </div>
           
