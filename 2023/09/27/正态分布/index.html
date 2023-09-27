@@ -12,12 +12,12 @@
 
 
 
-  <meta name="description" content="分布式算法导论">
+  <meta name="description" content="正态分布">
 
 
 
 
-  <meta name="keywords" content="books,">
+  <meta name="keywords" content="math,">
 
 
 
@@ -32,21 +32,21 @@
 
 
 
-<link rel="canonical" href="http://zivyou.github.io/2023/01/29/分布式算法导论/">
+<link rel="canonical" href="http://zivyou.github.io/2023/09/27/正态分布/">
 
 
-<meta name="description" content="前言分布式系统的定义分布式系统是一系列节点(node)互连的集合。而节点(node)指的是:自主计算机、进程或者处理器等等。自主性是说node必须要配备自己专用的控制单元。互连是说node之间必须能够交换信息。这个定义还不够完备，Tanenbaum在此基础之上又补充了一条:系统中的自主性node必须对使用者是透明的。 提出分布式系统的目的:  信息交换; 资源共享; 通过备份提高可靠性; 通过并行">
-<meta name="keywords" content="books">
+<meta name="description" content="概率密度:$ f(x)=\frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^{2}} $ 为什么正态分布如此广泛的存在于自然界? 「正态」这个词翻译的感觉不太好，英文原意是normal，对应的应该是「常规」、「普遍」  这个事实是由「中心极限定理」明确指出的;中心极限定理: 无论随机变量服从什">
+<meta name="keywords" content="math">
 <meta property="og:type" content="article">
-<meta property="og:title" content="分布式算法导论">
-<meta property="og:url" content="http://zivyou.github.io/2023/01/29/分布式算法导论/index.html">
+<meta property="og:title" content="正态分布">
+<meta property="og:url" content="http://zivyou.github.io/2023/09/27/正态分布/index.html">
 <meta property="og:site_name" content="zivyou">
-<meta property="og:description" content="前言分布式系统的定义分布式系统是一系列节点(node)互连的集合。而节点(node)指的是:自主计算机、进程或者处理器等等。自主性是说node必须要配备自己专用的控制单元。互连是说node之间必须能够交换信息。这个定义还不够完备，Tanenbaum在此基础之上又补充了一条:系统中的自主性node必须对使用者是透明的。 提出分布式系统的目的:  信息交换; 资源共享; 通过备份提高可靠性; 通过并行">
+<meta property="og:description" content="概率密度:$ f(x)=\frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^{2}} $ 为什么正态分布如此广泛的存在于自然界? 「正态」这个词翻译的感觉不太好，英文原意是normal，对应的应该是「常规」、「普遍」  这个事实是由「中心极限定理」明确指出的;中心极限定理: 无论随机变量服从什">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2023-01-29T06:21:11.467Z">
+<meta property="og:updated_time" content="2023-09-27T09:09:54.174Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分布式算法导论">
-<meta name="twitter:description" content="前言分布式系统的定义分布式系统是一系列节点(node)互连的集合。而节点(node)指的是:自主计算机、进程或者处理器等等。自主性是说node必须要配备自己专用的控制单元。互连是说node之间必须能够交换信息。这个定义还不够完备，Tanenbaum在此基础之上又补充了一条:系统中的自主性node必须对使用者是透明的。 提出分布式系统的目的:  信息交换; 资源共享; 通过备份提高可靠性; 通过并行">
+<meta name="twitter:title" content="正态分布">
+<meta name="twitter:description" content="概率密度:$ f(x)=\frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^{2}} $ 为什么正态分布如此广泛的存在于自然界? 「正态」这个词翻译的感觉不太好，英文原意是normal，对应的应该是「常规」、「普遍」  这个事实是由「中心极限定理」明确指出的;中心极限定理: 无论随机变量服从什">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -73,7 +73,7 @@
 
 
 
-    <title> 分布式算法导论 - zivyou </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <title> 正态分布 - zivyou </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   </head>
 
   <body>
@@ -137,12 +137,12 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          分布式算法导论
+          正态分布
         
       </h1>
 
       <time class="post-time">
-          1月 29 2023
+          9月 27 2023
       </time>
 
 
@@ -178,39 +178,14 @@
 
     
             <div class="post-content">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="分布式系统的定义"><a href="#分布式系统的定义" class="headerlink" title="分布式系统的定义"></a>分布式系统的定义</h2><p>分布式系统是一系列节点(node)互连的集合。而节点(node)指的是:自主计算机、进程或者处理器等等。自主性是说node必须要配备自己专用的控制单元。互连是说node之间必须能够交换信息。<br>这个定义还不够完备，Tanenbaum在此基础之上又补充了一条:系统中的自主性node必须对使用者是透明的。</p>
-<p>提出分布式系统的目的:</p>
-<ul>
-<li>信息交换;</li>
-<li>资源共享;</li>
-<li>通过备份提高可靠性;</li>
-<li>通过并行化提高性能;</li>
-<li>通过规范简化设计;</li>
-</ul>
-<p>分布式系统的应用领域:</p>
-<ul>
-<li>计算机网络(广域网、局域网)</li>
-<li>多处理器计算机</li>
-</ul>
-<p>分布式系统领域的学术会议/期刊:</p>
-<ul>
-<li>Principles of Distributed Computing(PoDC), ACM会议</li>
-<li>International Workshops on Distributed Algorithm(WDAG), Springer期刊</li>
-<li>Distributed Computing(DISC), ACM会议</li>
-<li>Foundation of Computer Science(FoCS), IEEE会议</li>
-<li>Journal of Parallel and Distributed Computing(JPDC), 期刊</li>
-</ul>
-<p>本书的内容主要是3个话题:</p>
-<ol>
-<li>协议;</li>
-<li>基本算法;</li>
-<li>容错;</li>
-</ol>
-<h1 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h1><h2 id="分布式系统的数学模型"><a href="#分布式系统的数学模型" class="headerlink" title="分布式系统的数学模型"></a>分布式系统的数学模型</h2><h3 id="转移系统的数学形式化定义"><a href="#转移系统的数学形式化定义" class="headerlink" title="转移系统的数学形式化定义"></a>转移系统的数学形式化定义</h3><p>分布式计算: 一组离散事件的集合，每个事件在全局状态中都是一个原子元素。因此分布式系统可以定义成一个转移系统。<br>转移系统(Transition System)的数学形式定义:</p>
-<blockquote>
-<p>转移系统由一个三元组定义: S = (C, -&gt;, I),其中C是配置集合(所有全局状态的集合)，-&gt;是C中的二元转移操作，I是初始配置，I是C的一个子集。<br>显然，转移操作-&gt;是C×C的一个子集。<br>在这个数学形式系统下，这个分布式系统的一次执行过程可以用: 一个序列<script type="math/tex">E=(r0, r1, r2, ...)</script>,r0属于I, ri -&gt; ri+1 属于-&gt;。</p>
+            <h1 id="概率密度"><a href="#概率密度" class="headerlink" title="概率密度:"></a>概率密度:</h1><p>$ f(x)=\frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^{2}} $</p>
+<h1 id="为什么正态分布如此广泛的存在于自然界"><a href="#为什么正态分布如此广泛的存在于自然界" class="headerlink" title="为什么正态分布如此广泛的存在于自然界?"></a>为什么正态分布如此广泛的存在于自然界?</h1><blockquote>
+<p>「正态」这个词翻译的感觉不太好，英文原意是normal，对应的应该是「常规」、「普遍」</p>
 </blockquote>
-<h3 id="异步消息系统的数学形式化定义"><a href="#异步消息系统的数学形式化定义" class="headerlink" title="异步消息系统的数学形式化定义"></a>异步消息系统的数学形式化定义</h3><p>分布式系统由进程集和通信子系统组成。每个进程自身是一个转移系统，而且这个转移系统可以和通信子系统交互。在进程中，我们用「事件」和「状态」来描述进程的属性。</p>
+<p>这个事实是由「中心极限定理」明确指出的;<br>中心极限定理: 无论随机变量服从什么分布，我们随机采样后样本的均值会服从正态分布。</p>
+<p>之所以会如此广泛的存在于自然界，是因为我们去观测一个样本值的时候，这个样本值无论如何都会受到各种各样随机因素的干扰，这些干扰因素互相独立且相互叠加。<br>如果我们的观测方式是取均值，那么本质上是样本值的加法，这样这些随机干扰因素是线性的叠加到我们的观测值中的，这样的观测方式下，我们样本的观测值就会体现出一定的规律。</p>
+<p>所以，总结一下的话，就是自然界中的干扰因素一般都是随机的，而我们的观测方法选取一般都会让这些干扰因素线性可叠加的体现到观测结果中，所以我们的观测结果很多都会成正态分布。</p>
+<h1 id="这个问题等价于「中心极限定理的证明问题」"><a href="#这个问题等价于「中心极限定理的证明问题」" class="headerlink" title="这个问题等价于「中心极限定理的证明问题」"></a>这个问题等价于「中心极限定理的证明问题」</h1><p>太难了，等以后搞明白了再补充。</p>
 
             </div>
           
@@ -220,7 +195,7 @@
 		
 		<div class="post-tags">
 		  
-			<a href="/tags/books/">books</a>
+			<a href="/tags/math/">math</a>
 		  
 		</div>
 		
@@ -229,15 +204,9 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2023/09/27/正态分布/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">正态分布</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
     
-    
-      <a class="next" href="/2022/11/22/物理内存的管理/">
-        <span class="next-text nav-default">物理内存的管理</span>
+      <a class="next" href="/2023/01/29/分布式算法导论/">
+        <span class="next-text nav-default">分布式算法导论</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
@@ -299,9 +268,9 @@
 
 <script type="text/javascript">
   var disqus_shortname = 'zivyou';
-  var disqus_identifier = '2023/01/29/分布式算法导论/';
+  var disqus_identifier = '2023/09/27/正态分布/';
 
-  var disqus_title = "分布式算法导论";
+  var disqus_title = "正态分布";
 
 
   var disqus = {

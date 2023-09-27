@@ -35,18 +35,18 @@
 <link rel="canonical" href="http://zivyou.github.io/2019/12/29/一些数论的基础知识/">
 
 
-<meta name="description" content="欧拉公式  if \ \ \  gcd(a, n) = 1, then \ \ a^{\phi(n)} \equiv 1 mod n 欧拉降幂法则 if \ \ gcd(a, n)=1, then \ a^b  \equiv a^{b \% \phi(n)} mod n RSA加密  取大素数p, q 取数字e、d, 使得： (e*d) \% \phi(p*q) = 1. 由欧拉公式得，只要满足">
+<meta name="description" content="欧拉公式  if \ \ \  gcd(a, n) = 1, then \ \ a^{\phi(n)} \equiv 1 mod n 欧拉降幂法则 if \ \ gcd(a, n)=1 \Rightarrow \ a^b  \equiv a^{b \% \phi(n)} mod nif \ \ gcd(a, n)\neq 1,  b">
 <meta name="keywords" content="math">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一些数论的基础知识">
 <meta property="og:url" content="http://zivyou.github.io/2019/12/29/一些数论的基础知识/index.html">
 <meta property="og:site_name" content="zivyou">
-<meta property="og:description" content="欧拉公式  if \ \ \  gcd(a, n) = 1, then \ \ a^{\phi(n)} \equiv 1 mod n 欧拉降幂法则 if \ \ gcd(a, n)=1, then \ a^b  \equiv a^{b \% \phi(n)} mod n RSA加密  取大素数p, q 取数字e、d, 使得： (e*d) \% \phi(p*q) = 1. 由欧拉公式得，只要满足">
+<meta property="og:description" content="欧拉公式  if \ \ \  gcd(a, n) = 1, then \ \ a^{\phi(n)} \equiv 1 mod n 欧拉降幂法则 if \ \ gcd(a, n)=1 \Rightarrow \ a^b  \equiv a^{b \% \phi(n)} mod nif \ \ gcd(a, n)\neq 1,  b">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2022-12-22T02:58:05.050Z">
+<meta property="og:updated_time" content="2023-09-27T02:23:42.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一些数论的基础知识">
-<meta name="twitter:description" content="欧拉公式  if \ \ \  gcd(a, n) = 1, then \ \ a^{\phi(n)} \equiv 1 mod n 欧拉降幂法则 if \ \ gcd(a, n)=1, then \ a^b  \equiv a^{b \% \phi(n)} mod n RSA加密  取大素数p, q 取数字e、d, 使得： (e*d) \% \phi(p*q) = 1. 由欧拉公式得，只要满足">
+<meta name="twitter:description" content="欧拉公式  if \ \ \  gcd(a, n) = 1, then \ \ a^{\phi(n)} \equiv 1 mod n 欧拉降幂法则 if \ \ gcd(a, n)=1 \Rightarrow \ a^b  \equiv a^{b \% \phi(n)} mod nif \ \ gcd(a, n)\neq 1,  b">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -183,7 +183,7 @@
 <script type="math/tex; mode=display">
 if \ \ \  gcd(a, n) = 1, then \ \ a^{\phi(n)} \equiv 1 mod n</script></li>
 <li><p>欧拉降幂法则</p>
-<script type="math/tex; mode=display">if \ \ gcd(a, n)=1, then \ a^b  \equiv a^{b \% \phi(n)} mod n</script></li>
+<script type="math/tex; mode=display">if \ \ gcd(a, n)=1 \Rightarrow \ a^b  \equiv a^{b \% \phi(n)} mod n</script><script type="math/tex; mode=display">if \ \ gcd(a, n)\neq 1,  b<\phi(n) \Rightarrow a^b \equiv a^b mod n</script><script type="math/tex; mode=display">if \ \ gcd(a, n) \neq 1, b \ge \phi(n) \Rightarrow a^b \equiv a^{b\%\phi(n)+\phi(p)} mod n</script></li>
 <li><p>RSA加密</p>
 <ul>
 <li>取大素数p, q</li>
