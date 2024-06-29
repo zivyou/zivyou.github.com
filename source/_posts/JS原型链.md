@@ -21,4 +21,4 @@ const foo = new Foo();
 14. Object.prototype.__proto__ === null
 
 ```
-![js原型链](js-prototype-link.png)
+![js原型链](./js-prototype-link.png)

@@ -29,6 +29,8 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang 
 skip_render: 
+  - source/todo/**
+  - source/project/**
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -58,8 +60,14 @@ index_generator:
  
 # Category & Tag
 default_category: uncategorized
-category_map:
-tag_map:
+
+tag:
+  tagcloud:
+    min_font: 15
+    max_font: 30
+    unit: px  # 字号单位
+    start_color: "#BBBBEE"
+    end_color: "#337ab7"
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
@@ -76,7 +84,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: polarbear 
+theme: hexo-theme-mengd
 
 
 mathjax:
@@ -96,3 +104,6 @@ deploy:
   repo: git@github.com:zivyou/zivyou.github.com.git
   branch: master
   
+search:
+  path: search.json
+  field: post

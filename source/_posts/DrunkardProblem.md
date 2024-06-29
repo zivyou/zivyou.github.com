@@ -24,4 +24,4 @@ Dota2贴吧莫名奇妙开展了一场数学大讨论，源于这道题：
 当然，最后进过多方认证，正确答案敲定为75%。
 
 有个最直观的思路：
-![solution](../solution.jpg)
+![solution](solution.jpg)
