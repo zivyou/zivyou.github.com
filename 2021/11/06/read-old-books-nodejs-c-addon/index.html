@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>旧书新读-《nodejs:来一打C++扩展》 | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="V8基础内存机制内存管理基本原理V8有自己的堆内存区域，并且有自己的堆管理策略。简单来说，V8将堆内存分成了下面几种区域：  新生代内存区： 基本的数据对象都会被分配到这里，其特点是小而频繁。区域小但是垃圾回收频繁；新生代内存使用Scavenge算法进行回收：将新生代空间分成两部分，一部分为From，一部分为To。分配时总是从From空间中预留空间。在遇到GC时，V8会将From空间中存活的对象复">
 <meta property="og:type" content="article">
 <meta property="og:title" content="旧书新读-《nodejs:来一打C++扩展》">
@@ -84,6 +84,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -94,6 +114,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -111,7 +151,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -145,7 +185,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><h1 id="V8基础"><a href="#V8基础" class="headerlink" title="V8基础"></a>V8基础</h1><h2 id="内存机制"><a href="#内存机制" class="headerlink" title="内存机制"></a>内存机制</h2><h3 id="内存管理基本原理"><a href="#内存管理基本原理" class="headerlink" title="内存管理基本原理"></a>内存管理基本原理</h3><p>V8有自己的堆内存区域，并且有自己的堆管理策略。简单来说，V8将堆内存分成了下面几种区域：</p>
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <h1 id="V8基础"><a href="#V8基础" class="headerlink" title="V8基础"></a>V8基础</h1><h2 id="内存机制"><a href="#内存机制" class="headerlink" title="内存机制"></a>内存机制</h2><h3 id="内存管理基本原理"><a href="#内存管理基本原理" class="headerlink" title="内存管理基本原理"></a>内存管理基本原理</h3><p>V8有自己的堆内存区域，并且有自己的堆管理策略。简单来说，V8将堆内存分成了下面几种区域：</p>
 <ul>
 <li>新生代内存区： 基本的数据对象都会被分配到这里，其特点是小而频繁。区域小但是垃圾回收频繁；<br>新生代内存使用Scavenge算法进行回收：将新生代空间分成两部分，一部分为From，一部分为To。分配时总是从From空间中预留空间。在遇到GC时，V8会将From空间中存活的对象复制到To空间中，剩下的不存活的对象会被直接释放。完成后交换From和To的角色。</li>
 <li>老生代指针区：指向老生代内存区具体数据内容的指针会被存在这里。从新生代蜕变过来的对象的指针会被放在这里；<br>老生代使用Mark-Sweep和Mark-Compact结合的机制进行垃圾回收。Mark-Sweep即标记删除法：先遍历老生代中的对象，将已经死亡的对象标记，之后统一进行清除。<br>在使用标记清除法进行操作的时候，很容易产生内存碎片问题。Mark-Compact就是一种改进后的方案，可以堆内存碎片进行整理。即先标记，然后在统一进行清除的时候，让活着的对象尽可能的向内存区域的头部进行对齐。</li>

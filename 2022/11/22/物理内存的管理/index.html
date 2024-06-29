@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>物理内存的管理 | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="只针对x86-32架构的机器。目前只懂这个。  实模式下的物理内存实模式下的一开始的640KB物理内存分配给了BIOS，后面640K-1M的空间依次给了一些给显示器和硬件接口。可见一开始的实模式下，CPU可以使用的物理内存空间为1M。 BIOS CPU在通电后，默认是去读取0xFFFF0(1023K+1008B &#x3D; 1M - 4B)这个地方的内存内容，并将其当作代码来执行。而0xFFFF0这个地">
 <meta property="og:type" content="article">
 <meta property="og:title" content="物理内存的管理">
@@ -84,6 +84,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -94,6 +114,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -111,7 +151,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -145,7 +185,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><blockquote>
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <blockquote>
 <p>只针对x86-32架构的机器。目前只懂这个。</p>
 </blockquote>
 <h1 id="实模式下的物理内存"><a href="#实模式下的物理内存" class="headerlink" title="实模式下的物理内存"></a>实模式下的物理内存</h1><p>实模式下的一开始的640KB物理内存分配给了BIOS，后面640K-1M的空间依次给了一些给显示器和硬件接口。<br>可见一开始的实模式下，CPU可以使用的物理内存空间为1M。</p>

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>数据库范式 | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="1NF: 最基本的数据库形式，要求每一列都是不同的，不存在相同的列，数据项不可分割。现在的RDB已经不可能创建出不符合1NF的表了 2NF：每个表格的每一行需要有至少一个可以唯一标识这一行的字段，通常我们会把这个字段称为码。因此2NF要求表必须要有码，码确定的情况下其他字段都可以确定 3NF：每个表格的每一行中的所有字段，都只依赖于码，不依赖于其他任何字段。每个表格中的属性，既不部分依赖于码，也">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库范式">
@@ -84,6 +84,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -94,6 +114,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -111,7 +151,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -145,7 +185,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><ol>
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <ol>
 <li>1NF: 最基本的数据库形式，要求每一列都是不同的，不存在相同的列，数据项不可分割。现在的RDB已经不可能创建出不符合1NF的表了</li>
 <li>2NF：每个表格的每一行需要有至少一个可以唯一标识这一行的字段，通常我们会把这个字段称为码。因此2NF要求表必须要有码，码确定的情况下其他字段都可以确定</li>
 <li>3NF：每个表格的每一行中的所有字段，都只依赖于码，不依赖于其他任何字段。每个表格中的属性，既不部分依赖于码，也不传递依赖于码</li>
@@ -215,29 +276,29 @@
     <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/Tech/" style="color:#eed414;font-size:0.9705942408035506rem">Tech</a>
+      <a href="/tags/Tech/" style="color:#e5a31;font-size:0.4197900058015067rem">Tech</a>
       
-      <a href="/tags/Math/" style="color:#875629;font-size:0.051135061198448906rem">Math</a>
+      <a href="/tags/Math/" style="color:#1c0bb0;font-size:1.683971880223604rem">Math</a>
       
-      <a href="/tags/tech/" style="color:#de38f5;font-size:1.5793299848026128rem">tech</a>
+      <a href="/tags/tech/" style="color:#f1a02f;font-size:0.934379892152748rem">tech</a>
       
-      <a href="/tags/TODO/" style="color:#3777bc;font-size:1.7011421364090231rem">TODO</a>
+      <a href="/tags/TODO/" style="color:#9c37b7;font-size:1.3159460050667224rem">TODO</a>
       
-      <a href="/tags/emotion/" style="color:#5a476e;font-size:1.9810241446033774rem">emotion</a>
+      <a href="/tags/emotion/" style="color:#c58338;font-size:1.2507729063898867rem">emotion</a>
       
-      <a href="/tags/leetcode/" style="color:#bfb0eb;font-size:0.8307693381369976rem">leetcode</a>
+      <a href="/tags/leetcode/" style="color:#7a2cfb;font-size:1.6039397935097175rem">leetcode</a>
       
-      <a href="/tags/books/" style="color:#d56ed;font-size:1.219838376287293rem">books</a>
+      <a href="/tags/books/" style="color:#17be59;font-size:0.005184376940457369rem">books</a>
       
-      <a href="/tags/thought/" style="color:#6062d3;font-size:0.2215990723211676rem">thought</a>
+      <a href="/tags/thought/" style="color:#d6043a;font-size:1.6299390849177562rem">thought</a>
       
-      <a href="/tags/math/" style="color:#ec1e52;font-size:1.223632675466634rem">math</a>
+      <a href="/tags/math/" style="color:#3c69c0;font-size:0.6654238047957133rem">math</a>
       
-      <a href="/tags/EMOTION/" style="color:#c1fa6;font-size:0.23174299035533563rem">EMOTION</a>
+      <a href="/tags/EMOTION/" style="color:#cd0804;font-size:0.5214476237091739rem">EMOTION</a>
       
-      <a href="/tags/OS/" style="color:#76b67a;font-size:0.8100609897505016rem">OS</a>
+      <a href="/tags/OS/" style="color:#cc432d;font-size:1.4193161086350874rem">OS</a>
       
-      <a href="/tags/TECH/" style="color:#117e37;font-size:0.23244605498208637rem">TECH</a>
+      <a href="/tags/TECH/" style="color:#a07b59;font-size:0.004545946851111982rem">TECH</a>
       
     </div>
   </div>

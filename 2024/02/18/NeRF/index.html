@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>NeRF | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis NeRF: 用于视图合成的神经辐射场场景重建  摘要我们提出了一种方法，可以达到目前业界最好的效果，用于合成新的复杂场景的视图，通过优化一个目标连续体积场景函数，这个函数使用一系列的稀疏视图作为输入。我们的算法使用一个全连通(非巻积)深度网络来重建场景，这个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NeRF">
@@ -83,6 +83,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -93,6 +113,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -110,7 +150,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -144,7 +184,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><h1 id="NeRF-Representing-Scenes-as-Neural-Radiance-Fields-for-View-Synthesis"><a href="#NeRF-Representing-Scenes-as-Neural-Radiance-Fields-for-View-Synthesis" class="headerlink" title="NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis"></a>NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis</h1><blockquote>
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <h1 id="NeRF-Representing-Scenes-as-Neural-Radiance-Fields-for-View-Synthesis"><a href="#NeRF-Representing-Scenes-as-Neural-Radiance-Fields-for-View-Synthesis" class="headerlink" title="NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis"></a>NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis</h1><blockquote>
 <p>NeRF: 用于视图合成的神经辐射场场景重建</p>
 </blockquote>
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>我们提出了一种方法，可以达到目前业界最好的效果，用于合成新的复杂场景的视图，通过优化一个目标连续体积场景函数，这个函数使用一系列的稀疏视图作为输入。我们的算法使用一个全连通(非巻积)深度网络来重建场景，这个网络的输入是一个单个连续的5D坐标(包含位置信息(x,y,z)以及一个视图方向信息($\theta, \phi$))，其输出是特殊位置下的体积密度(volume density)以及视角相关的发射亮度。我们通过查询5D坐标和相机光线，同时使用经典的体积渲染技术来构建输出颜色和密度到一帧图像中，从而合成视图。由于体积渲染是一个自然可微分的过程，我们的重建过程要求的唯一输入是一系列已知相机位置的图片。</p>

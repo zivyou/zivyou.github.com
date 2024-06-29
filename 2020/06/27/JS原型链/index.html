@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>JS原型链 | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="const foo &#x3D; new Foo();1234567891011121314151. foo.__proto__ &#x3D;&#x3D;&#x3D; Foo.prototype2. Foo.prototype.constructor &#x3D;&#x3D;&#x3D; Foo3. Foo.prototype &#x3D;&#x3D;&#x3D; Foo.prototype &#x2F;&#x2F; 左边指的是Foo这一对象(也是一个函数)的一个属性，右边指的是一个具体的对象，即‘Foo的原型对象">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS原型链">
@@ -86,6 +86,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -96,6 +116,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -113,7 +153,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -147,7 +187,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><p>const foo = new Foo();<br><figure class="highlight plaintext">
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <p>const foo = new Foo();<br><figure class="highlight plaintext">
     <div class="code-block-header" lang="plaintext">
       <span class="copy-code">COPY</span>
     </div>
@@ -216,29 +277,29 @@
     <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/Tech/" style="color:#ad650e;font-size:1.1783253693474771rem">Tech</a>
+      <a href="/tags/Tech/" style="color:#f0555c;font-size:0.10509479557803836rem">Tech</a>
       
-      <a href="/tags/Math/" style="color:#d6bbdd;font-size:0.029856744902541976rem">Math</a>
+      <a href="/tags/Math/" style="color:#a81efe;font-size:0.9379601156179049rem">Math</a>
       
-      <a href="/tags/tech/" style="color:#fa67b3;font-size:1.4958279791857576rem">tech</a>
+      <a href="/tags/tech/" style="color:#bcf504;font-size:1.2188979024019417rem">tech</a>
       
-      <a href="/tags/TODO/" style="color:#d166a8;font-size:0.977318781461189rem">TODO</a>
+      <a href="/tags/TODO/" style="color:#65ccb6;font-size:1.3985102873209643rem">TODO</a>
       
-      <a href="/tags/emotion/" style="color:#9ca70b;font-size:0.828975330705044rem">emotion</a>
+      <a href="/tags/emotion/" style="color:#acebec;font-size:0.3953304714075596rem">emotion</a>
       
-      <a href="/tags/leetcode/" style="color:#870cf;font-size:1.839401372805281rem">leetcode</a>
+      <a href="/tags/leetcode/" style="color:#2c9251;font-size:1.2169145399664845rem">leetcode</a>
       
-      <a href="/tags/books/" style="color:#65715c;font-size:0.8639280503472655rem">books</a>
+      <a href="/tags/books/" style="color:#1c8165;font-size:1.283162865308721rem">books</a>
       
-      <a href="/tags/thought/" style="color:#4162ce;font-size:1.6552910768349882rem">thought</a>
+      <a href="/tags/thought/" style="color:#9918fb;font-size:1.9344109992836582rem">thought</a>
       
-      <a href="/tags/math/" style="color:#c0239b;font-size:1.9860732387337992rem">math</a>
+      <a href="/tags/math/" style="color:#18e49e;font-size:1.5267281942869118rem">math</a>
       
-      <a href="/tags/EMOTION/" style="color:#d5ed6b;font-size:1.1946541547684815rem">EMOTION</a>
+      <a href="/tags/EMOTION/" style="color:#257f25;font-size:0.2769307544475219rem">EMOTION</a>
       
-      <a href="/tags/OS/" style="color:#810453;font-size:1.0950077974958532rem">OS</a>
+      <a href="/tags/OS/" style="color:#201f36;font-size:0.7412160314176326rem">OS</a>
       
-      <a href="/tags/TECH/" style="color:#fdbf32;font-size:1.9479295096970923rem">TECH</a>
+      <a href="/tags/TECH/" style="color:#32a0c;font-size:1.4760787200436507rem">TECH</a>
       
     </div>
   </div>

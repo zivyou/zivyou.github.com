@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>内嵌汇编 | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="asm violate (“movl %1,%0” : “&#x3D;r” (result) : “m” (input) : “ebx”);  &#x3D;r 指明返回的结果：最后会将eax中的内容拷贝到result变量中 m： 指明输入的内容来自内存，从input变量中拷贝 %1, %0: 指明参数的顺序： 这样指令展开的时候会成： movl (input分配的寄存器) (result分配的寄存器)  ebx 破坏">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内嵌汇编">
@@ -84,6 +84,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -94,6 +114,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -111,7 +151,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -145,7 +185,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><p><strong>asm</strong> <strong>violate</strong> (“movl %1,%0” : “=r” (result) : “m” (input) : “ebx”);</p>
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <p><strong>asm</strong> <strong>violate</strong> (“movl %1,%0” : “=r” (result) : “m” (input) : “ebx”);</p>
 <ol>
 <li>=r 指明返回的结果：最后会将eax中的内容拷贝到result变量中</li>
 <li>m： 指明输入的内容来自内存，从input变量中拷贝</li>
@@ -217,29 +278,29 @@
     <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/Tech/" style="color:#37226c;font-size:0.2741897942612268rem">Tech</a>
+      <a href="/tags/Tech/" style="color:#f4e5f5;font-size:0.44842340799437785rem">Tech</a>
       
-      <a href="/tags/Math/" style="color:#91bcf6;font-size:0.9024350057842025rem">Math</a>
+      <a href="/tags/Math/" style="color:#ecccc1;font-size:0.4066531375444433rem">Math</a>
       
-      <a href="/tags/tech/" style="color:#4e7785;font-size:1.5060064766502106rem">tech</a>
+      <a href="/tags/tech/" style="color:#247589;font-size:1.5094139141030731rem">tech</a>
       
-      <a href="/tags/TODO/" style="color:#907731;font-size:1.90370431833206rem">TODO</a>
+      <a href="/tags/TODO/" style="color:#a92adf;font-size:1.964778083738398rem">TODO</a>
       
-      <a href="/tags/emotion/" style="color:#b55410;font-size:0.4376701107147092rem">emotion</a>
+      <a href="/tags/emotion/" style="color:#c86656;font-size:1.8396613228890444rem">emotion</a>
       
-      <a href="/tags/leetcode/" style="color:#b97837;font-size:1.5775800427211175rem">leetcode</a>
+      <a href="/tags/leetcode/" style="color:#2aa119;font-size:1.5643622967417246rem">leetcode</a>
       
-      <a href="/tags/books/" style="color:#ff0772;font-size:0.5973676393033172rem">books</a>
+      <a href="/tags/books/" style="color:#9633f2;font-size:1.903349561319125rem">books</a>
       
-      <a href="/tags/thought/" style="color:#d16f2f;font-size:1.4626281617040995rem">thought</a>
+      <a href="/tags/thought/" style="color:#f6de8a;font-size:0.6253970465167855rem">thought</a>
       
-      <a href="/tags/math/" style="color:#b8596e;font-size:1.231060891402866rem">math</a>
+      <a href="/tags/math/" style="color:#dce206;font-size:0.055249106128556935rem">math</a>
       
-      <a href="/tags/EMOTION/" style="color:#b8ef82;font-size:1.4198862470298605rem">EMOTION</a>
+      <a href="/tags/EMOTION/" style="color:#6ac5be;font-size:0.9653833119891808rem">EMOTION</a>
       
-      <a href="/tags/OS/" style="color:#ba8b16;font-size:1.8206937073035787rem">OS</a>
+      <a href="/tags/OS/" style="color:#a740a0;font-size:0.8546311126189661rem">OS</a>
       
-      <a href="/tags/TECH/" style="color:#8524a5;font-size:1.9774991434182914rem">TECH</a>
+      <a href="/tags/TECH/" style="color:#22a80d;font-size:1.9297897152718826rem">TECH</a>
       
     </div>
   </div>

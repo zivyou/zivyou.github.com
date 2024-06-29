@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>GNU build system | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="GNU M4一个「Unix宏处理器」。Autoconfig 中用它来生成configure文件。大概的几条语法规则:  注释（从注释符（默认#）到换行）保持不动输出。 名字（由若干字母、数字和下划线组成，不以数字开始），当碰到名字是宏名字（多参数宏还要求马上紧接开括号），就触发宏展开，否则保持不动输出。 引用字符串（默认由配对的|和’包围，但这可以动态设置），会被剥去一层包装后输出。 其它字符，保">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GNU build system">
@@ -84,6 +84,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -94,6 +114,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -111,7 +151,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -145,7 +185,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><h1 id="GNU-M4"><a href="#GNU-M4" class="headerlink" title="GNU M4"></a>GNU M4</h1><p>一个「Unix宏处理器」。<br>Autoconfig 中用它来生成configure文件。<br>大概的几条语法规则:</p>
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <h1 id="GNU-M4"><a href="#GNU-M4" class="headerlink" title="GNU M4"></a>GNU M4</h1><p>一个「Unix宏处理器」。<br>Autoconfig 中用它来生成configure文件。<br>大概的几条语法规则:</p>
 <ul>
 <li>注释（从注释符（默认#）到换行）保持不动输出。</li>
 <li>名字（由若干字母、数字和下划线组成，不以数字开始），当碰到名字是宏名字（多参数宏还要求马上紧接开括号），就触发宏展开，否则保持不动输出。</li>

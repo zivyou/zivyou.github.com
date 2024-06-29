@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>C++ can not set reference as key in STL | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="在写图的算法，尝试将Node&#x2F;Edge的对象作为key存入unordered_map，发现一系列问题。首先，如果要追求1std::unordered_map&lt;Node, int&gt; data; 这种写法(类似Java的那种风格)，得做两件事情:  为Node类型重载 &#x3D;&#x3D; 运算符，如果不愿意，可以选择未Node类型实现 () 运算符; 实现一个自定义的供Node类型使用的hash方法，比">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++ can not set reference as key in STL">
@@ -84,6 +84,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -94,6 +114,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -111,7 +151,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -145,7 +185,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><p>在写图的算法，尝试将Node/Edge的对象作为key存入unordered_map，发现一系列问题。<br>首先，如果要追求<br><figure class="highlight plain">
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <p>在写图的算法，尝试将Node/Edge的对象作为key存入unordered_map，发现一系列问题。<br>首先，如果要追求<br><figure class="highlight plain">
     <div class="code-block-header" lang="plain">
       <span class="copy-code">COPY</span>
     </div>
@@ -244,29 +305,29 @@
     <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/Tech/" style="color:#8e24a;font-size:1.4851954922248711rem">Tech</a>
+      <a href="/tags/Tech/" style="color:#d88134;font-size:1.2033022118552341rem">Tech</a>
       
-      <a href="/tags/Math/" style="color:#d9cede;font-size:0.47067698456219587rem">Math</a>
+      <a href="/tags/Math/" style="color:#52c4d3;font-size:1.2551888007855045rem">Math</a>
       
-      <a href="/tags/tech/" style="color:#6bb74c;font-size:0.8839674356189877rem">tech</a>
+      <a href="/tags/tech/" style="color:#b20da5;font-size:1.4372142900867058rem">tech</a>
       
-      <a href="/tags/TODO/" style="color:#db4fbc;font-size:0.8615965285679756rem">TODO</a>
+      <a href="/tags/TODO/" style="color:#7a1c12;font-size:0.7293812192166693rem">TODO</a>
       
-      <a href="/tags/emotion/" style="color:#5a050f;font-size:0.46125008098852716rem">emotion</a>
+      <a href="/tags/emotion/" style="color:#37e4d1;font-size:0.5923443151743024rem">emotion</a>
       
-      <a href="/tags/leetcode/" style="color:#879957;font-size:0.18995729532507166rem">leetcode</a>
+      <a href="/tags/leetcode/" style="color:#1c303c;font-size:1.701243294532793rem">leetcode</a>
       
-      <a href="/tags/books/" style="color:#8d1c6f;font-size:1.2326455195868102rem">books</a>
+      <a href="/tags/books/" style="color:#3bc897;font-size:0.6876897160419531rem">books</a>
       
-      <a href="/tags/thought/" style="color:#f867de;font-size:1.7600194261500537rem">thought</a>
+      <a href="/tags/thought/" style="color:#b4db50;font-size:1.369036976137211rem">thought</a>
       
-      <a href="/tags/math/" style="color:#11204d;font-size:1.1515351264312117rem">math</a>
+      <a href="/tags/math/" style="color:#974022;font-size:1.1391581685285646rem">math</a>
       
-      <a href="/tags/EMOTION/" style="color:#a137df;font-size:1.9655205698375662rem">EMOTION</a>
+      <a href="/tags/EMOTION/" style="color:#cfb0d6;font-size:0.6942267479734561rem">EMOTION</a>
       
-      <a href="/tags/OS/" style="color:#736def;font-size:0.006547339424552767rem">OS</a>
+      <a href="/tags/OS/" style="color:#1b0650;font-size:1.165991268023153rem">OS</a>
       
-      <a href="/tags/TECH/" style="color:#6b96f5;font-size:0.7689043574347916rem">TECH</a>
+      <a href="/tags/TECH/" style="color:#d0dc2d;font-size:1.5425160367709227rem">TECH</a>
       
     </div>
   </div>

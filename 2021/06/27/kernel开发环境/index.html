@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>kernel开发环境 | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="编译就是常规的make menuconfig&#x2F; make &#x2F; make bzImage套路，最终生成一个bzImage镜像文件  制作根文件系统略有一些复杂：   创建一个目录x 将一些要放入根文件系统的工具编译好，放入x目录中。通常是一些系统启动前需要使用的工具 将x目录用cpio指令打包成一个img文件：  find . | cpio -o -Hnewc | gzip -9 &gt; y.i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kernel开发环境">
@@ -83,6 +83,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -93,6 +113,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -110,7 +150,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -144,7 +184,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><ol>
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <ol>
 <li><p>编译<br>就是常规的make menuconfig/ make / make bzImage套路，最终生成一个bzImage镜像文件</p>
 </li>
 <li><p>制作根文件系统<br>略有一些复杂： </p>
@@ -207,29 +268,29 @@
     <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/Tech/" style="color:#cc185f;font-size:1.6544464002005168rem">Tech</a>
+      <a href="/tags/Tech/" style="color:#b201e9;font-size:1.247951373736988rem">Tech</a>
       
-      <a href="/tags/Math/" style="color:#f3cf8e;font-size:0.289261107383874rem">Math</a>
+      <a href="/tags/Math/" style="color:#38e7cf;font-size:0.0019218096481967706rem">Math</a>
       
-      <a href="/tags/tech/" style="color:#fbec23;font-size:1.620924250749272rem">tech</a>
+      <a href="/tags/tech/" style="color:#3f867d;font-size:0.9779239320924384rem">tech</a>
       
-      <a href="/tags/TODO/" style="color:#cab53b;font-size:0.12731577969920416rem">TODO</a>
+      <a href="/tags/TODO/" style="color:#d5ffee;font-size:0.3806017864432185rem">TODO</a>
       
-      <a href="/tags/emotion/" style="color:#40f63c;font-size:0.5968938142576037rem">emotion</a>
+      <a href="/tags/emotion/" style="color:#91c9ca;font-size:1.4101805891799786rem">emotion</a>
       
-      <a href="/tags/leetcode/" style="color:#587630;font-size:1.6021928424219314rem">leetcode</a>
+      <a href="/tags/leetcode/" style="color:#33db9d;font-size:1.5397673270637302rem">leetcode</a>
       
-      <a href="/tags/books/" style="color:#7ee379;font-size:0.9481646517922693rem">books</a>
+      <a href="/tags/books/" style="color:#f3a661;font-size:1.579368826560768rem">books</a>
       
-      <a href="/tags/thought/" style="color:#d2cbd6;font-size:0.2582501271704247rem">thought</a>
+      <a href="/tags/thought/" style="color:#90c7d8;font-size:0.13527567288661269rem">thought</a>
       
-      <a href="/tags/math/" style="color:#fac81d;font-size:1.6240947434142035rem">math</a>
+      <a href="/tags/math/" style="color:#b5d1dd;font-size:0.6139020715688339rem">math</a>
       
-      <a href="/tags/EMOTION/" style="color:#536faa;font-size:1.7691918601970298rem">EMOTION</a>
+      <a href="/tags/EMOTION/" style="color:#2db761;font-size:1.244161125635118rem">EMOTION</a>
       
-      <a href="/tags/OS/" style="color:#7cca45;font-size:1.472669394914254rem">OS</a>
+      <a href="/tags/OS/" style="color:#73607d;font-size:1.3383618066429928rem">OS</a>
       
-      <a href="/tags/TECH/" style="color:#cb78df;font-size:1.9662896509683563rem">TECH</a>
+      <a href="/tags/TECH/" style="color:#6339bd;font-size:1.5015759545096583rem">TECH</a>
       
     </div>
   </div>

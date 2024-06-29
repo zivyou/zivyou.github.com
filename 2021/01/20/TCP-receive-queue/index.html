@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>TCP-receive-queue | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="连接过程:  sync队列 已连接队列  数据接收过程:  receive  out-of-order  backlog  prequeue   1中描述的队列是socket队列，用来存储处于不同状态的socket实体。SYN状态是TCP三次握手的第一此握手完成之后所处的状态，内核会将处于该状态的socket存储于这个队列。在连接建立完成之后，socket会被放置在’已连接队列上’。 2中描述的队">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCP-receive-queue">
@@ -84,6 +84,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -94,6 +114,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -111,7 +151,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -145,7 +185,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><p>连接过程:</p>
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <p>连接过程:</p>
 <ol>
 <li>sync队列</li>
 <li>已连接队列</li>
@@ -237,29 +298,29 @@
     <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/Tech/" style="color:#1e45e6;font-size:0.9981794755210571rem">Tech</a>
+      <a href="/tags/Tech/" style="color:#13e558;font-size:1.558051442632749rem">Tech</a>
       
-      <a href="/tags/Math/" style="color:#861593;font-size:1.626807728704236rem">Math</a>
+      <a href="/tags/Math/" style="color:#49b116;font-size:1.905366537380906rem">Math</a>
       
-      <a href="/tags/tech/" style="color:#692a5a;font-size:0.5052504481179949rem">tech</a>
+      <a href="/tags/tech/" style="color:#79236b;font-size:1.946884740099092rem">tech</a>
       
-      <a href="/tags/TODO/" style="color:#30263c;font-size:0.5086329444927444rem">TODO</a>
+      <a href="/tags/TODO/" style="color:#5d22c1;font-size:0.6457624349031996rem">TODO</a>
       
-      <a href="/tags/emotion/" style="color:#b12c98;font-size:0.6356343342138837rem">emotion</a>
+      <a href="/tags/emotion/" style="color:#4d92d4;font-size:0.23569989304051653rem">emotion</a>
       
-      <a href="/tags/leetcode/" style="color:#dad1df;font-size:0.1310221210898126rem">leetcode</a>
+      <a href="/tags/leetcode/" style="color:#4b74e;font-size:1.8287210320692964rem">leetcode</a>
       
-      <a href="/tags/books/" style="color:#bb92d0;font-size:0.3824416656426788rem">books</a>
+      <a href="/tags/books/" style="color:#80d1b0;font-size:1.484231434039569rem">books</a>
       
-      <a href="/tags/thought/" style="color:#d30f23;font-size:1.9038574847403198rem">thought</a>
+      <a href="/tags/thought/" style="color:#e5d078;font-size:0.7575083308514401rem">thought</a>
       
-      <a href="/tags/math/" style="color:#de311f;font-size:1.4909168661936012rem">math</a>
+      <a href="/tags/math/" style="color:#d73de9;font-size:1.955262494788991rem">math</a>
       
-      <a href="/tags/EMOTION/" style="color:#879027;font-size:1.0057720485902606rem">EMOTION</a>
+      <a href="/tags/EMOTION/" style="color:#6ac4b2;font-size:1.4756167348384972rem">EMOTION</a>
       
-      <a href="/tags/OS/" style="color:#eb4cb0;font-size:0.009837249948755566rem">OS</a>
+      <a href="/tags/OS/" style="color:#592d36;font-size:1.821665060590329rem">OS</a>
       
-      <a href="/tags/TECH/" style="color:#82d75c;font-size:1.6418965624068176rem">TECH</a>
+      <a href="/tags/TECH/" style="color:#211c1;font-size:0.04111669817452279rem">TECH</a>
       
     </div>
   </div>

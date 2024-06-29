@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>TLS-Handshake | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="sequenceDiagram   客户端 -&gt;&gt;  服务端 : 客户端生成一个随机数(r1)，加上自己支持的加密方式，将这二者发给服务端   服务端 -&gt;&gt; 客户端: 服务端收到客户端的随机数(r1)后，自己生成一个随机数(r2)，然后将r2和服务端证书发给客户端   客户端 -&gt;&gt; 服务端: 客户端新生成一个随机数(r3，又被称为预主密钥),将r3用步骤二中从证书里获取到的公钥加密，发给服务端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TLS-Handshake">
@@ -84,6 +84,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -94,6 +114,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -111,7 +151,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -145,7 +185,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><p><pre class="mermaid">sequenceDiagram
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <p><pre class="mermaid">sequenceDiagram
   客户端 ->>  服务端 : 客户端生成一个随机数(r1)，加上自己支持的加密方式，将这二者发给服务端
   服务端 ->> 客户端: 服务端收到客户端的随机数(r1)后，自己生成一个随机数(r2)，然后将r2和服务端证书发给客户端
   客户端 ->> 服务端: 客户端新生成一个随机数(r3，又被称为预主密钥),将r3用步骤二中从证书里获取到的公钥加密，发给服务端</pre><br>之后，服务端就可以用私钥解出r3。服务端和客户端都可以用商量好的加密方式，通过加密(r1, r2, r3)得到会话密钥。</p>
@@ -213,29 +274,29 @@
     <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/Tech/" style="color:#5ddeca;font-size:0.5230250120844491rem">Tech</a>
+      <a href="/tags/Tech/" style="color:#e4e44d;font-size:0.8124402164623521rem">Tech</a>
       
-      <a href="/tags/Math/" style="color:#caf556;font-size:1.3086963142421273rem">Math</a>
+      <a href="/tags/Math/" style="color:#9a44e5;font-size:0.4411942416468153rem">Math</a>
       
-      <a href="/tags/tech/" style="color:#7e5ad1;font-size:0.7246629047154372rem">tech</a>
+      <a href="/tags/tech/" style="color:#382bcc;font-size:1.6810597996162526rem">tech</a>
       
-      <a href="/tags/TODO/" style="color:#b2432a;font-size:0.7484859687283194rem">TODO</a>
+      <a href="/tags/TODO/" style="color:#c1e757;font-size:0.3829427136220276rem">TODO</a>
       
-      <a href="/tags/emotion/" style="color:#63fe40;font-size:0.1588948149240843rem">emotion</a>
+      <a href="/tags/emotion/" style="color:#ba6fc1;font-size:0.4101998209177711rem">emotion</a>
       
-      <a href="/tags/leetcode/" style="color:#e6b1ca;font-size:1.1239894602694385rem">leetcode</a>
+      <a href="/tags/leetcode/" style="color:#6011e9;font-size:0.5536804369755659rem">leetcode</a>
       
-      <a href="/tags/books/" style="color:#d92bb2;font-size:1.4790093709210481rem">books</a>
+      <a href="/tags/books/" style="color:#5be956;font-size:0.8310362020610671rem">books</a>
       
-      <a href="/tags/thought/" style="color:#d561b8;font-size:1.6222061287474476rem">thought</a>
+      <a href="/tags/thought/" style="color:#d23ee2;font-size:0.8834754912691483rem">thought</a>
       
-      <a href="/tags/math/" style="color:#1acc4f;font-size:1.591773061865549rem">math</a>
+      <a href="/tags/math/" style="color:#85801f;font-size:0.4427570814500563rem">math</a>
       
-      <a href="/tags/EMOTION/" style="color:#8d882c;font-size:0.2521897316363413rem">EMOTION</a>
+      <a href="/tags/EMOTION/" style="color:#5eaead;font-size:0.9678395072731893rem">EMOTION</a>
       
-      <a href="/tags/OS/" style="color:#8bf3f;font-size:0.9617920703200773rem">OS</a>
+      <a href="/tags/OS/" style="color:#5624a6;font-size:0.5360642460704379rem">OS</a>
       
-      <a href="/tags/TECH/" style="color:#62a4df;font-size:1.435941381801983rem">TECH</a>
+      <a href="/tags/TECH/" style="color:#304820;font-size:1.7465504811668442rem">TECH</a>
       
     </div>
   </div>

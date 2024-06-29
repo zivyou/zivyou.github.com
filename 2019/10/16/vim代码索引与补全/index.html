@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>vim代码索引与补全 | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="目标实现C&#x2F;C++&#x2F;Objective-C, js&#x2F;ts的代码索引、自动补全。使用LSP。YCM、Ctags之类的软件太古老了。关于LSP: Language Server Protocol. 需要的插件 Vundle.vim : 插件管理nerdtreeroxma&#x2F;vim-hug-neovim-rpc: 为vim8补全一些特性，像neoVim看齐。roxma&#x2F;nvim-yarp: 同上autoz">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vim代码索引与补全">
@@ -84,6 +84,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -94,6 +114,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -111,7 +151,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -145,7 +185,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>实现C/C++/Objective-C, js/ts的代码索引、自动补全。<br>使用LSP。YCM、Ctags之类的软件太古老了。<br>关于LSP: Language Server Protocol.</p>
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>实现C/C++/Objective-C, js/ts的代码索引、自动补全。<br>使用LSP。YCM、Ctags之类的软件太古老了。<br>关于LSP: Language Server Protocol.</p>
 <h2 id="需要的插件"><a href="#需要的插件" class="headerlink" title="需要的插件"></a>需要的插件</h2><blockquote>
 <p>Vundle.vim : 插件管理<br>nerdtree<br>roxma/vim-hug-neovim-rpc: 为vim8补全一些特性，像neoVim看齐。<br>roxma/nvim-yarp: 同上<br>autozimu/LanguageClient-neovim: neoVim的language client插件。vim8下需要上面两个插件支持<br>Shougo/deoplete.nvim: neoVim的代码补全插件<br>Shougo/neosnippet.vim: code snippet插件<br>Shougo/neosnippet-snippets: 同上</p>
 </blockquote>

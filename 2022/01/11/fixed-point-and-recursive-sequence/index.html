@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>不动点与递推数列 | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="设数列 \{a_{n+1}\}存在递推公式a_{n+1}&#x3D;f(a_{n})，求数列的通项公式。考察函数f(x),假设该函数存在不动点x_0，使得f(x_0)&#x3D;x_0，则:有x&#x3D;x_0 是函数 f(x)-x的一个解。如果函数f(x)-x_0是一个可以因式分解的函数，则x-x_0必定是方程f(x)-x_0&#x3D;0的一个解。我们可以假设f(x)-x_0&#x3D;A*(x-x_0)，接下来我们可以想办法求出这个A。将">
 <meta property="og:type" content="article">
 <meta property="og:title" content="不动点与递推数列">
@@ -84,6 +84,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -94,6 +114,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -111,7 +151,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -145,7 +185,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><p>设数列 <script type="math/tex">\{a_{n+1}\}</script>存在递推公式<script type="math/tex">a_{n+1}=f(a_{n})</script>，求数列的通项公式。<br>考察函数<script type="math/tex">f(x)</script>,假设该函数存在不动点<script type="math/tex">x_0</script>，使得<script type="math/tex">f(x_0)=x_0</script>，则:<br>有<script type="math/tex">x=x_0</script> 是函数 <script type="math/tex">f(x)-x</script>的一个解。<br>如果函数<script type="math/tex">f(x)-x_0</script>是一个可以因式分解的函数，则<script type="math/tex">x-x_0</script>必定是方程<script type="math/tex">f(x)-x_0=0</script>的一个解。<br>我们可以假设<script type="math/tex">f(x)-x_0=A*(x-x_0)</script>，接下来我们可以想办法求出这个<script type="math/tex">A</script>。<br>将数列<script type="math/tex">\{a_{n}\}</script>带入到上面的方程中:<br>=&gt; <script type="math/tex">f(a_{n})-x_0=A*(a_n-x_0)</script> =&gt; <script type="math/tex">a_{n+1}-x_0=A*(a_n-x_0)</script><br>=&gt; <script type="math/tex">A=(a_{n+1}-x_0)/(a_n-x_0)</script><br>在正常的出题中，<script type="math/tex">f(x)</script>的形式都是给出了的，所以这里可以代入到上面的式子中算出A。<br>算出A之后，新数列<script type="math/tex">\{(a_{n+1}-x_0)/(a_n-x_0)\}</script>就成了一个等比数列。可以算出其通项公式。</p>
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <p>设数列 <script type="math/tex">\{a_{n+1}\}</script>存在递推公式<script type="math/tex">a_{n+1}=f(a_{n})</script>，求数列的通项公式。<br>考察函数<script type="math/tex">f(x)</script>,假设该函数存在不动点<script type="math/tex">x_0</script>，使得<script type="math/tex">f(x_0)=x_0</script>，则:<br>有<script type="math/tex">x=x_0</script> 是函数 <script type="math/tex">f(x)-x</script>的一个解。<br>如果函数<script type="math/tex">f(x)-x_0</script>是一个可以因式分解的函数，则<script type="math/tex">x-x_0</script>必定是方程<script type="math/tex">f(x)-x_0=0</script>的一个解。<br>我们可以假设<script type="math/tex">f(x)-x_0=A*(x-x_0)</script>，接下来我们可以想办法求出这个<script type="math/tex">A</script>。<br>将数列<script type="math/tex">\{a_{n}\}</script>带入到上面的方程中:<br>=&gt; <script type="math/tex">f(a_{n})-x_0=A*(a_n-x_0)</script> =&gt; <script type="math/tex">a_{n+1}-x_0=A*(a_n-x_0)</script><br>=&gt; <script type="math/tex">A=(a_{n+1}-x_0)/(a_n-x_0)</script><br>在正常的出题中，<script type="math/tex">f(x)</script>的形式都是给出了的，所以这里可以代入到上面的式子中算出A。<br>算出A之后，新数列<script type="math/tex">\{(a_{n+1}-x_0)/(a_n-x_0)\}</script>就成了一个等比数列。可以算出其通项公式。</p>
 </div>
   
   <div class="article-end">
@@ -210,29 +271,29 @@
     <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/Tech/" style="color:#b683e9;font-size:1.0602154091637361rem">Tech</a>
+      <a href="/tags/Tech/" style="color:#8df191;font-size:0.7551123501293073rem">Tech</a>
       
-      <a href="/tags/Math/" style="color:#9c26f0;font-size:0.2747161916712697rem">Math</a>
+      <a href="/tags/Math/" style="color:#891070;font-size:1.8690922321181307rem">Math</a>
       
-      <a href="/tags/tech/" style="color:#7bc107;font-size:1.8265532712855892rem">tech</a>
+      <a href="/tags/tech/" style="color:#ce7066;font-size:0.1697776810810243rem">tech</a>
       
-      <a href="/tags/TODO/" style="color:#86bfb5;font-size:1.101075384314627rem">TODO</a>
+      <a href="/tags/TODO/" style="color:#6edfc6;font-size:0.1573484980299673rem">TODO</a>
       
-      <a href="/tags/emotion/" style="color:#c61cf0;font-size:1.792632266501247rem">emotion</a>
+      <a href="/tags/emotion/" style="color:#e6ea80;font-size:0.11215209642240964rem">emotion</a>
       
-      <a href="/tags/leetcode/" style="color:#d1befb;font-size:1.9115671519107793rem">leetcode</a>
+      <a href="/tags/leetcode/" style="color:#53d14f;font-size:0.0721164538427237rem">leetcode</a>
       
-      <a href="/tags/books/" style="color:#13cd20;font-size:0.253388828643037rem">books</a>
+      <a href="/tags/books/" style="color:#53a4af;font-size:1.183964205045903rem">books</a>
       
-      <a href="/tags/thought/" style="color:#77f48c;font-size:1.1684595961550217rem">thought</a>
+      <a href="/tags/thought/" style="color:#656576;font-size:1.395646393581603rem">thought</a>
       
-      <a href="/tags/math/" style="color:#32f2eb;font-size:1.4941230047179723rem">math</a>
+      <a href="/tags/math/" style="color:#539ca4;font-size:0.4174613546019921rem">math</a>
       
-      <a href="/tags/EMOTION/" style="color:#fcf237;font-size:0.3228159943809863rem">EMOTION</a>
+      <a href="/tags/EMOTION/" style="color:#340824;font-size:0.01977515581719569rem">EMOTION</a>
       
-      <a href="/tags/OS/" style="color:#bb2da4;font-size:1.059191247377174rem">OS</a>
+      <a href="/tags/OS/" style="color:#e80e6e;font-size:0.02429817019525249rem">OS</a>
       
-      <a href="/tags/TECH/" style="color:#bd7fb0;font-size:0.8584895944760098rem">TECH</a>
+      <a href="/tags/TECH/" style="color:#7d0aee;font-size:1.8907953613214508rem">TECH</a>
       
     </div>
   </div>

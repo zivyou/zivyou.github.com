@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>分布式算法导论 | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="前言分布式系统的定义分布式系统是一系列节点(node)互连的集合。而节点(node)指的是:自主计算机、进程或者处理器等等。自主性是说node必须要配备自己专用的控制单元。互连是说node之间必须能够交换信息。这个定义还不够完备，Tanenbaum在此基础之上又补充了一条:系统中的自主性node必须对使用者是透明的。 提出分布式系统的目的:  信息交换; 资源共享; 通过备份提高可靠性; 通过并行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式算法导论">
@@ -84,6 +84,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -94,6 +114,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -111,7 +151,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -145,7 +185,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="分布式系统的定义"><a href="#分布式系统的定义" class="headerlink" title="分布式系统的定义"></a>分布式系统的定义</h2><p>分布式系统是一系列节点(node)互连的集合。而节点(node)指的是:自主计算机、进程或者处理器等等。自主性是说node必须要配备自己专用的控制单元。互连是说node之间必须能够交换信息。<br>这个定义还不够完备，Tanenbaum在此基础之上又补充了一条:系统中的自主性node必须对使用者是透明的。</p>
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="分布式系统的定义"><a href="#分布式系统的定义" class="headerlink" title="分布式系统的定义"></a>分布式系统的定义</h2><p>分布式系统是一系列节点(node)互连的集合。而节点(node)指的是:自主计算机、进程或者处理器等等。自主性是说node必须要配备自己专用的控制单元。互连是说node之间必须能够交换信息。<br>这个定义还不够完备，Tanenbaum在此基础之上又补充了一条:系统中的自主性node必须对使用者是透明的。</p>
 <p>提出分布式系统的目的:</p>
 <ul>
 <li>信息交换;</li>

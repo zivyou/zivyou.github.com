@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>计算机的时间观念 | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="L1缓存: 0.5ns L2缓存: 7ns 加解锁: 25ns 内存寻址: 100ns CPU上下文切换: 1500ns 1Gbps网络上传递2k的数据:  20us SSD随机读取1MB的数据: 150us 内存中读取1MB的连续数据: 250us 同一个数据中心网络上跑一个来回: 0.5ms SSD读取1MB的顺序数据: 1ms 磁盘寻址时间: 10ms 从磁盘读取1MB的连续数据: 20m">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机的时间观念">
@@ -84,6 +84,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -94,6 +114,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -111,7 +151,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -145,7 +185,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><ol>
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <ol>
 <li>L1缓存: 0.5ns</li>
 <li>L2缓存: 7ns</li>
 <li>加解锁: 25ns</li>
@@ -223,29 +284,29 @@
     <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/Tech/" style="color:#d8f691;font-size:0.5109165339743176rem">Tech</a>
+      <a href="/tags/Tech/" style="color:#3bb1ae;font-size:1.6336293201851446rem">Tech</a>
       
-      <a href="/tags/Math/" style="color:#692279;font-size:1.701389776080656rem">Math</a>
+      <a href="/tags/Math/" style="color:#65b734;font-size:1.0305588760128153rem">Math</a>
       
-      <a href="/tags/tech/" style="color:#f8f61d;font-size:1.302787668946889rem">tech</a>
+      <a href="/tags/tech/" style="color:#443ef3;font-size:0.8764564320170467rem">tech</a>
       
-      <a href="/tags/TODO/" style="color:#48795b;font-size:1.1433454722926024rem">TODO</a>
+      <a href="/tags/TODO/" style="color:#d1534;font-size:0.9851114779105714rem">TODO</a>
       
-      <a href="/tags/emotion/" style="color:#57f1aa;font-size:1.3749426401589622rem">emotion</a>
+      <a href="/tags/emotion/" style="color:#ea5824;font-size:0.4266311254890014rem">emotion</a>
       
-      <a href="/tags/leetcode/" style="color:#e17f;font-size:1.3583056952475183rem">leetcode</a>
+      <a href="/tags/leetcode/" style="color:#717630;font-size:1.3833856498787909rem">leetcode</a>
       
-      <a href="/tags/books/" style="color:#b04e7;font-size:0.8934611869214781rem">books</a>
+      <a href="/tags/books/" style="color:#55608a;font-size:1.1924062937722804rem">books</a>
       
-      <a href="/tags/thought/" style="color:#d622a8;font-size:1.4978328747615466rem">thought</a>
+      <a href="/tags/thought/" style="color:#72ff53;font-size:0.24866618408436025rem">thought</a>
       
-      <a href="/tags/math/" style="color:#b0402c;font-size:0.6045003557540363rem">math</a>
+      <a href="/tags/math/" style="color:#f56473;font-size:0.7336823263650514rem">math</a>
       
-      <a href="/tags/EMOTION/" style="color:#a7ff44;font-size:0.5804301806091994rem">EMOTION</a>
+      <a href="/tags/EMOTION/" style="color:#d6c9;font-size:0.034232222817338176rem">EMOTION</a>
       
-      <a href="/tags/OS/" style="color:#bb4469;font-size:1.1311925368115894rem">OS</a>
+      <a href="/tags/OS/" style="color:#37941c;font-size:1.9572157351784467rem">OS</a>
       
-      <a href="/tags/TECH/" style="color:#e8abca;font-size:0.6090422175621644rem">TECH</a>
+      <a href="/tags/TECH/" style="color:#55779;font-size:1.6681564248544265rem">TECH</a>
       
     </div>
   </div>

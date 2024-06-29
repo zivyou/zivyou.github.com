@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
   <title>回溯搜索回文串 | zivyou</title>
-  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico">
   <meta name="description" content="leetcode 131  字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：12345678910111213141516171819i从[a, s.size())：- 假如s.substr(a, i-a+1)不是回文串，i++继续寻找下一个；- 假如s.substr(a, i-a+1)是回文串，可以将s.substr(a, i-a+1)推">
 <meta property="og:type" content="article">
 <meta property="og:title" content="回溯搜索回文串">
@@ -84,6 +84,26 @@
             <a href="/">Home</a>
           </li>
           
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
         </ul>
         <div class="sidebar-nav" tabindex="-1">
           <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
@@ -94,6 +114,26 @@
             
             <li class="nav-list-item">
               <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
             </li>
             
           </ul>
@@ -111,7 +151,7 @@
         <article class="article page">
   <div class="article-info">
     
-    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    <img data-src="/img/favicon.ico" alt="avatar" class="avatar" src=/img/load.gif>
     
     <div class="article-meta">
       <div class="author-name">zivyou</div>
@@ -145,7 +185,28 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><p>leetcode 131</p>
+  <div class="article-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+  <p>leetcode 131</p>
 <ul>
 <li>字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：<figure class="highlight plain">
     <div class="code-block-header" lang="plain">
@@ -218,29 +279,29 @@
     <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/Tech/" style="color:#bcb163;font-size:0.8473836747238259rem">Tech</a>
+      <a href="/tags/Tech/" style="color:#99bfcb;font-size:0.7117175413368408rem">Tech</a>
       
-      <a href="/tags/Math/" style="color:#49b07;font-size:1.6090602028181977rem">Math</a>
+      <a href="/tags/Math/" style="color:#a71404;font-size:0.9398030082466362rem">Math</a>
       
-      <a href="/tags/tech/" style="color:#968230;font-size:1.1080588909223614rem">tech</a>
+      <a href="/tags/tech/" style="color:#c93389;font-size:1.8587926296324762rem">tech</a>
       
-      <a href="/tags/TODO/" style="color:#706b0e;font-size:0.18533728460372467rem">TODO</a>
+      <a href="/tags/TODO/" style="color:#6f4e06;font-size:0.8341769952271916rem">TODO</a>
       
-      <a href="/tags/emotion/" style="color:#cf0820;font-size:1.0820427706386835rem">emotion</a>
+      <a href="/tags/emotion/" style="color:#6afef2;font-size:0.5698006831499867rem">emotion</a>
       
-      <a href="/tags/leetcode/" style="color:#545519;font-size:0.4144971183092161rem">leetcode</a>
+      <a href="/tags/leetcode/" style="color:#fc1ed4;font-size:1.3746488345997725rem">leetcode</a>
       
-      <a href="/tags/books/" style="color:#154d4;font-size:0.8135772612649745rem">books</a>
+      <a href="/tags/books/" style="color:#d51fde;font-size:1.6879862871881417rem">books</a>
       
-      <a href="/tags/thought/" style="color:#e37fce;font-size:0.08944475667583474rem">thought</a>
+      <a href="/tags/thought/" style="color:#76fbd8;font-size:0.8033356146473132rem">thought</a>
       
-      <a href="/tags/math/" style="color:#4ce186;font-size:1.3152208177286622rem">math</a>
+      <a href="/tags/math/" style="color:#7d9ff2;font-size:0.951051327342614rem">math</a>
       
-      <a href="/tags/EMOTION/" style="color:#65a7f0;font-size:0.783181825427127rem">EMOTION</a>
+      <a href="/tags/EMOTION/" style="color:#205e68;font-size:0.6663451312652513rem">EMOTION</a>
       
-      <a href="/tags/OS/" style="color:#4e596a;font-size:1.7308750077335873rem">OS</a>
+      <a href="/tags/OS/" style="color:#1f6aa4;font-size:1.2185461091325531rem">OS</a>
       
-      <a href="/tags/TECH/" style="color:#17b844;font-size:0.49398969584720565rem">TECH</a>
+      <a href="/tags/TECH/" style="color:#2e3bbd;font-size:1.8914051725119885rem">TECH</a>
       
     </div>
   </div>
