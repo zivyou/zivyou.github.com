@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+  
+  <title>zivyou</title>
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="zivyou">
+<meta property="og:url" content="http://zivyou.github.io/archives/2022/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="zivyou">
+<meta name="twitter:card" content="summary">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+<script src="/js/main.js" defer></script>
+
+  
+<meta name="generator" content="Hexo 7.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<html>
+
+<body>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <header class="user-select">
+  <div class="header-container-wrap">
+    <div class="header-container">
+      
+      
+      
+      <style>
+        .logo>* {
+          width:auto;height:4rem;border-radius:50%;;
+        }
+      </style>
+      
+      <a href="/" class="logo">
+        <img data-src="/img/logo.gif" / src=/img/load.gif>
+      </a>
+      
+      <nav>
+        
+        <div class="search" tabindex="-1">
+          <input class="search-input" placeholder="Search for articles" type="search" maxlength="64">
+          <div class="seach-icon-container">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"></path>
+</svg>
+          </div>
+          <div class="search-history">
+            <div class="search-history-title">
+              <span>Search for History</span>
+              <span class="search-history-clear">Clear</span>
+            </div>
+            <div class="search-history-list"></div>
+          </div>
+          <div class="search-result"></div>
+          
+<script src="/js/search.js" path="&#x2F;search.json" defer></script>
+
+        </div>
+        
+
+        
+        
+        <ul class="nav-list">
+          
+          <li class="nav-list-item">
+            <a href="/">Home</a>
+          </li>
+          
+        </ul>
+        <div class="sidebar-nav" tabindex="-1">
+          <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
+  <path d="M3,11.335h16M3,6h16M3,16.67h16" transform="translate(-3-3.335)" stroke="currentColor" stroke-width="2" />
+</svg>
+          <div class="mask" tabindex="-1"></div>
+          <ul class="nav-list">
+            
+            <li class="nav-list-item">
+              <a href="/">Home</a>
+            </li>
+            
+          </ul>
+        </div>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+    <div class="main-wrap">
+      <main class="main-width">
+        
+        <ul class="post-list">
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.11.22</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/11/22/%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E7%9A%84%E7%AE%A1%E7%90%86/" class="post-title" >物理内存的管理</a>
+        <a href="/2022/11/22/%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E7%9A%84%E7%AE%A1%E7%90%86/" class="post-abstract">只针对x86-32架构的机器。目前只懂这个。实模式下的物理内存实模式下的一开始的640KB物理内存分配给了BIOS，后面640K-1M的空间依次给了一些给显示器和硬件接口。可见一开始的实模式下，CPU可以使用的物理内存空间为1M。BIOSCPU在通电后，默认是去读取0xFFFF0(1023K+1008B = 1M - 4B)这个地方的内存内容，并将其当作代码来执行。而0xFFFF0这个地方的...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>383</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.06.23</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/06/23/CRDT-%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7/" class="post-title" >CRDT: 最终一致性</a>
+        <a href="/2022/06/23/CRDT-%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7/" class="post-abstract">挖个大坑，是一个有意思的课题</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>13</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.02.24</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/02/24/code-of-score/" class="post-title" >上分密码</a>
+        <a href="/2022/02/24/code-of-score/" class="post-abstract">计数字符串匹配Manacher字符串哈希模拟枚举排序线段树树状数组后缀数组并查集字典树dp记忆化搜索贪心分治树形dp二叉搜索树栈单调栈哈希堆有序表链表图拓扑排序最短路径最小生成树欧拉回路强连通分量dfsbfs回溯滑动窗口双指针二分查找状态压缩离散化扫描线前缀和滚动哈希</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>119</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.01.20</div>
+      <div class="post-tag">
+        
+        <a href="/tags/books/" class="post-tag-item">books</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/01/20/read-old-books-advanced-engieering-mathmatics/" class="post-title" >旧书新读-《高等工程数学》</a>
+        <a href="/2022/01/20/read-old-books-advanced-engieering-mathmatics/" class="post-abstract">线性空间线性组合/线性表出线性相关唯一线性表出定理基坐标维度基与坐标变换欧式空间子空间线性代数应该怎么学? (ref: https://www.zhihu.com/question/311724817)要学好线性代数，最重要的是抓住线性代数的主线。线性代数的主线就是线性空间以及线性映射，整个线性代数的概念公式定义定理都是围绕着线性空间以及线性映射展开的。你要做的，就是紧紧抓住这条主线，把线性...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>3.3k</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>12min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.01.19</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/01/19/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E7%90%86%E8%AE%BA/" class="post-title" >有限状态机理论</a>
+        <a href="/2022/01/19/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E7%90%86%E8%AE%BA/" class="post-abstract">计算模型在计算理论中，FSM是一个计算模型。一个抽象的机器，这个机器在任何时候只能处于有限的几个状态;在某些特定的输入下，这个机器可以从一个状态切换到其他的状态; 这个切换过程称为transition;状态机可以由「一组状态」、「初始状态」、「触发每个transition的输入」唯一定义。FSM可以分成两大类: 确定性有限状态机 和 不确定性有限状态机。一个确定性有限状态机可以与任何一个非确...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>240</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.01.17</div>
+      <div class="post-tag">
+        
+        <a href="/tags/books/" class="post-tag-item">books</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/01/17/%E6%97%A7%E4%B9%A6%E6%96%B0%E8%AF%BB-%E3%80%8A%E5%A4%A7%E8%B1%A1-think-in-UML%E3%80%8B/" class="post-title" >旧书新读: 《大象-think in UML》</a>
+        <a href="/2022/01/17/%E6%97%A7%E4%B9%A6%E6%96%B0%E8%AF%BB-%E3%80%8A%E5%A4%A7%E8%B1%A1-think-in-UML%E3%80%8B/" class="post-abstract">why面向过程 VS. 面向对象面向对象与面向过程之争本质上是认识论的争论。书中提到说古希腊哲学家亚里士多德也思考过这个问题: 世界是过程还是对象?学术界也有关于这个面向对象思维认识论的讨论。1作者本人是认同这个世界的本质是由对象组成的，平时看上去相互无关的独立对象在不同的驱动力和规则下体现出不同的运动过程。而在面向过程的认知中，世界的一切都不是孤立的，他们互相紧密的联系在一起，缺一不可，互...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>2.5k</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>8min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.01.11</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Math/" class="post-tag-item">Math</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/01/11/fixed-point-and-recursive-sequence/" class="post-title" >不动点与递推数列</a>
+        <a href="/2022/01/11/fixed-point-and-recursive-sequence/" class="post-abstract">设数列 \{a_{n+1}\}存在递推公式a_{n+1}=f(a_{n})，求数列的通项公式。考察函数f(x),假设该函数存在不动点x_0，使得f(x_0)=x_0，则:有x=x_0 是函数 f(x)-x的一个解。如果函数f(x)-x_0是一个可以因式分解的函数，则x-x_0必定是方程f(x)-x_0=0的一个解。我们可以假设f(x)-x_0=A*(x-x_0)，接下来我们可以想办法求出这个...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>229</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.01.10</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Math/" class="post-tag-item">Math</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/01/10/the-step-of-math/" class="post-title" >数学的天梯</a>
+        <a href="/2022/01/10/the-step-of-math/" class="post-abstract">古典数学算术基本几何分数、开方、幂笛卡尔坐标无理数变量、方程、函数基础数学初等代数斜率多项式矩阵复数、对数弧度三角函数圆锥曲线微积分参数方程数理统计微分最优化积分极坐标无穷级数多元微积分向量分析微分方程、偏微分方程散度、斯托克斯定理S-L问题张量矢量空间线性变换若尔当标准型特征值、特征向量收敛傅立叶级数拉普拉斯变换理论数学群论变分学实分析欧式空间密码学博弈论随机分析组合学随机分析复分析复变函...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>384</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+</ul>
+      </main>
+      <aside tabindex="-1">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+
+  
+  
+  
+  <div class="sidebar-block tags-wrap">
+    <div class="sidebar-title tags-title">Tags</div>
+    <div class="sidebar-body">
+      
+      <a href="/tags/Tech/" style="color:#7645f7;font-size:0.6199628991643742rem">Tech</a>
+      
+      <a href="/tags/Math/" style="color:#70840;font-size:1.0351793289385745rem">Math</a>
+      
+      <a href="/tags/tech/" style="color:#fb1815;font-size:0.7120759829327712rem">tech</a>
+      
+      <a href="/tags/TODO/" style="color:#f0ffd;font-size:1.3564517437868764rem">TODO</a>
+      
+      <a href="/tags/emotion/" style="color:#a18571;font-size:1.3214296447180587rem">emotion</a>
+      
+      <a href="/tags/leetcode/" style="color:#534f42;font-size:1.302987900227583rem">leetcode</a>
+      
+      <a href="/tags/books/" style="color:#c7183;font-size:1.0704253052614705rem">books</a>
+      
+      <a href="/tags/thought/" style="color:#6855d1;font-size:1.4828999904920233rem">thought</a>
+      
+      <a href="/tags/math/" style="color:#2e349f;font-size:1.5831898091074952rem">math</a>
+      
+      <a href="/tags/EMOTION/" style="color:#d698ed;font-size:1.2212232355236377rem">EMOTION</a>
+      
+      <a href="/tags/OS/" style="color:#5dedbf;font-size:0.4787130327708282rem">OS</a>
+      
+      <a href="/tags/TECH/" style="color:#77c135;font-size:1.2371155813986139rem">TECH</a>
+      
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+  
+  
+  
+</aside>
+    </div>
+    
+    
+
+<footer class="footer main-width">
+  <div class="copyright">
+    &copy; 2020 - 2024
+    zivyou
+  </div>
+  <div class="framework-info">
+    <span>Framework</span>
+    <a href="https://hexo.io" target="_blank">Hexo</a>
+    <span class="footer-separator">|</span>
+    <span>Theme</span>
+    <a href="https://github.com/Lete114/hexo-theme-MengD" target="_blank">MengD</a>
+  </div>
+  
+  <div class="custom">A clean and lightweight Hexo theme</div>
+  
+</footer>
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+</body>
+
+</html>

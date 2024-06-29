@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+  
+  <title>zivyou</title>
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <meta name="description" content="window.onload&#x3D;function(){             canv &#x3D; document.getElementById(&quot;gc&quot;);             ctx &#x3D; canv.getContext(&quot;2d&quot;);             document.addEventListener(&quot;keydown&quot;, keyPush);">
+<meta property="og:type" content="website">
+<meta property="og:title" content="zivyou">
+<meta property="og:url" content="http://zivyou.github.io/project/snake.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="window.onload&#x3D;function(){             canv &#x3D; document.getElementById(&quot;gc&quot;);             ctx &#x3D; canv.getContext(&quot;2d&quot;);             document.addEventListener(&quot;keydown&quot;, keyPush);">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-13T14:51:59.330Z">
+<meta property="article:modified_time" content="2023-06-13T14:51:59.330Z">
+<meta property="article:author" content="zivyou">
+<meta name="twitter:card" content="summary">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+<script src="/js/image-preview.js" defer></script>
+
+  
+  
+<script src="/js/main.js" defer></script>
+
+  
+<meta name="generator" content="Hexo 7.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<html>
+
+<body>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <header class="user-select">
+  <div class="header-container-wrap">
+    <div class="header-container">
+      
+      
+      
+      <style>
+        .logo>* {
+          width:auto;height:4rem;border-radius:50%;;
+        }
+      </style>
+      
+      <a href="/" class="logo">
+        <img data-src="/img/logo.gif" / src=/img/load.gif>
+      </a>
+      
+      <nav>
+        
+        <div class="search" tabindex="-1">
+          <input class="search-input" placeholder="Search for articles" type="search" maxlength="64">
+          <div class="seach-icon-container">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"></path>
+</svg>
+          </div>
+          <div class="search-history">
+            <div class="search-history-title">
+              <span>Search for History</span>
+              <span class="search-history-clear">Clear</span>
+            </div>
+            <div class="search-history-list"></div>
+          </div>
+          <div class="search-result"></div>
+          
+<script src="/js/search.js" path="&#x2F;search.json" defer></script>
+
+        </div>
+        
+
+        
+        
+        <ul class="nav-list">
+          
+          <li class="nav-list-item">
+            <a href="/">Home</a>
+          </li>
+          
+        </ul>
+        <div class="sidebar-nav" tabindex="-1">
+          <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
+  <path d="M3,11.335h16M3,6h16M3,16.67h16" transform="translate(-3-3.335)" stroke="currentColor" stroke-width="2" />
+</svg>
+          <div class="mask" tabindex="-1"></div>
+          <ul class="nav-list">
+            
+            <li class="nav-list-item">
+              <a href="/">Home</a>
+            </li>
+            
+          </ul>
+        </div>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+    <div class="main-wrap">
+      <main class="main-width">
+        
+        <h1 class="page-title">No Title</h1>
+        
+        <div class="page"><canvas id="gc" width="400" height="400"> </canvas>
+        <script>
+        window.onload=function(){
+            canv = document.getElementById("gc");
+            ctx = canv.getContext("2d");
+            document.addEventListener("keydown", keyPush);
+            setInterval(game, 1000/15);
+        }
+        px=py=10;
+        gs=tc=20;
+        ax=ay=15;
+        xv=yv=0;
+        trail = [];
+        tail = 5;
+
+        function game(){
+            px+=xv;
+            py+=yv;
+            if (px<0){
+                px = tc-1;
+            }
+            if (px > tc-1){
+                px = 0;
+            }
+            
+            if (py<0){
+                py = tc-1;
+            } 
+            if (py>tc-1){
+                py = 0;
+            }
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, canv.width, canv.height);
+
+            ctx.fillStyle="lime";
+            for (var i=0; i<trail.length; i++){
+                ctx.fillRect(trail[i].x*gs, trail[i].y*gs, gs-2, gs-2);
+                if (trail[i].x == px && trail[i].y == py){
+                    tail = 5;
+                }
+            }
+            trail.push({x: px, y:py});
+
+            while (trail.length>tail){
+                trail.shift();
+            }
+            if (ax==px && ay== py){
+                tail++;
+                ax=Math.floor(Math.random()*tc);
+                ay=Math.floor(Math.random()*tc);
+            }
+            ctx.fillStyle = "red";
+            ctx.fillRect(ax*gs, ay*gs, gs-2, gs-2);
+        }
+
+
+        function keyPush(evt){
+            switch (evt.keyCode) {
+                case 37:
+                    xv=-1; yv=0;
+                    break;
+                case 38:
+                    xv=0; yv=-1;
+                    break;
+                case 39:
+                    xv=1; yv=0;
+                    break;
+                case 40:
+                    xv=0; yv=1;
+                    break;
+            }    
+        }
+        </script>
+</div>
+      </main>
+      <aside tabindex="-1">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+
+  
+  
+  
+  <div class="sidebar-block tags-wrap">
+    <div class="sidebar-title tags-title">Tags</div>
+    <div class="sidebar-body">
+      
+      <a href="/tags/Tech/" style="color:#d2e29;font-size:1.6195329424759572rem">Tech</a>
+      
+      <a href="/tags/Math/" style="color:#9a68ae;font-size:1.1121272700782083rem">Math</a>
+      
+      <a href="/tags/tech/" style="color:#69158c;font-size:0.42287202313120975rem">tech</a>
+      
+      <a href="/tags/TODO/" style="color:#3b9a52;font-size:0.6602624293646646rem">TODO</a>
+      
+      <a href="/tags/emotion/" style="color:#e37956;font-size:1.7741101579030776rem">emotion</a>
+      
+      <a href="/tags/leetcode/" style="color:#a5cbc6;font-size:1.7164489304758432rem">leetcode</a>
+      
+      <a href="/tags/books/" style="color:#fc0700;font-size:0.4274838129213374rem">books</a>
+      
+      <a href="/tags/thought/" style="color:#f22c69;font-size:1.5444033157136818rem">thought</a>
+      
+      <a href="/tags/math/" style="color:#b72136;font-size:0.7148423585530312rem">math</a>
+      
+      <a href="/tags/EMOTION/" style="color:#24d4ad;font-size:0.05972539638768959rem">EMOTION</a>
+      
+      <a href="/tags/OS/" style="color:#cf896;font-size:1.0397902860217711rem">OS</a>
+      
+      <a href="/tags/TECH/" style="color:#36fab5;font-size:0.759381013799842rem">TECH</a>
+      
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+  
+  
+  
+</aside>
+    </div>
+    
+    
+
+<footer class="footer main-width">
+  <div class="copyright">
+    &copy; 2020 - 2024
+    zivyou
+  </div>
+  <div class="framework-info">
+    <span>Framework</span>
+    <a href="https://hexo.io" target="_blank">Hexo</a>
+    <span class="footer-separator">|</span>
+    <span>Theme</span>
+    <a href="https://github.com/Lete114/hexo-theme-MengD" target="_blank">MengD</a>
+  </div>
+  
+  <div class="custom">A clean and lightweight Hexo theme</div>
+  
+</footer>
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+</body>
+
+</html>

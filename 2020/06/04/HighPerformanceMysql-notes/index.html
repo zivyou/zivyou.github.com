@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+  
+  <title>HighPerformanceMysql notes | zivyou</title>
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <meta name="description" content="「完全的范式化和反范式化schema都是实验室里才有的东西」 「影子表」 数据类型选型: B-Tree索引 哈希索引 空间数据索引(R-Tree) 全文索引 前缀索引 聚簇索引 覆盖索引 慢查询 一些常见的优化招式 案例1「完全的范式化和反范式化schema都是实验室里才有的东西」   范式化的优点:  范式化的更新操作通常比反范式化要快 当数据较好地范式化时，就只有很少或者没有常负数据，所以值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HighPerformanceMysql notes">
+<meta property="og:url" content="http://zivyou.github.io/2020/06/04/HighPerformanceMysql-notes/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="「完全的范式化和反范式化schema都是实验室里才有的东西」 「影子表」 数据类型选型: B-Tree索引 哈希索引 空间数据索引(R-Tree) 全文索引 前缀索引 聚簇索引 覆盖索引 慢查询 一些常见的优化招式 案例1「完全的范式化和反范式化schema都是实验室里才有的东西」   范式化的优点:  范式化的更新操作通常比反范式化要快 当数据较好地范式化时，就只有很少或者没有常负数据，所以值">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-04T15:42:58.000Z">
+<meta property="article:modified_time" content="2023-06-13T14:51:59.286Z">
+<meta property="article:author" content="zivyou">
+<meta name="twitter:card" content="summary">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+<script src="/js/image-preview.js" defer></script>
+
+  
+  
+<script src="/js/main.js" defer></script>
+
+  
+<meta name="generator" content="Hexo 7.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<html>
+
+<body>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <header class="user-select">
+  <div class="header-container-wrap">
+    <div class="header-container">
+      
+      
+      
+      <style>
+        .logo>* {
+          width:auto;height:4rem;border-radius:50%;;
+        }
+      </style>
+      
+      <a href="/" class="logo">
+        <img data-src="/img/logo.gif" / src=/img/load.gif>
+      </a>
+      
+      <nav>
+        
+        <div class="search" tabindex="-1">
+          <input class="search-input" placeholder="Search for articles" type="search" maxlength="64">
+          <div class="seach-icon-container">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"></path>
+</svg>
+          </div>
+          <div class="search-history">
+            <div class="search-history-title">
+              <span>Search for History</span>
+              <span class="search-history-clear">Clear</span>
+            </div>
+            <div class="search-history-list"></div>
+          </div>
+          <div class="search-result"></div>
+          
+<script src="/js/search.js" path="&#x2F;search.json" defer></script>
+
+        </div>
+        
+
+        
+        
+        <ul class="nav-list">
+          
+          <li class="nav-list-item">
+            <a href="/">Home</a>
+          </li>
+          
+        </ul>
+        <div class="sidebar-nav" tabindex="-1">
+          <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
+  <path d="M3,11.335h16M3,6h16M3,16.67h16" transform="translate(-3-3.335)" stroke="currentColor" stroke-width="2" />
+</svg>
+          <div class="mask" tabindex="-1"></div>
+          <ul class="nav-list">
+            
+            <li class="nav-list-item">
+              <a href="/">Home</a>
+            </li>
+            
+          </ul>
+        </div>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+    <div class="main-wrap">
+      <main class="main-width">
+        
+        <h1 class="page-title">HighPerformanceMysql notes</h1>
+        
+        <article class="article page">
+  <div class="article-info">
+    
+    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    
+    <div class="article-meta">
+      <div class="author-name">zivyou</div>
+      <div class="article-meta-list">
+        
+        <time datetime="2020-06-04 23:42:58" title="2020-06-04 23:42:58" class="time">
+          2020-06-04 23:42:58
+        </time>
+        
+        <div class="article-meta-item-wrap">
+          
+          <div class="article-meta-item">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>2.1k</span>
+          </div>
+          
+          
+          <div class="article-meta-item">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>8min</span>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="article-content"><ul>
+<li><a href="#完全的范式化和反范式化schema都是实验室里才有的东西">「完全的范式化和反范式化schema都是实验室里才有的东西」</a></li>
+<li><a href="#影子表">「影子表」</a></li>
+<li><a href="#数据类型选型">数据类型选型:</a></li>
+<li><a href="#b-tree索引">B-Tree索引</a></li>
+<li><a href="#哈希索引">哈希索引</a></li>
+<li><a href="#空间数据索引r-tree">空间数据索引(R-Tree)</a></li>
+<li><a href="#全文索引">全文索引</a></li>
+<li><a href="#前缀索引">前缀索引</a></li>
+<li><a href="#聚簇索引">聚簇索引</a></li>
+<li><a href="#覆盖索引">覆盖索引</a></li>
+<li><a href="#慢查询">慢查询</a></li>
+<li><a href="#一些常见的优化招式">一些常见的优化招式</a></li>
+<li><a href="#案例1">案例1</a><h1 id="「完全的范式化和反范式化schema都是实验室里才有的东西」"><a href="#「完全的范式化和反范式化schema都是实验室里才有的东西」" class="headerlink" title="「完全的范式化和反范式化schema都是实验室里才有的东西」"></a>「完全的范式化和反范式化schema都是实验室里才有的东西」</h1></li>
+</ul>
+<blockquote>
+<p>范式化的优点:</p>
+<ul>
+<li>范式化的更新操作通常比反范式化要快</li>
+<li>当数据较好地范式化时，就只有很少或者没有常负数据，所以值需要修改更少的数据</li>
+<li>范式化的表通常更小，可以更好地放在内存里，所以执行更快</li>
+<li>很少有多余的数据意味着检索列表数据时更少需要DISTINCT或者GROUP语句</li>
+</ul>
+<p>范式化的缺点</p>
+</blockquote>
+<ul>
+<li>通常范式化需要大量的表关联，稍微复杂一些的查询语句在符合范式的schema上都可能需要至少一次关联</li>
+</ul>
+<blockquote>
+<p>反范式化的优点: </p>
+<pre><code>- 可以很好地避免关联
+- 可以设计更好的索引策略
+</code></pre></blockquote>
+<h1 id="「影子表」"><a href="#「影子表」" class="headerlink" title="「影子表」"></a>「影子表」</h1><figure class="highlight plain">
+    <div class="code-block-header" lang="plain">
+      <span class="copy-code">COPY</span>
+    </div>
+    <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">drop table if exists my_summary_new, my_summary_old;</span><br><span class="line">create table my_summary_new like my_summary;</span><br><span class="line">rename table my_summary to my_summary_old, my_summary_new to my_summary;</span><br></pre></td></tr></table></figure>
+<h1 id="数据类型选型"><a href="#数据类型选型" class="headerlink" title="数据类型选型:"></a>数据类型选型:</h1><ul>
+<li>使用小而简单的合适数据类型，除非真实数据模型中有确切的需要，否则应该尽可能的避免使用NULL值</li>
+<li>尽量使用相同的数据类型存储相似霍相关的值，尤其是要在关联条件中使用的列</li>
+<li>注意可变长字符串，其在临时表和排序时可能导致悲观的按最大长度分配内存</li>
+<li>小心使用ENUM和SET，不能滥用。最好避免使用BIT</li>
+</ul>
+<h1 id="B-Tree索引"><a href="#B-Tree索引" class="headerlink" title="B-Tree索引"></a>B-Tree索引</h1><blockquote>
+<ul>
+<li>一般讨论索引的时候，都是指B树索引</li>
+<li>InnoDB使用的是B+树</li>
+<li>B-Tree对索引列是顺序组织存储的，所以很适合查找范围数据</li>
+<li>B-Tree适用于一下类型的查找: 全键值、键值范围、键值前缀(指适用于最左前缀匹配)</li>
+<li>索引树中的所有节点都是有序的，所以也适用于order by排序操作</li>
+</ul>
+</blockquote>
+<h1 id="哈希索引"><a href="#哈希索引" class="headerlink" title="哈希索引"></a>哈希索引</h1><blockquote>
+<ul>
+<li>哈希索引指包含哈希指和行指针，而不存储字段值</li>
+<li></li>
+<li>哈希索引数据并不是按照索引值顺序存储的，所以无法用于排序</li>
+<li></li>
+<li>哈希索引也不支持部分索引列匹配查找</li>
+<li></li>
+<li>哈希索引值支持等值比较查询，包括=, IN(), &lt;=&gt;，不支持任何范围查询</li>
+<li></li>
+<li>如果哈希冲突很多，一些索引的维护操作的代价高</li>
+<li></li>
+<li>可以在业务层手动为一些字段设置哈希函数，实现”伪哈希索引”</li>
+</ul>
+</blockquote>
+<h1 id="空间数据索引-R-Tree"><a href="#空间数据索引-R-Tree" class="headerlink" title="空间数据索引(R-Tree)"></a>空间数据索引(R-Tree)</h1><blockquote>
+<p>MyISAM的特性，用于存储地理信息数据(3维GIS)，提供了一系列内置函数</p>
+</blockquote>
+<h1 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h1><blockquote>
+<p>待后文详解</p>
+</blockquote>
+<h1 id="前缀索引"><a href="#前缀索引" class="headerlink" title="前缀索引"></a>前缀索引</h1><figure class="highlight plain">
+    <div class="code-block-header" lang="plain">
+      <span class="copy-code">COPY</span>
+    </div>
+    <table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table sakila.city_demo add key (city(7))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>无法做group by和order by</p>
+</blockquote>
+<h1 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h1><blockquote>
+<p>聚簇索引描述的是一种索引的存储结构。InnoDB中的聚簇索引是在同一个结构中保存B树的索引和数据行，所以所以结构和数据存放在同一个文件中。</p>
+<p>优势:</p>
+</blockquote>
+<ul>
+<li>减少磁盘IO</li>
+<li><p>数据访问更快</p>
+<blockquote>
+<p>缺点:</p>
+</blockquote>
+</li>
+<li><p>如果数据全部放在了内存中，则聚簇索引就没有什么意义了</p>
+</li>
+<li></li>
+<li>数据插入的速度严重依赖于插入顺序</li>
+<li></li>
+<li>更新聚簇索引列的代价搞</li>
+<li></li>
+<li>页分裂问题</li>
+<li><h1 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h1></li>
+</ul>
+<blockquote>
+<p>案例<br><figure class="highlight plain">
+    <div class="code-block-header" lang="plain">
+      <span class="copy-code">COPY</span>
+    </div>
+    <table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from products where actor=&apos;SEAN CARRY&apos; and title like &apos;%APOLLO%&apos;;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h1 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h1><blockquote>
+<p>典型的负面案例</p>
+</blockquote>
+<ul>
+<li>查询不需要的attributes</li>
+<li>表关联时返回全部attributes</li>
+<li>select *</li>
+<li>where中包含in 子查询: select * from tableA where tableA.fid in (select id from tableB where name=’xxx’);<blockquote>
+<p>mysql使用where的3种方式(以下从好到坏列出)</p>
+</blockquote>
+</li>
+<li>在索引中用where，过滤不匹配的行。在存储引擎中完成</li>
+<li>使用索引覆盖扫描(explain extra: using index)，在mysql服务层完成，无需回表查询</li>
+<li><p>从数据表中返回数据，然后过滤不满足条件的行，explain extra: using where，在mysql服务层完成，需要回表查询</p>
+<blockquote>
+<p>重构查询</p>
+</blockquote>
+</li>
+<li><p>复杂查询拆分成几步，可在业务代码中完成</p>
+</li>
+<li>利用循环，采用类似于分页的方式分批查询</li>
+<li><p>分解关联查询</p>
+<blockquote>
+<p>关联查询的原理</p>
+</blockquote>
+</li>
+<li><p>所有的关联动作都是先生成一个临时表，然后通过嵌套查询的方式遍历。简单来说，如果A, B, C3表关联查询，3表分别有x, y, z行数据，则关联的复杂度为x <em> y </em> z;</p>
+</li>
+</ul>
+<blockquote>
+<p>关联查询优化</p>
+</blockquote>
+<ul>
+<li><p>所有的查询，mysql都会预先生成一个查询计划。查询计划是有很多个的，mysql会自己选择查询计划中看起来代价最小的那个</p>
+</li>
+<li><p>多表关联查询的查询计划，通常都是一棵左侧深度优先的树</p>
+</li>
+<li>mysql的关联查询优化器会通过调整关联顺序尝试自己选择合适的查询计划: 当n个表关联时，会去尝试n!(n的阶乘)种排列方式。显然，n不能太大</li>
+</ul>
+<blockquote>
+<p>排序优化</p>
+</blockquote>
+<ul>
+<li><p>数据量小的时候，mysql会在内存排序，数据量大了，就是在磁盘排序了。但在explain extra中看到的都是filesort</p>
+</li>
+<li><p>mysql使用「快排」在内存中进行排序; 当在磁盘时，使用快排分段排序，再merge回磁盘</p>
+</li>
+</ul>
+<blockquote>
+<p>查询的执行</p>
+</blockquote>
+<ul>
+<li>mysql的执行计划是一个数据结构</li>
+<li>通过调用存储引擎的「handler API」完成。</li>
+<li>查询优化器的一些提示关键字(hint): 用来指示查询优化器如何按照我们定制化的方案执行。类似于gcc的内置宏</li>
+</ul>
+<h1 id="一些常见的优化招式"><a href="#一些常见的优化招式" class="headerlink" title="一些常见的优化招式"></a>一些常见的优化招式</h1><blockquote>
+<p>优化count()</p>
+</blockquote>
+<ul>
+<li>count()既可以统计行数，也可以统计某个列值的数量。统计列值的时候mysql会计算列值不为空的数量。如果mysql确认count()括号里的内容不可能为空，此时统计的其实就是行数</li>
+<li>所以如果要统计行数，请直接使用count(*)</li>
+<li><p>count(*)会扫描所有行，这是不可避免的，如果有必要，可以新增一张汇总表来解决</p>
+<blockquote>
+<p>优化关联查询</p>
+</blockquote>
+</li>
+<li><p>尽量让on或者using的字段有索引</p>
+</li>
+<li><p>确保group by和order by里的表达式只涉及到一个表中的列</p>
+<blockquote>
+<p>优化子查询</p>
+</blockquote>
+</li>
+<li><p>尽量用关联查询代替</p>
+</li>
+</ul>
+<blockquote>
+<p>优化group by和distinct</p>
+</blockquote>
+<ul>
+<li><p>使用索引来优化，这是最有效的办法</p>
+</li>
+<li><p>A left join B ，最好只对A中的列做group by</p>
+</li>
+</ul>
+<blockquote>
+<p>优化limit + offset + order by的分页方法</p>
+</blockquote>
+<ul>
+<li><p>尽可能使用索引覆盖扫描。利用表关联，先通过覆盖索引找出id， 再做一次关联查询查询行的其他信息</p>
+<figure class="highlight plain">
+    <div class="code-block-header" lang="plain">
+      <span class="copy-code">COPY</span>
+    </div>
+    <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select film_id, description from sakila.film order by title limit to 50, 5</span><br><span class="line">建议改成:</span><br><span class="line">select film.film_id, film.description</span><br><span class="line">from sakila.film</span><br><span class="line">	inner join (</span><br><span class="line">  	select film_id from sakila.film</span><br><span class="line">    order by title limit 50, 5</span><br><span class="line">  ) as lim using(film_id)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用书签记录一下上次翻页的位置，然后利用&gt;, &lt;, between 加上索引的方式，可以减少无用的扫描次数</p>
+</li>
+</ul>
+<blockquote>
+<p>使用用户自定义sql变量来优化</p>
+</blockquote>
+<ul>
+<li>自定义变量在整个查询连接过程中都存在</li>
+<li>使用了自定义变量的查询，无法使用查询缓存</li>
+</ul>
+<blockquote>
+<p>优化select for update<br>表格式<br><figure class="highlight plain">
+    <div class="code-block-header" lang="plain">
+      <span class="copy-code">COPY</span>
+    </div>
+    <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create table unsent_emails (id int not null primary key auto_increament, status enum(&apos;unsent&apos;, &apos;claimed&apos;, &apos;sent&apos;)</span><br><span class="line">                  owner int unsigned not null default 0, ts timestamp, key (owner, status, ts)</span><br><span class="line">                )</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>常规的用法:<br><figure class="highlight plain">
+    <div class="code-block-header" lang="plain">
+      <span class="copy-code">COPY</span>
+    </div>
+    <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">begin;</span><br><span class="line">select id from unsent_emails</span><br><span class="line">  where owner=0 and status=&apos;unsent&apos;</span><br><span class="line">  limit 10 for update;</span><br><span class="line">-- result: 123, 456, 789</span><br><span class="line">update unsent_emails</span><br><span class="line">  set status=&apos;claimed&apos;, owner=connection_id(),</span><br><span class="line">  where id in(123, 456, 789)</span><br></pre></td></tr></table></figure></p>
+<p>改进的用法:<br><figure class="highlight plain">
+    <div class="code-block-header" lang="plain">
+      <span class="copy-code">COPY</span>
+    </div>
+    <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">set autocommit=1;</span><br><span class="line">commit;</span><br><span class="line">update unsent_emails</span><br><span class="line">  set status=&apos;claimed&apos;, owner=connection_id()</span><br><span class="line">  where owner=0 and status=&apos;unsent&apos;</span><br><span class="line">  limit 10;</span><br><span class="line">set autocommit=0;</span><br><span class="line">select id from unsent_emails</span><br><span class="line">  where owner=connection_id() and status=&apos;claimed&apos;;</span><br><span class="line">-- result 123,456,789</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h1><p>翻页问题:  mysql可以使用limit m,n的方式支持翻页。但是在实现上，mysql查找第m条记录需要将前m条记录都扫一遍。因此当m比较大的时候，效率低。<br>解决方法:</p>
+<ol>
+<li>借助自增ID，定位m的值，较少扫描的行数。例如，limit m,n 的时候，我们可以改成 where id&gt;m order by id ASC limit n; 效果提升明显</li>
+<li>借助索引。具体想法是先找出limit m,n的id(id自带索引)，然后inner join整条记录:<figure class="highlight plain">
+    <div class="code-block-header" lang="plain">
+      <span class="copy-code">COPY</span>
+    </div>
+    <table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from TableA inner join (select id from TableA limit m,n) as TableB using(id);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</div>
+  
+  <div class="article-end">
+    
+    
+
+<div class="post-copyright">
+  <div class="post-copyright-icon"><svg class="copyright-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm117.134 346.753c-1.592 1.867-39.776 45.731-109.851 45.731-84.692 0-144.484-63.26-144.484-145.567 0-81.303 62.004-143.401 143.762-143.401 66.957 0 101.965 37.315 103.422 38.904a12 12 0 0 1 1.238 14.623l-22.38 34.655c-4.049 6.267-12.774 7.351-18.234 2.295-.233-.214-26.529-23.88-61.88-23.88-46.116 0-73.916 33.575-73.916 76.082 0 39.602 25.514 79.692 74.277 79.692 38.697 0 65.28-28.338 65.544-28.625 5.132-5.565 14.059-5.033 18.508 1.053l24.547 33.572a12.001 12.001 0 0 1-.553 14.866z" />
+</svg></div>
+  <div class="post-copyright-author">
+    <span class="post-copyright-meta">Authorship: </span>
+    <span class="post-copyright-info">
+      <a href="http://zivyou.github.io">zivyou</a>
+    </span>
+  </div>
+  <div class="post-copyright-type">
+    <span class="post-copyright-meta">Article Link: </span>
+    <span class="post-copyright-info">
+      <a href="http://zivyou.github.io/2020/06/04/HighPerformanceMysql-notes/">http://zivyou.github.io/2020/06/04/HighPerformanceMysql-notes/</a>
+    </span>
+  </div>
+  <div class="post-copyright-notice">
+    <span class="post-copyright-meta">Copyright: </span>
+    <span class="post-copyright-info">All posts on this blog are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> license unless otherwise stated. Please cite <a href="http://zivyou.github.io" target="_blank">zivyou</a> !</span>
+  </div>
+</div>
+
+  </div>
+</article>
+      </main>
+      <aside tabindex="-1">
+  
+  <div class="sidebar-block sidebar-sticky toc-wrap" tabindex="-1">
+    <div class="toc-btn">
+      <svg class="toc-btn-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z"></path>
+  <path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z"></path>
+</svg>
+    </div>
+    <div class="sidebar-title toc-title">Catalog</div>
+    <div class="sidebar-body">
+      <ul class="toc-list">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%8C%E5%AE%8C%E5%85%A8%E7%9A%84%E8%8C%83%E5%BC%8F%E5%8C%96%E5%92%8C%E5%8F%8D%E8%8C%83%E5%BC%8F%E5%8C%96schema%E9%83%BD%E6%98%AF%E5%AE%9E%E9%AA%8C%E5%AE%A4%E9%87%8C%E6%89%8D%E6%9C%89%E7%9A%84%E4%B8%9C%E8%A5%BF%E3%80%8D"><span class="toc-number">1.</span> <span class="toc-text">「完全的范式化和反范式化schema都是实验室里才有的东西」</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%8C%E5%BD%B1%E5%AD%90%E8%A1%A8%E3%80%8D"><span class="toc-number">2.</span> <span class="toc-text">「影子表」</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E9%80%89%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">数据类型选型:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#B-Tree%E7%B4%A2%E5%BC%95"><span class="toc-number">4.</span> <span class="toc-text">B-Tree索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E7%B4%A2%E5%BC%95"><span class="toc-number">5.</span> <span class="toc-text">哈希索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE%E7%B4%A2%E5%BC%95-R-Tree"><span class="toc-number">6.</span> <span class="toc-text">空间数据索引(R-Tree)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%A8%E6%96%87%E7%B4%A2%E5%BC%95"><span class="toc-number">7.</span> <span class="toc-text">全文索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95"><span class="toc-number">8.</span> <span class="toc-text">前缀索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95"><span class="toc-number">9.</span> <span class="toc-text">聚簇索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95"><span class="toc-number">10.</span> <span class="toc-text">覆盖索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%85%A2%E6%9F%A5%E8%AF%A2"><span class="toc-number">11.</span> <span class="toc-text">慢查询</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E7%9A%84%E4%BC%98%E5%8C%96%E6%8B%9B%E5%BC%8F"><span class="toc-number">12.</span> <span class="toc-text">一些常见的优化招式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B1"><span class="toc-number">13.</span> <span class="toc-text">案例1</span></a></li></ol>
+      </ul>
+    </div>
+  </div>
+  
+</aside>
+    </div>
+    
+    
+
+<footer class="footer main-width">
+  <div class="copyright">
+    &copy; 2020 - 2024
+    zivyou
+  </div>
+  <div class="framework-info">
+    <span>Framework</span>
+    <a href="https://hexo.io" target="_blank">Hexo</a>
+    <span class="footer-separator">|</span>
+    <span>Theme</span>
+    <a href="https://github.com/Lete114/hexo-theme-MengD" target="_blank">MengD</a>
+  </div>
+  
+  <div class="custom">A clean and lightweight Hexo theme</div>
+  
+</footer>
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+</body>
+
+</html>

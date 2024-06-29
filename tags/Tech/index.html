@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+  
+  <title>zivyou</title>
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="zivyou">
+<meta property="og:url" content="http://zivyou.github.io/tags/Tech/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="zivyou">
+<meta name="twitter:card" content="summary">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+<script src="/js/main.js" defer></script>
+
+  
+<meta name="generator" content="Hexo 7.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<html>
+
+<body>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <header class="user-select">
+  <div class="header-container-wrap">
+    <div class="header-container">
+      
+      
+      
+      <style>
+        .logo>* {
+          width:auto;height:4rem;border-radius:50%;;
+        }
+      </style>
+      
+      <a href="/" class="logo">
+        <img data-src="/img/logo.gif" / src=/img/load.gif>
+      </a>
+      
+      <nav>
+        
+        <div class="search" tabindex="-1">
+          <input class="search-input" placeholder="Search for articles" type="search" maxlength="64">
+          <div class="seach-icon-container">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"></path>
+</svg>
+          </div>
+          <div class="search-history">
+            <div class="search-history-title">
+              <span>Search for History</span>
+              <span class="search-history-clear">Clear</span>
+            </div>
+            <div class="search-history-list"></div>
+          </div>
+          <div class="search-result"></div>
+          
+<script src="/js/search.js" path="&#x2F;search.json" defer></script>
+
+        </div>
+        
+
+        
+        
+        <ul class="nav-list">
+          
+          <li class="nav-list-item">
+            <a href="/">Home</a>
+          </li>
+          
+        </ul>
+        <div class="sidebar-nav" tabindex="-1">
+          <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
+  <path d="M3,11.335h16M3,6h16M3,16.67h16" transform="translate(-3-3.335)" stroke="currentColor" stroke-width="2" />
+</svg>
+          <div class="mask" tabindex="-1"></div>
+          <ul class="nav-list">
+            
+            <li class="nav-list-item">
+              <a href="/">Home</a>
+            </li>
+            
+          </ul>
+        </div>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+    <div class="main-wrap">
+      <main class="main-width">
+        
+        <ul class="post-list">
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.11.22</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/11/22/%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E7%9A%84%E7%AE%A1%E7%90%86/" class="post-title" >物理内存的管理</a>
+        <a href="/2022/11/22/%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E7%9A%84%E7%AE%A1%E7%90%86/" class="post-abstract">只针对x86-32架构的机器。目前只懂这个。实模式下的物理内存实模式下的一开始的640KB物理内存分配给了BIOS，后面640K-1M的空间依次给了一些给显示器和硬件接口。可见一开始的实模式下，CPU可以使用的物理内存空间为1M。BIOSCPU在通电后，默认是去读取0xFFFF0(1023K+1008B = 1M - 4B)这个地方的内存内容，并将其当作代码来执行。而0xFFFF0这个地方的...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>383</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.06.23</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/06/23/CRDT-%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7/" class="post-title" >CRDT: 最终一致性</a>
+        <a href="/2022/06/23/CRDT-%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7/" class="post-abstract">挖个大坑，是一个有意思的课题</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>13</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.02.24</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/02/24/code-of-score/" class="post-title" >上分密码</a>
+        <a href="/2022/02/24/code-of-score/" class="post-abstract">计数字符串匹配Manacher字符串哈希模拟枚举排序线段树树状数组后缀数组并查集字典树dp记忆化搜索贪心分治树形dp二叉搜索树栈单调栈哈希堆有序表链表图拓扑排序最短路径最小生成树欧拉回路强连通分量dfsbfs回溯滑动窗口双指针二分查找状态压缩离散化扫描线前缀和滚动哈希</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>119</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.01.19</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/01/19/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E7%90%86%E8%AE%BA/" class="post-title" >有限状态机理论</a>
+        <a href="/2022/01/19/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E7%90%86%E8%AE%BA/" class="post-abstract">计算模型在计算理论中，FSM是一个计算模型。一个抽象的机器，这个机器在任何时候只能处于有限的几个状态;在某些特定的输入下，这个机器可以从一个状态切换到其他的状态; 这个切换过程称为transition;状态机可以由「一组状态」、「初始状态」、「触发每个transition的输入」唯一定义。FSM可以分成两大类: 确定性有限状态机 和 不确定性有限状态机。一个确定性有限状态机可以与任何一个非确...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>240</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2021.03.18</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2021/03/18/GNU-build-system/" class="post-title" >GNU build system</a>
+        <a href="/2021/03/18/GNU-build-system/" class="post-abstract">GNU M4一个「Unix宏处理器」。Autoconfig 中用它来生成configure文件。大概的几条语法规则:注释（从注释符（默认#）到换行）保持不动输出。名字（由若干字母、数字和下划线组成，不以数字开始），当碰到名字是宏名字（多参数宏还要求马上紧接开括号），就触发宏展开，否则保持不动输出。引用字符串（默认由配对的|和’包围，但这可以动态设置），会被剥去一层包装后输出。其它字符，保持不...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>146</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2021.01.20</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2021/01/20/TCP-receive-queue/" class="post-title" >TCP-receive-queue</a>
+        <a href="/2021/01/20/TCP-receive-queue/" class="post-abstract">连接过程:sync队列已连接队列数据接收过程:receiveout-of-orderbacklogprequeue1中描述的队列是socket队列，用来存储处于不同状态的socket实体。SYN状态是TCP三次握手的第一此握手完成之后所处的状态，内核会将处于该状态的socket存储于这个队列。在连接建立完成之后，socket会被放置在’已连接队列上’。2中描述的队列是skb队列，用来存储通信...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>339</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2021.01.09</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2021/01/09/CPP-can-not-set-reference-as-key-in-STL/" class="post-title" >C++ can not set reference as key in STL</a>
+        <a href="/2021/01/09/CPP-can-not-set-reference-as-key-in-STL/" class="post-abstract">在写图的算法，尝试将Node/Edge的对象作为key存入unordered_map，发现一系列问题。首先，如果要追求std::unordered_map&amp;lt;Node, int&amp;gt; data;这种写法(类似Java的那种风格)，得做两件事情:为Node类型重载 == 运算符，如果不愿意，可以选择未Node类型实现 () 运算符;实现一个自定义的供Node类型使用的hash方法，比如简...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>442</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>2min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2020.06.29</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2020/06/29/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F/" class="post-title" >数据库范式</a>
+        <a href="/2020/06/29/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F/" class="post-abstract">1NF: 最基本的数据库形式，要求每一列都是不同的，不存在相同的列，数据项不可分割。现在的RDB已经不可能创建出不符合1NF的表了2NF：每个表格的每一行需要有至少一个可以唯一标识这一行的字段，通常我们会把这个字段称为码。因此2NF要求表必须要有码，码确定的情况下其他字段都可以确定3NF：每个表格的每一行中的所有字段，都只依赖于码，不依赖于其他任何字段。每个表格中的属性，既不部分依赖于码，也...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>188</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2020.06.27</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2020/06/27/JS%E5%8E%9F%E5%9E%8B%E9%93%BE/" class="post-title" >JS原型链</a>
+        <a href="/2020/06/27/JS%E5%8E%9F%E5%9E%8B%E9%93%BE/" class="post-abstract">const foo = new Foo();1. foo.__proto__ === Foo.prototype2. Foo.prototype.constructor === Foo3. Foo.prototype === Foo.prototype // 左边指的是Foo这一对象(也是一个函数)的一个属性，右边指的是一个具体的对象，即‘Foo的原型对象’4. Foo.__proto__ ...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>157</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2020.06.24</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2020/06/24/TLS-Handshake/" class="post-title" >TLS-Handshake</a>
+        <a href="/2020/06/24/TLS-Handshake/" class="post-abstract">sequenceDiagram  客户端 -&gt;&gt;  服务端 : 客户端生成一个随机数(r1)，加上自己支持的加密方式，将这二者发给服务端  服务端 -&gt;&gt; 客户端: 服务端收到客户端的随机数(r1)后，自己生成一个随机数(r2)，然后将r2和服务端证书发给客户端  客户端 -&gt;&gt; 服务端: 客户端新生成一个随机数(r3，又被称为预主密钥),将r3用步骤二中从证书里获取到的公钥加密，发给服务端...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>179</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+</ul>
+      </main>
+      <aside tabindex="-1">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+
+  
+  
+  
+  <div class="sidebar-block tags-wrap">
+    <div class="sidebar-title tags-title">Tags</div>
+    <div class="sidebar-body">
+      
+      <a href="/tags/Tech/" style="color:#3e58f5;font-size:0.16813316394183708rem">Tech</a>
+      
+      <a href="/tags/Math/" style="color:#e6547c;font-size:0.3609845320674303rem">Math</a>
+      
+      <a href="/tags/tech/" style="color:#5a4c50;font-size:0.8494374982639172rem">tech</a>
+      
+      <a href="/tags/TODO/" style="color:#8dc07e;font-size:0.12009571319904921rem">TODO</a>
+      
+      <a href="/tags/emotion/" style="color:#863193;font-size:1.8095859129029122rem">emotion</a>
+      
+      <a href="/tags/leetcode/" style="color:#d163c6;font-size:0.8192792815297354rem">leetcode</a>
+      
+      <a href="/tags/books/" style="color:#d0f626;font-size:1.8337987238254088rem">books</a>
+      
+      <a href="/tags/thought/" style="color:#eb281a;font-size:1.8379728596892182rem">thought</a>
+      
+      <a href="/tags/math/" style="color:#48f4e8;font-size:1.4750733668669893rem">math</a>
+      
+      <a href="/tags/EMOTION/" style="color:#71ccd8;font-size:0.1126777561719643rem">EMOTION</a>
+      
+      <a href="/tags/OS/" style="color:#4c5202;font-size:0.4774798146684711rem">OS</a>
+      
+      <a href="/tags/TECH/" style="color:#cf4f0;font-size:0.5345407626635121rem">TECH</a>
+      
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+  
+  
+  
+</aside>
+    </div>
+    
+    
+
+<footer class="footer main-width">
+  <div class="copyright">
+    &copy; 2020 - 2024
+    zivyou
+  </div>
+  <div class="framework-info">
+    <span>Framework</span>
+    <a href="https://hexo.io" target="_blank">Hexo</a>
+    <span class="footer-separator">|</span>
+    <span>Theme</span>
+    <a href="https://github.com/Lete114/hexo-theme-MengD" target="_blank">MengD</a>
+  </div>
+  
+  <div class="custom">A clean and lightweight Hexo theme</div>
+  
+</footer>
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+</body>
+
+</html>

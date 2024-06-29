@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+  
+  <title>物理内存的管理 | zivyou</title>
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <meta name="description" content="只针对x86-32架构的机器。目前只懂这个。  实模式下的物理内存实模式下的一开始的640KB物理内存分配给了BIOS，后面640K-1M的空间依次给了一些给显示器和硬件接口。可见一开始的实模式下，CPU可以使用的物理内存空间为1M。 BIOS CPU在通电后，默认是去读取0xFFFF0(1023K+1008B &#x3D; 1M - 4B)这个地方的内存内容，并将其当作代码来执行。而0xFFFF0这个地">
+<meta property="og:type" content="article">
+<meta property="og:title" content="物理内存的管理">
+<meta property="og:url" content="http://zivyou.github.io/2022/11/22/%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E7%9A%84%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="只针对x86-32架构的机器。目前只懂这个。  实模式下的物理内存实模式下的一开始的640KB物理内存分配给了BIOS，后面640K-1M的空间依次给了一些给显示器和硬件接口。可见一开始的实模式下，CPU可以使用的物理内存空间为1M。 BIOS CPU在通电后，默认是去读取0xFFFF0(1023K+1008B &#x3D; 1M - 4B)这个地方的内存内容，并将其当作代码来执行。而0xFFFF0这个地">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-22T12:50:46.000Z">
+<meta property="article:modified_time" content="2023-06-13T14:51:59.330Z">
+<meta property="article:author" content="zivyou">
+<meta property="article:tag" content="Tech">
+<meta name="twitter:card" content="summary">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+<script src="/js/image-preview.js" defer></script>
+
+  
+  
+<script src="/js/main.js" defer></script>
+
+  
+<meta name="generator" content="Hexo 7.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<html>
+
+<body>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <header class="user-select">
+  <div class="header-container-wrap">
+    <div class="header-container">
+      
+      
+      
+      <style>
+        .logo>* {
+          width:auto;height:4rem;border-radius:50%;;
+        }
+      </style>
+      
+      <a href="/" class="logo">
+        <img data-src="/img/logo.gif" / src=/img/load.gif>
+      </a>
+      
+      <nav>
+        
+        <div class="search" tabindex="-1">
+          <input class="search-input" placeholder="Search for articles" type="search" maxlength="64">
+          <div class="seach-icon-container">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"></path>
+</svg>
+          </div>
+          <div class="search-history">
+            <div class="search-history-title">
+              <span>Search for History</span>
+              <span class="search-history-clear">Clear</span>
+            </div>
+            <div class="search-history-list"></div>
+          </div>
+          <div class="search-result"></div>
+          
+<script src="/js/search.js" path="&#x2F;search.json" defer></script>
+
+        </div>
+        
+
+        
+        
+        <ul class="nav-list">
+          
+          <li class="nav-list-item">
+            <a href="/">Home</a>
+          </li>
+          
+        </ul>
+        <div class="sidebar-nav" tabindex="-1">
+          <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
+  <path d="M3,11.335h16M3,6h16M3,16.67h16" transform="translate(-3-3.335)" stroke="currentColor" stroke-width="2" />
+</svg>
+          <div class="mask" tabindex="-1"></div>
+          <ul class="nav-list">
+            
+            <li class="nav-list-item">
+              <a href="/">Home</a>
+            </li>
+            
+          </ul>
+        </div>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+    <div class="main-wrap">
+      <main class="main-width">
+        
+        <h1 class="page-title">物理内存的管理</h1>
+        
+        <article class="article page">
+  <div class="article-info">
+    
+    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    
+    <div class="article-meta">
+      <div class="author-name">zivyou</div>
+      <div class="article-meta-list">
+        
+        <time datetime="2022-11-22 20:50:46" title="2022-11-22 20:50:46" class="time">
+          2022-11-22 20:50:46
+        </time>
+        
+        <div class="article-meta-item-wrap">
+          
+          <div class="article-meta-item">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>383</span>
+          </div>
+          
+          
+          <div class="article-meta-item">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="article-content"><blockquote>
+<p>只针对x86-32架构的机器。目前只懂这个。</p>
+</blockquote>
+<h1 id="实模式下的物理内存"><a href="#实模式下的物理内存" class="headerlink" title="实模式下的物理内存"></a>实模式下的物理内存</h1><p>实模式下的一开始的640KB物理内存分配给了BIOS，后面640K-1M的空间依次给了一些给显示器和硬件接口。<br>可见一开始的实模式下，CPU可以使用的物理内存空间为1M。</p>
+<h2 id="BIOS"><a href="#BIOS" class="headerlink" title="BIOS"></a>BIOS</h2><ol>
+<li>CPU在通电后，默认是去读取0xFFFF0(1023K+1008B = 1M - 4B)这个地方的内存内容，并将其当作代码来执行。而0xFFFF0这个地方的内容是ROM-BIOS中的地址。也就是说，CPU在实模式下，大于1<br>M的地址，是不会从RAM中去找的，而是找到了ROM中。</li>
+<li>0 - 0x3FF(1K-1B) : BIOS将自己的中断向量表拷贝到[0, 1K)的这个地址范围内，也就是说，内存刚上电初始化时，其开始的地址会被BIOS改写成BIOS的中断向量表；</li>
+<li>0x400(1K) - 0x4FF(2K-1B): BIOS存储自己的数据的地方，[1K, 2k)</li>
+<li>0x7C00(31K) - 0x7DFF(31K+511B): [31K, 31K+512B)BIOS会将启动磁盘的第一个扇区（这个扇区共512B）的内容拷贝到内存的0x7C00(31K)处；</li>
+</ol>
+<h2 id="显示器"><a href="#显示器" class="headerlink" title="显示器"></a>显示器</h2><ol>
+<li>0xA0000(640K) - 0xAFFFF(704k-1B): [640K, 704K): 彩色显示器的内存映射；</li>
+<li>0xB0000(704K) - 0xB7FFF(736K-1B): [704K, 736): 黑白显示器的内存映射；</li>
+<li>0xB8000(736K) - 0xBFFFF(768K-1B): [736K, 768K): 文本模式显示器；</li>
+<li>0xC0000(768K) - 0xC7FFF(800K-1B): [768K, 800K): 暂未查到是哪种显示器使用了；</li>
+</ol>
+<h2 id="其他硬件"><a href="#其他硬件" class="headerlink" title="其他硬件"></a>其他硬件</h2><ol>
+<li>0xC8000(800K) - 0xEFFFF(960K-1B): [800K, 960K): 硬件控制器的ROM或者内存映射式I/O； </li>
+</ol>
+</div>
+  
+  <div class="article-end">
+    
+    <div class="article-meta">
+      
+      
+      <div class="article-tags">
+        <div class="article-tags-name">Tags: </div>
+        
+        <a class="article-tags-item" href="/tags/Tech/">
+          Tech
+        </a>
+        
+      </div>
+      
+    </div>
+    
+    
+
+<div class="post-copyright">
+  <div class="post-copyright-icon"><svg class="copyright-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm117.134 346.753c-1.592 1.867-39.776 45.731-109.851 45.731-84.692 0-144.484-63.26-144.484-145.567 0-81.303 62.004-143.401 143.762-143.401 66.957 0 101.965 37.315 103.422 38.904a12 12 0 0 1 1.238 14.623l-22.38 34.655c-4.049 6.267-12.774 7.351-18.234 2.295-.233-.214-26.529-23.88-61.88-23.88-46.116 0-73.916 33.575-73.916 76.082 0 39.602 25.514 79.692 74.277 79.692 38.697 0 65.28-28.338 65.544-28.625 5.132-5.565 14.059-5.033 18.508 1.053l24.547 33.572a12.001 12.001 0 0 1-.553 14.866z" />
+</svg></div>
+  <div class="post-copyright-author">
+    <span class="post-copyright-meta">Authorship: </span>
+    <span class="post-copyright-info">
+      <a href="http://zivyou.github.io">zivyou</a>
+    </span>
+  </div>
+  <div class="post-copyright-type">
+    <span class="post-copyright-meta">Article Link: </span>
+    <span class="post-copyright-info">
+      <a href="http://zivyou.github.io/2022/11/22/%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E7%9A%84%E7%AE%A1%E7%90%86/">http://zivyou.github.io/2022/11/22/%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E7%9A%84%E7%AE%A1%E7%90%86/</a>
+    </span>
+  </div>
+  <div class="post-copyright-notice">
+    <span class="post-copyright-meta">Copyright: </span>
+    <span class="post-copyright-info">All posts on this blog are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> license unless otherwise stated. Please cite <a href="http://zivyou.github.io" target="_blank">zivyou</a> !</span>
+  </div>
+</div>
+
+  </div>
+</article>
+      </main>
+      <aside tabindex="-1">
+  
+  <div class="sidebar-block sidebar-sticky toc-wrap" tabindex="-1">
+    <div class="toc-btn">
+      <svg class="toc-btn-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z"></path>
+  <path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z"></path>
+</svg>
+    </div>
+    <div class="sidebar-title toc-title">Catalog</div>
+    <div class="sidebar-body">
+      <ul class="toc-list">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98"><span class="toc-number">1.</span> <span class="toc-text">实模式下的物理内存</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BIOS"><span class="toc-number">1.1.</span> <span class="toc-text">BIOS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E5%99%A8"><span class="toc-number">1.2.</span> <span class="toc-text">显示器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%A1%AC%E4%BB%B6"><span class="toc-number">1.3.</span> <span class="toc-text">其他硬件</span></a></li></ol></li></ol>
+      </ul>
+    </div>
+  </div>
+  
+</aside>
+    </div>
+    
+    
+
+<footer class="footer main-width">
+  <div class="copyright">
+    &copy; 2020 - 2024
+    zivyou
+  </div>
+  <div class="framework-info">
+    <span>Framework</span>
+    <a href="https://hexo.io" target="_blank">Hexo</a>
+    <span class="footer-separator">|</span>
+    <span>Theme</span>
+    <a href="https://github.com/Lete114/hexo-theme-MengD" target="_blank">MengD</a>
+  </div>
+  
+  <div class="custom">A clean and lightweight Hexo theme</div>
+  
+</footer>
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+</body>
+
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+  
+  <title>The-GNU-linker | zivyou</title>
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <meta name="description" content="简介 使用方法 命令行选项 环境变量   链接器脚本 链接器脚本的一些基本概念 链接器脚本格式 简单的链接器脚本示例 简单的链接器脚本命令 设置程序入口 文件处理相关命令 obj文件格式处理命令 设置内存区域的别名 其他的链接器脚本命令    GNU链接器作者： Steve Chamberlain, Ian Lance Taylor.   @Red Hat Inc 简介ld链接器可以组合一组ob">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The-GNU-linker">
+<meta property="og:url" content="http://zivyou.github.io/2021/07/25/The-GNU-linker/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="简介 使用方法 命令行选项 环境变量   链接器脚本 链接器脚本的一些基本概念 链接器脚本格式 简单的链接器脚本示例 简单的链接器脚本命令 设置程序入口 文件处理相关命令 obj文件格式处理命令 设置内存区域的别名 其他的链接器脚本命令    GNU链接器作者： Steve Chamberlain, Ian Lance Taylor.   @Red Hat Inc 简介ld链接器可以组合一组ob">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-25T07:53:10.000Z">
+<meta property="article:modified_time" content="2023-06-13T14:51:59.286Z">
+<meta property="article:author" content="zivyou">
+<meta name="twitter:card" content="summary">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+<script src="/js/image-preview.js" defer></script>
+
+  
+  
+<script src="/js/main.js" defer></script>
+
+  
+<meta name="generator" content="Hexo 7.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<html>
+
+<body>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <header class="user-select">
+  <div class="header-container-wrap">
+    <div class="header-container">
+      
+      
+      
+      <style>
+        .logo>* {
+          width:auto;height:4rem;border-radius:50%;;
+        }
+      </style>
+      
+      <a href="/" class="logo">
+        <img data-src="/img/logo.gif" / src=/img/load.gif>
+      </a>
+      
+      <nav>
+        
+        <div class="search" tabindex="-1">
+          <input class="search-input" placeholder="Search for articles" type="search" maxlength="64">
+          <div class="seach-icon-container">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"></path>
+</svg>
+          </div>
+          <div class="search-history">
+            <div class="search-history-title">
+              <span>Search for History</span>
+              <span class="search-history-clear">Clear</span>
+            </div>
+            <div class="search-history-list"></div>
+          </div>
+          <div class="search-result"></div>
+          
+<script src="/js/search.js" path="&#x2F;search.json" defer></script>
+
+        </div>
+        
+
+        
+        
+        <ul class="nav-list">
+          
+          <li class="nav-list-item">
+            <a href="/">Home</a>
+          </li>
+          
+        </ul>
+        <div class="sidebar-nav" tabindex="-1">
+          <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
+  <path d="M3,11.335h16M3,6h16M3,16.67h16" transform="translate(-3-3.335)" stroke="currentColor" stroke-width="2" />
+</svg>
+          <div class="mask" tabindex="-1"></div>
+          <ul class="nav-list">
+            
+            <li class="nav-list-item">
+              <a href="/">Home</a>
+            </li>
+            
+          </ul>
+        </div>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+    <div class="main-wrap">
+      <main class="main-width">
+        
+        <h1 class="page-title">The-GNU-linker</h1>
+        
+        <article class="article page">
+  <div class="article-info">
+    
+    <img data-src="https://www.imlete.cn/img/avatar.png" alt="avatar" class="avatar" src=/img/load.gif>
+    
+    <div class="article-meta">
+      <div class="author-name">zivyou</div>
+      <div class="article-meta-list">
+        
+        <time datetime="2021-07-25 15:53:10" title="2021-07-25 15:53:10" class="time">
+          2021-07-25 15:53:10
+        </time>
+        
+        <div class="article-meta-item-wrap">
+          
+          <div class="article-meta-item">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>7.3k</span>
+          </div>
+          
+          
+          <div class="article-meta-item">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>26min</span>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="article-content"><ul>
+<li><a href="#简介">简介</a></li>
+<li><a href="#使用方法">使用方法</a><ul>
+<li><a href="#命令行选项">命令行选项</a></li>
+<li><a href="#环境变量">环境变量</a></li>
+</ul>
+</li>
+<li><a href="#链接器脚本">链接器脚本</a><ul>
+<li><a href="#链接器脚本的一些基本概念">链接器脚本的一些基本概念</a></li>
+<li><a href="#链接器脚本格式">链接器脚本格式</a></li>
+<li><a href="#简单的链接器脚本示例">简单的链接器脚本示例</a></li>
+<li><a href="#简单的链接器脚本命令">简单的链接器脚本命令</a></li>
+<li><a href="#设置程序入口">设置程序入口</a></li>
+<li><a href="#文件处理相关命令">文件处理相关命令</a></li>
+<li><a href="#obj文件格式处理命令">obj文件格式处理命令</a></li>
+<li><a href="#设置内存区域的别名">设置内存区域的别名</a></li>
+<li><a href="#其他的链接器脚本命令">其他的链接器脚本命令</a></li>
+</ul>
+</li>
+</ul>
+<p>GNU链接器<br>作者： Steve Chamberlain, Ian Lance Taylor.   @Red Hat Inc</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>ld链接器可以组合一组object文件和archive文件，重定位这些文件中的数据，重新绑定这些文件中的符号引用。通常在编译一个程序的最后阶段就是运行ld链接器程序。</p>
+<p>ld会读取一个‘Linker Command Language’所写的文件作为输入，这个语言是AT&amp;T Linker Editor Command Language的一个语法超集。这个文件会提供控制链接的全部过程。目前版本的ld使用通用的BFD库来操作目标文件。BFD库提供了ld链接器所需要的各种格式（比如COFF、a.out格式）的文件读取、拼接、写obj文件的功能。不同格式的文件也可以链接到一起来产生一个可用类型的obj文件。</p>
+<p>相比较与其他链接器，ld不仅使用灵活，还提供了很多很有用的诊断类信息。很多其他的链接器会在遇到error的时候会理解停止执行，但是ld会继续执行，这样可以让你看看后面是不是还会由其他错误。有些时候，尽管出现了错误，最后还是会产生一个输出文件。</p>
+<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><p>ld注定是要处理各种各样的链接场景，然后还得尽可能的保证和其他链接器兼容。最后的结果就是，你有多种方式来控制它的行为。</p>
+<h2 id="命令行选项"><a href="#命令行选项" class="headerlink" title="命令行选项"></a>命令行选项</h2><p>ld支持非常多的命令行选项，但是实际上只有非常少的一部分是在任何场景中都适用的。举个例子，ld常用来链接标准的Unix obj文件，在Unix系统中，链接一个文件hello.o是这样使用的：<br><code>ld -o output /lib/crt0.o hello.o -lc</code></p>
+<p>这个命令会告诉ld产生一个名为ouput的输出文件作为链接的结果，链接的过程是将文件/lib/crt0.o，hello.o和标准搜索目录下的库libc.a链接在一起。</p>
+<p>ld的一些命令行参数可以在命令的任何位值声明。不过呢，用来修饰文件的参数，比如-l, -T，这些参数会决定ld在什么时候读取文件，因此这些参数的出现顺序和位置是有讲究的。重复的非文件修饰参数，如果有不同的值，那么这些声明的参数要么就都不起效果，由么就是后面的覆盖前面的效果。一些特殊情况的命令行参数会在下面单独说明。</p>
+<p>必选的参数是Obj文件或者archive归档文件，这些文件会最终被链接到一起。它们可以跟在命令行参数后面，也可以放在命令行参数前面，也可以交叉着来。但是文件不能放在命令行选项和它们的值之间。</p>
+<p>通常至少提供了一个obj文件链接器彩绘启动，但是你可以通过-l, -R参数来声明其他类型的二进制文件来作为输入文件，然后通过链接脚本来控制链接过程。如果没有一个二进制文件作为输入，那链接器不会产生任何输出文件，并且会声明一个错误： no input files.</p>
+<p>如果链接器不能识别obj文件的格式，那么ld会将这个文件识别为一个链接器参数脚本。链接器参数脚本声明了链接过程中使用的各种参数（注意区别下链接器参数脚本和默认的链接器脚本，以及由参数-T声明的链接器脚本）。有了这样的机制，链接器就可以链接那些只定义了一些符号，或者通过INPUT和GROUP来引入其他Obj文件的obj文件或archive文件。这种方式只提供给链接脚本一些使用的参数，然后使用-T选项来替换整个默认的链接脚本，但是需要注意INSERT命令的副作用。</p>
+<p>对于那些单个字母的命令行参数，可以使用一个短横线或者两个短横线来标识，比如，—trace-symbol和-trace-symbol是等价的。注意，这个规则有一个例外情况：以小写的o打头的多个字母的命令行选项必须以两个短横线来标识。这个是为了避免和-o选项弄混淆。举个例子,-omagic选项是声明输出文件名为magic，但是—omagic选项的作用是设置输出文件中的NMAGIC flag。</p>
+<p>多个字母的命令行选项的参数必须用等号来和选项自身分隔开，或者让参数紧跟着命令行选项。比如，—trace-symbol foo和 —trace-symbol=foo 是等价的。多个字母的命令行选项一般可以缩写为一个没有歧义的选项。</p>
+<p>注意： 如果链接器是被间接调用的，比如通过一个编译器(gcc)驱动，那么所有的链接器命令行选项都必须以-Wl为前缀，举个例子： gcc -Wl,—start-group foo.o bar.o -Wl,—end-group<br>这个规则很重要，因为如果不通过这种方式声明的话，编译器驱动的程序可能会悄悄地丢掉一些链接器参数，造成链接失败。在通过编译器传递一些选项参数的值的时候，有些时候会让人产生疑惑，甚至可能会将选项传递给链接器，但是选项的参数却传递给编译器了。在这种情况下，最简单的解决办法是使用单个短横线和多字母选项混合的方式，比如这样： gcc foo.o bar.o -Wl,-eENTRY -Wl,-Map=a.map</p>
+<p>下面是一些GNU链接器的通用命令行选项列表：<br>@file: 从文件file中读取命令行选项。读入的命令行选项会插入到@file参数所在的位置。如果声明的文件不存在，或者无法读取，那这个@file选项会被当作字面量解释，而且不会自动被移除。<br>文件file中的命令行选项以空白符隔开。单引号和双引号引起来的选项两边可以有空白字符。任何字符（包括反斜杠）都可以通过在字符前添加反斜杠的方式引入。参数file指定的文件中可以再包含file参数，这样的引用方式会以递归的形式展开</p>
+<p>-A architecture<br>—architecture=architecture<br>    目前版本的ld中，这个选项只在Intel 960系列CPU架构中有用。在使用这种参数的ld配置中，architecture参数声明了960系列中的具体CPU架构。</p>
+<p>-b input-format<br>—format=input-format<br>    ld可以通过配置来支持多种obj文件。如果你的ld通过这个参数进行配置的话，那-b选项可以声明输入的二进制Obj文件的格式。即使在需要ld支持多种obj格式的情况，你一般也不需要手动通过这个-b参数来显式地声明这些输入Obj的格式，这是因为ld的默认配置会根据各个机器的不同自动识别这个机器上常见的Obj格式。input-format参数是一个string文本，代表一个BFD库支持的特定的格式。你可以通过命令objdump -i命令来获取当前机器支持的所有二进制格式。</p>
+<p>…<br>(选项太多，候选再补充)</p>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p>你可以通过环境变量GNUTARGET, LDEMULATION和COLLECTION_NO_DEMANGLE来改变ld的行为。</p>
+<p>GNUTARGET可以决定输入文件的格式，前提是你没有通过-b或者—format选项来声明输入文件的格式。这个环境变量的值必须是BFD中input format的一种。如果没有设置GNUTARGET环境变量的话，ld会使用默认的目标文件格式。如果GNUTARGET的值为default，那么BFD库会尝试自己检查二进制输入文件的格式；这种自动检查一般来说都是可以成功的，但是有些时候还是会失败，因为用来标识文件格式的magic number并不是统一和确定的。不过呢，BFD库中内置了各个系统中常见的格式，所以这种歧义一般可以通过约定俗成的规定来避免。</p>
+<p>LDEMULATION环境变量决定了默认的仿真功能（如果你不使用-m选项的话）。仿真功能可以影响链接器各个方面的行为，特别是默认的链接器脚本。你可以通过—verbose和-V选项来列出可用的仿真功能。如果没有使用-m选项，同时又没有设置LDEMULATION环境变量的话，仿真功能默认是由链接器自身的配置决定。</p>
+<p>正常情况下，链接器由默认的识别符号的方式。然而，如果设置了COLLECT_NO_DEMANGLE环境变量，那链接器默认会不自己识别符号。这个环境变量的gcc链接器wrapper程序中被广泛的使用。这个环境变量的值可以被—demangle和—no-demangle选项覆盖。</p>
+<h1 id="链接器脚本"><a href="#链接器脚本" class="headerlink" title="链接器脚本"></a>链接器脚本</h1><p>链接过程由链接器脚本控制。链接器脚本是用‘链接命令语言’(the linker command language)撰写的。</p>
+<p>链接器脚本的主要目的是描述输入文件中的各个section怎么映射到输出文件中，然后如何控制输出文件中的内存布局。大多数的链接器脚本就干这两件事情。不过呢，在必要的时候，链接器脚本也可以使用下面的命令来指导链接器做一些其他的操作。</p>
+<p>一般来说，链接器都会使用一个链接器脚本。如果你没有自定一个链接器脚本的话，它会使用一个默认的脚本，这个脚本已经编译在ld命令的二进制程序中。你可以通过—verbose选项来展示默认的链接器脚本。一些命令行选项，比如-r和-N，可以影响默认的链接器脚本。</p>
+<p>你可以使用命令行选项-T来声明自定义的链接器脚本。当你这样声明的时候，你提供的链接器脚本会覆盖默认的链接器脚本。</p>
+<p>你可以通过将链接器脚本当作要被链接的输入文件这样的方式来隐式使用。</p>
+<h2 id="链接器脚本的一些基本概念"><a href="#链接器脚本的一些基本概念" class="headerlink" title="链接器脚本的一些基本概念"></a>链接器脚本的一些基本概念</h2><p>为了描述链接器脚本语言，我们需要定义一些基本的概念和词汇。</p>
+<p>链接器会将输入文件组合到一个单独的输出文件中。输出文件和各个输入文件都是obj格式文件。输入输出文件都可以被称为Obj文件，输出文件往往被称为可执行文件，不过我们的文档中也会将输出文件称为obj文件。每个obj文件都包括了一系列sections和一些其他东西。输入文件中的section称为输入section，输出文件中的section称为输出section。</p>
+<p>obj文件中的每个section都包含一个名字和一个大小。大多数section还包含一个相关的数据块，一般称为sectoin内容。section可以标记位‘可加载的’，这个是指当输出文件运行的时候这部分内容可以加载至内存中。一个没有任何内容的section可以是‘可分配的’，这是指内存中的这块区域需要单独设置，但是没有特别说明需要设置什么内容（一些情况下需要设置成0）。一个既不是可加载的也不是可分配的section一般都是包含一些调试信息。</p>
+<p>每个可加载的或者可分配的输出section都有两个地址。第一个地址称为VMA，即virtual memory address（虚拟内存地址）。这个地址定义了输出文件在运行的时候，这个section应该在哪个内存地址处。第二个地址是LMA，也称为load memory address。这个地址描述了这个section会被加载到哪个地址那里。大多数情况下这两个地址是相同的。它们俩不同的一种情况是： 当一个程序启动的时候，它的data section加载到ROM，然后又被加载到RAM中，就会出现这种情况。这个技术常常被一些基于ROM的系统用来初始化全局变量。这个案例中，ROM的地址应该是LMA，RAM的地址应该是VMA。</p>
+<p>可以使用objdump命令的-h选项来查看obj文件的各个section。每个Obj文件都有一个符号列表，即符号表。符号可以是定义的也可以是未定义的。每个符号都有一个名字，每个定义的符号都有一个地址以及一些其他信息。如果你是将一个C或者C++程序编译成obj文件，每个定义的函数和全局的或者静态变量都对应一个定义的符号。输入文件中的每个未定义的函数或者未定义的全局变量都会对应一个未定义符号。</p>
+<p>你可以使用nm程序来查看一个obj文件中的符号，或者使用objdump的-t选项来查看。</p>
+<h2 id="链接器脚本格式"><a href="#链接器脚本格式" class="headerlink" title="链接器脚本格式"></a>链接器脚本格式</h2><p>链接器脚本是一个文本文件。</p>
+<p>你可以像写一系列命令一样来写一个链接器脚本。每个命令同时也是一个关键字，可以带参数，或者定义一个符号。可以通过分号分隔命令，空白字符一般会被忽略。</p>
+<p>文件名和格式名可以当作字符串直接输入。如果一个文件名中包含像逗号这样会切分字符串的字符，你需要将这个特殊的文件名通过双引号引起来。文件名中不能包含双引号。</p>
+<p>和C语言一样，你可以在链接器脚本中使用”/<em>“和”</em>/“来声明一段注释，同样的，注释也是会当作空白字符一样处理。</p>
+<h2 id="简单的链接器脚本示例"><a href="#简单的链接器脚本示例" class="headerlink" title="简单的链接器脚本示例"></a>简单的链接器脚本示例</h2><p>一般链接器脚本都相当简单。</p>
+<p>最简单的链接器脚本是只有一个命令的脚本： ‘sections’。你可以使用sections命令来描述输出文件的内存布局。</p>
+<p>sections命令是一个很强的命令。我们简单演示一下它的用法。假设你的程序只包含代码、初始化数据和未初始化数据，它们分别放在.text，.data，和.bss sections中。</p>
+<p>这个例子中，我们假设代码需要在地址0x100000处加载，数据需要从0x8000000处开始。那我们可以写个这样的链接器脚本：<br>sections<br>{<br>    . = 0x100000;<br>    .text : {.<em>(.text)}<br>    . = 0x8000000;<br>    .data : {</em>(.data)}<br>    .bss : {*(.bss}<br>}<br>首先，我们使用了命令section，紧接着我们在一对大括号内写了一系列符号的定义以及输出文件的secton描述。</p>
+<p>第一行section命令内部的设定了特殊符号“.”的值，这个“.”也被称作位置计数器。如果你没有使用一些其他的方法来声明输出section的地址的话，那这个地址会被设置成当前位置计数器的值。然后位置计数器的值会往上增加这个输出section大小的数值。在命令sections使用的地方，位置计数器的值是0.</p>
+<p>第二行定了一个输出section: .text。冒号是必须的。大括号内，你定义了需要放置在输出section内的输入section。“<em>”一个通配符，代表可以匹配任何名字。表达式“</em>(.text)”代表任何输入文件中的”.text”输入section。</p>
+<p>由于”.text : {.*(.text)}”这句话这里的位置计数器的值是“0x10000”，链接器会设置输出.text section的地址为0x100000。</p>
+<p>剩下的代码定义了输出文件的.data和.bss section。链接器会将输出文件中的.data section放在地址0x8000000处。之后，位置计数器的值会自动变为0x8000000加上.data输出section的大小。这样，.bss输出sectoin会立马紧接着放在.data输出section的内存地址后面。</p>
+<p>链接器通过自动增加位置计数器的方式来保证每个输出section都按要求对齐。这个例子中，.text和.data section会按照声明的方式进行对齐，但是链接器可能必须要在.data和.bss section中间预留一段间隙。</p>
+<p>就是这样！这就是一个简单但是完整的链接器脚本。</p>
+<h2 id="简单的链接器脚本命令"><a href="#简单的链接器脚本命令" class="headerlink" title="简单的链接器脚本命令"></a>简单的链接器脚本命令</h2><p>下面我们简单介绍一下连接器脚本中的命令。</p>
+<h2 id="设置程序入口"><a href="#设置程序入口" class="headerlink" title="设置程序入口"></a>设置程序入口</h2><p>程序中执行的第一个指令称为程序的入口点(entry point)。你可以使用ENTRY链接器脚本命令来设置入口点。这个命令的参数是一个符号名：<br>ENTRY(symbol)<br>有多种方式可以设置入口点。对于链接器来说，他会一个个按顺序的尝试下面的方法，直到有一个方法成功了：</p>
+<ul>
+<li>命令行选项: -e</li>
+<li>链接器脚本中的 ENTRY(symbol)命令</li>
+<li>符号start的值，如果没有设置那这个方法就不行</li>
+<li>.text段的第一个字节的地址</li>
+<li>地址0</li>
+</ul>
+<h2 id="文件处理相关命令"><a href="#文件处理相关命令" class="headerlink" title="文件处理相关命令"></a>文件处理相关命令</h2><p>下面几个命令是文件处理相关的：</p>
+<ul>
+<li><p>INCLUDE filename: 在当前位置包含一个链接器脚本filename进来。文件的搜索路径为当前路径，以及通过命令行选项-L声明的文件路径。你可以嵌套执行INCLUDE命令，但是最多嵌套10层。<br>你可以将INCLUDE命令放置在最外层： 在MEMORY或者SECTIONS命令中，或者在输出section的描述区域中。</p>
+</li>
+<li><p>INPUT(file, file, …) / INPUT(file file …): INPUT命令告诉链接器需要链接的文件列表。<br>举个例子，如果你想在链接的时候包含一个名为‘subr.o’的文件作为输入文件，但是呢，每次在命令行中写又太麻烦了，那么你就可以在链接器脚本中定义： INPUT(subr.o)<br>事实上，只要你愿意，你可以在链接器脚本中列出所有的输入文件，然后在命令行写命令的时候可以简单的使用-T选项就完事了。<br>在配置了sysroot prefix系统根目录前缀的情况下，如果你声明的文件名以’/‘开头，并且当前链接器脚本又在根目录下，那列出的文件会被认为是在根目录下的。负责，链接器会尝试在当前目录下找文件。如果没有找到，链接器会尝试在默认的库搜索路径下搜索文件。可以参考下参数-L的行为。<br>如果你这样使用INPUT命令： INPUT(-lfile)，那ld链接器会将文件名翻译为libfile.a，这个是参数-l的行为<br>当你显式地在链接器脚本中使用INPUT命令时，当这些文件会在当前链接器脚本生效的时刻引入到链接过程。这个可能会对文件搜索又一点影响。</p>
+</li>
+<li><p>GROUP(file, file, …) / GROUP(file file …): GROUP命令鹤INPUT命令类似，就是参数中的文件必须是归档文件，并且这些文件会反复搜索直到没有新的未定义的符号引用被创建出来。</p>
+</li>
+<li><p>AS_NEEDED(file, file, …) / AS_NEEDED(file file …): 这个用法只能和其他文件名一起出现在INPUT或者GROUP命令中间。列出的文件会被当作INPUT和GROUP命令列出的文件一样被处理，除了EFL的共享链接库，共享链接库只会在它们被需要的时候才会加载。这个命令本质上是在命令行选项上启用了—as-needed选项，然后列出所有的文件名，之后启用—no-as-needed选项。</p>
+</li>
+<li><p>OUTPUT(filename): OUTPUT命令可以给输出文件命名。在链接器脚本中使用OUTPUT(filename)命令等价于在命令行中使用-o filename选项。如果两者都使用了的话，命令行选项的优先级更高。<br>你可以使用OUTPUT命令来设置一个默认的输出文件名，如果常见的a.out默认输出文件名就是这么设定的。</p>
+</li>
+<li><p>SEARCH_DIR(path): SEARCH_DIR命令会将参数path添加到链接器搜索归档库的路径中。SEARCH_DIR(path)的原理和命令行选项-L path的原理是一样的。如果两者都使用了的话，命令行选项的优先级更高。</p>
+</li>
+<li><p>STARTUP(filename): STARTUP命令和INPUT命令类似，但是STARTUP命令声明的文件filename会是第一个被链接的输入文件，就好像它是命令行参数中第一个被声明的文件一样。这个在那些默认入口点是第一个被链接的文件的系统中是很有用的。</p>
+</li>
+</ul>
+<h2 id="obj文件格式处理命令"><a href="#obj文件格式处理命令" class="headerlink" title="obj文件格式处理命令"></a>obj文件格式处理命令</h2><p>有一对链接器脚本命令可以用来处理obj文件格式。</p>
+<ul>
+<li><p>OUTPUT_FORMAT(bfdname) / OUTPUT_FORMAT(default, big, little): OUTPUT_FORMAT这命令声明了输出文件使用的BFD格式。使用OUTPUT_FORMAT(bfdname)的效果和使用‘—oformat bfdname’命令行选项的效果是一样的。如果两者都使用了的话，命令行选项的定义优先级更高。<br>你可以在命令OUTPUT_FORMAT命令后加3个参数来声明不同的输出格式，对应于命令选项中的-EB和-EL选项。这个用法让链接器可以根据系统不同的大小端情况来选择不同的输出格式。<br>如果-EB和-EL选项都没有使用的话，那么输出文件的格式会是第一个参数default声明的格式。如果使用了-EB选项，那么输出格式会是第二个参数big声明的格式。如果使用了-EL选项，那么输出文件的格式会是第三个参数litte声明的格式。<br>举个例子，MIPS架构下的ELF目标文件的格式在默认的链接器脚本中是这么定义的： OUTPUT_FORMAT(elf32-bigmips, elf32-bigmips, elf32-littlemips)<br>这个定义时说，默认的输出文件格式是‘elf32-bigmips’，但是如果在链接的时候使用了-EL命令行选项，那么输出文件的格式将会是elf32-littlemips格式。</p>
+</li>
+<li><p>TARGET(bfdname): TARGET命令声明了解析输出文件时的BFD格式，这个设置同时也会影响到INPUT和GROUP命令。这个命令的效果和’-b bfdname’命令行选项的效果是一样的。如果使用了TARGET命令但是没有使用OUTPUT_FORMAT命令，那么最后一个TARGET设置的格式也会作为输出文件的格式。</p>
+</li>
+</ul>
+<h2 id="设置内存区域的别名"><a href="#设置内存区域的别名" class="headerlink" title="设置内存区域的别名"></a>设置内存区域的别名</h2><p>通过创建命令动态创建出来的内存区域可以设置一个别名。每个别名最多可以对应一个内存区域。<br>使用方法： REGION_ALIAS(alias, region)<br>REGION_ALIAS函数为参数region指定的内存区域创建出一个名为alias的别名。这种用法可以灵活的为输出文件中的内存区域设置一个映射表。下面是一个具体的例子。<br>假设我们有一个嵌入式系统的应用，它包含多个内存存储设备。和其他系统一样，随机访问存储器RAM允许代码的执行或者数据的存储。有一些系统可能会有一个只读的、非随机访问的存储器ROM，它允许代码指令和只读数据的访问。然后可能还会有一个只读的、非随机访问的的存储设备ROM，它只允许读取只读数据，并且不允许代码执行。这样我们就需要4个输出section:</p>
+<ul>
+<li>.text: 程序的代码</li>
+<li>.rodata: 只读数据</li>
+<li>.data: 已初始化的可读可写数据</li>
+<li>.bss: 用0初始化过的可读可写数据<br>我们的目标是提供一个链接器命令文件，这个文件包含一个系统无关的部分，这个部分需要定义output section；还需要定义一个系统相关的部分，这个部分定义了输出section和系统可用内存区域的映射关系。我们的嵌入式系统有3中不同存储设置方案A, B 和 C，这3种方法分别如下：<br>Section      Variant A      Variant B        Variant C<br>.text          RAM             ROM             ROM<br>.rodata        RAM             ROM             ROM2<br>.data          RAM           RAM/ROM           RAM/RO<br>.bss           RAM             RAM             RAM<br>这里的RAM/ROM或者RAM/ROM2意思是这个section可以依次加载到ROM或者ROM2中。请注意，这3种方法中的.data section都是紧接着.rodata的末尾的。</li>
+</ul>
+<p>下面是生成输出section的一个链接器脚本的示例。这个脚本中包含一个linkcmds.memory文件，这个文件与系统相关，它描述了具体的内存布局。</p>
+<figure class="highlight plain">
+    <div class="code-block-header" lang="plain">
+      <span class="copy-code">COPY</span>
+    </div>
+    <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">INCLUDE linkcmds.memory</span><br><span class="line"></span><br><span class="line">SECTIONS</span><br><span class="line">&#123;</span><br><span class="line">  .text: </span><br><span class="line">  &#123;</span><br><span class="line">    *(.text)</span><br><span class="line">  &#125; &gt; REGION_TEXT</span><br><span class="line">  .rodata:</span><br><span class="line">  &#123;</span><br><span class="line">    *(.rodata)</span><br><span class="line">    rodata_end = .;</span><br><span class="line">  &#125; &gt; REGION_RODATA</span><br><span class="line">  .data : AT (rodata_end)</span><br><span class="line">  &#123;</span><br><span class="line">    data_start = .;</span><br><span class="line">    *(.data)</span><br><span class="line">  &#125; &gt; REGION_DATA</span><br><span class="line">  data_size = SIZEOF(.data);</span><br><span class="line">  data_load_start = LOADADDR(.data);</span><br><span class="line">  .bss :</span><br><span class="line">  &#123;</span><br><span class="line">    *(.bss)</span><br><span class="line">  &#125; &gt; REGION_BSS</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>链接器脚本已经有了，现在我们需要提供3种不同的链接器命令文件linkcmds.memory来定义不同的内存布局和别名。A, B, C三种方法对应的文件分别如下：</p>
+<p>A方案：所有的内容都存储在RAM中。<br><figure class="highlight plain">
+    <div class="code-block-header" lang="plain">
+      <span class="copy-code">COPY</span>
+    </div>
+    <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MEMORY</span><br><span class="line">&#123;</span><br><span class="line">  RAM : ORIGION = 0, LENGTH = 4M</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">REGION_ALIAS(&quot;REGION_TEXT&quot;, RAM);</span><br><span class="line">REGION_ALIAS(&quot;REGION_RODATA&quot;, RAM);</span><br><span class="line">REGION_ALIAS(&quot;REGION_DATA&quot;, RAM);</span><br><span class="line">REGION_ALIAS(&quot;REGION_BSS&quot;, RAM);</span><br></pre></td></tr></table></figure></p>
+<p>B方案：程序代码和只读数据存储在ROM中，可读写数据存储在RAM中。ROM中会存储一份用于初始化的数据，并且会在系统启动的时候拷贝到RAM中。<br><figure class="highlight plain">
+    <div class="code-block-header" lang="plain">
+      <span class="copy-code">COPY</span>
+    </div>
+    <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MEMORY</span><br><span class="line">&#123;</span><br><span class="line">ROM : ORIGIN = 0, LENGTH = 3M</span><br><span class="line">RAM : ORIGIN = 0x10000000, LENGTH = 1M</span><br><span class="line">&#125;</span><br><span class="line">REGION_ALIAS(&quot;REGION_TEXT&quot;, ROM);</span><br><span class="line">REGION_ALIAS(&quot;REGION_RODATA&quot;, ROM);</span><br><span class="line">REGION_ALIAS(&quot;REGION_DATA&quot;, RAM);</span><br><span class="line">REGION_ALIAS(&quot;REGION_BSS&quot;, RAM);</span><br></pre></td></tr></table></figure></p>
+<p>C方案：程序代码存储在ROM中，只读数据存储在ROM2中。可读写数据存储在RAM中。ROM2中存储有一份用于初始化的数据，并且会在系统启动的时候加载到RAM中。<br><figure class="highlight plain">
+    <div class="code-block-header" lang="plain">
+      <span class="copy-code">COPY</span>
+    </div>
+    <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">MEMORY</span><br><span class="line">&#123;</span><br><span class="line">ROM : ORIGIN = 0, LENGTH = 2M</span><br><span class="line">ROM2 : ORIGIN = 0x10000000, LENGTH = 1M</span><br><span class="line">RAM : ORIGIN = 0x20000000, LENGTH = 1M</span><br><span class="line">&#125;</span><br><span class="line">REGION_ALIAS(&quot;REGION_TEXT&quot;, ROM);</span><br><span class="line">REGION_ALIAS(&quot;REGION_RODATA&quot;, ROM2);</span><br><span class="line">REGION_ALIAS(&quot;REGION_DATA&quot;, RAM);</span><br><span class="line">REGION_ALIAS(&quot;REGION_BSS&quot;, RAM);</span><br></pre></td></tr></table></figure></p>
+<p>如果有必要的话，我们可以写一段可以通用的处理程序，用来在系统初始化的时候将数据从ROM或者ROM2的.data section拷贝到RAM中。这段程序可以这么写：<br><figure class="highlight plain">
+    <div class="code-block-header" lang="plain">
+      <span class="copy-code">COPY</span>
+    </div>
+    <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;string.h&gt;</span><br><span class="line">extern char data_start [];</span><br><span class="line">extern char data_size [];</span><br><span class="line">extern char data_load_start [];</span><br><span class="line">void copy_data(void)</span><br><span class="line">&#123;</span><br><span class="line">  if (data_start != data_load_start)</span><br><span class="line">  &#123;</span><br><span class="line">    memcpy(data_start, data_load_start, (size_t) data_size);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="其他的链接器脚本命令"><a href="#其他的链接器脚本命令" class="headerlink" title="其他的链接器脚本命令"></a>其他的链接器脚本命令</h2><p>还有一些其他的链接器脚本命令。<br>ASSERT(exp, message): 使用的时候必须保证exp的值不为0.如果是0的话，那链接器会将参数message的内容打印出来，并且抛出错误码，然后退出。</p>
+<p>EXTERN(symbol symbol …): 强制将符号symbol作为一个undefined符号放入到输出文件中。有一些情况需要这样操作，比如想要触发链接器将一些标准库链接进来。你可以使用EXTERN来列出多个符号，也可以多次使用EXTERN命令。这个命令的效果和命令行参数-u是一样的。</p>
+<p>FORCE_COMMON_ALLOCATION: 这个命令和命令行选项-d的效果是一样的： 让ld链接器给通用符号预留空间，即使已已经通过-r选项声明了一个可重定位输出文件。</p>
+<p>INHIBIT_COMMON_ALLOCATION: 这个命令和命令行选项—no-define-common的效果是一样的： 让ld链接器忽略对通用符号的地址分配，即使声明了是一个不可重定位输出文件。</p>
+<p>INSERT [AFTER | BEFORE] output_section: 这个命令的典型使用场景是在一个-T声明的链接器脚本中，用来修饰SECTIONS命令的行为(比如overlays覆盖行为)。这个命令会将所有前面的链接器脚本语句插入到output_section参数声明的section之前（或者之后），同时会引起-T声明的链接器脚本不覆盖默认的链接器脚本。插入行为会发生在链接器将输入文件的section映射到输出文件的section完成之后。在插入之前，由于-T声明的链接器脚本会在默认的链接器脚本前面进行解析，因此-T声明的脚本中的语句会在默认的链接器脚本中的语句之前执行。特别的，-T声明的脚本中的输入section的分配会发生在默认链接器脚本的输入section分配之前。下面是一个例子，用来说明-T脚本是如何使用INSERT命令的。<br><figure class="highlight plain">
+    <div class="code-block-header" lang="plain">
+      <span class="copy-code">COPY</span>
+    </div>
+    <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SECTIONS</span><br><span class="line">&#123;</span><br><span class="line">  OVERLAY :</span><br><span class="line">  &#123;</span><br><span class="line">    .ov1 &#123; ov1*(.text) &#125;</span><br><span class="line">    .ov2 &#123; ov2*(.text) &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">INSERT AFTER .text;</span><br></pre></td></tr></table></figure></p>
+</div>
+  
+  <div class="article-end">
+    
+    
+
+<div class="post-copyright">
+  <div class="post-copyright-icon"><svg class="copyright-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm117.134 346.753c-1.592 1.867-39.776 45.731-109.851 45.731-84.692 0-144.484-63.26-144.484-145.567 0-81.303 62.004-143.401 143.762-143.401 66.957 0 101.965 37.315 103.422 38.904a12 12 0 0 1 1.238 14.623l-22.38 34.655c-4.049 6.267-12.774 7.351-18.234 2.295-.233-.214-26.529-23.88-61.88-23.88-46.116 0-73.916 33.575-73.916 76.082 0 39.602 25.514 79.692 74.277 79.692 38.697 0 65.28-28.338 65.544-28.625 5.132-5.565 14.059-5.033 18.508 1.053l24.547 33.572a12.001 12.001 0 0 1-.553 14.866z" />
+</svg></div>
+  <div class="post-copyright-author">
+    <span class="post-copyright-meta">Authorship: </span>
+    <span class="post-copyright-info">
+      <a href="http://zivyou.github.io">zivyou</a>
+    </span>
+  </div>
+  <div class="post-copyright-type">
+    <span class="post-copyright-meta">Article Link: </span>
+    <span class="post-copyright-info">
+      <a href="http://zivyou.github.io/2021/07/25/The-GNU-linker/">http://zivyou.github.io/2021/07/25/The-GNU-linker/</a>
+    </span>
+  </div>
+  <div class="post-copyright-notice">
+    <span class="post-copyright-meta">Copyright: </span>
+    <span class="post-copyright-info">All posts on this blog are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> license unless otherwise stated. Please cite <a href="http://zivyou.github.io" target="_blank">zivyou</a> !</span>
+  </div>
+</div>
+
+  </div>
+</article>
+      </main>
+      <aside tabindex="-1">
+  
+  <div class="sidebar-block sidebar-sticky toc-wrap" tabindex="-1">
+    <div class="toc-btn">
+      <svg class="toc-btn-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z"></path>
+  <path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z"></path>
+</svg>
+    </div>
+    <div class="sidebar-title toc-title">Catalog</div>
+    <div class="sidebar-body">
+      <ul class="toc-list">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">使用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%80%89%E9%A1%B9"><span class="toc-number">2.1.</span> <span class="toc-text">命令行选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">2.2.</span> <span class="toc-text">环境变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5%E5%99%A8%E8%84%9A%E6%9C%AC"><span class="toc-number">3.</span> <span class="toc-text">链接器脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5%E5%99%A8%E8%84%9A%E6%9C%AC%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">3.1.</span> <span class="toc-text">链接器脚本的一些基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5%E5%99%A8%E8%84%9A%E6%9C%AC%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.2.</span> <span class="toc-text">链接器脚本格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E9%93%BE%E6%8E%A5%E5%99%A8%E8%84%9A%E6%9C%AC%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.3.</span> <span class="toc-text">简单的链接器脚本示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E9%93%BE%E6%8E%A5%E5%99%A8%E8%84%9A%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-number">3.4.</span> <span class="toc-text">简单的链接器脚本命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E7%A8%8B%E5%BA%8F%E5%85%A5%E5%8F%A3"><span class="toc-number">3.5.</span> <span class="toc-text">设置程序入口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-number">3.6.</span> <span class="toc-text">文件处理相关命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#obj%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-number">3.7.</span> <span class="toc-text">obj文件格式处理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E7%9A%84%E5%88%AB%E5%90%8D"><span class="toc-number">3.8.</span> <span class="toc-text">设置内存区域的别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84%E9%93%BE%E6%8E%A5%E5%99%A8%E8%84%9A%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-number">3.9.</span> <span class="toc-text">其他的链接器脚本命令</span></a></li></ol></li></ol>
+      </ul>
+    </div>
+  </div>
+  
+</aside>
+    </div>
+    
+    
+
+<footer class="footer main-width">
+  <div class="copyright">
+    &copy; 2020 - 2024
+    zivyou
+  </div>
+  <div class="framework-info">
+    <span>Framework</span>
+    <a href="https://hexo.io" target="_blank">Hexo</a>
+    <span class="footer-separator">|</span>
+    <span>Theme</span>
+    <a href="https://github.com/Lete114/hexo-theme-MengD" target="_blank">MengD</a>
+  </div>
+  
+  <div class="custom">A clean and lightweight Hexo theme</div>
+  
+</footer>
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+</body>
+
+</html>
