@@ -102,7 +102,7 @@ mermaid: ## mermaid url https://github.com/knsv/mermaid
 deploy:
   type: git
   repo: git@github.com:zivyou/zivyou.github.com.git
-  branch: main
+  branch: master
   
 search:
   path: search.json
