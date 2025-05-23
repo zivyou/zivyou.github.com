@@ -9,7 +9,7 @@
   <meta name="description" content="leetcode 131  字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：12345678910111213141516171819i从[a, s.size())：- 假如s.substr(a, i-a+1)不是回文串，i++继续寻找下一个；- 假如s.substr(a, i-a+1)是回文串，可以将s.substr(a, i-a+1)推">
 <meta property="og:type" content="article">
 <meta property="og:title" content="回溯搜索回文串">
-<meta property="og:url" content="http://zivyou.github.io/2020/06/29/%E5%9B%9E%E6%BA%AF%E6%90%9C%E7%B4%A2%E5%9B%9E%E6%96%87%E4%B8%B2/index.html">
+<meta property="og:url" content="https://zivyou.github.io/2020/06/29/%E5%9B%9E%E6%BA%AF%E6%90%9C%E7%B4%A2%E5%9B%9E%E6%96%87%E4%B8%B2/index.html">
 <meta property="og:site_name" content="zivyou">
 <meta property="og:description" content="leetcode 131  字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：12345678910111213141516171819i从[a, s.size())：- 假如s.substr(a, i-a+1)不是回文串，i++继续寻找下一个；- 假如s.substr(a, i-a+1)是回文串，可以将s.substr(a, i-a+1)推">
 <meta property="og:locale" content="zh_CN">
@@ -242,18 +242,18 @@
   <div class="post-copyright-author">
     <span class="post-copyright-meta">Authorship: </span>
     <span class="post-copyright-info">
-      <a href="http://zivyou.github.io">zivyou</a>
+      <a href="https://zivyou.github.io">zivyou</a>
     </span>
   </div>
   <div class="post-copyright-type">
     <span class="post-copyright-meta">Article Link: </span>
     <span class="post-copyright-info">
-      <a href="http://zivyou.github.io/2020/06/29/%E5%9B%9E%E6%BA%AF%E6%90%9C%E7%B4%A2%E5%9B%9E%E6%96%87%E4%B8%B2/">http://zivyou.github.io/2020/06/29/%E5%9B%9E%E6%BA%AF%E6%90%9C%E7%B4%A2%E5%9B%9E%E6%96%87%E4%B8%B2/</a>
+      <a href="https://zivyou.github.io/2020/06/29/%E5%9B%9E%E6%BA%AF%E6%90%9C%E7%B4%A2%E5%9B%9E%E6%96%87%E4%B8%B2/">https://zivyou.github.io/2020/06/29/%E5%9B%9E%E6%BA%AF%E6%90%9C%E7%B4%A2%E5%9B%9E%E6%96%87%E4%B8%B2/</a>
     </span>
   </div>
   <div class="post-copyright-notice">
     <span class="post-copyright-meta">Copyright: </span>
-    <span class="post-copyright-info">All posts on this blog are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> license unless otherwise stated. Please cite <a href="http://zivyou.github.io" target="_blank">zivyou</a> !</span>
+    <span class="post-copyright-info">All posts on this blog are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> license unless otherwise stated. Please cite <a href="https://zivyou.github.io" target="_blank">zivyou</a> !</span>
   </div>
 </div>
 
@@ -279,29 +279,29 @@
     <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/Tech/" style="color:#cdbdbd;font-size:1.796027446329039rem">Tech</a>
+      <a href="/tags/Tech/" style="color:#38f933;font-size:1.00941196312868rem">Tech</a>
       
-      <a href="/tags/Math/" style="color:#5b6428;font-size:0.7002551324029622rem">Math</a>
+      <a href="/tags/Math/" style="color:#2fd476;font-size:0.8618308908196548rem">Math</a>
       
-      <a href="/tags/tech/" style="color:#5a2ef6;font-size:1.4990050162319877rem">tech</a>
+      <a href="/tags/tech/" style="color:#b19a7d;font-size:0.6835304579854937rem">tech</a>
       
-      <a href="/tags/TODO/" style="color:#6ed106;font-size:0.9707898323426556rem">TODO</a>
+      <a href="/tags/TODO/" style="color:#852a2e;font-size:0.32589196775178886rem">TODO</a>
       
-      <a href="/tags/emotion/" style="color:#7edd7e;font-size:1.9991924739229199rem">emotion</a>
+      <a href="/tags/emotion/" style="color:#985b57;font-size:0.7286112128602236rem">emotion</a>
       
-      <a href="/tags/leetcode/" style="color:#92129f;font-size:1.723922417842493rem">leetcode</a>
+      <a href="/tags/leetcode/" style="color:#f9a133;font-size:0.20941251346176504rem">leetcode</a>
       
-      <a href="/tags/books/" style="color:#ab3fab;font-size:1.3483192576216676rem">books</a>
+      <a href="/tags/books/" style="color:#a9567f;font-size:0.29958524345444637rem">books</a>
       
-      <a href="/tags/thought/" style="color:#b4b142;font-size:1.442325980150907rem">thought</a>
+      <a href="/tags/thought/" style="color:#cbda4d;font-size:0.6861721820552322rem">thought</a>
       
-      <a href="/tags/math/" style="color:#482122;font-size:0.23076413312384636rem">math</a>
+      <a href="/tags/math/" style="color:#b8d45;font-size:1.9905187213454267rem">math</a>
       
-      <a href="/tags/EMOTION/" style="color:#4a260;font-size:1.606724698572723rem">EMOTION</a>
+      <a href="/tags/EMOTION/" style="color:#96a846;font-size:1.4360849556415212rem">EMOTION</a>
       
-      <a href="/tags/OS/" style="color:#63644a;font-size:1.9997134965220642rem">OS</a>
+      <a href="/tags/OS/" style="color:#f4e152;font-size:1.4075302994792813rem">OS</a>
       
-      <a href="/tags/TECH/" style="color:#71c865;font-size:0.36092272405234693rem">TECH</a>
+      <a href="/tags/TECH/" style="color:#fffb78;font-size:0.4247370935605619rem">TECH</a>
       
     </div>
   </div>

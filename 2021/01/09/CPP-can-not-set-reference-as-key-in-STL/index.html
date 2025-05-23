@@ -9,7 +9,7 @@
   <meta name="description" content="在写图的算法，尝试将Node&#x2F;Edge的对象作为key存入unordered_map，发现一系列问题。首先，如果要追求1std::unordered_map&lt;Node, int&gt; data; 这种写法(类似Java的那种风格)，得做两件事情:  为Node类型重载 &#x3D;&#x3D; 运算符，如果不愿意，可以选择未Node类型实现 () 运算符; 实现一个自定义的供Node类型使用的hash方法，比">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++ can not set reference as key in STL">
-<meta property="og:url" content="http://zivyou.github.io/2021/01/09/CPP-can-not-set-reference-as-key-in-STL/index.html">
+<meta property="og:url" content="https://zivyou.github.io/2021/01/09/CPP-can-not-set-reference-as-key-in-STL/index.html">
 <meta property="og:site_name" content="zivyou">
 <meta property="og:description" content="在写图的算法，尝试将Node&#x2F;Edge的对象作为key存入unordered_map，发现一系列问题。首先，如果要追求1std::unordered_map&lt;Node, int&gt; data; 这种写法(类似Java的那种风格)，得做两件事情:  为Node类型重载 &#x3D;&#x3D; 运算符，如果不愿意，可以选择未Node类型实现 () 运算符; 实现一个自定义的供Node类型使用的hash方法，比">
 <meta property="og:locale" content="zh_CN">
@@ -268,18 +268,18 @@
   <div class="post-copyright-author">
     <span class="post-copyright-meta">Authorship: </span>
     <span class="post-copyright-info">
-      <a href="http://zivyou.github.io">zivyou</a>
+      <a href="https://zivyou.github.io">zivyou</a>
     </span>
   </div>
   <div class="post-copyright-type">
     <span class="post-copyright-meta">Article Link: </span>
     <span class="post-copyright-info">
-      <a href="http://zivyou.github.io/2021/01/09/CPP-can-not-set-reference-as-key-in-STL/">http://zivyou.github.io/2021/01/09/CPP-can-not-set-reference-as-key-in-STL/</a>
+      <a href="https://zivyou.github.io/2021/01/09/CPP-can-not-set-reference-as-key-in-STL/">https://zivyou.github.io/2021/01/09/CPP-can-not-set-reference-as-key-in-STL/</a>
     </span>
   </div>
   <div class="post-copyright-notice">
     <span class="post-copyright-meta">Copyright: </span>
-    <span class="post-copyright-info">All posts on this blog are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> license unless otherwise stated. Please cite <a href="http://zivyou.github.io" target="_blank">zivyou</a> !</span>
+    <span class="post-copyright-info">All posts on this blog are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> license unless otherwise stated. Please cite <a href="https://zivyou.github.io" target="_blank">zivyou</a> !</span>
   </div>
 </div>
 
@@ -305,29 +305,29 @@
     <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/Tech/" style="color:#a1d97d;font-size:1.788251280343656rem">Tech</a>
+      <a href="/tags/Tech/" style="color:#2f3b55;font-size:1.1105758915975632rem">Tech</a>
       
-      <a href="/tags/Math/" style="color:#aa7475;font-size:0.3938270779102129rem">Math</a>
+      <a href="/tags/Math/" style="color:#c17d97;font-size:1.4360346725047375rem">Math</a>
       
-      <a href="/tags/tech/" style="color:#345695;font-size:0.0028705656310807903rem">tech</a>
+      <a href="/tags/tech/" style="color:#99ba2f;font-size:0.5043831905146008rem">tech</a>
       
-      <a href="/tags/TODO/" style="color:#fc09a2;font-size:0.4552094396913162rem">TODO</a>
+      <a href="/tags/TODO/" style="color:#c02e1;font-size:0.848131924878337rem">TODO</a>
       
-      <a href="/tags/emotion/" style="color:#68ef34;font-size:0.25545226233216267rem">emotion</a>
+      <a href="/tags/emotion/" style="color:#8ab9eb;font-size:0.48412391148228684rem">emotion</a>
       
-      <a href="/tags/leetcode/" style="color:#70fb8a;font-size:0.6503860982732115rem">leetcode</a>
+      <a href="/tags/leetcode/" style="color:#c0b998;font-size:0.7608191037312357rem">leetcode</a>
       
-      <a href="/tags/books/" style="color:#c82279;font-size:1.9185966090644326rem">books</a>
+      <a href="/tags/books/" style="color:#c3ca1e;font-size:1.1848328607168375rem">books</a>
       
-      <a href="/tags/thought/" style="color:#d0b18;font-size:1.0178443145389053rem">thought</a>
+      <a href="/tags/thought/" style="color:#7621cf;font-size:0.8288596976241518rem">thought</a>
       
-      <a href="/tags/math/" style="color:#f83d55;font-size:1.148430087174614rem">math</a>
+      <a href="/tags/math/" style="color:#b07d8c;font-size:0.9391707501610549rem">math</a>
       
-      <a href="/tags/EMOTION/" style="color:#90d527;font-size:1.6928579458234285rem">EMOTION</a>
+      <a href="/tags/EMOTION/" style="color:#d282c3;font-size:0.16860765137518818rem">EMOTION</a>
       
-      <a href="/tags/OS/" style="color:#a94281;font-size:1.7144459882979386rem">OS</a>
+      <a href="/tags/OS/" style="color:#59a876;font-size:0.4365726670844583rem">OS</a>
       
-      <a href="/tags/TECH/" style="color:#d67db2;font-size:0.20957138376432027rem">TECH</a>
+      <a href="/tags/TECH/" style="color:#8f14a;font-size:0.9801508019810146rem">TECH</a>
       
     </div>
   </div>

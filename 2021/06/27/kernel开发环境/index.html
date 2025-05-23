@@ -9,7 +9,7 @@
   <meta name="description" content="编译就是常规的make menuconfig&#x2F; make &#x2F; make bzImage套路，最终生成一个bzImage镜像文件  制作根文件系统略有一些复杂：   创建一个目录x 将一些要放入根文件系统的工具编译好，放入x目录中。通常是一些系统启动前需要使用的工具 将x目录用cpio指令打包成一个img文件：  find . | cpio -o -Hnewc | gzip -9 &gt; y.i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kernel开发环境">
-<meta property="og:url" content="http://zivyou.github.io/2021/06/27/kernel%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/index.html">
+<meta property="og:url" content="https://zivyou.github.io/2021/06/27/kernel%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/index.html">
 <meta property="og:site_name" content="zivyou">
 <meta property="og:description" content="编译就是常规的make menuconfig&#x2F; make &#x2F; make bzImage套路，最终生成一个bzImage镜像文件  制作根文件系统略有一些复杂：   创建一个目录x 将一些要放入根文件系统的工具编译好，放入x目录中。通常是一些系统启动前需要使用的工具 将x目录用cpio指令打包成一个img文件：  find . | cpio -o -Hnewc | gzip -9 &gt; y.i">
 <meta property="og:locale" content="zh_CN">
@@ -231,18 +231,18 @@
   <div class="post-copyright-author">
     <span class="post-copyright-meta">Authorship: </span>
     <span class="post-copyright-info">
-      <a href="http://zivyou.github.io">zivyou</a>
+      <a href="https://zivyou.github.io">zivyou</a>
     </span>
   </div>
   <div class="post-copyright-type">
     <span class="post-copyright-meta">Article Link: </span>
     <span class="post-copyright-info">
-      <a href="http://zivyou.github.io/2021/06/27/kernel%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">http://zivyou.github.io/2021/06/27/kernel%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</a>
+      <a href="https://zivyou.github.io/2021/06/27/kernel%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">https://zivyou.github.io/2021/06/27/kernel%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</a>
     </span>
   </div>
   <div class="post-copyright-notice">
     <span class="post-copyright-meta">Copyright: </span>
-    <span class="post-copyright-info">All posts on this blog are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> license unless otherwise stated. Please cite <a href="http://zivyou.github.io" target="_blank">zivyou</a> !</span>
+    <span class="post-copyright-info">All posts on this blog are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> license unless otherwise stated. Please cite <a href="https://zivyou.github.io" target="_blank">zivyou</a> !</span>
   </div>
 </div>
 
@@ -268,29 +268,29 @@
     <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/Tech/" style="color:#d3fa23;font-size:0.0742943998679726rem">Tech</a>
+      <a href="/tags/Tech/" style="color:#843c7d;font-size:1.2956337839658327rem">Tech</a>
       
-      <a href="/tags/Math/" style="color:#6f349;font-size:0.22272016475899248rem">Math</a>
+      <a href="/tags/Math/" style="color:#50b3f0;font-size:1.9476840609329384rem">Math</a>
       
-      <a href="/tags/tech/" style="color:#5bab26;font-size:0.40786443941027173rem">tech</a>
+      <a href="/tags/tech/" style="color:#952387;font-size:0.7480412012149609rem">tech</a>
       
-      <a href="/tags/TODO/" style="color:#cc1e42;font-size:0.9194792635813456rem">TODO</a>
+      <a href="/tags/TODO/" style="color:#b92ad4;font-size:0.057430954462946104rem">TODO</a>
       
-      <a href="/tags/emotion/" style="color:#e06137;font-size:1.8172162745996658rem">emotion</a>
+      <a href="/tags/emotion/" style="color:#bd212d;font-size:1.813189106462267rem">emotion</a>
       
-      <a href="/tags/leetcode/" style="color:#ad01fa;font-size:1.5661758313767717rem">leetcode</a>
+      <a href="/tags/leetcode/" style="color:#5c6cff;font-size:0.6898836905232493rem">leetcode</a>
       
-      <a href="/tags/books/" style="color:#612f6d;font-size:1.5315772121464515rem">books</a>
+      <a href="/tags/books/" style="color:#5dc76c;font-size:0.02108264643043878rem">books</a>
       
-      <a href="/tags/thought/" style="color:#fc8f69;font-size:1.5050728247878151rem">thought</a>
+      <a href="/tags/thought/" style="color:#230658;font-size:0.2143080782659057rem">thought</a>
       
-      <a href="/tags/math/" style="color:#70354a;font-size:0.42879450921313644rem">math</a>
+      <a href="/tags/math/" style="color:#65e0f6;font-size:1.8114830491252665rem">math</a>
       
-      <a href="/tags/EMOTION/" style="color:#59332d;font-size:0.268421006891832rem">EMOTION</a>
+      <a href="/tags/EMOTION/" style="color:#bc8af1;font-size:0.9662742921885088rem">EMOTION</a>
       
-      <a href="/tags/OS/" style="color:#529278;font-size:0.39270597934202867rem">OS</a>
+      <a href="/tags/OS/" style="color:#3e6cbb;font-size:1.0669061665615907rem">OS</a>
       
-      <a href="/tags/TECH/" style="color:#a36ec8;font-size:1.3619032497241754rem">TECH</a>
+      <a href="/tags/TECH/" style="color:#fd8611;font-size:0.37583715194033385rem">TECH</a>
       
     </div>
   </div>
