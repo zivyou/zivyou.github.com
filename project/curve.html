@@ -1,18 +1,289 @@
-{% extends "_layout.swig" %}
+<!DOCTYPE html>
+<head>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+  
+  <title>zivyou</title>
+  <link rel="shortcut icon" href="/img/favicon.ico">
+  <meta name="description" content="var c &#x3D; document.getElementById(&#39;c&#39;); var	ctx &#x3D; c.getContext(&#39;2d&#39;); var t &#x3D; 0;  var x &#x3D; 250; var y &#x3D; 250;    function draw(){     try {         var preX &#x3D; x;         var preY &#x3D; y;         for (va">
+<meta property="og:type" content="website">
+<meta property="og:title" content="zivyou">
+<meta property="og:url" content="https://zivyou.github.io/project/curve.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="var c &#x3D; document.getElementById(&#39;c&#39;); var	ctx &#x3D; c.getContext(&#39;2d&#39;); var t &#x3D; 0;  var x &#x3D; 250; var y &#x3D; 250;    function draw(){     try {         var preX &#x3D; x;         var preY &#x3D; y;         for (va">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-13T14:51:59.330Z">
+<meta property="article:modified_time" content="2023-06-13T14:51:59.330Z">
+<meta property="article:author" content="zivyou">
+<meta name="twitter:card" content="summary">
+  
+<link rel="stylesheet" href="/css/style.css">
 
-{% block title %} {{ page.title }} - {{ config.title }} {% endblock %}
+  
+  
+  
+<script src="/js/image-preview.js" defer></script>
 
-{% block content %}
-    <div id="primary">
-        <article class="post">
-            <header class="post-header">
-                <h1 class="post-title">
-                    {{ page.title }}
-                </h1>
-            </header>
-            <div class="post-content">
-                {{ page.content }}
+  
+  
+<script src="/js/main.js" defer></script>
+
+  
+<meta name="generator" content="Hexo 7.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<html>
+
+<body>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <header class="user-select">
+  <div class="header-container-wrap">
+    <div class="header-container">
+      
+      
+      
+      <style>
+        .logo>* {
+          width:auto;height:4rem;border-radius:50%;;
+        }
+      </style>
+      
+      <a href="/" class="logo">
+        <img data-src="/img/logo.gif" / src=/img/load.gif>
+      </a>
+      
+      <nav>
+        
+        <div class="search" tabindex="-1">
+          <input class="search-input" placeholder="Search for articles" type="search" maxlength="64">
+          <div class="seach-icon-container">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"></path>
+</svg>
+          </div>
+          <div class="search-history">
+            <div class="search-history-title">
+              <span>Search for History</span>
+              <span class="search-history-clear">Clear</span>
             </div>
-        </article>
+            <div class="search-history-list"></div>
+          </div>
+          <div class="search-result"></div>
+          
+<script src="/js/search.js" path="&#x2F;search.json" defer></script>
+
+        </div>
+        
+
+        
+        
+        <ul class="nav-list">
+          
+          <li class="nav-list-item">
+            <a href="/">Home</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
+        </ul>
+        <div class="sidebar-nav" tabindex="-1">
+          <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
+  <path d="M3,11.335h16M3,6h16M3,16.67h16" transform="translate(-3-3.335)" stroke="currentColor" stroke-width="2" />
+</svg>
+          <div class="mask" tabindex="-1"></div>
+          <ul class="nav-list">
+            
+            <li class="nav-list-item">
+              <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
+            </li>
+            
+          </ul>
+        </div>
+        
+      </nav>
     </div>
-{% endblock %}
+  </div>
+</header>
+    <div class="main-wrap">
+      <main class="main-width">
+        
+        <h1 class="page-title">No Title</h1>
+        
+        <div class="page">
+<canvas id="c" width="500" height="500">
+</canvas>
+
+<script>
+var c = document.getElementById('c');
+var	ctx = c.getContext('2d');
+var t = 0;
+
+var x = 250;
+var y = 250;
+
+
+
+function draw(){
+    try {
+        var preX = x;
+        var preY = y;
+        for (var i=0; i<=t; i++){
+            var xx = 250+200*Math.sin(1/18*i);
+            var yy = 250+200*Math.sin(1/13*i);
+            ctx.beginPath();
+            ctx.moveTo(preX, preY);
+            ctx.lineTo(xx, yy);
+            ctx.stroke();
+
+            preX = xx;
+            preY = yy;
+        }
+    } 
+    catch (e) {
+    };
+}
+
+function clear(){
+    ctx.fillStyle = '#d0e7f9';
+	ctx.clearRect(0, 0, c.width, c.height);
+	ctx.beginPath();
+	ctx.rect(0, 0, c.width, c.height);
+	ctx.closePath();
+	ctx.fill();
+}
+
+var loop = function(){
+    clear();
+    t+=Math.PI/4.0;
+    if (t > 4000){
+        t = 0;
+        clear();
+    }
+
+
+    draw();
+    setTimeout(loop, 1000/10);
+}
+
+loop();
+</script>
+</div>
+      </main>
+      <aside tabindex="-1">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+
+  
+  
+  
+  <div class="sidebar-block tags-wrap">
+    <div class="sidebar-title tags-title">Tags</div>
+    <div class="sidebar-body">
+      
+      <a href="/tags/Tech/" style="color:#f045d2;font-size:1.4133385629174482rem">Tech</a>
+      
+      <a href="/tags/Math/" style="color:#967553;font-size:1.6773090252501395rem">Math</a>
+      
+      <a href="/tags/tech/" style="color:#266914;font-size:0.6869873173575347rem">tech</a>
+      
+      <a href="/tags/TODO/" style="color:#3b7254;font-size:0.8828323163251017rem">TODO</a>
+      
+      <a href="/tags/emotion/" style="color:#a35c1d;font-size:0.9931973642588572rem">emotion</a>
+      
+      <a href="/tags/leetcode/" style="color:#30fe63;font-size:1.3589942177526186rem">leetcode</a>
+      
+      <a href="/tags/books/" style="color:#6da4e5;font-size:1.642341869356673rem">books</a>
+      
+      <a href="/tags/thought/" style="color:#dde0af;font-size:1.2484330088639424rem">thought</a>
+      
+      <a href="/tags/math/" style="color:#8df90d;font-size:0.7948239962912766rem">math</a>
+      
+      <a href="/tags/EMOTION/" style="color:#93232a;font-size:1.6382468111607014rem">EMOTION</a>
+      
+      <a href="/tags/OS/" style="color:#4a2639;font-size:0.9710209144906838rem">OS</a>
+      
+      <a href="/tags/TECH/" style="color:#e36716;font-size:1.9368117831336789rem">TECH</a>
+      
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+  
+  
+  
+</aside>
+    </div>
+    
+    
+
+<footer class="footer main-width">
+  <div class="copyright">
+    &copy; 2020 - 2025
+    zivyou
+  </div>
+  <div class="framework-info">
+    <span>Framework</span>
+    <a href="https://hexo.io" target="_blank">Hexo</a>
+    <span class="footer-separator">|</span>
+    <span>Theme</span>
+    <a href="https://github.com/Lete114/hexo-theme-MengD" target="_blank">MengD</a>
+  </div>
+  
+  <div class="custom">A clean and lightweight Hexo theme</div>
+  
+</footer>
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+</body>
+
+</html>

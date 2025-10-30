@@ -1,15 +1,648 @@
-{% extends "_layout.swig" %}
-{% import '_macro/post.swig' as post_template %}
+<!DOCTYPE html>
+<head>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+  
+  <title>zivyou</title>
+  <link rel="shortcut icon" href="/img/favicon.ico">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="zivyou">
+<meta property="og:url" content="https://zivyou.github.io/page/2/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="zivyou">
+<meta name="twitter:card" content="summary">
+  
+<link rel="stylesheet" href="/css/style.css">
 
+  
+  
+  
+<script src="/js/main.js" defer></script>
 
-{% block title %} {{ config.title }} - {{ config.description }}{% endblock %}
+  
+<meta name="generator" content="Hexo 7.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<html>
 
-{% block content %}
-    <div id="primary" class="home">
-        {% for post in page.posts %}
-            {{ post_template.render(post) }}
-        {% endfor %}
-        {% include "_partial/pagination.swig" %}
+<body>
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <header class="user-select">
+  <div class="header-container-wrap">
+    <div class="header-container">
+      
+      
+      
+      <style>
+        .logo>* {
+          width:auto;height:4rem;border-radius:50%;;
+        }
+      </style>
+      
+      <a href="/" class="logo">
+        <img data-src="/img/logo.gif" / src=/img/load.gif>
+      </a>
+      
+      <nav>
+        
+        <div class="search" tabindex="-1">
+          <input class="search-input" placeholder="Search for articles" type="search" maxlength="64">
+          <div class="seach-icon-container">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"></path>
+</svg>
+          </div>
+          <div class="search-history">
+            <div class="search-history-title">
+              <span>Search for History</span>
+              <span class="search-history-clear">Clear</span>
+            </div>
+            <div class="search-history-list"></div>
+          </div>
+          <div class="search-result"></div>
+          
+<script src="/js/search.js" path="&#x2F;search.json" defer></script>
+
+        </div>
+        
+
+        
+        
+        <ul class="nav-list">
+          
+          <li class="nav-list-item">
+            <a href="/">Home</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/tags">Tags</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/todo">Todo</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/project">Project</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/archives">Archives</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a href="/about">About</a>
+          </li>
+          
+        </ul>
+        <div class="sidebar-nav" tabindex="-1">
+          <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
+  <path d="M3,11.335h16M3,6h16M3,16.67h16" transform="translate(-3-3.335)" stroke="currentColor" stroke-width="2" />
+</svg>
+          <div class="mask" tabindex="-1"></div>
+          <ul class="nav-list">
+            
+            <li class="nav-list-item">
+              <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/tags">Tags</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/todo">Todo</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/project">Project</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/archives">Archives</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a href="/about">About</a>
+            </li>
+            
+          </ul>
+        </div>
+        
+      </nav>
     </div>
-    {% include "_partial/widget.swig" %}
-{% endblock %}
+  </div>
+</header>
+    <div class="main-wrap">
+      <main class="main-width">
+        
+        <ul class="post-list">
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.01.19</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Tech/" class="post-tag-item">Tech</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/01/19/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E7%90%86%E8%AE%BA/" class="post-title" >有限状态机理论</a>
+        <a href="/2022/01/19/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E7%90%86%E8%AE%BA/" class="post-abstract">计算模型在计算理论中，FSM是一个计算模型。一个抽象的机器，这个机器在任何时候只能处于有限的几个状态;在某些特定的输入下，这个机器可以从一个状态切换到其他的状态; 这个切换过程称为transition;状态机可以由「一组状态」、「初始状态」、「触发每个transition的输入」唯一定义。FSM可以分成两大类: 确定性有限状态机 和 不确定性有限状态机。一个确定性有限状态机可以与任何一个非确...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>240</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.01.17</div>
+      <div class="post-tag">
+        
+        <a href="/tags/books/" class="post-tag-item">books</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/01/17/%E6%97%A7%E4%B9%A6%E6%96%B0%E8%AF%BB-%E3%80%8A%E5%A4%A7%E8%B1%A1-think-in-UML%E3%80%8B/" class="post-title" >旧书新读: 《大象-think in UML》</a>
+        <a href="/2022/01/17/%E6%97%A7%E4%B9%A6%E6%96%B0%E8%AF%BB-%E3%80%8A%E5%A4%A7%E8%B1%A1-think-in-UML%E3%80%8B/" class="post-abstract">why面向过程 VS. 面向对象面向对象与面向过程之争本质上是认识论的争论。书中提到说古希腊哲学家亚里士多德也思考过这个问题: 世界是过程还是对象?学术界也有关于这个面向对象思维认识论的讨论。1作者本人是认同这个世界的本质是由对象组成的，平时看上去相互无关的独立对象在不同的驱动力和规则下体现出不同的运动过程。而在面向过程的认知中，世界的一切都不是孤立的，他们互相紧密的联系在一起，缺一不可，互...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>2.5k</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>8min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.01.11</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Math/" class="post-tag-item">Math</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/01/11/fixed-point-and-recursive-sequence/" class="post-title" >不动点与递推数列</a>
+        <a href="/2022/01/11/fixed-point-and-recursive-sequence/" class="post-abstract">设数列 \{a_{n+1}\}存在递推公式a_{n+1}=f(a_{n})，求数列的通项公式。考察函数f(x),假设该函数存在不动点x_0，使得f(x_0)=x_0，则:有x=x_0 是函数 f(x)-x的一个解。如果函数f(x)-x_0是一个可以因式分解的函数，则x-x_0必定是方程f(x)-x_0=0的一个解。我们可以假设f(x)-x_0=A*(x-x_0)，接下来我们可以想办法求出这个...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>229</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2022.01.10</div>
+      <div class="post-tag">
+        
+        <a href="/tags/Math/" class="post-tag-item">Math</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2022/01/10/the-step-of-math/" class="post-title" >数学的天梯</a>
+        <a href="/2022/01/10/the-step-of-math/" class="post-abstract">古典数学算术基本几何分数、开方、幂笛卡尔坐标无理数变量、方程、函数基础数学初等代数斜率多项式矩阵复数、对数弧度三角函数圆锥曲线微积分参数方程数理统计微分最优化积分极坐标无穷级数多元微积分向量分析微分方程、偏微分方程散度、斯托克斯定理S-L问题张量矢量空间线性变换若尔当标准型特征值、特征向量收敛傅立叶级数拉普拉斯变换理论数学群论变分学实分析欧式空间密码学博弈论随机分析组合学随机分析复分析复变函...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>384</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2021.12.29</div>
+      <div class="post-tag">
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2021/12/29/SpringAnnotations/" class="post-title" >Spring中奇奇怪怪的注解</a>
+        <a href="/2021/12/29/SpringAnnotations/" class="post-abstract">@ImportSpring用来做配置的几个重要注解之一。@Import可以将一个被注解的类生成一个Bean并交给容器管理，从这一点上看，@Import有着和@Bean相似的功能，但是@Import的能力更大。它可以提供自定义的导入方式、导入条件，甚至可以动态修改导入的Bean的属性、类型等等。这个注解最早设计的时候，目标是为了替代远古时期的XML配置的Bean注入功能。类似于XML中的。后来...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>265</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2021.11.06</div>
+      <div class="post-tag">
+        
+        <a href="/tags/books/" class="post-tag-item">books</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2021/11/06/read-old-books-nodejs-c-addon/" class="post-title" >旧书新读-《nodejs:来一打C++扩展》</a>
+        <a href="/2021/11/06/read-old-books-nodejs-c-addon/" class="post-abstract">V8基础内存机制内存管理基本原理V8有自己的堆内存区域，并且有自己的堆管理策略。简单来说，V8将堆内存分成了下面几种区域：新生代内存区： 基本的数据对象都会被分配到这里，其特点是小而频繁。区域小但是垃圾回收频繁；新生代内存使用Scavenge算法进行回收：将新生代空间分成两部分，一部分为From，一部分为To。分配时总是从From空间中预留空间。在遇到GC时，V8会将From空间中存活的对象...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>1.4k</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>5min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2021.08.01</div>
+      <div class="post-tag">
+        
+        <a href="/tags/books/" class="post-tag-item">books</a>
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2021/08/01/%E6%97%A7%E4%B9%A6%E6%96%B0%E8%AF%BB-%E3%80%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB%E3%80%8B/" class="post-title" >旧书新读:《程序员的自我修养》</a>
+        <a href="/2021/08/01/%E6%97%A7%E4%B9%A6%E6%96%B0%E8%AF%BB-%E3%80%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB%E3%80%8B/" class="post-abstract">编译与链接编译过程预处理编译汇编链接编译器前端词法分析语法分析中间代码生成编译器后端代码生成目标代码优化目标文件格式格式分析工具.text section.data section / .rodata section.bss section自定义sectionELF文件格式文件头（File header）section表(section header table)重定位表(Relocatio...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>8.6k</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>36min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2021.07.25</div>
+      <div class="post-tag">
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2021/07/25/The-GNU-linker/" class="post-title" >The-GNU-linker</a>
+        <a href="/2021/07/25/The-GNU-linker/" class="post-abstract">简介使用方法命令行选项环境变量链接器脚本链接器脚本的一些基本概念链接器脚本格式简单的链接器脚本示例简单的链接器脚本命令设置程序入口文件处理相关命令obj文件格式处理命令设置内存区域的别名其他的链接器脚本命令GNU链接器作者： Steve Chamberlain, Ian Lance Taylor.   @Red Hat Inc简介ld链接器可以组合一组object文件和archive文件，重...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>7.3k</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>26min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2021.06.29</div>
+      <div class="post-tag">
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2021/06/29/using-as/" class="post-title" >using as</a>
+        <a href="/2021/06/29/using-as/" class="post-abstract">Translated by zivyou. All rights reserved.由zivyou翻译，保留所有权利。Using as(The GNU Assembly)概要obj文件格式语法预处理符号表达式常量字符常量字符串段(section)和重定位（relocation）链接器专属section汇编器专属sectionsub-sectionsbss section符号（Symbols）...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>26.3k</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>97min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+  <li class="post-item">
+    <div class="post-meta">
+      <div class="post-date">2021.06.27</div>
+      <div class="post-tag">
+        
+      </div>
+    </div>
+    <div class="post-content-wrap">
+      <div class="post-content">
+        
+        <a href="/2021/06/27/kernel%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="post-title" >kernel开发环境</a>
+        <a href="/2021/06/27/kernel%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="post-abstract">编译就是常规的make menuconfig/ make / make bzImage套路，最终生成一个bzImage镜像文件制作根文件系统略有一些复杂： 创建一个目录x将一些要放入根文件系统的工具编译好，放入x目录中。通常是一些系统启动前需要使用的工具将x目录用cpio指令打包成一个img文件：  find . | cpio -o -Hnewc | gzip -9 &amp;gt; y.img使用...</a>
+        <ul class="post-action-list">
+          
+          
+          <li class="post-action-item post-word">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>129</span>
+          </li>
+          
+          
+          <li class="post-action-item post-time">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>1min</span>
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      
+    </div>
+  </li>
+  
+</ul>
+      </main>
+      <aside tabindex="-1">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+
+  
+  
+  
+  <div class="sidebar-block tags-wrap">
+    <div class="sidebar-title tags-title">Tags</div>
+    <div class="sidebar-body">
+      
+      <a href="/tags/Tech/" style="color:#ef722b;font-size:0.8682310899192847rem">Tech</a>
+      
+      <a href="/tags/Math/" style="color:#5945bf;font-size:0.7372756974968127rem">Math</a>
+      
+      <a href="/tags/tech/" style="color:#668814;font-size:0.9280586970185847rem">tech</a>
+      
+      <a href="/tags/TODO/" style="color:#3554f0;font-size:0.31267581471075445rem">TODO</a>
+      
+      <a href="/tags/emotion/" style="color:#2a3bb4;font-size:1.633768278294696rem">emotion</a>
+      
+      <a href="/tags/leetcode/" style="color:#283b47;font-size:0.30427142962513365rem">leetcode</a>
+      
+      <a href="/tags/books/" style="color:#8cf822;font-size:0.527847507599891rem">books</a>
+      
+      <a href="/tags/thought/" style="color:#e8cdd;font-size:0.06696755211348648rem">thought</a>
+      
+      <a href="/tags/math/" style="color:#aaf830;font-size:1.952381696135951rem">math</a>
+      
+      <a href="/tags/EMOTION/" style="color:#4aefb3;font-size:0.4917320143189561rem">EMOTION</a>
+      
+      <a href="/tags/OS/" style="color:#ff5ca6;font-size:0.628245489466476rem">OS</a>
+      
+      <a href="/tags/TECH/" style="color:#54583b;font-size:0.4134813667549637rem">TECH</a>
+      
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+  
+  
+  
+</aside>
+    </div>
+    
+<div class="pagination main-width user-select">
+  
+  <a class="extend prev" rel="prev" href="/">
+        <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+          <path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z" />
+        </svg>
+        </a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">
+        <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+          <path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z" />
+        </svg>
+        </a>
+</div>
+
+    
+
+<footer class="footer main-width">
+  <div class="copyright">
+    &copy; 2020 - 2025
+    zivyou
+  </div>
+  <div class="framework-info">
+    <span>Framework</span>
+    <a href="https://hexo.io" target="_blank">Hexo</a>
+    <span class="footer-separator">|</span>
+    <span>Theme</span>
+    <a href="https://github.com/Lete114/hexo-theme-MengD" target="_blank">MengD</a>
+  </div>
+  
+  <div class="custom">A clean and lightweight Hexo theme</div>
+  
+</footer>
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+</body>
+
+</html>
