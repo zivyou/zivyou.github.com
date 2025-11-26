@@ -17,7 +17,7 @@
 
 
 
-  <meta name="keywords" content="leetcode," />
+  <meta name="keywords" content=",,,,,,,," />
 
 
 
@@ -32,13 +32,13 @@
 
 
 
-<link rel="canonical" href="https://zivyou.github.io/2020/07/02/leetcode-cn-377/"/>
+<link rel="canonical" href="https://zivyou.github.io/bak/leetcode-cn-377.html"/>
 
 
 <meta name="description" content="12345678910111213141516171819202122class Solution &#123;private:  map&lt;int, int&gt; m;public:    int combinationSum4(vector&lt;int&gt;&amp; nums, int target) &#123;      unsigned int re[target+1];">
-<meta property="og:type" content="article">
+<meta property="og:type" content="website">
 <meta property="og:title" content="leetcode-cn-377">
-<meta property="og:url" content="https://zivyou.github.io/2020/07/02/leetcode-cn-377/index.html">
+<meta property="og:url" content="https://zivyou.github.io/bak/leetcode-cn-377.html">
 <meta property="og:site_name" content="zivyou">
 <meta property="og:description" content="12345678910111213141516171819202122class Solution &#123;private:  map&lt;int, int&gt; m;public:    int combinationSum4(vector&lt;int&gt;&amp; nums, int target) &#123;      unsigned int re[target+1];">
 <meta property="og:locale" content="zh_CN">
@@ -132,30 +132,14 @@
       <div id="content">
         
     <div id="primary">
-        
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          leetcode-cn-377
-        
-      </h1>
-
-      <time class="post-time">
-          7月 02 2020
-      </time>
-
-
-  
-
-
-    </header>
-
-
-
-    
+        <article class="post">
+            <header class="post-header">
+                <h1 class="post-title">
+                    leetcode-cn-377
+                </h1>
+            </header>
             <div class="post-content">
-            <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">  map&lt;int, int&gt; m;</span><br><span class="line">public:</span><br><span class="line">    int combinationSum4(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">      unsigned int re[target+1];</span><br><span class="line">      for (int i=0; i&lt;=target; i++) re[i] = 0;</span><br><span class="line">      int cur = 0;</span><br><span class="line">      while (cur ++ &lt; target) &#123;</span><br><span class="line">        bool found = false;</span><br><span class="line">        for (auto elem: nums) &#123;</span><br><span class="line">          if (elem &lt;= cur) &#123;</span><br><span class="line">            re[cur] += re[cur-elem];</span><br><span class="line">            if (elem == cur) found = true;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (found) re[cur]++;</span><br><span class="line">      &#125;</span><br><span class="line">      return re[target];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+                <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">  map&lt;int, int&gt; m;</span><br><span class="line">public:</span><br><span class="line">    int combinationSum4(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">      unsigned int re[target+1];</span><br><span class="line">      for (int i=0; i&lt;=target; i++) re[i] = 0;</span><br><span class="line">      int cur = 0;</span><br><span class="line">      while (cur ++ &lt; target) &#123;</span><br><span class="line">        bool found = false;</span><br><span class="line">        for (auto elem: nums) &#123;</span><br><span class="line">          if (elem &lt;= cur) &#123;</span><br><span class="line">            re[cur] += re[cur-elem];</span><br><span class="line">            if (elem == cur) found = true;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (found) re[cur]++;</span><br><span class="line">      &#125;</span><br><span class="line">      return re[target];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>坑很深的一道题：</p>
 <ol>
 <li>一开始的时候没有细想，直接上搜索：<br>search(nums, begin, target-nums[begin], count);<br>search(nums, begin+1, target-nums[begin], count);<br>search(nums, begin+1, target, count);<br>发现超时了，调试了一番，发现这种方法即使在target很小的时候，时间复杂度也十分惊人，可见是不可取的方法；</li>
@@ -165,57 +149,7 @@
 </ol>
 
             </div>
-          
-
-    
-      <footer class="post-footer">
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/leetcode/">leetcode</a>
-		  
-		</div>
-		
-
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2020/07/25/%E5%86%85%E5%B5%8C%E6%B1%87%E7%BC%96/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">内嵌汇编</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
-    
-    
-      <a class="next" href="/2020/06/29/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F/">
-        <span class="next-text nav-default">数据库范式</span>
-        <span class="prev-text nav-mobile">下一篇</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
-
-        
-  <div class="comments" id="comments">
-    
-    <div style="text-align:center;">
-        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
-    </div>
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
-  </div>
-
-
-      </footer>
-    
-  </article>
-
+        </article>
     </div>
 
       </div>
@@ -244,7 +178,7 @@
 
 <script type="text/javascript">
   var disqus_shortname = 'zivyou';
-  var disqus_identifier = '2020/07/02/leetcode-cn-377/';
+  var disqus_identifier = 'bak/leetcode-cn-377.html';
 
   var disqus_title = "leetcode-cn-377";
 

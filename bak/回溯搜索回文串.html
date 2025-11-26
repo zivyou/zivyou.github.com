@@ -17,7 +17,7 @@
 
 
 
-  <meta name="keywords" content="leetcode," />
+  <meta name="keywords" content=",,,,,,,," />
 
 
 
@@ -32,13 +32,13 @@
 
 
 
-<link rel="canonical" href="https://zivyou.github.io/2020/06/29/回溯搜索回文串/"/>
+<link rel="canonical" href="https://zivyou.github.io/bak/回溯搜索回文串.html"/>
 
 
 <meta name="description" content="leetcode 131  字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：12345678910111213141516171819i从[a, s.size())：- 假如s.substr(a, i-a+1)不是回文串，i++继续寻找下一个；- 假如s.substr(a, i-a+1)是回文串，可以将s.substr(a, i-a+1)推">
-<meta property="og:type" content="article">
+<meta property="og:type" content="website">
 <meta property="og:title" content="回溯搜索回文串">
-<meta property="og:url" content="https://zivyou.github.io/2020/06/29/%E5%9B%9E%E6%BA%AF%E6%90%9C%E7%B4%A2%E5%9B%9E%E6%96%87%E4%B8%B2/index.html">
+<meta property="og:url" content="https://zivyou.github.io/bak/%E5%9B%9E%E6%BA%AF%E6%90%9C%E7%B4%A2%E5%9B%9E%E6%96%87%E4%B8%B2.html">
 <meta property="og:site_name" content="zivyou">
 <meta property="og:description" content="leetcode 131  字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：12345678910111213141516171819i从[a, s.size())：- 假如s.substr(a, i-a+1)不是回文串，i++继续寻找下一个；- 假如s.substr(a, i-a+1)是回文串，可以将s.substr(a, i-a+1)推">
 <meta property="og:locale" content="zh_CN">
@@ -132,87 +132,21 @@
       <div id="content">
         
     <div id="primary">
-        
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          回溯搜索回文串
-        
-      </h1>
-
-      <time class="post-time">
-          6月 29 2020
-      </time>
-
-
-  
-
-
-    </header>
-
-
-
-    
+        <article class="post">
+            <header class="post-header">
+                <h1 class="post-title">
+                    回溯搜索回文串
+                </h1>
+            </header>
             <div class="post-content">
-            <p>leetcode 131</p>
+                <p>leetcode 131</p>
 <ul>
 <li>字符串s, 假定前面的[0, a)都已经搜索过了，那么下面的[a, s.size())部分可以用这个策略：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">i从[a, s.size())：</span><br><span class="line">- 假如s.substr(a, i-a+1)不是回文串，i++继续寻找下一个；</span><br><span class="line">- 假如s.substr(a, i-a+1)是回文串，可以将s.substr(a, i-a+1)推入我们的临时搜索结果集中，然后递归搜索剩下的；但是有个问题，i的后面就没有其他的字串s.substr(a, k-a+1)是回文串了吗?</span><br><span class="line">  所以，在将s.substr(a, i-a+1)推入搜索结果集中，并调用递归进行剩下的搜索之后，还需要把s.substr(a, i-a+1)从临时结果集中弹出，让i++继续，寻找当前临时结果集下其他的可能回文串。</span><br><span class="line">  故：</span><br><span class="line">  </span><br><span class="line">  void search(vector&lt;vector&lt;string&gt;&gt; &amp;re, vector&lt;string&gt; tmpRe, string &amp;s, int a, int b)&#123;</span><br><span class="line">      if (a &gt;= b)&#123;</span><br><span class="line">          re.push_back(tmpRe);</span><br><span class="line">          return;</span><br><span class="line">      &#125;</span><br><span class="line">      for (int i=a; i&lt;=b; i++)&#123;</span><br><span class="line">          if (isPalindrome(s.substr(a, i-a+1)))&#123;</span><br><span class="line">              tmpRe.push_back(s.substr(a, i-a+1));</span><br><span class="line">              search(re, tmpRe, s, i+1, b);</span><br><span class="line">              tmpRe.pop_back();   // 这一步就是所谓的回溯</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 
             </div>
-          
-
-    
-      <footer class="post-footer">
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/leetcode/">leetcode</a>
-		  
-		</div>
-		
-
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2020/06/29/%E5%9B%9E%E6%BA%AF%E6%90%9C%E7%B4%A2%E7%9B%AE%E6%A0%87%E5%92%8C%E6%95%B0%E5%AD%97%E7%BB%84%E5%90%88/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">回溯搜索目标和数字组合</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
-    
-    
-      <a class="next" href="/2020/06/29/%E9%98%B6%E4%B9%98%E4%B8%AD%E6%9C%AB%E5%B0%BE%E8%BF%9E%E7%BB%AD0%E7%9A%84%E4%B8%AA%E6%95%B0/">
-        <span class="next-text nav-default">阶乘中末尾连续0的个数</span>
-        <span class="prev-text nav-mobile">下一篇</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
-
-        
-  <div class="comments" id="comments">
-    
-    <div style="text-align:center;">
-        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
-    </div>
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
-  </div>
-
-
-      </footer>
-    
-  </article>
-
+        </article>
     </div>
 
       </div>
@@ -241,7 +175,7 @@
 
 <script type="text/javascript">
   var disqus_shortname = 'zivyou';
-  var disqus_identifier = '2020/06/29/回溯搜索回文串/';
+  var disqus_identifier = 'bak/回溯搜索回文串.html';
 
   var disqus_title = "回溯搜索回文串";
 
