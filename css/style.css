@@ -526,15 +526,15 @@ h6 {
     width: 100%;
   }
 }
-.header {
-  padding: 20px 20px;
-}
 .header:before, .header:after {
   content: " ";
   display: table;
 }
 .header:after {
   clear: both;
+}
+.header {
+  padding: 20px 20px;
 }
 
 @media only screen and (max-width: 750px) {
@@ -690,7 +690,7 @@ h6 {
 }
 .post .post-content > table th, .post .post-content > table td {
   padding: 5px 15px;
-  border: 1px double #f0f0f0;
+  border: 1px double rgb(240.35, 240.35, 240.35);
   text-align: left;
 }
 .post .post-content code, .post .post-content pre {
@@ -720,7 +720,7 @@ h6 {
   font-size: 13px;
   font-weight: bold;
   color: #cacaca;
-  background: #f0f0f0;
+  background: rgb(240.35, 240.35, 240.35);
   content: "Code";
 }
 .post .post-content .highlight.html > ::after {
