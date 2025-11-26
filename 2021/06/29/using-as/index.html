@@ -343,7 +343,7 @@
 <p>Target picoJava 平台选项::<br>[-mb|-me]</p>
 <p>Target PowerPC 平台选项::<br>[-mpwrx|-mpwr2|-mpwr|-m601|-mppc|-mppc32|-m603|-m604|<br>-m403|-m405|-mppc64|-m620|-mppc64bridge|-mbooke|<br>-mbooke32|-mbooke64]<br>[-mcom|-many|-maltivec] [-memb]<br>[-mregnames|-mno-regnames]<br>[-mrelocatable|-mrelocatable-lib]<br>[-mlittle|-mlittle-endian|-mbig|-mbig-endian]<br>[-msolaris|-mno-solaris]</p>
 <p>Target SPARC 平台选项::<br>[-Av6|-Av7|-Av8|-Asparclet|-Asparclite<br>-Av8plus|-Av8plusa|-Av9|-Av9a]<br>[-xarch=v8plus|-xarch=v8plusa] [-bump]<br>[-32|-64]</p>
-<p>Target TIC54X 平台选项::<br>[-mcpu=54[123589]|-mcpu=54[56]lp] [-mfar-mode|-mf]<br>[-merrors-to-file <filename>|-me <filename>]</filename></filename></p>
+<p>Target TIC54X 平台选项::<br>[-mcpu=54[123589]|-mcpu=54[56]lp] [-mfar-mode|-mf]<br>[-merrors-to-file <filename>|-me <filename>]</p>
 <p>Target Xtensa 平台选项::<br>[–[no-]density] [–[no-]relax] [–[no-]generics]<br>[–[no-]text-section-literals]<br>[–[no-]target-align] [–[no-]longcalls]</p>
 <p>下面依次解释各个参数的含义：<br>-a[cdhlmns]<br>   可以以多种方式展开这个参数列表：<br>   -ac 忽略值为false的条件分支<br>   -ad 忽略debug指令<br>   -ah 包含高级语言的源代码<br>   -al 包含汇编代码<br>   -am 包含宏展开<br>   -an 包含格式处理<br>   -as 包含符号<br>   =file 设置文件列表名<br>  你可以组合使用这些选项。比如说，可以使用‘-aln’可以不启用格式处理来汇编一系列文件。如果使用了‘=file’这个选项，就必须保证这个选项是参数的最后一个。另外，‘-a’选项默认等于‘-alhs’选项。</p>
 <p>-D 这个选项会直接被忽略。这个选项只是为了在脚本中使用汇编器的时候可以兼容其他汇编器的语法。</p>
@@ -711,7 +711,7 @@
 <p>这个命令会影响后续list时候的页数，如果在当前页的前10行出现的时候，也会影响当前页的页数。</p>
 <h2 id="type"><a href="#type" class="headerlink" title=".type"></a>.type</h2><p>这个命令用来设置一个符号的类型。</p>
 <p>COFF版本：<br>对于COFF格式的文件，这个命令必须出现在.def/.endef命令对的中间。用起来时候像这样： .type int。类型的属性会以一个整数的形式存放在符号表中。<br>.type命令只对COFF文件格式有效，当生成b.out格式的时候，这个命令会直接被忽略。</p>
-<p>ELF版本：<br>对于ELF格式的文件，这个命令是这样使用的： .type name, type description。这个用法会将符号‘name’的类型设置成一个函数符号或者一个对象符号。参数”type description“有5种不同类型的语法(为了和其他的汇编器兼容):<br>.type <name>, #function<br>.type <name>, #object<br>.type &lt;name&gt;,@function<br>.type &lt;name&gt;,@object<br>.type <name>,%function<br>.type <name>,%object<br>.type <name>,”function”<br>.type <name>,”object”<br>.type <name>,STT_FUNCTION<br>.type <name>,STT_OBJECT</name></name></name></name></name></name></name></name></p>
+<p>ELF版本：<br>对于ELF格式的文件，这个命令是这样使用的： .type name, type description。这个用法会将符号‘name’的类型设置成一个函数符号或者一个对象符号。参数”type description“有5种不同类型的语法(为了和其他的汇编器兼容):<br>.type <name>, #function<br>.type <name>, #object<br>.type &lt;name&gt;,@function<br>.type &lt;name&gt;,@object<br>.type <name>,%function<br>.type <name>,%object<br>.type <name>,”function”<br>.type <name>,”object”<br>.type <name>,STT_FUNCTION<br>.type <name>,STT_OBJECT</p>
 <h2 id="uleb128-expressions"><a href="#uleb128-expressions" class="headerlink" title=".uleb128 expressions"></a>.uleb128 expressions</h2><p>uleb128的意思是： ‘unsigned little endian base 128’。</p>
 <h2 id="val-addr"><a href="#val-addr" class="headerlink" title=".val addr"></a>.val addr</h2><p>这个命令只能出现在.def/.endef命令对之间，参数‘addr’记录了符号表中符号的value属性所存放的地址。</p>
 <p>.val命令只能在COFF文件格式中使用 ，当as汇编器输出b.out格式文件的时候，这个命令会被忽略。</p>
