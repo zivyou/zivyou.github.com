@@ -3,6 +3,21 @@ title: vim代码索引与补全
 date: 2019-10-16 09:52:05
 tags: tech
 ---
+
+[TOC]
+<!-- vim-markdown-toc GFM -->
+
+* [目标](#目标)
+* [需要的插件](#需要的插件)
+* [language server](#language-server)
+* [步骤](#步骤)
+        * [1. 安装Vundle: git repo: https://github.com/VundleVim/Vundle.](#1-安装vundle-git-repo-httpsgithubcomvundlevimvundle)
+        * [2. .vimrc](#2-vimrc)
+        * [3. 装插件](#3-装插件)
+        * [4. 使用](#4-使用)
+
+<!-- vim-markdown-toc -->
+
 ## 目标
 实现C/C++/Objective-C, js/ts的代码索引、自动补全。
 使用LSP。YCM、Ctags之类的软件太古老了。

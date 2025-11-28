@@ -4,6 +4,14 @@ date: 2019-10-08 14:00:36
 tags: tech
 ---
 
+[TOC]
+<!-- vim-markdown-toc GFM -->
+
+* [常用命令 格式: /$cmd](#常用命令-格式-cmd)
+* [设定](#设定)
+
+<!-- vim-markdown-toc -->
+
 ## 常用命令 格式: /$cmd
 1. /help $cmd: 查看命令的手册
 2. /server add freenode8001 chat.freenode.net/8001  : 添加freenode:8001，并取名freenode8001
