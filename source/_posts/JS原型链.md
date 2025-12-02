@@ -1,7 +1,7 @@
 ---
 title: JS原型链
 date: 2020-06-27 21:57:40
-tags: Tech
+tags: TECH
 ---
 const foo = new Foo();
 ```

@@ -1,7 +1,7 @@
 ---
 title: 尝试electorn
 date: 2019-11-05 10:19:33
-tags: tech
+tags: TECH
 ---
 
 ## 安装依赖

@@ -1,7 +1,7 @@
 ---
 title: 数学的天梯 
 date: 2022-01-10 10:03:40
-tags: Math
+tags: MATH
 ---
 
 > 古典数学

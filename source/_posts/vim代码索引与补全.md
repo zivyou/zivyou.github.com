@@ -1,7 +1,7 @@
 ---
 title: vim代码索引与补全
 date: 2019-10-16 09:52:05
-tags: tech
+tags: TECH
 ---
 
 [TOC]

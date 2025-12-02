@@ -1,7 +1,7 @@
 ---
 title: weechat指南
 date: 2019-10-08 14:00:36
-tags: tech
+tags: TECH
 ---
 
 [TOC]

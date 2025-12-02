@@ -2,7 +2,7 @@
 ---
 title: DrunkardProblem
 date: 2018-10-24 11:09:08
-tags: Math
+tags: MATH
 ---
 
 -----------

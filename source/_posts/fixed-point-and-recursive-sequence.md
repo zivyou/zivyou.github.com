@@ -3,7 +3,7 @@ title: 不动点与递推数列
 date: 2022-01-11 10:03:38
 mathjax:
     enable: true
-tags: Math
+tags: MATH
 ---
 
 设数列 `$ \{a_{n+1}\} $`存在递推公式`$ a_{n+1}=f(a_{n}) $`，求数列的通项公式。

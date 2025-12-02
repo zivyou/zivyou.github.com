@@ -1,7 +1,7 @@
 ---
 title: 上分密码
 date: 2022-02-24 00:42:42
-tags: Tech
+tags: TECH
 ---
 
 计数

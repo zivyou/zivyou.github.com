@@ -1,7 +1,7 @@
 ---
 title: 'CRDT: 最终一致性'
 date: 2022-06-23 10:54:24
-tags: Tech
+tags: TECH
 ---
 
 > 挖个大坑，是一个有意思的课题

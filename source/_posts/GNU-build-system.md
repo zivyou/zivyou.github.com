@@ -1,7 +1,7 @@
 ---
 title: GNU build system
 date: 2021-03-18 21:11:12
-tags: Tech
+tags: TECH
 ---
 
 # GNU M4

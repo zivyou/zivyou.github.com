@@ -1,7 +1,7 @@
 ---
 title: C++ can not set reference as key in STL
 date: 2021-01-09 15:58:32
-tags: Tech
+tags: TECH
 ---
 
 在写图的算法，尝试将Node/Edge的对象作为key存入unordered_map，发现一系列问题。
