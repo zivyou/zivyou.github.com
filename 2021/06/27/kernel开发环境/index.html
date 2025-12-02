@@ -33,15 +33,15 @@
 <link rel="canonical" href="https://zivyou.github.io/2021/06/27/kernel开发环境/"/>
 
 
-<meta name="description" content="编译就是常规的make menuconfig&#x2F; make &#x2F; make bzImage套路，最终生成一个bzImage镜像文件  制作根文件系统略有一些复杂：   创建一个目录x 将一些要放入根文件系统的工具编译好，放入x目录中。通常是一些系统启动前需要使用的工具 将x目录用cpio指令打包成一个img文件：  find . | cpio -o -Hnewc | gzip -9 &gt; y.i">
+<meta name="description" content="编译就是常规的make menuconfig&#x2F; make &#x2F; make bzImage套路，最终生成一个bzImage镜像文件  制作根文件系统略有一些复杂：   创建一个目录x 将一些要放入根文件系统的工具编译好，放入x目录中。通常是一些系统启动前需要使用的工具(这些工具一般拷贝busybox的二进制可执行文件会比较简单) 将x目录用cpio指令打包成一个img文件：  find . | cp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kernel开发环境">
 <meta property="og:url" content="https://zivyou.github.io/2021/06/27/kernel%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/index.html">
 <meta property="og:site_name" content="zivyou">
-<meta property="og:description" content="编译就是常规的make menuconfig&#x2F; make &#x2F; make bzImage套路，最终生成一个bzImage镜像文件  制作根文件系统略有一些复杂：   创建一个目录x 将一些要放入根文件系统的工具编译好，放入x目录中。通常是一些系统启动前需要使用的工具 将x目录用cpio指令打包成一个img文件：  find . | cpio -o -Hnewc | gzip -9 &gt; y.i">
+<meta property="og:description" content="编译就是常规的make menuconfig&#x2F; make &#x2F; make bzImage套路，最终生成一个bzImage镜像文件  制作根文件系统略有一些复杂：   创建一个目录x 将一些要放入根文件系统的工具编译好，放入x目录中。通常是一些系统启动前需要使用的工具(这些工具一般拷贝busybox的二进制可执行文件会比较简单) 将x目录用cpio指令打包成一个img文件：  find . | cp">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-27T07:16:39.000Z">
-<meta property="article:modified_time" content="2024-06-29T12:30:26.608Z">
+<meta property="article:modified_time" content="2025-12-02T14:59:28.769Z">
 <meta property="article:author" content="zivyou">
 <meta name="twitter:card" content="summary">
 
@@ -158,7 +158,7 @@
 <li><p>制作根文件系统<br>略有一些复杂： </p>
 <ul>
 <li>创建一个目录x</li>
-<li>将一些要放入根文件系统的工具编译好，放入x目录中。通常是一些系统启动前需要使用的工具</li>
+<li>将一些要放入根文件系统的工具编译好，放入x目录中。通常是一些系统启动前需要使用的工具(这些工具一般拷贝busybox的二进制可执行文件会比较简单)</li>
 <li>将x目录用cpio指令打包成一个img文件：  find . | cpio -o -Hnewc | gzip -9 &gt; y.img</li>
 </ul>
 </li>

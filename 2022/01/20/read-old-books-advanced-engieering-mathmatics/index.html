@@ -35,15 +35,15 @@
 <link rel="canonical" href="https://zivyou.github.io/2022/01/20/read-old-books-advanced-engieering-mathmatics/"/>
 
 
-<meta name="description" content="线性空间 线性组合&#x2F;线性表出 线性相关 唯一线性表出定理 基 坐标 维度 基与坐标变换 欧式空间 子空间     线性代数应该怎么学? (ref: https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;311724817) 要学好线性代数，最重要的是抓住线性代数的主线。线性代数的主线就是线性空间以及线性映射，整个线性代数的概念公式定义定理都是围绕着线性空间以及线性映射展开的。你要做的，就">
+<meta name="description" content="[TOC]  线性空间 线性组合&#x2F;线性表出 线性相关 唯一线性表出定理 基 坐标 维度 基与坐标变换 欧式空间 子空间 子空间的张成 子空间基的扩充 子空间的交、和运算 子空间的和与张成 维数公式        线性代数应该怎么学? (ref: https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;311724817) 要学好线性代数，最重要的是抓住线性代数的主线。线性代数的主线就是线性空">
 <meta property="og:type" content="article">
 <meta property="og:title" content="旧书新读-《高等工程数学》">
 <meta property="og:url" content="https://zivyou.github.io/2022/01/20/read-old-books-advanced-engieering-mathmatics/index.html">
 <meta property="og:site_name" content="zivyou">
-<meta property="og:description" content="线性空间 线性组合&#x2F;线性表出 线性相关 唯一线性表出定理 基 坐标 维度 基与坐标变换 欧式空间 子空间     线性代数应该怎么学? (ref: https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;311724817) 要学好线性代数，最重要的是抓住线性代数的主线。线性代数的主线就是线性空间以及线性映射，整个线性代数的概念公式定义定理都是围绕着线性空间以及线性映射展开的。你要做的，就">
+<meta property="og:description" content="[TOC]  线性空间 线性组合&#x2F;线性表出 线性相关 唯一线性表出定理 基 坐标 维度 基与坐标变换 欧式空间 子空间 子空间的张成 子空间基的扩充 子空间的交、和运算 子空间的和与张成 维数公式        线性代数应该怎么学? (ref: https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;311724817) 要学好线性代数，最重要的是抓住线性代数的主线。线性代数的主线就是线性空">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-20T02:02:08.000Z">
-<meta property="article:modified_time" content="2024-06-29T12:30:26.608Z">
+<meta property="article:modified_time" content="2025-12-02T14:59:28.768Z">
 <meta property="article:author" content="zivyou">
 <meta property="article:tag" content="books">
 <meta name="twitter:card" content="summary">
@@ -178,7 +178,8 @@
 
     
             <div class="post-content">
-            <ul>
+            <p>[TOC]<br><!-- vim-markdown-toc GFM --></p>
+<ul>
 <li><a href="#线性空间">线性空间</a><ul>
 <li><a href="#线性组合线性表出">线性组合/线性表出</a></li>
 <li><a href="#线性相关">线性相关</a></li>
@@ -188,10 +189,18 @@
 <li><a href="#维度">维度</a></li>
 <li><a href="#基与坐标变换">基与坐标变换</a></li>
 <li><a href="#欧式空间">欧式空间</a></li>
-<li><a href="#子空间">子空间</a></li>
+<li><a href="#子空间">子空间</a><ul>
+<li><a href="#子空间的张成">子空间的张成</a></li>
+<li><a href="#子空间基的扩充">子空间基的扩充</a></li>
+<li><a href="#子空间的交和运算">子空间的交、和运算</a></li>
+<li><a href="#子空间的和与张成">子空间的和与张成</a></li>
+<li><a href="#维数公式">维数公式</a></li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+<!-- vim-markdown-toc -->
 <blockquote>
 <p>线性代数应该怎么学? (ref: <a href="https://www.zhihu.com/question/311724817">https://www.zhihu.com/question/311724817</a>)</p>
 <p>要学好线性代数，最重要的是抓住线性代数的主线。线性代数的主线就是线性空间以及线性映射，整个线性代数的概念公式定义定理都是围绕着线性空间以及线性映射展开的。你要做的，就是紧紧抓住这条主线，把线性代数的所有知识点串联起来，然后融会贯通，自然就能学好线性代数了。</p>
