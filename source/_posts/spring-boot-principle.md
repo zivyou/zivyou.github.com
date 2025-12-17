@@ -16,6 +16,7 @@ tags: TECH
     * [机制](#机制)
         * [SPI](#spi)
         * [自动装配](#自动装配)
+        * [配置](#配置)
 
 <!-- vim-markdown-toc -->
 
@@ -50,3 +51,15 @@ SpringBoot是如何做到让大部分的组件只需要一行配置引入后即�
 2. spring-boot-heatlh的内容:
 观察spring-boot-health的resource/META-INFO/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports中的内容,可以知道spring-boot-health是通过SPI机制提供了一系列的AutoConfiguration类, 这些类就是自动装配的入口了. 这里spring-boot-health暴露了很多AutoConfiguration类,这里我们看一个: HealthEndpointAutoConfiguration, 这个类是给我们的服务提供GET /actuator/heatlh/*接口的配置类. 
 HealthEndpointAutoConfiguration类的内容,就是自动装配设计的核心技术了,比如使用各种@ConditionOnXXX注解来声明类引入的约束, 这些约束/规则会最终确定SpringBoot内部会存在哪些Bean, 这也是「装配」一词的内涵.
+
+### 配置
+spring-boot中的配置变量可以有多种配置方式, 但是他们之间有优先级之分. 具体来说, 优先级从低到高依次为:
+1. java命令行'--'参数, 即在最后执行java -jar 时以--key=value的方式设定的参数. 优先级最高, 可以override其他所有的参数;
+2. 操作系统的环境变量: SPRING_DATASOURCE_URL会自动转换成spring.datasource.url变量;
+3. java命令行 '-D'参数: 比如java -Dspring.profiles.active=prod -jar app.jar;
+4. 外部的application-xxx.yaml: 一般额外设置application-xxx.yaml,都是用来在部署时通过spring.profiles.active手动激活使用的, 在激活后, application-xxx.yaml中变量会覆盖application.yaml中的变量;
+5. 外部的application.yaml: 比如应用服务外的config文件夹指定的application.yaml;
+6. 应用服务内部的application-xxx.yaml;
+7. 应用服务内的application.yaml;
+8. 应用服务内部通过@PropertySource注解执行的application.yaml;
+8. spring-boot框架内部设置的默认值;
