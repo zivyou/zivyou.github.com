@@ -1,3 +1,6 @@
 [submodule "themes/hexo-theme-mengd"]
 	path = themes/hexo-theme-mengd
 	url = git@github.com:zivyou/Hexo-Theme-MengD.git
+[submodule "themes/hexo-theme-polarbear"]
+	path = themes/hexo-theme-polarbear
+	url = https://github.com/zivyou/hexo-theme-polarbear.git
