@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="有限状态机理论"/>
+
+
+
+
+  <meta name="keywords" content="TECH," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zivyou" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://zivyou.github.io/2022/01/19/有限状态机理论/"/>
+
+
+<meta name="description" content="计算模型在计算理论中，FSM是一个计算模型。  一个抽象的机器，这个机器在任何时候只能处于有限的几个状态; 在某些特定的输入下，这个机器可以从一个状态切换到其他的状态; 这个切换过程称为transition;  状态机可以由「一组状态」、「初始状态」、「触发每个transition的输入」唯一定义。 FSM可以分成两大类: 确定性有限状态机 和 不确定性有限状态机。一个确定性有限状态机可以与任何一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有限状态机理论">
+<meta property="og:url" content="https://zivyou.github.io/2022/01/19/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E7%90%86%E8%AE%BA/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="计算模型在计算理论中，FSM是一个计算模型。  一个抽象的机器，这个机器在任何时候只能处于有限的几个状态; 在某些特定的输入下，这个机器可以从一个状态切换到其他的状态; 这个切换过程称为transition;  状态机可以由「一组状态」、「初始状态」、「触发每个transition的输入」唯一定义。 FSM可以分成两大类: 确定性有限状态机 和 不确定性有限状态机。一个确定性有限状态机可以与任何一">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-19T06:55:03.000Z">
+<meta property="article:modified_time" content="2026-02-01T07:32:48.364Z">
+<meta property="article:author" content="zivyou">
+<meta property="article:tag" content="TECH">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 有限状态机理论 - zivyou </title>
+  <meta name="generator" content="Hexo 7.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">zivyou</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about/me.html">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/project">
+                            
+                            
+                                Project
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          有限状态机理论
+        
+      </h1>
+
+      <time class="post-time">
+          1月 19 2022
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="计算模型"><a href="#计算模型" class="headerlink" title="计算模型"></a>计算模型</h1><p>在计算理论中，FSM是一个计算模型。</p>
+<ol>
+<li>一个抽象的机器，这个机器在任何时候只能处于有限的几个状态;</li>
+<li>在某些特定的输入下，这个机器可以从一个状态切换到其他的状态; 这个切换过程称为transition;</li>
+</ol>
+<p>状态机可以由「一组状态」、「初始状态」、「触发每个transition的输入」唯一定义。</p>
+<p>FSM可以分成两大类: 确定性有限状态机 和 不确定性有限状态机。一个确定性有限状态机可以与任何一个非确定性有限状态机在数学上同构。</p>
+<p>在理论计算领域内，FSM的计算能力是比其他的一些计算模型要低的。典型的，FSM比图灵机的计算能力要弱。</p>
+<blockquote>
+<p>「计算能力」如何衡量? 比如有一些任务，图灵机能做，但是FSM却做不了。</p>
+</blockquote>
+<h1 id="UML状态机"><a href="#UML状态机" class="headerlink" title="UML状态机"></a>UML状态机</h1>
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/TECH/">TECH</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2022/01/20/read-old-books-advanced-engieering-mathmatics/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">旧书新读-《高等工程数学》</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2022/01/17/%E6%97%A7%E4%B9%A6%E6%96%B0%E8%AF%BB-%E3%80%8A%E5%A4%A7%E8%B1%A1-think-in-UML%E3%80%8B/">
+        <span class="next-text nav-default">旧书新读: 《大象-think in UML》</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2026
+    <span class="footer-author">zivyou.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'zivyou';
+  var disqus_identifier = '2022/01/19/有限状态机理论/';
+
+  var disqus_title = "有限状态机理论";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

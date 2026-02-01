@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="spring-boot-principle"/>
+
+
+
+
+  <meta name="keywords" content="TECH," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zivyou" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://zivyou.github.io/2025/12/02/spring-boot-principle/"/>
+
+
+<meta name="description" content="Spring Boot Framework 语法 sealed&#x2F;non-sealed   概念 SpringApplication ApplicationContext   机制 SPI 自动装配 配置       Spring Boot Framework语法sealed&#x2F;non-sealedJava 17中新引入的关键字,可以翻译为密封类&#x2F;非密封类. 我们都知道, Java中有一个关键字f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring-boot-principle">
+<meta property="og:url" content="https://zivyou.github.io/2025/12/02/spring-boot-principle/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="Spring Boot Framework 语法 sealed&#x2F;non-sealed   概念 SpringApplication ApplicationContext   机制 SPI 自动装配 配置       Spring Boot Framework语法sealed&#x2F;non-sealedJava 17中新引入的关键字,可以翻译为密封类&#x2F;非密封类. 我们都知道, Java中有一个关键字f">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-02T02:46:10.000Z">
+<meta property="article:modified_time" content="2026-02-01T07:32:48.360Z">
+<meta property="article:author" content="zivyou">
+<meta property="article:tag" content="TECH">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> spring-boot-principle - zivyou </title>
+  <meta name="generator" content="Hexo 7.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">zivyou</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about/me.html">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/project">
+                            
+                            
+                                Project
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          spring-boot-principle
+        
+      </h1>
+
+      <time class="post-time">
+          12月 02 2025
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <!-- vim-markdown-toc GFM -->
+<ul>
+<li><a href="#spring-boot-framework">Spring Boot Framework</a><ul>
+<li><a href="#语法">语法</a><ul>
+<li><a href="#sealednon-sealed">sealed/non-sealed</a></li>
+</ul>
+</li>
+<li><a href="#概念">概念</a><ul>
+<li><a href="#springapplication">SpringApplication</a></li>
+<li><a href="#applicationcontext">ApplicationContext</a></li>
+</ul>
+</li>
+<li><a href="#机制">机制</a><ul>
+<li><a href="#spi">SPI</a></li>
+<li><a href="#自动装配">自动装配</a></li>
+<li><a href="#配置">配置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- vim-markdown-toc -->
+<h1 id="Spring-Boot-Framework"><a href="#Spring-Boot-Framework" class="headerlink" title="Spring Boot Framework"></a>Spring Boot Framework</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="sealed-non-sealed"><a href="#sealed-non-sealed" class="headerlink" title="sealed/non-sealed"></a>sealed/non-sealed</h3><p>Java 17中新引入的关键字,可以翻译为密封类/非密封类. 我们都知道, Java中有一个关键字final, 在修饰类时可以用来约束当前类不允许被其他类继承. 但是如果一个类允许被其他类继承,但是只能由某些子类继承,就需要使用sealed…permits语法了: 被sealed修饰的类, 只能被permits修饰的类继承, 同时,被permits修饰的类还必须在定义时声明自己是sealed、non-sealed还是final. 所以, 新引入的这个特性是在提供一种继承约束的能力.<br>这里面有一个问题: 被sealed修饰的类和被permits修饰的类需要互相引用,为了避免循环依赖问题,被sealed修饰的类和被permits修饰的类需要放在同一个包下.</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="SpringApplication"><a href="#SpringApplication" class="headerlink" title="SpringApplication"></a>SpringApplication</h3><p>SpringApplication完整包名为:org.springframework.boot.SpringApplication. 是SpringBoot源码定义的一个类. 主要功能是管理服务启动过程的整个生命周期. 核心方法为一个void run(String… args)方法, 里面会做一些环境变量加载和解析、ApplicationContext初始化、Bean构造、启动web server等等动作, 本质上是将之前古早时期需要手动做的动作给自动化了, 让整个Spring应用运行更轻松.</p>
+<h3 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h3><p>这是Spring框架定义的一个概念(不是SpringBoot框架), 也是我们常说的「容器」的概念的一种具体形式. 「容器』一词的标准定义应该是由interface org.springframework.beans.factory.BeanFactory定义的, 该interface定义了所有的Bean get/set方法.而ApplicatoinContext继承了BeanFactory接口: 是的, ApplicationContext自己也是一个interface, 除了BeanFactory定义的方法外, ApplicationContext还扩展了环境变量管理、MessageSource、事件机制等其他基础框架的功能. ApplicationContext的一个具体实现类为: org.springframework.context.support.GenericApplicationContext, 这个类聚合了DefaultListableBeanFactory, DefaultListableBeanFactory继承了AbstractAutowireCapableBeanFactory; AbstractAutowireCapableBeanFactory继承了AbstractBeanFactory; AbstractBeanFactoryFactory继承了BeanRegistrySupport; FactoryBeanRegistrySupport继承了DefaultSingletonBeanRegistry, DefaultSingletonBeanRegistry就是我们存储各个Bean单例对象的地方, 从源码可以看到,其实就是使用ConcurrentHashMap存储<name, Object>键值对. </p>
+<h2 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h2><h3 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h3><p>SPI(service provider interface), 是Java语言内置的一种「服务发现机制」.核心设计思想是服务调用方只提供接口定义和服务发现能力,来达成功能的模块化、插件化, 最终做到模块解耦的效果.<br>服务发现机制:</p>
+<ol>
+<li>接口实现方(也就是服务提供方)在包的META-INF/services/目录下创建配置文件(配置文件名是由接口定义方,也就是服务调用者定义的),里面写明提供某个接口的实现类是哪一个;</li>
+<li>调用调用方通过jdk提供的工具类:java.util.ServiceLoader来扫描已经加载的所有包中有哪些实现类;</li>
+</ol>
+<p>SpringBoot的SPI机制: Springboot使用SPI机制的方法与Java标准的SPI方式不太一样, 主要是SpringBoot框架加载接口的具体实现时,并不是从META-INF/services目录下加载, 通常META-INF/services目录下定义的配置文件名会是接口的全类名. SpringBoot选择将接口定义在META-INF/spring.factories文件中,这样做的原因主要有两个:(1) springboot自身定义的接口太多了,放在META-INF/services中有点乱;而spring.factories文件中使用key-value的形式定义了所有的实现类; (2) springboot单独实现了SPI的服务发现能力,因此定义在spirng.factories中的实现,不仅支持对interface的实现,也支持对抽象类的继承,甚至注解的继承.</p>
+<h3 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a>自动装配</h3><p>SpringBoot是如何做到让大部分的组件只需要一行配置引入后即可开箱即用呢?这就是SpringBoot自动装备机制提供的能力. 一般情况下, 我们可以引入一个spring-boot-starter-<em>包(一般官方的是这么命名) 或者</em>-spring-boot-starter包(一般非官方的是这么命名)来直接启用一个功能. 比如, 我们可以引入spring-boot-starter-actuator包,来启用GET /actuator/*等一系列系统运行时检查接口. 那么具体是怎么实现的呢?</p>
+<ol>
+<li>spring-boot-starter-actuator包的内容:<br>非常简单,里面没有任何Java代码,只有一个gradle依赖描述: spring-boot-starter-actuator会引用spring-boot-health这个包; (当然也会引用其他的几个包,我们这里只关心这一个);</li>
+<li>spring-boot-heatlh的内容:<br>观察spring-boot-health的resource/META-INFO/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports中的内容,可以知道spring-boot-health是通过SPI机制提供了一系列的AutoConfiguration类, 这些类就是自动装配的入口了. 这里spring-boot-health暴露了很多AutoConfiguration类,这里我们看一个: HealthEndpointAutoConfiguration, 这个类是给我们的服务提供GET /actuator/heatlh/*接口的配置类.<br>HealthEndpointAutoConfiguration类的内容,就是自动装配设计的核心技术了,比如使用各种@ConditionOnXXX注解来声明类引入的约束, 这些约束/规则会最终确定SpringBoot内部会存在哪些Bean, 这也是「装配」一词的内涵.</li>
+</ol>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>spring-boot中的配置变量可以有多种配置方式, 但是他们之间有优先级之分. 具体来说, 优先级从低到高依次为:</p>
+<ol>
+<li>java命令行’—‘参数, 即在最后执行java -jar 时以—key=value的方式设定的参数. 优先级最高, 可以override其他所有的参数;</li>
+<li>操作系统的环境变量: SPRING_DATASOURCE_URL会自动转换成spring.datasource.url变量;</li>
+<li>java命令行 ‘-D’参数: 比如java -Dspring.profiles.active=prod -jar app.jar;</li>
+<li>外部的application-xxx.yaml: 一般额外设置application-xxx.yaml,都是用来在部署时通过spring.profiles.active手动激活使用的, 在激活后, application-xxx.yaml中变量会覆盖application.yaml中的变量;</li>
+<li>外部的application.yaml: 比如应用服务外的config文件夹指定的application.yaml;</li>
+<li>应用服务内部的application-xxx.yaml;</li>
+<li>应用服务内的application.yaml;</li>
+<li>应用服务内部通过@PropertySource注解执行的application.yaml;</li>
+<li>spring-boot框架内部设置的默认值;</li>
+</ol>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/TECH/">TECH</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2025/12/02/my-k8s-handbook/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">my-k8s-handbook</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2025/06/19/learning-big-data/">
+        <span class="next-text nav-default">learning big data</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2026
+    <span class="footer-author">zivyou.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'zivyou';
+  var disqus_identifier = '2025/12/02/spring-boot-principle/';
+
+  var disqus_title = "spring-boot-principle";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

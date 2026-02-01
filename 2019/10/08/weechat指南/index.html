@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="weechat指南"/>
+
+
+
+
+  <meta name="keywords" content="TECH," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zivyou" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://zivyou.github.io/2019/10/08/weechat指南/"/>
+
+
+<meta name="description" content="[TOC]  常用命令 格式: &#x2F;$cmd 设定   常用命令 格式: &#x2F;$cmd &#x2F;help $cmd: 查看命令的手册 &#x2F;server add freenode8001 chat.freenode.net&#x2F;8001  : 添加freenode:8001，并取名freenode8001 &#x2F;connect freenode8001 username:mypassword: 使用用户名usernam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="weechat指南">
+<meta property="og:url" content="https://zivyou.github.io/2019/10/08/weechat%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="[TOC]  常用命令 格式: &#x2F;$cmd 设定   常用命令 格式: &#x2F;$cmd &#x2F;help $cmd: 查看命令的手册 &#x2F;server add freenode8001 chat.freenode.net&#x2F;8001  : 添加freenode:8001，并取名freenode8001 &#x2F;connect freenode8001 username:mypassword: 使用用户名usernam">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-10-08T06:00:36.000Z">
+<meta property="article:modified_time" content="2026-02-01T07:32:48.362Z">
+<meta property="article:author" content="zivyou">
+<meta property="article:tag" content="TECH">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> weechat指南 - zivyou </title>
+  <meta name="generator" content="Hexo 7.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">zivyou</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about/me.html">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/project">
+                            
+                            
+                                Project
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          weechat指南
+        
+      </h1>
+
+      <time class="post-time">
+          10月 08 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>[TOC]<br><!-- vim-markdown-toc GFM --></p>
+<ul>
+<li><a href="#常用命令-格式-cmd">常用命令 格式: /$cmd</a></li>
+<li><a href="#设定">设定</a></li>
+</ul>
+<!-- vim-markdown-toc -->
+<h2 id="常用命令-格式-cmd"><a href="#常用命令-格式-cmd" class="headerlink" title="常用命令 格式: /$cmd"></a>常用命令 格式: /$cmd</h2><ol>
+<li>/help $cmd: 查看命令的手册</li>
+<li>/server add freenode8001 chat.freenode.net/8001  : 添加freenode:8001，并取名freenode8001</li>
+<li>/connect freenode8001 username:mypassword: 使用用户名username连接到freenode:8001</li>
+<li>/list -re open*: 查看以open开头的聊天室(支持正则)</li>
+<li>/join #channel: 进入名为channel的channel</li>
+<li>/close: close a server</li>
+<li>/nick username: 使用昵称username</li>
+<li>/msg NickServ identify <em>**</em>: 输入用户名、密码，以空格相隔(相当于登录)</li>
+<li>Ctrl+n: switch between buffer</li>
+<li>Ctrl+x: switch between topic</li>
+<li>/part “a message” : leave a channel</li>
+<li>/Option+l: 纯显示聊天内容</li>
+<li>Ctrl+r: 历史命令搜索</li>
+<li>/window scroll 10/-10: buffer上下翻页</li>
+</ol>
+<h2 id="设定"><a href="#设定" class="headerlink" title="设定"></a>设定</h2><ol>
+<li>/set irc.server_default.nicks “nick1, nick2” :设定默认的登录昵称</li>
+<li>/set</li>
+<li>利用Alt+k来设定快捷键: /key bind (press Alt+k to get keys) (press your keys composite) /window scroll 1</li>
+</ol>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/TECH/">TECH</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/10/16/vim%E4%BB%A3%E7%A0%81%E7%B4%A2%E5%BC%95%E4%B8%8E%E8%A1%A5%E5%85%A8/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">vim代码索引与补全</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/08/20/hello-world/">
+        <span class="next-text nav-default">Hello World</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2026
+    <span class="footer-author">zivyou.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'zivyou';
+  var disqus_identifier = '2019/10/08/weechat指南/';
+
+  var disqus_title = "weechat指南";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

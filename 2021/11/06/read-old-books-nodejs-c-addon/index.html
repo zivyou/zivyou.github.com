@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="旧书新读-《nodejs:来一打C++扩展》"/>
+
+
+
+
+  <meta name="keywords" content="books," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zivyou" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://zivyou.github.io/2021/11/06/read-old-books-nodejs-c-addon/"/>
+
+
+<meta name="description" content="V8基础 内存机制 内存管理基本原理   隔离实例(Isolate) 句柄 句柄作用域（Handle Scope） 上下文 模版 数据类型 异常机制     V8基础内存机制内存管理基本原理V8有自己的堆内存区域，并且有自己的堆管理策略。简单来说，V8将堆内存分成了下面几种区域：  新生代内存区： 基本的数据对象都会被分配到这里，其特点是小而频繁。区域小但是垃圾回收频繁；新生代内存使用Scav">
+<meta property="og:type" content="article">
+<meta property="og:title" content="旧书新读-《nodejs:来一打C++扩展》">
+<meta property="og:url" content="https://zivyou.github.io/2021/11/06/read-old-books-nodejs-c-addon/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="V8基础 内存机制 内存管理基本原理   隔离实例(Isolate) 句柄 句柄作用域（Handle Scope） 上下文 模版 数据类型 异常机制     V8基础内存机制内存管理基本原理V8有自己的堆内存区域，并且有自己的堆管理策略。简单来说，V8将堆内存分成了下面几种区域：  新生代内存区： 基本的数据对象都会被分配到这里，其特点是小而频繁。区域小但是垃圾回收频繁；新生代内存使用Scav">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-06T11:22:38.000Z">
+<meta property="article:modified_time" content="2026-02-01T07:32:48.360Z">
+<meta property="article:author" content="zivyou">
+<meta property="article:tag" content="books">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 旧书新读-《nodejs:来一打C++扩展》 - zivyou </title>
+  <meta name="generator" content="Hexo 7.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">zivyou</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about/me.html">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/project">
+                            
+                            
+                                Project
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          旧书新读-《nodejs:来一打C++扩展》
+        
+      </h1>
+
+      <time class="post-time">
+          11月 06 2021
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <!-- vim-markdown-toc GFM -->
+<ul>
+<li><a href="#v8基础">V8基础</a><ul>
+<li><a href="#内存机制">内存机制</a><ul>
+<li><a href="#内存管理基本原理">内存管理基本原理</a></li>
+</ul>
+</li>
+<li><a href="#隔离实例isolate">隔离实例(Isolate)</a></li>
+<li><a href="#句柄">句柄</a></li>
+<li><a href="#句柄作用域handle-scope">句柄作用域（Handle Scope）</a></li>
+<li><a href="#上下文">上下文</a></li>
+<li><a href="#模版">模版</a></li>
+<li><a href="#数据类型">数据类型</a></li>
+<li><a href="#异常机制">异常机制</a></li>
+</ul>
+</li>
+</ul>
+<!-- vim-markdown-toc -->
+<h1 id="V8基础"><a href="#V8基础" class="headerlink" title="V8基础"></a>V8基础</h1><h2 id="内存机制"><a href="#内存机制" class="headerlink" title="内存机制"></a>内存机制</h2><h3 id="内存管理基本原理"><a href="#内存管理基本原理" class="headerlink" title="内存管理基本原理"></a>内存管理基本原理</h3><p>V8有自己的堆内存区域，并且有自己的堆管理策略。简单来说，V8将堆内存分成了下面几种区域：</p>
+<ul>
+<li>新生代内存区： 基本的数据对象都会被分配到这里，其特点是小而频繁。区域小但是垃圾回收频繁；<br>新生代内存使用Scavenge算法进行回收：将新生代空间分成两部分，一部分为From，一部分为To。分配时总是从From空间中预留空间。在遇到GC时，V8会将From空间中存活的对象复制到To空间中，剩下的不存活的对象会被直接释放。完成后交换From和To的角色。</li>
+<li>老生代指针区：指向老生代内存区具体数据内容的指针会被存在这里。从新生代蜕变过来的对象的指针会被放在这里；<br>老生代使用Mark-Sweep和Mark-Compact结合的机制进行垃圾回收。Mark-Sweep即标记删除法：先遍历老生代中的对象，将已经死亡的对象标记，之后统一进行清除。<br>在使用标记清除法进行操作的时候，很容易产生内存碎片问题。Mark-Compact就是一种改进后的方案，可以堆内存碎片进行整理。即先标记，然后在统一进行清除的时候，让活着的对象尽可能的向内存区域的头部进行对齐。</li>
+<li>老生代数据区：存放数据对象，而不是指向其他对象的指针。老生代指针区的指针就往这边指。</li>
+<li>大对象区：这里存放体积超越其他区大小的对象，每个对象都有自己的内存，垃圾回收机制并不会移动大对象；</li>
+<li>代码区：代码对象，也就是包含JIT之后指令的对象，会被分配在这里。这是唯一拥有执行权限的区域； </li>
+<li>Cell区、属性Cell区、Map区：存放Cell、属性Cell和Map，每个区域都是存放相同大小的元素，结构简单；<h2 id="隔离实例-Isolate"><a href="#隔离实例-Isolate" class="headerlink" title="隔离实例(Isolate)"></a>隔离实例(Isolate)</h2>一个引擎的实例称为一个isolate。可以理解为是V8引擎的一个实例，拥有完全独立的各种状态、堆管理、垃圾回收等等。<br>在一个实例中生成的对象无法在另一个实例中使用。<h2 id="句柄"><a href="#句柄" class="headerlink" title="句柄"></a>句柄</h2>句柄提供了对V8的堆内存的中JavaScript数据对象的一个引用。简单来说，句柄是一种包装过的指针，这种指针可以被V8的垃圾回收引擎识别，然后进行生命周期管理。<br>句柄有多种类型：</li>
+<li>本地句柄：v8::Local; 本地句柄存在于栈中，在对应的析构函数被调用的时候会销毁内存。其生命周期由其所在的句柄作用域决定。可以通过成员函数As()/Cast()进行强制类型转换。</li>
+<li>持久句柄：v8::Presistent；比较复杂，分为弱持久句柄（PresistentBase::SetWeak）、唯一持久句柄（v8::UniquePersistent&lt;&gt;）和一般持久句柄（v8::Persistent&lt;&gt;）;</li>
+<li>永生句柄：v8::Eternal; 永生句柄在整个程序的生命周期内都不会被删除，也就是说不会进行垃圾回收。<br>下面就是几种常见的句柄：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v8::Local&lt;v8::Number&gt;</span><br><span class="line">v8::Persistent&lt;v8::String&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="句柄作用域（Handle-Scope）"><a href="#句柄作用域（Handle-Scope）" class="headerlink" title="句柄作用域（Handle Scope）"></a>句柄作用域（Handle Scope）</h2>存在于栈空间中，是一个维护一堆句柄的容器。当一个句柄作用域被析构时，其容器内的所有句柄都会被析构。句柄作用域一个类似于栈帧的逻辑组织和使用。<h2 id="上下文"><a href="#上下文" class="headerlink" title="上下文"></a>上下文</h2>上下文是V8中JavaScript代码的执行环境。各个上下文是独立存在并且允许存在多个。即使在同一个隔离实例中，不同的上下文也是不想干的，可以执行各自的JavaScript代码。<br>在V8中，可以通过vm模块创建沙箱来执行一段JavaScript代码。也就是说，借助vm模块，可以自己定制上下文实例。<h2 id="模版"><a href="#模版" class="headerlink" title="模版"></a>模版</h2>在某个上下文中，创建JavaScript对象或者函数的一个原型。</li>
+<li>函数模版（FunctionTemplate）。可以通过函数模版的GetFunction()方法来获取其具体函数实例的句柄。这样获取的具体函数实例是可以被JavaScript代码直接识别和使用的。<br>函数模版的使用时候有一种特殊的情况，就是你设置了一个函数模版的实例，然后想让这个实例在JavaScript的世界中成为某一个类的构造函数。这是一个挺复杂的事情。在函数模版实例中，可以调用成员方法SetClassName()来设定‘当前函数为构造函数的情况下，new出来的对象是哪一个类的’。</li>
+<li>对象模版（ObjectTemplate）：对象模版用于在运行时创建对象。由于JavaScript的面向对象使用的是原型对象的模式，因此在对象模版中添加的属性，也会被创建出来的对象实例所继承。<br>我们回顾一下JavaScript的原型链：</li>
+</ul>
+<ol>
+<li>每个对象实例都有一个<strong>proto</strong>属性指向自己的原型对象；</li>
+<li>所有的函数都有一个prototype属性，指向自己的原型对象。这个原型对象就是以该函数作为构造函数new出来的对象的原型；</li>
+<li>函数也是一个对象，所以也有<strong>proto</strong>属性。特别的，所有函数的<strong>proto</strong>属性都指向Function.prototype，因为所有的函数看成对象的会都是由Function（）作为构造函数构造出来的对象。<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h2 id="异常机制"><a href="#异常机制" class="headerlink" title="异常机制"></a>异常机制</h2></li>
+</ol>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/books/">books</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2021/12/29/SpringAnnotations/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Spring中奇奇怪怪的注解</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2021/08/01/%E6%97%A7%E4%B9%A6%E6%96%B0%E8%AF%BB-%E3%80%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB%E3%80%8B/">
+        <span class="next-text nav-default">旧书新读:《程序员的自我修养》</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2026
+    <span class="footer-author">zivyou.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'zivyou';
+  var disqus_identifier = '2021/11/06/read-old-books-nodejs-c-addon/';
+
+  var disqus_title = "旧书新读-《nodejs:来一打C++扩展》";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

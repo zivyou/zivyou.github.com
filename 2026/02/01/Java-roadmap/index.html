@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="Java-roadmap"/>
+
+
+
+
+  <meta name="keywords" content="TECH," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zivyou" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://zivyou.github.io/2026/02/01/Java-roadmap/"/>
+
+
+<meta name="description" content="精通 Java 是一个从语言语法到生态系统，再到工程实践的渐进过程。通常可以划分为以下核心维度：一、语言根基（必须扎实）面向对象深化：不只是封装继承多态，还要理解抽象类 vs 接口的演进（Java 8+ 的默认方法）、内部类的内存泄漏风险、不可变对象设计集合框架源码：ArrayList&#x2F;HashMap 的扩容机制、ConcurrentHashMap 的分段锁演进、Fast-Fail 机制、 equ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java-roadmap">
+<meta property="og:url" content="https://zivyou.github.io/2026/02/01/Java-roadmap/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="精通 Java 是一个从语言语法到生态系统，再到工程实践的渐进过程。通常可以划分为以下核心维度：一、语言根基（必须扎实）面向对象深化：不只是封装继承多态，还要理解抽象类 vs 接口的演进（Java 8+ 的默认方法）、内部类的内存泄漏风险、不可变对象设计集合框架源码：ArrayList&#x2F;HashMap 的扩容机制、ConcurrentHashMap 的分段锁演进、Fast-Fail 机制、 equ">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-01T07:44:35.000Z">
+<meta property="article:modified_time" content="2026-02-01T07:45:26.389Z">
+<meta property="article:author" content="zivyou">
+<meta property="article:tag" content="TECH">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Java-roadmap - zivyou </title>
+  <meta name="generator" content="Hexo 7.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">zivyou</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about/me.html">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/project">
+                            
+                            
+                                Project
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Java-roadmap
+        
+      </h1>
+
+      <time class="post-time">
+          2月 01 2026
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>精通 Java 是一个从语言语法到生态系统，再到工程实践的渐进过程。通常可以划分为以下核心维度：<br>一、语言根基（必须扎实）<br>面向对象深化：不只是封装继承多态，还要理解抽象类 vs 接口的演进（Java 8+ 的默认方法）、内部类的内存泄漏风险、不可变对象设计<br>集合框架源码：ArrayList/HashMap 的扩容机制、ConcurrentHashMap 的分段锁演进、Fast-Fail 机制、 equals/hashCode 契约<br>异常体系：受检异常的设计哲学、异常链、try-with-resources 的语法糖原理<br>泛型与反射：类型擦除的边界、通配符的 PECS 原则、反射的性能开销与安全限制<br>新特性追踪：Lambda 与函数式接口、Stream API 的惰性求值、Optional 的正确使用姿势、Record 类、Pattern Matching、Virtual Threads（Project Loom）<br>二、JVM 原理（区分普通与精通的分水岭）<br>内存模型：JMM 的 happens-before 规则、volatile 的内存语义、对象头与指针压缩（Compressed Oops）<br>垃圾回收：CMS/G1/ZGC/Shenandoah 的算法差异、STW 的优化、GC 日志解读与调参实战<br>类加载机制：双亲委派的破坏（SPI/OSGi）、自定义类加载器、字节码增强（ASM/ByteBuddy/Javassist）<br>性能调优：JProfiler/Arthas 诊断、内存泄漏排查（MAT）、JIT 编译器的逃逸分析与内联优化<br>三、并发编程（高阶核心能力）<br>线程基础：线程状态机、中断机制、ThreadLocal 的内存泄漏（InheritableThreadLocal/TransmittableThreadLocal）<br>锁体系：synchronized 的锁升级（偏向→轻量→重量）、AQS 框架源码（ReentrantLock/CountDownLatch）、StampedLock 的乐观读<br>并发容器：ConcurrentHashMap/ConcurrentSkipListMap、BlockingQueue 的实现差异（Array vs Linked）<br>线程池：ThreadPoolExecutor 的 7 大参数、拒绝策略选型、动态线程池监控、ForkJoinPool 的工作窃取<br>异步编程：CompletableFuture 的组合编排、Reactive Streams（Project Reactor/RxJava）、响应式背压<br>四、框架与生态（工程落地）<br>Spring 全家桶：IoC 容器的循环依赖解决、AOP 的动态代理机制（JDK vs CGLIB）、事务传播行为、Spring Boot 的自动配置原理（@Conditional）<br>数据层：JPA 的持久化上下文、MyBatis 的 SQL 映射与插件机制、连接池（HikariCP 的高性能秘诀）、分库分表（ShardingSphere）<br>微服务：Spring Cloud 的服务注册发现（Consul/Nacos）、负载均衡（Ribbon/LoadBalancer）、熔断限流（Sentinel/Resilience4j）、分布式事务（Seata）<br>消息队列：Kafka/RocketMQ 的架构设计与 Java 客户端优化、事务消息、顺序消息、幂等消费<br>五、设计能力与架构思维<br>设计模式：不仅是 23 种模式的套用，而是理解 Spring 中的模式（工厂、代理、模板方法、观察者）、JDK 中的模式（装饰器 IO 流、迭代器）<br>SOLID 与重构：单一职责的边界、依赖倒置的实践、代码坏味道识别、单元测试（JUnit/Mockito/TDD）<br>DDD 领域驱动：聚合根设计、值对象、领域事件、防腐层（Anti-Corruption Layer）<br>系统架构：CAP 与 BASE 理论、分布式一致性（Raft/Paxos 的 Java 实现）、高并发架构设计（缓存策略、降级预案）<br>六、工具链与工程化<br>构建工具：Maven 的生命周期与插件机制、Gradle 的 DSL 与构建缓存、依赖冲突解决（仲裁机制）<br>调试诊断：JDWP 远程调试、jstack/jmap/jstat 命令行、线上热修复（Arthas redefine）<br>质量保障：SonarQube 静态扫描、SpotBugs、JaCoCo 覆盖率、CI/CD 流水线（Jenkins/GitHub Actions）<br>七、横向知识储备<br>数据结构与算法：不仅是 LeetCode，还有 Java 中的红黑树（TreeMap）、跳表（ConcurrentSkipListMap）、时间轮（Kafka 延迟队列）<br>网络编程：Netty 的 Reactor 模型、零拷贝（Zero-Copy）、拆包粘包处理、WebSocket 长连接管理<br>数据库原理：索引底层（B+树）、事务隔离级别实现（MVCC）、SQL 优化（执行计划分析）、连接池参数调优<br>学习建议路径<br>初级：语法熟练 → 能写 CRUD（Spring Boot + MyBatis）<br>中级：熟读集合/JUC 源码 → 能设计多线程方案 → 掌握 Spring 核心原理<br>高级：深入 JVM 调优 → 独立设计高并发系统 → 能自定义框架或中间件<br>检验标准：能否在不依赖框架的情况下，手写一个简易的 Web 服务器（基于 NIO）、实现一个 IOC 容器、或优化一个百万级 QPS 系统的 GC 停顿？<br>真正的精通体现在遇到诡异 Bug 时能定位到字节码层面，设计系统时能预判 GC 和线程竞争瓶颈，以及能根据业务场景权衡一致性、可用性与性能。</p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/TECH/">TECH</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2025/12/09/natural-ability/">
+        <span class="next-text nav-default">natural-ability</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2026
+    <span class="footer-author">zivyou.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'zivyou';
+  var disqus_identifier = '2026/02/01/Java-roadmap/';
+
+  var disqus_title = "Java-roadmap";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

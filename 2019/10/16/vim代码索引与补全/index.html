@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="vim代码索引与补全"/>
+
+
+
+
+  <meta name="keywords" content="TECH," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zivyou" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://zivyou.github.io/2019/10/16/vim代码索引与补全/"/>
+
+
+<meta name="description" content="[TOC]  目标 需要的插件 language server 步骤  * [1. 安装Vundle: git repo: https:&#x2F;&#x2F;github.com&#x2F;VundleVim&#x2F;Vundle.](#1-安装vundle-git-repo-httpsgithubcomvundlevimvundle)   * [2. .vimrc](#2-vimrc)   * [3. 装插件](#3-装插件)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim代码索引与补全">
+<meta property="og:url" content="https://zivyou.github.io/2019/10/16/vim%E4%BB%A3%E7%A0%81%E7%B4%A2%E5%BC%95%E4%B8%8E%E8%A1%A5%E5%85%A8/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="[TOC]  目标 需要的插件 language server 步骤  * [1. 安装Vundle: git repo: https:&#x2F;&#x2F;github.com&#x2F;VundleVim&#x2F;Vundle.](#1-安装vundle-git-repo-httpsgithubcomvundlevimvundle)   * [2. .vimrc](#2-vimrc)   * [3. 装插件](#3-装插件)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-10-16T01:52:05.000Z">
+<meta property="article:modified_time" content="2026-02-01T07:32:48.362Z">
+<meta property="article:author" content="zivyou">
+<meta property="article:tag" content="TECH">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> vim代码索引与补全 - zivyou </title>
+  <meta name="generator" content="Hexo 7.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">zivyou</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about/me.html">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/project">
+                            
+                            
+                                Project
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          vim代码索引与补全
+        
+      </h1>
+
+      <time class="post-time">
+          10月 16 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>[TOC]<br><!-- vim-markdown-toc GFM --></p>
+<ul>
+<li><a href="#目标">目标</a></li>
+<li><a href="#需要的插件">需要的插件</a></li>
+<li><a href="#language-server">language server</a></li>
+<li><a href="#步骤">步骤</a><pre><code>  * [1. 安装Vundle: git repo: https://github.com/VundleVim/Vundle.](#1-安装vundle-git-repo-httpsgithubcomvundlevimvundle)
+  * [2. .vimrc](#2-vimrc)
+  * [3. 装插件](#3-装插件)
+  * [4. 使用](#4-使用)
+</code></pre></li>
+</ul>
+<!-- vim-markdown-toc -->
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>实现C/C++/Objective-C, js/ts的代码索引、自动补全。<br>使用LSP。YCM、Ctags之类的软件太古老了。<br>关于LSP: Language Server Protocol.</p>
+<h2 id="需要的插件"><a href="#需要的插件" class="headerlink" title="需要的插件"></a>需要的插件</h2><blockquote>
+<p>Vundle.vim : 插件管理<br>nerdtree<br>roxma/vim-hug-neovim-rpc: 为vim8补全一些特性，像neoVim看齐。<br>roxma/nvim-yarp: 同上<br>autozimu/LanguageClient-neovim: neoVim的language client插件。vim8下需要上面两个插件支持<br>Shougo/deoplete.nvim: neoVim的代码补全插件<br>Shougo/neosnippet.vim: code snippet插件<br>Shougo/neosnippet-snippets: 同上</p>
+</blockquote>
+<h2 id="language-server"><a href="#language-server" class="headerlink" title="language server"></a>language server</h2><blockquote>
+<p>C/C++:  <a href="https://github.com/MaskRay/ccls">ccls</a></p>
+<ul>
+<li>install on macOS: brew install ccls</li>
+<li>js/ts: <a href="https://github.com/sourcegraph/javascript-typescript-langserver">javascript-typescript-langserer</a><ul>
+<li>install on macOS: npm install -g javascript-typescript-langserver</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h4 id="1-安装Vundle-git-repo-https-github-com-VundleVim-Vundle"><a href="#1-安装Vundle-git-repo-https-github-com-VundleVim-Vundle" class="headerlink" title="1. 安装Vundle: git repo: https://github.com/VundleVim/Vundle."></a>1. 安装Vundle: git repo: <a href="https://github.com/VundleVim/Vundle">https://github.com/VundleVim/Vundle</a>.</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim</span><br></pre></td></tr></table></figure>
+<p>编辑.vimrc如下</p>
+<h4 id="2-vimrc"><a href="#2-vimrc" class="headerlink" title="2. .vimrc"></a>2. .vimrc</h4><p>里面加了一些私货，请酌情参考<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line">syntax on</span><br><span class="line">map &lt;C-n&gt; :NERDTreeToggle &lt;CR&gt;</span><br><span class="line">set nocompatible &quot; be iMproved, required</span><br><span class="line">filetype off &quot; required</span><br><span class="line">set encoding=utf-8</span><br><span class="line"></span><br><span class="line">&quot; set the runtime path to include Vundle and initialize</span><br><span class="line">set rtp+=~/.config/nvim/bundle/Vundle.vim</span><br><span class="line">call vundle#begin()            &quot; required</span><br><span class="line">Plugin &#x27;VundleVim/Vundle.vim&#x27;  &quot; required</span><br><span class="line">Plugin &#x27;git://github.com/scrooloose/nerdtree.git&#x27;</span><br><span class="line">Plugin &#x27;https://github.com/Shougo/deoplete.nvim.git&#x27;</span><br><span class="line">Plugin &#x27;https://github.com/autozimu/LanguageClient-neovim.git&#x27;</span><br><span class="line">Plugin &#x27;git@github.com:vim-scripts/taglist.vim.git&#x27;</span><br><span class="line">Plugin &#x27;scrooloose/syntastic&#x27;</span><br><span class="line">&quot; ===================</span><br><span class="line">&quot; my plugins here</span><br><span class="line">&quot; ===================</span><br><span class="line"></span><br><span class="line">&quot; Plugin &#x27;dracula/vim&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot; ===================</span><br><span class="line">&quot; end of plugins</span><br><span class="line">&quot; ===================</span><br><span class="line">call vundle#end()               &quot; required</span><br><span class="line">filetype plugin indent on       &quot; required</span><br><span class="line"></span><br><span class="line">&quot; Brief help</span><br><span class="line">&quot; :PluginList - lists configured plugins</span><br><span class="line">&quot; :PluginInstall - installs plugins; append `!` to update or just :PluginUpdate</span><br><span class="line">&quot; :PluginSearch foo - searches for foo; append `!` to refresh local cache</span><br><span class="line">&quot; :PluginClean - confirms removal of unused plugins; append `!` to auto-approve removal</span><br><span class="line">&quot;</span><br><span class="line">&quot; see :h vundle for more details or wiki for FAQ</span><br><span class="line">&quot; Put your non-Plugin stuff after this line</span><br><span class="line">&quot;</span><br><span class="line">&quot;</span><br><span class="line">let g:python3_host_prog = &quot;/usr/local/bin/python3&quot;</span><br><span class="line">let g:python2_host_prog = &quot;/usr/local/bin/python2&quot;</span><br><span class="line"></span><br><span class="line">&quot; setup javascript/typescript language server</span><br><span class="line">let g:LanguageClient_loadSettings = 1</span><br><span class="line">let g:LanguageClient_settingsPath = &#x27;/Users/zivyou/.config/nvim/settings.json&#x27;</span><br><span class="line">let g:LanguageClient_autoStart = 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let g:LanguageClient_serverCommands = &#123;</span><br><span class="line">    \ &#x27;javascript&#x27;: [&#x27;javascript-typescript-stdio&#x27;],</span><br><span class="line">   \ &#125;</span><br><span class="line"></span><br><span class="line">if executable(&#x27;javascript-typescript-stdio&#x27;)</span><br><span class="line">  let g:LanguageClient_serverCommands.javascript = [&#x27;javascript-typescript-stdio&#x27;]</span><br><span class="line">  &quot; Use LanguageServer for omnifunc completion</span><br><span class="line">  autocmd FileType javascript setlocal omnifunc=LanguageClient#complete</span><br><span class="line">  </span><br><span class="line">  &quot;let g:LanguageClient_serverCommands.typescript = [&#x27;javascript-typescript-stdio&#x27;]</span><br><span class="line">  &quot;autocmd FileType typescript setlocal omnifunc=LanguageClient#complete</span><br><span class="line"></span><br><span class="line">else</span><br><span class="line">  echo &quot;javascript-typescript-stdio not installed!\n&quot;</span><br><span class="line">  :cq</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">&quot; Register ccls C++ lanuage server.</span><br><span class="line">&quot;&quot;if executable(&#x27;ccls&#x27;)</span><br><span class="line">&quot;&quot;   au User lsp_setup call lsp#register_server(&#123;</span><br><span class="line">&quot;&quot;      \ &#x27;name&#x27;: &#x27;ccls&#x27;,</span><br><span class="line">&quot;&quot;      \ &#x27;cmd&#x27;: &#123;server_info-&gt;[&#x27;ccls&#x27;]&#125;,</span><br><span class="line">&quot;&quot;      \ &#x27;root_uri&#x27;: &#123;server_info-&gt;lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), &#x27;compile_commands.json&#x27;))&#125;,</span><br><span class="line">&quot;&quot;      \ &#x27;initialization_options&#x27;: &#123;&#x27;cache&#x27;: &#123;&#x27;directory&#x27;: &#x27;/tmp/ccls/cache&#x27; &#125;&#125;,</span><br><span class="line">&quot;&quot;      \ &#x27;whitelist&#x27;: [&#x27;c&#x27;, &#x27;cpp&#x27;, &#x27;objc&#x27;, &#x27;objcpp&#x27;, &#x27;cc&#x27;],</span><br><span class="line">&quot;&quot;      \ &#125;)</span><br><span class="line">&quot;&quot;endif</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">call deoplete#custom#option(&#x27;sources&#x27;, &#123;</span><br><span class="line">            \ &#x27;vim&#x27;: [&#x27;vim&#x27;],</span><br><span class="line">            \ &#x27;zsh&#x27;: [&#x27;zsh&#x27;]</span><br><span class="line">            \&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot; setup deoplete</span><br><span class="line">let g:deoplete#enable_at_startup = 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot; setup eslint&quot;</span><br><span class="line">let g:syntastic_javascript_checkers = [&#x27;eslint&#x27;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">nnoremap &lt;C-n&gt; :NERDTreeToggle &lt;CR&gt;</span><br><span class="line">nnoremap &lt;C-l&gt; :tabn &lt;CR&gt;</span><br><span class="line">nnoremap &lt;C-h&gt; :tabp &lt;CR&gt;</span><br><span class="line">nnoremap &lt;F8&gt; :TlistToggle &lt;CR&gt;</span><br><span class="line">nnoremap &lt;C-f&gt; :!find . -type f -name &quot;*.h&quot; -o -name &quot;*.cpp&quot; -o -name &quot;*.c&quot; -o -name &quot;*.cc&quot; -o -name &quot;*.hpp&quot; \| xargs grep -r &lt;cword&gt;</span><br><span class="line"></span><br><span class="line">&quot; 生成cscope的索引</span><br><span class="line">nnoremap &lt;C-c-t&gt; :!find . -name &quot;*.c&quot; -o -name &quot;*.cpp&quot; -o -name &quot;*.h&quot; -o -name &quot;*.cc&quot; -o -name &quot;*.hpp&quot; &gt; FileList.txt; cat FileList.txt \| xargs ctags -a ; cscope -bkq -i FileList.txt;</span><br><span class="line">if has(&quot;cscope&quot;)</span><br><span class="line">  set csto=0</span><br><span class="line">  set nocsverb</span><br><span class="line">  if filereadable(&quot;cscope.out&quot;)</span><br><span class="line">    cscope add cscope.out</span><br><span class="line">  endif</span><br><span class="line">  set csverb</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">&quot; Settings for cscope:</span><br><span class="line">nnoremap ,c :cs find c &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">nnoremap ,s :cs find s &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">nnoremap ,g :cs find g &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">nnoremap ,t :cs find t &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">nnoremap ,t :cs find e &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">nnoremap ,f :cs find f &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">nnoremap ,i :cs find c &lt;C-R&gt;^=expand(&quot;&lt;cword&gt;&quot;)$&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">nnoremap ,d :cs find d &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">nnoremap &lt;C-r&gt; :!</span><br><span class="line">nnoremap &lt;C-c-s&gt; :cs find </span><br><span class="line"></span><br><span class="line">&quot; LanguageClient-nvim key bindings</span><br><span class="line">nnoremap ;d :call LanguageClient#textDocument_definition()&lt;cr&gt;</span><br><span class="line">nnoremap ;r :call LanguageClient#textDocument_references(&#123;&#x27;includeDeclaration&#x27;: v:false&#125;)&lt;cr&gt;</span><br><span class="line">nnoremap ;h :call LanguageClient#textDocument_hover()&lt;cr&gt;</span><br><span class="line">&quot; caller</span><br><span class="line">nnoremap ;c :call LanguageClient#findLocations(&#123;&#x27;method&#x27;:&#x27;$ccls/call&#x27;&#125;)&lt;cr&gt;</span><br><span class="line"></span><br><span class="line">set showmatch</span><br><span class="line">color desert</span><br><span class="line">&quot;set background=dark</span><br><span class="line">&quot;colorscheme solarized</span><br><span class="line">set expandtab</span><br><span class="line">set ts=2</span><br><span class="line">set shiftwidth=2</span><br><span class="line">set hlsearch</span><br><span class="line">set backspace=indent,eol,start</span><br><span class="line">inoremap &#x27; &#x27;&#x27;&lt;ESC&gt;i</span><br><span class="line">inoremap &quot; &quot;&quot;&lt;ESC&gt;i</span><br><span class="line">inoremap ( ()&lt;ESC&gt;i</span><br><span class="line">inoremap [ []&lt;ESC&gt;i</span><br><span class="line">inoremap &#123; &#123;&#125;&lt;ESC&gt;i</span><br><span class="line">inoremap &lt;C-b&gt; &lt;left&gt;</span><br><span class="line">inoremap &lt;C-n&gt; &lt;down&gt;</span><br><span class="line">inoremap &lt;C-p&gt; &lt;up&gt;</span><br><span class="line">inoremap &lt;C-f&gt; &lt;right&gt;</span><br><span class="line">inoremap &lt;C-e&gt; &lt;end&gt;</span><br><span class="line">inoremap &lt;C-a&gt; &lt;home&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-装插件"><a href="#3-装插件" class="headerlink" title="3. 装插件"></a>3. 装插件</h4><pre><code>- :PluginInstall
+</code></pre><h4 id="4-使用"><a href="#4-使用" class="headerlink" title="4. 使用"></a>4. 使用</h4><pre><code>- ccls
+ccls在做代码索引的时候，需要针对不同的项目做不同的预处理。主要是生成JSON Compliation Database.
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake -H. -BDebug -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES</span><br><span class="line">ln -s Debug/compile_commands.json</span><br></pre></td></tr></table></figure>
+</code></pre>
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/TECH/">TECH</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/11/05/%E5%B0%9D%E8%AF%95electorn/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">尝试electorn</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/10/08/weechat%E6%8C%87%E5%8D%97/">
+        <span class="next-text nav-default">weechat指南</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2026
+    <span class="footer-author">zivyou.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'zivyou';
+  var disqus_identifier = '2019/10/16/vim代码索引与补全/';
+
+  var disqus_title = "vim代码索引与补全";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

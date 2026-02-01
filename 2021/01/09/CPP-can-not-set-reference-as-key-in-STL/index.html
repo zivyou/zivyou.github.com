@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="C++ can not set reference as key in STL"/>
+
+
+
+
+  <meta name="keywords" content="TECH," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zivyou" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://zivyou.github.io/2021/01/09/CPP-can-not-set-reference-as-key-in-STL/"/>
+
+
+<meta name="description" content="在写图的算法，尝试将Node&#x2F;Edge的对象作为key存入unordered_map，发现一系列问题。首先，如果要追求1std::unordered_map&lt;Node, int&gt; data;这种写法(类似Java的那种风格)，得做两件事情:  为Node类型重载 &#x3D;&#x3D; 运算符，如果不愿意，可以选择未Node类型实现 () 运算符; 实现一个自定义的供Node类型使用的hash方法，比如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ can not set reference as key in STL">
+<meta property="og:url" content="https://zivyou.github.io/2021/01/09/CPP-can-not-set-reference-as-key-in-STL/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="在写图的算法，尝试将Node&#x2F;Edge的对象作为key存入unordered_map，发现一系列问题。首先，如果要追求1std::unordered_map&lt;Node, int&gt; data;这种写法(类似Java的那种风格)，得做两件事情:  为Node类型重载 &#x3D;&#x3D; 运算符，如果不愿意，可以选择未Node类型实现 () 运算符; 实现一个自定义的供Node类型使用的hash方法，比如">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-09T07:58:32.000Z">
+<meta property="article:modified_time" content="2026-02-01T07:32:48.357Z">
+<meta property="article:author" content="zivyou">
+<meta property="article:tag" content="TECH">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> C++ can not set reference as key in STL - zivyou </title>
+  <meta name="generator" content="Hexo 7.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">zivyou</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about/me.html">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/project">
+                            
+                            
+                                Project
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          C++ can not set reference as key in STL
+        
+      </h1>
+
+      <time class="post-time">
+          1月 09 2021
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>在写图的算法，尝试将Node/Edge的对象作为key存入unordered_map，发现一系列问题。<br>首先，如果要追求<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::unordered_map&lt;Node, int&gt; data;</span><br></pre></td></tr></table></figure><br>这种写法(类似Java的那种风格)，得做两件事情:</p>
+<ol>
+<li>为Node类型重载 == 运算符，如果不愿意，可以选择未Node类型实现 () 运算符;</li>
+<li>实现一个自定义的供Node类型使用的hash方法，比如简单一点的:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class MyHash &#123;</span><br><span class="line"> public:</span><br><span class="line">  std::size_t operator() (const Node&amp; node) const &#123;</span><br><span class="line">    return node.id;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>剩下的事情就是在申明unordered_map时注意一下，将hash函数传进去就行: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::unordered_map&lt;Node, int, MyHash&gt; data;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>后来想尝试下，能不能向Java那样，使用地址值来做为hash值呢?写了个最简单的demo:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;unordered_map&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">class A &#123;</span><br><span class="line">private:</span><br><span class="line">  std::string data_;</span><br><span class="line">public:</span><br><span class="line">  A() &#123;</span><br><span class="line">    data_ = &quot;hello world&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">  bool operator== (const A&amp; b) const &#123;</span><br><span class="line">    return (const A*)this == &amp;b;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line">class Myhash &#123;</span><br><span class="line">  public:</span><br><span class="line">    std::size_t operator()(const A&amp; b) const &#123;</span><br><span class="line">      return (std::size_t)&amp;b; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line"></span><br><span class="line">  A t;</span><br><span class="line">  std::unordered_map&lt;A&amp;, int, Myhash&gt; data;</span><br><span class="line">  data[t] = 1;</span><br><span class="line">  for (auto elem : data) &#123;</span><br><span class="line">    std::cout&lt;&lt;&amp;(elem.first)&lt;&lt;&quot;, &quot;&lt;&lt;elem.second&lt;&lt;std::endl;</span><br><span class="line">  &#125;</span><br><span class="line">  std::cout&lt;&lt;data[t]&lt;&lt;std::endl;</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>到这里时，编译器报错了。google给出的答案是: STL中各种map(unordered_map, std::map)都是通过拷贝传值作为key，无法使用引用作为key。(ref: <a href="https://stackoverflow.com/questions/3235927/reference-as-key-in-stdmap">https://stackoverflow.com/questions/3235927/reference-as-key-in-stdmap</a>)</p>
+<p>怎么做到像Java那样自定义对象做key呢?几种可行的思路:</p>
+<ol>
+<li>舍弃Node做key，改用Node*;</li>
+<li>设计一个较好的hash函数，使得即使是拷贝传值的两个对象，也可通过hash值认为是同一份</li>
+<li>使用C++11引入的std::reference_wrapper</li>
+</ol>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/TECH/">TECH</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2021/01/20/TCP-receive-queue/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">TCP-receive-queue</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/11/17/TODO-booklist/">
+        <span class="next-text nav-default">TODO-booklist</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2026
+    <span class="footer-author">zivyou.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'zivyou';
+  var disqus_identifier = '2021/01/09/CPP-can-not-set-reference-as-key-in-STL/';
+
+  var disqus_title = "C++ can not set reference as key in STL";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

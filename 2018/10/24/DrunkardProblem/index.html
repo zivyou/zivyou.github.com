@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="DrunkardProblem"/>
+
+
+
+
+  <meta name="keywords" content="MATH," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zivyou" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://zivyou.github.io/2018/10/24/DrunkardProblem/"/>
+
+
+<meta name="description" content="酒鬼问题，频率派概率与贝叶斯Dota2贴吧莫名奇妙开展了一场数学大讨论，源于这道题： 12已知某酒鬼有90%的日子都会出去喝酒，喝酒只去固定三家酒吧（注：三家酒吧去的频率一样），今天警察找了其中两家酒吧都没有找到酒鬼。请问：酒鬼在第三家酒吧的概率是多少？ 问题被抛出之后，贴吧围观群众越来越多，在一番激烈的唇枪舌剑之后，吧友的结果基本分成了两种：90%与75%。90%党的思路是：题目给定酒鬼90%">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DrunkardProblem">
+<meta property="og:url" content="https://zivyou.github.io/2018/10/24/DrunkardProblem/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="酒鬼问题，频率派概率与贝叶斯Dota2贴吧莫名奇妙开展了一场数学大讨论，源于这道题： 12已知某酒鬼有90%的日子都会出去喝酒，喝酒只去固定三家酒吧（注：三家酒吧去的频率一样），今天警察找了其中两家酒吧都没有找到酒鬼。请问：酒鬼在第三家酒吧的概率是多少？ 问题被抛出之后，贴吧围观群众越来越多，在一番激烈的唇枪舌剑之后，吧友的结果基本分成了两种：90%与75%。90%党的思路是：题目给定酒鬼90%">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zivyou.github.io/2018/10/24/DrunkardProblem/solution.jpg">
+<meta property="article:published_time" content="2018-10-24T03:09:08.000Z">
+<meta property="article:modified_time" content="2026-02-01T07:32:48.357Z">
+<meta property="article:author" content="zivyou">
+<meta property="article:tag" content="MATH">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zivyou.github.io/2018/10/24/DrunkardProblem/solution.jpg">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> DrunkardProblem - zivyou </title>
+  <meta name="generator" content="Hexo 7.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">zivyou</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about/me.html">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/project">
+                            
+                            
+                                Project
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          DrunkardProblem
+        
+      </h1>
+
+      <time class="post-time">
+          10月 24 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <hr>
+<h3 id="酒鬼问题，频率派概率与贝叶斯"><a href="#酒鬼问题，频率派概率与贝叶斯" class="headerlink" title="酒鬼问题，频率派概率与贝叶斯"></a>酒鬼问题，频率派概率与贝叶斯</h3><p>Dota2贴吧莫名奇妙开展了一场数学大讨论，源于这道题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">已知某酒鬼有90%的日子都会出去喝酒，喝酒只去固定三家酒吧（注：三家酒吧去的频率一样），今天警察找了其中两家</span><br><span class="line">酒吧都没有找到酒鬼。请问：酒鬼在第三家酒吧的概率是多少？</span><br></pre></td></tr></table></figure>
+<p>问题被抛出之后，贴吧围观群众越来越多，在一番激烈的唇枪舌剑之后，吧友的结果基本分成了两种：90%与75%。<br>90%党的思路是：题目给定酒鬼90%的概率回出去喝酒，而警察检查了前两家，没有发现酒鬼。则只要酒鬼出去喝酒，必定在第三家。酒鬼出去喝酒的概率为90%，故在第三家酒馆的概率为90%。</p>
+<p>75%党使用贝叶斯公式一本正经的推算，得出结论：75%。</p>
+<p>当然，最后进过多方认证，正确答案敲定为75%。</p>
+<p>有个最直观的思路：<br><img src="solution.jpg" alt="solution"></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/MATH/">MATH</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/11/01/gdbNotes/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">gdbNotes</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2026
+    <span class="footer-author">zivyou.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'zivyou';
+  var disqus_identifier = '2018/10/24/DrunkardProblem/';
+
+  var disqus_title = "DrunkardProblem";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

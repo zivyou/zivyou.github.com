@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zivyou" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://zivyou.github.io/project/snake.html"/>
+
+
+<meta name="description" content="window.onload&#x3D;function(){             canv &#x3D; document.getElementById(&quot;gc&quot;);             ctx &#x3D; canv.getContext(&quot;2d&quot;);             document.addEventListener(&quot;keydown&quot;, keyPush);">
+<meta property="og:type" content="website">
+<meta property="og:title" content="zivyou">
+<meta property="og:url" content="https://zivyou.github.io/project/snake.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="window.onload&#x3D;function(){             canv &#x3D; document.getElementById(&quot;gc&quot;);             ctx &#x3D; canv.getContext(&quot;2d&quot;);             document.addEventListener(&quot;keydown&quot;, keyPush);">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-01T07:32:48.382Z">
+<meta property="article:modified_time" content="2026-02-01T07:32:48.382Z">
+<meta property="article:author" content="zivyou">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title>  - zivyou </title>
+  <meta name="generator" content="Hexo 7.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">zivyou</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about/me.html">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/project">
+                            
+                            
+                                Project
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        <article class="post">
+            <header class="post-header">
+                <h1 class="post-title">
+                    
+                </h1>
+            </header>
+            <div class="post-content">
+                <canvas id="gc" width="400" height="400"> </canvas>
+        <script>
+        window.onload=function(){
+            canv = document.getElementById("gc");
+            ctx = canv.getContext("2d");
+            document.addEventListener("keydown", keyPush);
+            setInterval(game, 1000/15);
+        }
+        px=py=10;
+        gs=tc=20;
+        ax=ay=15;
+        xv=yv=0;
+        trail = [];
+        tail = 5;
+
+        function game(){
+            px+=xv;
+            py+=yv;
+            if (px<0){
+                px = tc-1;
+            }
+            if (px > tc-1){
+                px = 0;
+            }
+            
+            if (py<0){
+                py = tc-1;
+            } 
+            if (py>tc-1){
+                py = 0;
+            }
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, canv.width, canv.height);
+
+            ctx.fillStyle="lime";
+            for (var i=0; i<trail.length; i++){
+                ctx.fillRect(trail[i].x*gs, trail[i].y*gs, gs-2, gs-2);
+                if (trail[i].x == px && trail[i].y == py){
+                    tail = 5;
+                }
+            }
+            trail.push({x: px, y:py});
+
+            while (trail.length>tail){
+                trail.shift();
+            }
+            if (ax==px && ay== py){
+                tail++;
+                ax=Math.floor(Math.random()*tc);
+                ay=Math.floor(Math.random()*tc);
+            }
+            ctx.fillStyle = "red";
+            ctx.fillRect(ax*gs, ay*gs, gs-2, gs-2);
+        }
+
+
+        function keyPush(evt){
+            switch (evt.keyCode) {
+                case 37:
+                    xv=-1; yv=0;
+                    break;
+                case 38:
+                    xv=0; yv=-1;
+                    break;
+                case 39:
+                    xv=1; yv=0;
+                    break;
+                case 40:
+                    xv=0; yv=1;
+                    break;
+            }    
+        }
+        </script>
+
+            </div>
+        </article>
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2026
+    <span class="footer-author">zivyou.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'zivyou';
+  var disqus_identifier = 'project/snake.html';
+
+  var disqus_title = "";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

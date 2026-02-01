@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="HighPerformanceMysql notes"/>
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zivyou" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://zivyou.github.io/2020/06/04/HighPerformanceMysql-notes/"/>
+
+
+<meta name="description" content="「完全的范式化和反范式化schema都是实验室里才有的东西」 「影子表」 数据类型选型: B-Tree索引 哈希索引 空间数据索引(R-Tree) 全文索引 前缀索引 聚簇索引 覆盖索引 慢查询 一些常见的优化招式 案例1「完全的范式化和反范式化schema都是实验室里才有的东西」   范式化的优点:  范式化的更新操作通常比反范式化要快 当数据较好地范式化时，就只有很少或者没有常负数据，所以值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HighPerformanceMysql notes">
+<meta property="og:url" content="https://zivyou.github.io/2020/06/04/HighPerformanceMysql-notes/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="「完全的范式化和反范式化schema都是实验室里才有的东西」 「影子表」 数据类型选型: B-Tree索引 哈希索引 空间数据索引(R-Tree) 全文索引 前缀索引 聚簇索引 覆盖索引 慢查询 一些常见的优化招式 案例1「完全的范式化和反范式化schema都是实验室里才有的东西」   范式化的优点:  范式化的更新操作通常比反范式化要快 当数据较好地范式化时，就只有很少或者没有常负数据，所以值">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-04T15:42:58.000Z">
+<meta property="article:modified_time" content="2026-02-01T07:32:48.358Z">
+<meta property="article:author" content="zivyou">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> HighPerformanceMysql notes - zivyou </title>
+  <meta name="generator" content="Hexo 7.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">zivyou</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about/me.html">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/project">
+                            
+                            
+                                Project
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          HighPerformanceMysql notes
+        
+      </h1>
+
+      <time class="post-time">
+          6月 04 2020
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <ul>
+<li><a href="#完全的范式化和反范式化schema都是实验室里才有的东西">「完全的范式化和反范式化schema都是实验室里才有的东西」</a></li>
+<li><a href="#影子表">「影子表」</a></li>
+<li><a href="#数据类型选型">数据类型选型:</a></li>
+<li><a href="#b-tree索引">B-Tree索引</a></li>
+<li><a href="#哈希索引">哈希索引</a></li>
+<li><a href="#空间数据索引r-tree">空间数据索引(R-Tree)</a></li>
+<li><a href="#全文索引">全文索引</a></li>
+<li><a href="#前缀索引">前缀索引</a></li>
+<li><a href="#聚簇索引">聚簇索引</a></li>
+<li><a href="#覆盖索引">覆盖索引</a></li>
+<li><a href="#慢查询">慢查询</a></li>
+<li><a href="#一些常见的优化招式">一些常见的优化招式</a></li>
+<li><a href="#案例1">案例1</a><h1 id="「完全的范式化和反范式化schema都是实验室里才有的东西」"><a href="#「完全的范式化和反范式化schema都是实验室里才有的东西」" class="headerlink" title="「完全的范式化和反范式化schema都是实验室里才有的东西」"></a>「完全的范式化和反范式化schema都是实验室里才有的东西」</h1></li>
+</ul>
+<blockquote>
+<p>范式化的优点:</p>
+<ul>
+<li>范式化的更新操作通常比反范式化要快</li>
+<li>当数据较好地范式化时，就只有很少或者没有常负数据，所以值需要修改更少的数据</li>
+<li>范式化的表通常更小，可以更好地放在内存里，所以执行更快</li>
+<li>很少有多余的数据意味着检索列表数据时更少需要DISTINCT或者GROUP语句</li>
+</ul>
+<p>范式化的缺点</p>
+</blockquote>
+<ul>
+<li>通常范式化需要大量的表关联，稍微复杂一些的查询语句在符合范式的schema上都可能需要至少一次关联</li>
+</ul>
+<blockquote>
+<p>反范式化的优点: </p>
+<pre><code>- 可以很好地避免关联
+- 可以设计更好的索引策略
+</code></pre></blockquote>
+<h1 id="「影子表」"><a href="#「影子表」" class="headerlink" title="「影子表」"></a>「影子表」</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">drop table if exists my_summary_new, my_summary_old;</span><br><span class="line">create table my_summary_new like my_summary;</span><br><span class="line">rename table my_summary to my_summary_old, my_summary_new to my_summary;</span><br></pre></td></tr></table></figure>
+<h1 id="数据类型选型"><a href="#数据类型选型" class="headerlink" title="数据类型选型:"></a>数据类型选型:</h1><ul>
+<li>使用小而简单的合适数据类型，除非真实数据模型中有确切的需要，否则应该尽可能的避免使用NULL值</li>
+<li>尽量使用相同的数据类型存储相似霍相关的值，尤其是要在关联条件中使用的列</li>
+<li>注意可变长字符串，其在临时表和排序时可能导致悲观的按最大长度分配内存</li>
+<li>小心使用ENUM和SET，不能滥用。最好避免使用BIT</li>
+</ul>
+<h1 id="B-Tree索引"><a href="#B-Tree索引" class="headerlink" title="B-Tree索引"></a>B-Tree索引</h1><blockquote>
+<ul>
+<li>一般讨论索引的时候，都是指B树索引</li>
+<li>InnoDB使用的是B+树</li>
+<li>B-Tree对索引列是顺序组织存储的，所以很适合查找范围数据</li>
+<li>B-Tree适用于一下类型的查找: 全键值、键值范围、键值前缀(指适用于最左前缀匹配)</li>
+<li>索引树中的所有节点都是有序的，所以也适用于order by排序操作</li>
+</ul>
+</blockquote>
+<h1 id="哈希索引"><a href="#哈希索引" class="headerlink" title="哈希索引"></a>哈希索引</h1><blockquote>
+<ul>
+<li>哈希索引指包含哈希指和行指针，而不存储字段值</li>
+<li></li>
+<li>哈希索引数据并不是按照索引值顺序存储的，所以无法用于排序</li>
+<li></li>
+<li>哈希索引也不支持部分索引列匹配查找</li>
+<li></li>
+<li>哈希索引值支持等值比较查询，包括=, IN(), &lt;=&gt;，不支持任何范围查询</li>
+<li></li>
+<li>如果哈希冲突很多，一些索引的维护操作的代价高</li>
+<li></li>
+<li>可以在业务层手动为一些字段设置哈希函数，实现”伪哈希索引”</li>
+</ul>
+</blockquote>
+<h1 id="空间数据索引-R-Tree"><a href="#空间数据索引-R-Tree" class="headerlink" title="空间数据索引(R-Tree)"></a>空间数据索引(R-Tree)</h1><blockquote>
+<p>MyISAM的特性，用于存储地理信息数据(3维GIS)，提供了一系列内置函数</p>
+</blockquote>
+<h1 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h1><blockquote>
+<p>待后文详解</p>
+</blockquote>
+<h1 id="前缀索引"><a href="#前缀索引" class="headerlink" title="前缀索引"></a>前缀索引</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table sakila.city_demo add key (city(7))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>无法做group by和order by</p>
+</blockquote>
+<h1 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h1><blockquote>
+<p>聚簇索引描述的是一种索引的存储结构。InnoDB中的聚簇索引是在同一个结构中保存B树的索引和数据行，所以所以结构和数据存放在同一个文件中。</p>
+<p>优势:</p>
+</blockquote>
+<ul>
+<li>减少磁盘IO</li>
+<li><p>数据访问更快</p>
+<blockquote>
+<p>缺点:</p>
+</blockquote>
+</li>
+<li><p>如果数据全部放在了内存中，则聚簇索引就没有什么意义了</p>
+</li>
+<li></li>
+<li>数据插入的速度严重依赖于插入顺序</li>
+<li></li>
+<li>更新聚簇索引列的代价搞</li>
+<li></li>
+<li>页分裂问题</li>
+<li><h1 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h1></li>
+</ul>
+<blockquote>
+<p>案例<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from products where actor=&#x27;SEAN CARRY&#x27; and title like &#x27;%APOLLO%&#x27;;</span><br></pre></td></tr></table></figure></p>
+<h1 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h1><p>典型的负面案例</p>
+</blockquote>
+<ul>
+<li>查询不需要的attributes</li>
+<li>表关联时返回全部attributes</li>
+<li>select *</li>
+<li>where中包含in 子查询: select * from tableA where tableA.fid in (select id from tableB where name=’xxx’);<blockquote>
+<p>mysql使用where的3种方式(以下从好到坏列出)</p>
+</blockquote>
+</li>
+<li>在索引中用where，过滤不匹配的行。在存储引擎中完成</li>
+<li>使用索引覆盖扫描(explain extra: using index)，在mysql服务层完成，无需回表查询</li>
+<li><p>从数据表中返回数据，然后过滤不满足条件的行，explain extra: using where，在mysql服务层完成，需要回表查询</p>
+<blockquote>
+<p>重构查询</p>
+</blockquote>
+</li>
+<li><p>复杂查询拆分成几步，可在业务代码中完成</p>
+</li>
+<li>利用循环，采用类似于分页的方式分批查询</li>
+<li><p>分解关联查询</p>
+<blockquote>
+<p>关联查询的原理</p>
+</blockquote>
+</li>
+<li><p>所有的关联动作都是先生成一个临时表，然后通过嵌套查询的方式遍历。简单来说，如果A, B, C3表关联查询，3表分别有x, y, z行数据，则关联的复杂度为x <em> y </em> z;</p>
+</li>
+</ul>
+<blockquote>
+<p>关联查询优化</p>
+</blockquote>
+<ul>
+<li><p>所有的查询，mysql都会预先生成一个查询计划。查询计划是有很多个的，mysql会自己选择查询计划中看起来代价最小的那个</p>
+</li>
+<li><p>多表关联查询的查询计划，通常都是一棵左侧深度优先的树</p>
+</li>
+<li>mysql的关联查询优化器会通过调整关联顺序尝试自己选择合适的查询计划: 当n个表关联时，会去尝试n!(n的阶乘)种排列方式。显然，n不能太大</li>
+</ul>
+<blockquote>
+<p>排序优化</p>
+</blockquote>
+<ul>
+<li><p>数据量小的时候，mysql会在内存排序，数据量大了，就是在磁盘排序了。但在explain extra中看到的都是filesort</p>
+</li>
+<li><p>mysql使用「快排」在内存中进行排序; 当在磁盘时，使用快排分段排序，再merge回磁盘</p>
+</li>
+</ul>
+<blockquote>
+<p>查询的执行</p>
+</blockquote>
+<ul>
+<li>mysql的执行计划是一个数据结构</li>
+<li>通过调用存储引擎的「handler API」完成。</li>
+<li>查询优化器的一些提示关键字(hint): 用来指示查询优化器如何按照我们定制化的方案执行。类似于gcc的内置宏</li>
+</ul>
+<h1 id="一些常见的优化招式"><a href="#一些常见的优化招式" class="headerlink" title="一些常见的优化招式"></a>一些常见的优化招式</h1><blockquote>
+<p>优化count()</p>
+</blockquote>
+<ul>
+<li>count()既可以统计行数，也可以统计某个列值的数量。统计列值的时候mysql会计算列值不为空的数量。如果mysql确认count()括号里的内容不可能为空，此时统计的其实就是行数</li>
+<li>所以如果要统计行数，请直接使用count(*)</li>
+<li><p>count(*)会扫描所有行，这是不可避免的，如果有必要，可以新增一张汇总表来解决</p>
+<blockquote>
+<p>优化关联查询</p>
+</blockquote>
+</li>
+<li><p>尽量让on或者using的字段有索引</p>
+</li>
+<li><p>确保group by和order by里的表达式只涉及到一个表中的列</p>
+<blockquote>
+<p>优化子查询</p>
+</blockquote>
+</li>
+<li><p>尽量用关联查询代替</p>
+</li>
+</ul>
+<blockquote>
+<p>优化group by和distinct</p>
+</blockquote>
+<ul>
+<li><p>使用索引来优化，这是最有效的办法</p>
+</li>
+<li><p>A left join B ，最好只对A中的列做group by</p>
+</li>
+</ul>
+<blockquote>
+<p>优化limit + offset + order by的分页方法</p>
+</blockquote>
+<ul>
+<li>尽可能使用索引覆盖扫描。利用表关联，先通过覆盖索引找出id， 再做一次关联查询查询行的其他信息<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select film_id, description from sakila.film order by title limit to 50, 5</span><br><span class="line">建议改成:</span><br><span class="line">select film.film_id, film.description</span><br><span class="line">from sakila.film</span><br><span class="line">	inner join (</span><br><span class="line">  	select film_id from sakila.film</span><br><span class="line">    order by title limit 50, 5</span><br><span class="line">  ) as lim using(film_id)</span><br></pre></td></tr></table></figure></li>
+<li>利用书签记录一下上次翻页的位置，然后利用&gt;, &lt;, between 加上索引的方式，可以减少无用的扫描次数</li>
+</ul>
+<blockquote>
+<p>使用用户自定义sql变量来优化</p>
+</blockquote>
+<ul>
+<li>自定义变量在整个查询连接过程中都存在</li>
+<li>使用了自定义变量的查询，无法使用查询缓存</li>
+</ul>
+<blockquote>
+<p>优化select for update<br>表格式<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create table unsent_emails (id int not null primary key auto_increament, status enum(&#x27;unsent&#x27;, &#x27;claimed&#x27;, &#x27;sent&#x27;)</span><br><span class="line">                  owner int unsigned not null default 0, ts timestamp, key (owner, status, ts)</span><br><span class="line">                )</span><br></pre></td></tr></table></figure><br>常规的用法:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">begin;</span><br><span class="line">select id from unsent_emails</span><br><span class="line">  where owner=0 and status=&#x27;unsent&#x27;</span><br><span class="line">  limit 10 for update;</span><br><span class="line">-- result: 123, 456, 789</span><br><span class="line">update unsent_emails</span><br><span class="line">  set status=&#x27;claimed&#x27;, owner=connection_id(),</span><br><span class="line">  where id in(123, 456, 789)</span><br></pre></td></tr></table></figure><br>改进的用法:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">set autocommit=1;</span><br><span class="line">commit;</span><br><span class="line">update unsent_emails</span><br><span class="line">  set status=&#x27;claimed&#x27;, owner=connection_id()</span><br><span class="line">  where owner=0 and status=&#x27;unsent&#x27;</span><br><span class="line">  limit 10;</span><br><span class="line">set autocommit=0;</span><br><span class="line">select id from unsent_emails</span><br><span class="line">  where owner=connection_id() and status=&#x27;claimed&#x27;;</span><br><span class="line">-- result 123,456,789 </span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<h1 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h1><p>翻页问题:  mysql可以使用limit m,n的方式支持翻页。但是在实现上，mysql查找第m条记录需要将前m条记录都扫一遍。因此当m比较大的时候，效率低。<br>解决方法:</p>
+<ol>
+<li>借助自增ID，定位m的值，较少扫描的行数。例如，limit m,n 的时候，我们可以改成 where id&gt;m order by id ASC limit n; 效果提升明显</li>
+<li>借助索引。具体想法是先找出limit m,n的id(id自带索引)，然后inner join整条记录:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from TableA inner join (select id from TableA limit m,n) as TableB using(id);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2020/06/24/TLS-Handshake/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">TLS-Handshake</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/05/20/Questions/">
+        <span class="next-text nav-default">Questions</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2026
+    <span class="footer-author">zivyou.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'zivyou';
+  var disqus_identifier = '2020/06/04/HighPerformanceMysql-notes/';
+
+  var disqus_title = "HighPerformanceMysql notes";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="TCP-receive-queue"/>
+
+
+
+
+  <meta name="keywords" content="TECH," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zivyou" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://zivyou.github.io/2021/01/20/TCP-receive-queue/"/>
+
+
+<meta name="description" content="连接过程:  sync队列 已连接队列  数据接收过程:  receive  out-of-order  backlog  prequeue   1中描述的队列是socket队列，用来存储处于不同状态的socket实体。SYN状态是TCP三次握手的第一此握手完成之后所处的状态，内核会将处于该状态的socket存储于这个队列。在连接建立完成之后，socket会被放置在’已连接队列上’。 2中描述的队">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP-receive-queue">
+<meta property="og:url" content="https://zivyou.github.io/2021/01/20/TCP-receive-queue/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="连接过程:  sync队列 已连接队列  数据接收过程:  receive  out-of-order  backlog  prequeue   1中描述的队列是socket队列，用来存储处于不同状态的socket实体。SYN状态是TCP三次握手的第一此握手完成之后所处的状态，内核会将处于该状态的socket存储于这个队列。在连接建立完成之后，socket会被放置在’已连接队列上’。 2中描述的队">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-20T14:29:43.000Z">
+<meta property="article:modified_time" content="2026-02-01T07:32:48.359Z">
+<meta property="article:author" content="zivyou">
+<meta property="article:tag" content="TECH">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> TCP-receive-queue - zivyou </title>
+  <meta name="generator" content="Hexo 7.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">zivyou</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about/me.html">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/project">
+                            
+                            
+                                Project
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          TCP-receive-queue
+        
+      </h1>
+
+      <time class="post-time">
+          1月 20 2021
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>连接过程:</p>
+<ol>
+<li>sync队列</li>
+<li>已连接队列</li>
+</ol>
+<p>数据接收过程:</p>
+<ul>
+<li><p>receive</p>
+</li>
+<li><p>out-of-order</p>
+</li>
+<li><p>backlog</p>
+</li>
+<li><p>prequeue</p>
+</li>
+</ul>
+<p>1中描述的队列是socket队列，用来存储处于不同状态的socket实体。SYN状态是TCP三次握手的第一此握手完成之后所处的状态，内核会将处于该状态的socket存储于这个队列。在连接建立完成之后，socket会被放置在’已连接队列上’。</p>
+<p>2中描述的队列是skb队列，用来存储通信过程中不同情景下传输的skb。详细的说明如下:</p>
+<ol>
+<li><p>假如用户态进程还没有调用recv函数，内核已经接收到数据，会将数据按顺序放置在receive队列</p>
+</li>
+<li><p>假如用户态进程还没有调用recv函数，内核已经接收到数据，但数据是乱序的，内核会先将乱序的skb暂时存放在out-of-order队列</p>
+</li>
+<li><p>假如用户态进程调用recv函数，进入了数据接收的上下文中，而此时网卡又接到了数据，网卡驱动会先将数据暂时放在backlog队列</p>
+</li>
+<li><p>假如用户态进程调用recv函数，但是因为没有数据所有阻塞了，进程被挂起了，而这个时候网卡收到了数据，网卡驱动会先将数据放在prequeue队列</p>
+</li>
+</ol>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/TECH/">TECH</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2021/03/18/GNU-build-system/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">GNU build system</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2021/01/09/CPP-can-not-set-reference-as-key-in-STL/">
+        <span class="next-text nav-default">C++ can not set reference as key in STL</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2026
+    <span class="footer-author">zivyou.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'zivyou';
+  var disqus_identifier = '2021/01/20/TCP-receive-queue/';
+
+  var disqus_title = "TCP-receive-queue";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

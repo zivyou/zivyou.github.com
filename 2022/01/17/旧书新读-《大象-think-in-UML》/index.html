@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="旧书新读: 《大象-think in UML》"/>
+
+
+
+
+  <meta name="keywords" content="books," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zivyou" >
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://zivyou.github.io/2022/01/17/旧书新读-《大象-think-in-UML》/"/>
+
+
+<meta name="description" content="why面向过程 VS. 面向对象面向对象与面向过程之争本质上是认识论的争论。书中提到说古希腊哲学家亚里士多德也思考过这个问题: 世界是过程还是对象?学术界也有关于这个面向对象思维认识论的讨论。1作者本人是认同这个世界的本质是由对象组成的，平时看上去相互无关的独立对象在不同的驱动力和规则下体现出不同的运动过程。而在面向过程的认知中，世界的一切都不是孤立的，他们互相紧密的联系在一起，缺一不可，互相影响">
+<meta property="og:type" content="article">
+<meta property="og:title" content="旧书新读: 《大象-think in UML》">
+<meta property="og:url" content="https://zivyou.github.io/2022/01/17/%E6%97%A7%E4%B9%A6%E6%96%B0%E8%AF%BB-%E3%80%8A%E5%A4%A7%E8%B1%A1-think-in-UML%E3%80%8B/index.html">
+<meta property="og:site_name" content="zivyou">
+<meta property="og:description" content="why面向过程 VS. 面向对象面向对象与面向过程之争本质上是认识论的争论。书中提到说古希腊哲学家亚里士多德也思考过这个问题: 世界是过程还是对象?学术界也有关于这个面向对象思维认识论的讨论。1作者本人是认同这个世界的本质是由对象组成的，平时看上去相互无关的独立对象在不同的驱动力和规则下体现出不同的运动过程。而在面向过程的认知中，世界的一切都不是孤立的，他们互相紧密的联系在一起，缺一不可，互相影响">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-17T04:47:12.000Z">
+<meta property="article:modified_time" content="2026-02-01T07:32:48.363Z">
+<meta property="article:author" content="zivyou">
+<meta property="article:tag" content="books">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 旧书新读: 《大象-think in UML》 - zivyou </title>
+  <meta name="generator" content="Hexo 7.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">zivyou</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about/me.html">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/project">
+                            
+                            
+                                Project
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          旧书新读: 《大象-think in UML》
+        
+      </h1>
+
+      <time class="post-time">
+          1月 17 2022
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="why"><a href="#why" class="headerlink" title="why"></a>why</h1><h2 id="面向过程-VS-面向对象"><a href="#面向过程-VS-面向对象" class="headerlink" title="面向过程 VS. 面向对象"></a>面向过程 VS. 面向对象</h2><p>面向对象与面向过程之争本质上是认识论的争论。书中提到说古希腊哲学家亚里士多德也思考过这个问题: 世界是过程还是对象?学术界也有关于这个面向对象思维认识论的讨论。<a href="#ref-anchor-1"><sup>1</sup></a><br>作者本人是认同这个世界的本质是由对象组成的，平时看上去相互无关的独立对象在不同的驱动力和规则下体现出不同的运动过程。而在面向过程的认知中，世界的一切都不是孤立的，他们互相紧密的联系在一起，缺一不可，互相影响，互相作用，并形成一个个具有严格因果律的小系统。</p>
+<p>从面向过程思想转变到面向对象思想，首先要接受的事实是: 这个世界是割裂的，只有在特点的场景下，孤立对象之间进行了某些信息交互才会表现出我们理解的一个过程。</p>
+<h3 id="面向过程的问题"><a href="#面向过程的问题" class="headerlink" title="面向过程的问题"></a>面向过程的问题</h3><blockquote>
+<p>面向过程方法认为每个小系统都有着明确的开始和明确的结束，开始和结束之间有着严谨的因果关系。只要我们将这个小系统中的每一个步骤和影响这个小系统走向的所有因素都分析出来，我们就能完全定一个这个系统的行为。<br>单从上面的描述来看，文中对与面向过程思想的概括，与图灵机的定义非常像。</p>
+</blockquote>
+<p>图灵机模型:<br>一台图灵机是一个七元组，<script type="math/tex">\{ Q, \Sigma, \Gamma, \delta, q_0, qaccept, qreject \}</script>。其中，<script type="math/tex">Q, \Sigma, \Gamma</script>都是有限集合。这个七元组满足:</p>
+<ol>
+<li><script type="math/tex">Q</script>是状态集合;</li>
+<li><script type="math/tex">\Sigma</script>是输入字母表，其中不包含特殊的空白字符;</li>
+<li><script type="math/tex">\Gamma</script>是整个纸带上的字母集合，并且有，<script type="math/tex">Q\subseteq\Gamma, \Sigma\subseteq\Gamma</script>，</li>
+<li>定义运算: <script type="math/tex">\delta: Q\times\Gamma \rightarrow Q\times\Gamma\times\{L, R\}</script>，其中的L, R标识的是纸带的运行方向;</li>
+<li><script type="math/tex">q_0 \in Q</script>代表机器的初始状态;</li>
+<li>qaccept代表一个特殊的状态，即「接受」;</li>
+<li>qreject代表一个特殊的状态，即「拒绝」;</li>
+</ol>
+<h3 id="面向对象的思路"><a href="#面向对象的思路" class="headerlink" title="面向对象的思路"></a>面向对象的思路</h3><p>将世界看作一个一个独立的对象，对象之间没有因果关系。在外部力量的推动下，对象之间会依据某种规律传递信息。</p>
+<h3 id="面向对象的问题"><a href="#面向对象的问题" class="headerlink" title="面向对象的问题"></a>面向对象的问题</h3><ol>
+<li>对象自己是怎么来的? 它的的生命周期是怎么回事?</li>
+<li>同一批对象，按照不同的结构组织起来，可以表达出不一样的功能。那么如何根据一批对象的组织结构来确定其功能呢?</li>
+<li>怎么确定一批对象的组合就满足了我们的需要呢?什么样的组合方式是好的，什么样的组合方式是坏的?</li>
+</ol>
+<p>解决以上问题的关键，是抽象:</p>
+<ol>
+<li>找到一种方法，可以将现实世界映射到对象世界;</li>
+<li>找到一种方法，可以用对象世界描述现实世界;</li>
+<li>找到一种方法，可以验证对象世界是否正确的反映了现实世界; </li>
+</ol>
+<p>UML就是这样一种方法。</p>
+<h3 id="先将现实世界映射到业务模型"><a href="#先将现实世界映射到业务模型" class="headerlink" title="先将现实世界映射到业务模型"></a>先将现实世界映射到业务模型</h3><p>使用用例图来实现。用例图是一种元模型，其中，Actor是整个业务的驱动者，代表现实世界的人，是模型信息来源的提供者。用例则是描述Actor业务目标的模型，代表现实世界的事。业务场景和用例场景则代表的是规则。对象业务模型(business object model)代表达成业务目标过程中的事务，对应现实世界的物。因此，用例图定义了与现实世界中的人、事、物、规则之间的映射。</p>
+<h3 id="将业务模型映射到概念模型"><a href="#将业务模型映射到概念模型" class="headerlink" title="将业务模型映射到概念模型"></a>将业务模型映射到概念模型</h3><p>借助分析模型图来实现。分析模型主要定义了以下元素:</p>
+<ol>
+<li>边界类: 定义了交互界面/操作界面;</li>
+<li>实体类: 定义与现实世界一一映射的事物和其间的逻辑关联;</li>
+<li>控制类: 定义原始需求中的动态信息;<br>在分析模型图的基础之上，可以加以归纳和整理，得出软件的一些关键信息，比如包、组件和节点。</li>
+</ol>
+<h3 id="将概念模型映射到设计模型"><a href="#将概念模型映射到设计模型" class="headerlink" title="将概念模型映射到设计模型"></a>将概念模型映射到设计模型</h3><p>做一些具体的软件设计工作，包括且不限于:</p>
+<ol>
+<li>控制类转换成程序或者框架，比如说工作流，算法体等;</li>
+<li>实体类转化成数据库表、XML文档等持久化元素;</li>
+<li>设定实现类的关系，例如继承、接口等;</li>
+<li>编程语言选型;</li>
+<li>中间件选型;</li>
+<li>代码规范选型;<br>…</li>
+</ol>
+<h1 id="建模"><a href="#建模" class="headerlink" title="建模"></a>建模</h1><p>什么是建模? 怎么样建模? 建出的模是什么?</p>
+<script type="math/tex; mode=display">
+问题领域 = \sum_{1}^{n} 抽象角度</script><script type="math/tex; mode=display">
+抽象角度 = 问题领域边界之外的参与者的业务目标 = 业务用例</script><script type="math/tex; mode=display">
+业务用例 = \sum_{1}^{n} 特定场景</script><script type="math/tex; mode=display">
+特定场景 = 静态的事物 + 特定的规则 + 特定的动作</script><script type="math/tex; mode=display">
+特定场景 = 特定的事物 + 特定的规则 + 特定的的人的行动</script><h2 id="用例驱动"><a href="#用例驱动" class="headerlink" title="用例驱动"></a>用例驱动</h2><p>用例可以用于构建以下内容:</p>
+<ol>
+<li>逻辑视图: 以图形方式说明系统的关键用例实现、子系统、包和类;</li>
+<li>进程视图: 以图形方式说明系统中进程的详细组织结构;</li>
+<li>部署视图: 以图形的方式说明处理活动在系统中各节点的分布;</li>
+<li>实施视图: 获取为实施指定的架构决策，包括: 描述子系统，描述分层，描述子系统的依赖关系。说的直白一点就是团队分工。</li>
+</ol>
+<h2 id="抽象层次"><a href="#抽象层次" class="headerlink" title="抽象层次"></a>抽象层次</h2><p>面向对象软件设计方法一般采用自顶向下的抽象方法;</p>
+<h2 id="对象分析方法"><a href="#对象分析方法" class="headerlink" title="对象分析方法"></a>对象分析方法</h2><ol>
+<li>一切都是对象;</li>
+<li>对象都是独立的;</li>
+<li>对象都具有原子性;</li>
+<li>对象都是可抽象的;</li>
+<li>对象都有层次;</li>
+</ol>
+<h1 id="UML核心元素"><a href="#UML核心元素" class="headerlink" title="UML核心元素"></a>UML核心元素</h1><h2 id="版型-stereotype"><a href="#版型-stereotype" class="headerlink" title="版型(stereotype)"></a>版型(stereotype)</h2><p>UML中的一个基础元素以及扩展元素。例如以下概念都可以称之为版型: 业务用例、类、接口、边界类、实体类、控制类、参与者等基础元素，子系统、组织结构、模块等自定义的扩展元素，文档、开发小组等更模糊的元素。<br>下面逐个介绍各个版型的内涵。</p>
+<h2 id="参与者-Actor"><a href="#参与者-Actor" class="headerlink" title="参与者(Actor)"></a>参与者(Actor)</h2><p>参与者在建模中是处于核心地位的，他是系统外与系统交互的人或事物。</p>
+<h2 id="用例"><a href="#用例" class="headerlink" title="用例"></a>用例</h2><p>用例是UML建模中最最重要的一个元素。由于面向对象世界中的对象是独立的、静止的，只有用例可以施加一种外力，让这些静止的对象成为一个系统。</p>
+<h3 id="用例的特征"><a href="#用例的特征" class="headerlink" title="用例的特征"></a>用例的特征</h3><ol>
+<li>用例是相对独立的;</li>
+<li>用例的执行结果对于参与者来说是可观测的、有意义的;</li>
+<li>用例必须由参与者发起;</li>
+<li>用例必须以动宾短语出现;</li>
+<li>一个用例就是一个需求单元、分析单元、设计单元、开发单元、测试单元，甚至是部署单元;</li>
+</ol>
+<h3 id="用例的粒度"><a href="#用例的粒度" class="headerlink" title="用例的粒度"></a>用例的粒度</h3><p>粒度的选择问题，本质上是边界认定的问题。</p>
+<ol>
+<li>参与者中是位于系统边界之外的;</li>
+<li>参与者对于系统有着明确的期望和明确的回报要求;</li>
+<li>参与者的期望和回报要求在系统边界之外;</li>
+</ol>
+<h2 id="业务实体"><a href="#业务实体" class="headerlink" title="业务实体"></a>业务实体</h2><p>业务实体是类(class)的一种版型，代表业务角色执行业务用例时所处理或使用的事物。</p>
+<h3 id="业务实体的属性"><a href="#业务实体的属性" class="headerlink" title="业务实体的属性"></a>业务实体的属性</h3><p>属性是用来保存业务实体特征的一个记录，业务实体的属性集合决定了它的唯一性。</p>
+<h3 id="业务实体的方法"><a href="#业务实体的方法" class="headerlink" title="业务实体的方法"></a>业务实体的方法</h3><p>方式是业务实体的一个访问句柄，它规定了外部可以怎样来使用它。</p>
+<h3 id="如何获取业务实体"><a href="#如何获取业务实体" class="headerlink" title="如何获取业务实体"></a>如何获取业务实体</h3><p>首先，我们需要建立业务用例场景。一般来说是一个动宾短语，用来描述参与者实现其业务目标的过程。<br>然后，我们从用例的动宾短语中获取其中的名词，这些名词都是我们业务实体的备选对象。<br>然后，对这些备选对象进行一轮筛选，去除对于业务目标没有直接贡献的对象，剩下的就是业务实体。<br>最后，分析这些业务实体的关系，并决定哪些可以单独建模，哪些只是作为属性。</p>
+<h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><p>包是一种容器，类似于文件夹，可以将信息分类，形成逻辑单元。包可以容纳任何UML元素，包括用例、业务实例、类图、子包等等。<br>分包的好坏是由包之间的依赖关系来评判的，包与包之间只有一种关系: 依赖关系。好的包应该具有高内聚、低耦合的特征。<br>什么是依赖?</p>
+<ol>
+<li>如果A发生变化，B必然发生变化，我们称B依赖于A;<br>分包可以按照以下思路:</li>
+<li>分入同一个包中的元素应当是相互紧密联系、不可分割的;</li>
+<li>包中任意一个元素被修改，其他包中的任何一个元素的内容都不受影响;</li>
+<li>如何包与包之间有依赖关系，则这种依赖关系应该是单向的，应避免发生双向依赖或者循环依赖;</li>
+</ol>
+<p>一些常见的包的版型包括:</p>
+<ol>
+<li>领域包: 用于在业务领域内的业务单元之间做分类;</li>
+<li>子系统: 用于分类系统中的逻辑对象并形成子系统;</li>
+<li>组织结构: 用于分类业务领域内的组织结构;</li>
+<li>层: 用于分类软件中的层次;</li>
+</ol>
+<h2 id="分析类"><a href="#分析类" class="headerlink" title="分析类"></a>分析类</h2><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><div id="ref-anchor-1"></div><br><!-- 下面必须有一个空行 --></p>
+<ul>
+<li>[1]: <a href="https://dl.acm.org/doi/10.1145/330908.331862">Aristotle and object-oriented programming</a></li>
+</ul>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/books/">books</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2022/01/19/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E7%90%86%E8%AE%BA/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">有限状态机理论</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2022/01/11/fixed-point-and-recursive-sequence/">
+        <span class="next-text nav-default">不动点与递推数列</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2026
+    <span class="footer-author">zivyou.</span>
+    <span class="power-by">
+        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'zivyou';
+  var disqus_identifier = '2022/01/17/旧书新读-《大象-think-in-UML》/';
+
+  var disqus_title = "旧书新读: 《大象-think in UML》";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>
