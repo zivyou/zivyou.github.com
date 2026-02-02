@@ -43,7 +43,7 @@
 <meta property="og:description" content="Spring Boot Framework 语法 sealed&#x2F;non-sealed   概念 SpringApplication ApplicationContext   机制 SPI 自动装配 配置       Spring Boot Framework语法sealed&#x2F;non-sealedJava 17中新引入的关键字,可以翻译为密封类&#x2F;非密封类. 我们都知道, Java中有一个关键字f">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-12-02T02:46:10.000Z">
-<meta property="article:modified_time" content="2026-02-01T07:32:48.360Z">
+<meta property="article:modified_time" content="2026-02-02T07:16:46.727Z">
 <meta property="article:author" content="zivyou">
 <meta property="article:tag" content="TECH">
 <meta name="twitter:card" content="summary">
@@ -177,7 +177,7 @@
 <li>spring-boot-starter-actuator包的内容:<br>非常简单,里面没有任何Java代码,只有一个gradle依赖描述: spring-boot-starter-actuator会引用spring-boot-health这个包; (当然也会引用其他的几个包,我们这里只关心这一个);</li>
 <li>spring-boot-heatlh的内容:<br>观察spring-boot-health的resource/META-INFO/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports中的内容,可以知道spring-boot-health是通过SPI机制提供了一系列的AutoConfiguration类, 这些类就是自动装配的入口了. 这里spring-boot-health暴露了很多AutoConfiguration类,这里我们看一个: HealthEndpointAutoConfiguration, 这个类是给我们的服务提供GET /actuator/heatlh/*接口的配置类.<br>HealthEndpointAutoConfiguration类的内容,就是自动装配设计的核心技术了,比如使用各种@ConditionOnXXX注解来声明类引入的约束, 这些约束/规则会最终确定SpringBoot内部会存在哪些Bean, 这也是「装配」一词的内涵.</li>
 </ol>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>spring-boot中的配置变量可以有多种配置方式, 但是他们之间有优先级之分. 具体来说, 优先级从低到高依次为:</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>spring-boot中的配置变量可以有多种配置方式, 但是他们之间有优先级之分. 具体来说, 优先级从高到低依次为:</p>
 <ol>
 <li>java命令行’—‘参数, 即在最后执行java -jar 时以—key=value的方式设定的参数. 优先级最高, 可以override其他所有的参数;</li>
 <li>操作系统的环境变量: SPRING_DATASOURCE_URL会自动转换成spring.datasource.url变量;</li>
@@ -188,6 +188,14 @@
 <li>应用服务内的application.yaml;</li>
 <li>应用服务内部通过@PropertySource注解执行的application.yaml;</li>
 <li>spring-boot框架内部设置的默认值;</li>
+</ol>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h3><ol>
+<li>创建SpringApplication对象;</li>
+<li>配置文件解析，设置环境变量;</li>
+<li>创建容器，即ApplicationContext;</li>
+<li>加载Bean，通过ComponentScan，扫描并注册Bean;</li>
+<li>自动装配，执行@EnableAutoConfiguration;</li>
+<li>启动完成，回调ApplicationRunner;</li>
 </ol>
 
             </div>
