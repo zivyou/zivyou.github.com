@@ -4,3 +4,4 @@
 [submodule "themes/hexo-theme-polarbear"]
 	path = themes/hexo-theme-polarbear
 	url = https://github.com/zivyou/hexo-theme-polarbear.git
+	branch = dev
